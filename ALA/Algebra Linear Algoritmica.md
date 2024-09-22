@@ -110,3 +110,5 @@ $$
 \end{bmatrix}
 $$
 Onde, $x_2\text{ , } x_5$ são **variáveis dependentes** e $x_1\text{ , }x_3\text{ , }x_4$ são **variáveis independentes**, ou seja, $x_2 \text{ e } x_5$ podem ser escritos como combinação linear de $x_1\text{ , }x_3\text{ , }x_4$.
+
+## Transformações Lineares
