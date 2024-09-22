@@ -1,0 +1,158 @@
+{
+  "main": {
+    "id": "3acb6c2abc81dc84",
+    "type": "split",
+    "children": [
+      {
+        "id": "c837e135504cd164",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "bee9e9eb00630e6f",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "Algebra Linear Algoritmica.md",
+                "mode": "source",
+                "source": false
+              }
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "vertical"
+  },
+  "left": {
+    "id": "5945b2ecd95de108",
+    "type": "split",
+    "children": [
+      {
+        "id": "a277b1f27ec574ba",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "f1b96cfb93a1f04a",
+            "type": "leaf",
+            "state": {
+              "type": "file-explorer",
+              "state": {
+                "sortOrder": "alphabetical"
+              }
+            }
+          },
+          {
+            "id": "1c48d7adc9d01e05",
+            "type": "leaf",
+            "state": {
+              "type": "search",
+              "state": {
+                "query": "",
+                "matchingCase": false,
+                "explainSearch": false,
+                "collapseAll": false,
+                "extraContext": false,
+                "sortOrder": "alphabetical"
+              }
+            }
+          },
+          {
+            "id": "49103a65e5f48c65",
+            "type": "leaf",
+            "state": {
+              "type": "bookmarks",
+              "state": {}
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "horizontal",
+    "width": 216.5
+  },
+  "right": {
+    "id": "32d40f02cd76403a",
+    "type": "split",
+    "children": [
+      {
+        "id": "d6f5df21be15b667",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "c09d5b0294119dfd",
+            "type": "leaf",
+            "state": {
+              "type": "backlink",
+              "state": {
+                "file": "Algebra Linear Algoritmica.md",
+                "collapseAll": false,
+                "extraContext": false,
+                "sortOrder": "alphabetical",
+                "showSearch": false,
+                "searchQuery": "",
+                "backlinkCollapsed": false,
+                "unlinkedCollapsed": true
+              }
+            }
+          },
+          {
+            "id": "1d2145d348b10543",
+            "type": "leaf",
+            "state": {
+              "type": "outgoing-link",
+              "state": {
+                "file": "Algebra Linear Algoritmica.md",
+                "linksCollapsed": false,
+                "unlinkedCollapsed": true
+              }
+            }
+          },
+          {
+            "id": "b4848574653f511b",
+            "type": "leaf",
+            "state": {
+              "type": "tag",
+              "state": {
+                "sortOrder": "frequency",
+                "useHierarchy": true
+              }
+            }
+          },
+          {
+            "id": "ca9234508708621d",
+            "type": "leaf",
+            "state": {
+              "type": "outline",
+              "state": {
+                "file": "Algebra Linear Algoritmica.md"
+              }
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "horizontal",
+    "width": 300,
+    "collapsed": true
+  },
+  "left-ribbon": {
+    "hiddenItems": {
+      "markdown-importer:Abrir importador Markdown": false,
+      "switcher:Abrir a troca rápida": false,
+      "graph:Abrir visualização em gráfico": false,
+      "canvas:Criar novo canvas": false,
+      "daily-notes:Abrir a nota de hoje": true,
+      "templates:Inserir modelo": false,
+      "command-palette:Abrir paleta de comandos": false
+    }
+  },
+  "active": "bee9e9eb00630e6f",
+  "lastOpenFiles": [
+    "2024-09-22.md",
+    "Sem título.canvas",
+    "Algebra Linear Algoritmica.md",
+    "Welcome.md",
+    "create a link.md"
+  ]
+}
