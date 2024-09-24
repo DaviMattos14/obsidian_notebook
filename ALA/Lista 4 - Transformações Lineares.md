@@ -7,11 +7,13 @@
 
 3. Insira a matriz $\begin{bmatrix}0 & 1\\ 1 & 0\end{bmatrix}$ no programa e descreva em palavras o que esta transformação faz.
      
-     Resposta: Uma rotação de 90º no sentido horário
+     Resposta: Uma rotação de 180º no sentido anti-horário na origem
      
-1. Ainda utilizando a matriz do item anterior, observe atentamente a animação e tente determinar vetores ou conjuntos de vetores que não mudam de direção (podem ser esticados ou encolhidos, mas não saem da reta original). Chamamos estes vetores "especiais" de autovetores ( [Dica](https://www.google.com/url?q=https%3A%2F%2Fen.wikipedia.org%2Fwiki%2FEigenvalues_and_eigenvectors%23%2Fmedia%2FFile%3AEigenvectors.gif))
+4. Ainda utilizando a matriz do item anterior, observe atentamente a animação e tente determinar vetores ou conjuntos de vetores que não mudam de direção (podem ser esticados ou encolhidos, mas não saem da reta original). Chamamos estes vetores "especiais" de autovetores ( [Dica](https://www.google.com/url?q=https%3A%2F%2Fen.wikipedia.org%2Fwiki%2FEigenvalues_and_eigenvectors%23%2Fmedia%2FFile%3AEigenvectors.gif))
     
-5. Ache os vetores ou conjuntos de vetores que não mudam de direção (podem ser esticados ou encolhidos, mas não saem da reta original (autovetores) da matriz $\begin{bmatrix}-1 & 0\\ 0 & 1\end{bmatrix}$.
+	O vetor que não mudam de direção é o eixo de $Ax$
+    
+1. Ache os vetores ou conjuntos de vetores que não mudam de direção (podem ser esticados ou encolhidos, mas não saem da reta original (autovetores) da matriz $\begin{bmatrix}-1 & 0\\ 0 & 1\end{bmatrix}$.
     
 6. Ache os vetores ou conjuntos de vetores que não mudam de direção (podem ser esticados ou encolhidos, mas não saem da reta original (autovetores) da matriz $\begin{bmatrix}-2 & 0\\ 2 & 2\end{bmatrix}$.
     
