@@ -35,3 +35,10 @@ O processador é responsável pela realização de uma série de funções:
 - Decodifica as instruções.
 - Realiza as operações lógica e aritméticas.
 - Responde a sinais enviados por dispositivos de entrada/saída como RESET ou interrupções.
+
+## Arquitetura do Processador
+
+### Unidade Aritmética e Lógica (UAL)
+
+A largura da arquitetura de um processador (8, 16, 32 ou 64 bits) é definida pela largura em bits do maior operando inteiro que pode ser utilizado em uma única operação pela UAL.
+
