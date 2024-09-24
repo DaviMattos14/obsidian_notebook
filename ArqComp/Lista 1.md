@@ -21,3 +21,18 @@
 5) Qual é a diferença entre linguagem de alto nível e linguagem de máquina?:
 - **Linguagem de Alto Nível**: Linguagens como Python, C ou Java, que são mais fáceis para humanos entenderem, utilizando sintaxes semelhantes a palavras e frases do cotidiano.
 - **Linguagem de Máquina**: Conjunto de instruções em formato binário que o processador entende diretamente. Estas instruções são mais difíceis para os humanos escreverem e interpretarem, mas são necessárias para a execução direta no hardware.
+ 
+6) Considere um sistema de computador que possua u processador capaz de endereçar, no máximo, 32 M endereços de memória principal. Qual deverá ser o tamanho, em bits, do barramento de endereços?
+
+$\text{Número de endereços} = 2^{n}$
+Onde:
+- $n$ é o número de bits do barramento de endereços;
+- O número de endereços é 32M, que significa \( $32 \times 10^6$ \) endereços.
+Primeiro, transformamos \( $32M$ \) em potência de 2:
+$$32M = 32 \times 2^{20} = 2^5 \times 2^{20} = 2^{25}$$
+Agora, igualamos:
+$$2^{n} = 2^{25}$$
+Logo:
+$$n = 25
+$$
+Portanto, o tamanho do barramento de endereços deverá ser **25 bits**.

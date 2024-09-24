@@ -42,3 +42,39 @@ O processador é responsável pela realização de uma série de funções:
 
 A largura da arquitetura de um processador (8, 16, 32 ou 64 bits) é definida pela largura em bits do maior operando inteiro que pode ser utilizado em uma única operação pela UAL.
 
+Como consequência direta, a largura em bits do maior operando admitido pela UAL irá determinar, normalmente, a largura em bits do acumulador e dos registradores de uso geral do processador. Não há sentido para que sejam maiores ou menores do que isso.
+
+### Registradores
+O processador contém elementos de memória, de pequena capacidade mas de alta velocidade, usados para armazenar resultados temporários, chamados de **registradores**.
+O conjunto desses registradores é denominado banco de **registradores**.
+Existe um registrador invisível ao programador, chamado de registrador de instrução (**RI**), que armazena a instrução que está sendo executada.
+Existe um registrador especial denominado apontador de instruções       (**PC**) , que contém o endereço da próxima instrução que vai ser executada.
+
+### Unidade de Controle
+A unidade de controle é responsável pela coordenação da atividade de todos os componentes do processador.
+- Ela busca a instrução na memória e coloca no registrador de instruções (RI).
+A unidade de controle faz a decodificação da instrução que está no RI:
+- Determina qual o tipo de operação vai ser realizada pela UAL
+- Determina quantos e quais são os operandos de leitura, e qual o registrador de destino, se houver.
+- Lê os operandos necessários para a execução da instrução e os coloca na entrada da UAL.
+A unidade de controle lê o resultado da saída da UAL e envia para o destino correto.
+Há duas formas de se implementar a unidade de controle:
+* Através de microprogramação
+	Arquiteturas do tipo **CISC**
+* Controle direto pelo hardware (PLA, ROM)
+	Arquiteturas do tipo **RISC**.
+
+### Tipos de Arquitetura
+
+- Arquitetura de Acumulador
+	- Um operando (em registrador ou memória), o acumulador é usado como operando implícito a maioria das vezes
+- Arquitetura de Pilha
+	- Nenhum operando: todos operandos são implícitos no topo da pilha
+- Arquitetura de Registrador (load / store)
+	- Três operandos, todos nos registradores
+	- loads e stores são as únicas instruções que fazem acesso à memória
+- Arquitetura Registrador-Memória
+	- Dois operandos, um em memória
+- Arquitetura Memória-Memória
+	- Três operandos, podem todos estar na memória
+	- 
