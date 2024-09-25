@@ -68,8 +68,10 @@ Há duas formas de se implementar a unidade de controle:
 
 - Arquitetura de Acumulador
 	- Um operando (em registrador ou memória), o acumulador é usado como operando implícito a maioria das vezes
+	![[Pasted image 20240924205755.png]]
 - Arquitetura de Pilha
 	- Nenhum operando: todos operandos são implícitos no topo da pilha
+	![[Pasted image 20240924205830.png]]
 - Arquitetura de Registrador (load / store)
 	- Três operandos, todos nos registradores
 	- loads e stores são as únicas instruções que fazem acesso à memória
@@ -77,4 +79,5 @@ Há duas formas de se implementar a unidade de controle:
 	- Dois operandos, um em memória
 - Arquitetura Memória-Memória
 	- Três operandos, podem todos estar na memória
-	- 
+
+### Sinal de Relógio (Clock)
