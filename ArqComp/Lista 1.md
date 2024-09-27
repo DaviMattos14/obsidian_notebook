@@ -62,3 +62,64 @@ Portanto, o total máximo de bits que podem ser armazenados na memória RAM é *
 - c) Qual é o tamanho da palavra e de cada célula da máquina?
 O tamanho da **palavra** é igual à capacidade do **RDM**, ou seja, **32 bits**.
 O tamanho de cada **célula** é metade de uma palavra, já que o enunciado menciona que em cada acesso são lidas duas células. Portanto, o tamanho de cada célula é **16 bits**.
+
+9) Um processador possui um barramento de endereços com capacidade de permitir a transferência de 33 bits de cada vez. Sabe-se que o barramento de dados permite a transferência de 4 palavras em cada acesso e que cada célula da memória RAM armazena 1/8 de cada palavra. Considerando que a memória RAM pode armazenar um máximo de 64 Gbits, pergunta-se:
+a) Qual é a quantidade máxima de células que podem ser armazenadas na memória RAM?
+**Tamanho total da memória (em bits):** 64 Gbits = $64 \times 10^9$ bits.
+**Tamanho de cada célula (em bits):** Cada célula armazena 1/8 de uma palavra, ou seja, o tamanho de uma palavra é 8 vezes o tamanho de uma célula.
+
+Se $\text{memória total} = 64 \times 10^9$ , e uma célula armazena $\frac{1}{8}$ de uma palavra, a quantidade máxima de $\text{Q}_{\text{células}}$  é simplesmente o número de bits que podem ser armazenados (64 bilhões de bits), já que estamos falando de bits individuais:
+
+$$\text{Q}_{\text{células}} = 64 \times 10^9 \, \text{bits}
+$$
+Então, **a quantidade máxima de células é 64 bilhões de células**.
+
+b) Qual é o tamanho do REM e do barramento de dados existentes neste computador?
+Com um barramento de 33 bits, o número máximo de endereços que podem ser representados é: 
+$$2^{33} = 8.589.934.592 \, \text{endereços}.$$
+
+No entanto, como a memória só tem 64 bilhões de células (ou $6,4 \times 10^{10}$ bits), o número de bits no REM corresponde ao que pode ser endereçado pelo barramento de 33 bits.
+
+Sabemos que o barramento de dados transfere 4 palavras em cada acesso. Se considerarmos que cada palavra tem 8 bits, isso significa que o barramento de dados tem que ser capaz de transferir 32 bits por vez (4 palavras × 8 bits por palavra = 32 bits).
+
+c) Qual é o tamanho de cada célula e da palavra desta máquina?
+Tamanho da célula: **1 bit**, tamanho da palavra: **8 bits**.
+
+10) Um computador possui um RDM com 16 bits de tamanho e um REM com capacidade para armazenar números com 2º bits. Sabe-se que a célula deste computador armazena dados com 8 bits de tamanho e que ele possui uma quantidade N de células, igual à sua capacidade máxima de armazenamento. Pergunta-se:
+a) Qual é o tamanho do barramento de endereços?
+Um barramento de endereços com 20 bits pode endereçar 2^{20} posições de memória, pois o número de endereços possíveis é dado por $2^n$, onde $n$ é o número de bits no barramento de endereços.
+
+$$2^{20} = 1.048.576 \, \text{células}.$$
+
+b) Quantas células de memória são lidas em uma única operação de leitura?
+Como o RDM é o registrador responsável por conter os dados transferidos do barramento de dados, ele precisa ser capaz de armazenar os dados de uma operação de leitura. Se o RDM tem 16 bits e cada célula tem 8 bits, então em uma única operação de leitura, o RDM consegue ler:
+
+$$\frac{16 \, \text{bits (RDM)}}{8 \, \text{bits por célula}} = 2 \, \text{células}.$$
+
+c) Quantos bits tem a MP?
+Para calcular o número total de bits da memória principal (MP), basta multiplicar a quantidade total de células pelo número de bits armazenados em cada célula:
+
+$$\text{MP} = 2^{20} \, \text{células} \times 2^{3} \, \text{bits por célula} = 2^{23} \, \text{bits}.$$
+11) Um microcomputador possui uma capacidade máxima de MP com 32 K células, cada uma capaz de armazenar uma palavra de 8 bits. Pergunta-se:
+a) Qual é o maior endereço, em decimal , desta memória?
+Sabemos que a memória principal (MP) possui **32 K células**. O número "K" representa **1024** ou $2^{10}$, logo o número total de células é:
+$$32 \times 1024 = 2^5 \times 2^{10} = 2^{15} =32.768 \, \text{células}.$$
+O **maior endereço** de uma memória é sempre igual ao número total de células menos 1 (porque o endereçamento começa do zero). Portanto, o maior endereço, em decimal, é:
+$$32.768 - 1 = 32.767.$$
+Portanto, **o maior endereço desta memória, em decimal, é 32.767**.
+
+b) Qual é o tamanho do barramento de endereços deste sistema?
+O barramento de endereços precisa ser capaz de endereçar todas as **32.768 células** de memória. O tamanho do barramento de endereços em bits é determinado pelo número de endereços que ele pode gerar, que é dado por $2^n$, onde n é o número de bits no barramento.
+Sabemos que:
+$$2^{15} = 32.768.$$
+Portanto, o **barramento de endereços tem 15 bits**
+c) Quantos bits podem ser armazenados no RDM e no REM?
+**RDM (Registrador de Dados de Memória):** O RDM armazena uma **palavra** de dados. Como cada célula da memória armazena uma palavra de **8 bits**, o RDM deve ser capaz de armazenar **8 bits**.
+
+d) Qual é o total máximo de bits que pode existir nesta memória?
+Para determinar o total máximo de bits que a memória pode armazenar, basta multiplicar o número total de células pela quantidade de bits que cada célula pode armazenar.
+
+Sabemos que a memória tem **32.768 células**, e cada célula armazena **8 bits**. Logo, o total máximo de bits é:
+
+$$32.768 \, \text{células} \times 8 \, \text{bits por célula} = 2^{15}\times 2^3 = 2^{17} = 262.144 \, \text{bits}.$$
+Como $\text{Kbits} = 2^{10}$, logo, $2^7$ Kbits = 256 Kbits 
