@@ -1,10 +1,10 @@
 # Aula 1 
 
 ## Modelo Von Neumann
-![[Pasted image 20240924182156.png]]
+![[modelo_von_neumann.png]]
 
 ## Modelo de Barramento
-![[Pasted image 20240924182233.png]]
+![[modelo_barramento.png]]
 
 ### Memória Principal e Secundária
 - Memória Principal
@@ -68,10 +68,10 @@ Há duas formas de se implementar a unidade de controle:
 
 - Arquitetura de Acumulador
 	- Um operando (em registrador ou memória), o acumulador é usado como operando implícito a maioria das vezes
-	![[Pasted image 20240924205755.png]]
+	![[arquitetura_acumulador.png]]
 - Arquitetura de Pilha
 	- Nenhum operando: todos operandos são implícitos no topo da pilha
-	![[Pasted image 20240924205830.png]]
+	![[arquitetura_pilha.png]]
 - Arquitetura de Registrador (load / store)
 	- Três operandos, todos nos registradores
 	- loads e stores são as únicas instruções que fazem acesso à memória
@@ -100,15 +100,16 @@ T_c=\frac{1}{f}
 $$
 Quanto maior a frequência de relógio maior é o consumo de energia e dissipação de calor do processador.
 A dissipação de calor, além do atraso dos componentes, também impõe limites práticos sobre a maior frequência que um processador pode ter.
-	
-| **Símbolo** | **Nome** | **Valor (em potência de 2)** | **Valor Decimal**                 |
-| ----------- | -------- | ---------------------------- | --------------------------------- |
-| K           | Kilo     | \( $2^{10}$ \)               | 1.024                             |
-| M           | Mega     | \( $2^{20}$ \)               | 1.048.576                         |
-| G           | Giga     | \( $2^{30}$ \)               | 1.073.741.824                     |
-| T           | Tera     | \( $2^{40}$ \)               | 1.099.511.627.776                 |
-| P           | Peta     | \( $2^{50}$ \)               | 1.125.899.906.842.624             |
-| E           | Exa      | \( $2^{60}$ \)               | 1.152.921.504.606.846.976         |
-| Z           | Zetta    | \( $2^{70}$ \)               | 1.180.591.620.717.411.303.424     |
-| Y           | Yotta    | \( $2^{80}$ \)               | 1.208.925.819.614.629.174.706.176 |
+
+#### Anotações
+| **Símbolo** | **Nome** | **Valor (em potência de 2)** | **Valor Decimal**           |
+|-------------|----------|------------------------------|-----------------------------|
+| K           | Kilo     | \( 2^{10} \)                 | 1.024                       |
+| M           | Mega     | \( 2^{20} \)                 | 1.048.576                   |
+| G           | Giga     | \( 2^{30} \)                 | 1.073.741.824               |
+| T           | Tera     | \( 2^{40} \)                 | 1.099.511.627.776           |
+| P           | Peta     | \( 2^{50} \)                 | 1.125.899.906.842.624       |
+| E           | Exa      | \( 2^{60} \)                 | 1.152.921.504.606.846.976   |
+| Z           | Zetta    | \( 2^{70} \)                 | 1.180.591.620.717.411.303.424 |
+| Y           | Yotta    | \( 2^{80} \)                 | 1.208.925.819.614.629.174.706.176 |
 
