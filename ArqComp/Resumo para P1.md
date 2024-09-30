@@ -60,9 +60,9 @@ A unidade de controle faz a decodificação da instrução que está no RI:
 A unidade de controle lê o resultado da saída da UAL e envia para o destino correto.
 Há duas formas de se implementar a unidade de controle:
 * Através de microprogramação
-	Arquiteturas do tipo **CISC**
+	Arquiteturas do tipo **CISC** - (Complex Instruction Set Computers)
 * Controle direto pelo hardware (PLA, ROM)
-	Arquiteturas do tipo **RISC**.
+	Arquiteturas do tipo **RISC** - (Reduced Instruction Set Computers).
 
 ### Tipos de Arquitetura
 
@@ -113,3 +113,81 @@ A dissipação de calor, além do atraso dos componentes, também impõe limites
 | Z           | Zetta    | \( 2^{70} \)                 | 1.180.591.620.717.411.303.424 |
 | Y           | Yotta    | \( 2^{80} \)                 | 1.208.925.819.614.629.174.706.176 |
 
+### Iniciando um Computador
+#### BIOS - Basic Input-Output System
+Responsável por ativar os componentes de hardware do seu computador, garantir que eles estejam funcionando corretamente e, em seguida, executar o gerenciador de partida que vai iniciar o
+sistema operacional que você tenha instalado. Então, quando você salva uma configuração, ela é armazenada em uma pequena memória CMOS, que é alimentada por uma bateria à parte, da própria placa-mãe e permanece ativa enquanto essa bateria estiver com carga. Essa bateria também é responsável por guardar a hora do computador atualizada, alimentando o RTC (Real Time Clock)
+quando computador é desligado. Quando você liga o computador, a BIOS irá testar e configurar o seu computador e recuperar a hora atual a partir dessas configurações salvas.
+
+Esse teste inicial é conhecido pelo nome de POST (Power- On Self Test), e serve para verificar diversos componentes, tais como: fonte de alimentação; adaptador de vídeo; memória principal (RAM); temporizador; teclado e mouse; etc.
+Após esses testes iniciais, se tudo estiver em ordem, o dispositivo de boot, que pode ser um disco rígido, um pendrive ou mesmo a ethernet, deve ser acessado para que o processo de carga do sistema operacional seja iniciada.
+
+#### UEFI
+A UEFI substitui o BIOS tradicional nos computadores pessoais e não há como mudar de BIOS para UEFI em um computador já existente.
+Ao invés do MBR, o UEFI utiliza uma nova de particionamento do disco, chamada de GUID Partition
+Table (GPT) que permite superar muitas limitações do antigo padrão BIOS/MBR, com partições maiores e redundância para a tabela de partição.
+Em síntese, o UEFI é essencialmente um mini sistema operacional executando direto no firmware do processador, podendo ser carregado da memória FLASH da placa mãe, carregado do disco rígido ou mesmo através da rede.
+O UEFI também definiu um formato padrão para os seus programas executáveis, além de definir uma extensão do formato FAT32 para ser utilizado nas partições que armazenam esses programas.
+Ou seja, o UEFI carrega programas executáveis, compilados com um formato definido na especificação do padrão, que estão armazenados em partições de sistema destinadas exclusivamente para o UEFI, formatadas também com um padrão descrito na sua especificação do
+padrão.
+O UEFI possui também um modo de compatibilidade com o padrão BIOS, configurável na interface de usuário.
+
+### Arquiteturas CISC x RISC
+O tempo de execução de um programa pode ser definido pela seguinte equação:
+
+$$
+T_p = C_i \times T_c \times N_i
+
+$$
+Onde:
+- \($T_p$  = tempo de execução do programa
+- \( $C_i$ \ = ciclos por instrução
+- \( $T_c$  = tempo de cada ciclo
+- \( $N_i$ = número de instruções
+
+Exemplos de arquitetura CISC eram então os processadores x86 da Intel.
+Já os processadores SPARC, MIPS e ARM são exemplos de arquiteturas RISC.
+
+#### CISC
+Características:
+- Instruções complexas demandando um número grande e variável de ciclos de máquina para sua
+execução.
+- Uso de diversos modos de endereçamento de operandos.
+- Instruções com formato muito variável.
+- Diferentes tipos de instruções podem referenciar operandos na memória principal.
+- Cada fase do processamento da instrução pode ter duração variável em função da complexidade.
+
+Consequências:
+- Implementação com uso de pipeline é difícil.
+- A taxa média de execução das instruções por ciclo tende a ser bastante superior a 1 CPI.
+- A unidade de controle é em geral microprogramada.
+- Códigos compactos podem ser gerados pelos compiladores.
+
+#### RISC
+Características:
+- Instruções mais simples demandando um número fixo de ciclos de máquina para sua execução;
+- Uso de poucos modos simples de endereçamento de operandos;
+- Poucos formatos diferentes de instruções
+- Apenas as instruções de “load” e “store” referenciam operandos na memória principal;
+- Cada fase de processamento da instrução tem a duração fixa igual a um ciclo de máquina.
+
+Consequências:
+- Implementadas com o uso do pipeline;
+- A taxa média de execução de instruções por ciclo de máquina é próxima de 1 CPI;
+- A unidade de controle é em geral “hardwired”;
+- Processo de compilação é complexo e requer cuidados especiais para otimização do desempenho do código gerado.
+
+### Processadores
+#### O que é?
+- O *microprocessador*, ou comumente chamado de processador;
+- É uma espécie de microchip especializado;
+- Um circuito integrado que realiza as funções de cálculo e tomada de decisão de um computador, parecida com a função cérebro humano;
+- Também pode ser chamado de *Unidade Central de Processamento* (UCP) (Em inglês *CPU*: Central Processing Unit);
+
+#### Função
+- Realiza cálculos de *operações aritméticas* e *comparações lógicas*;
+- Mantem o funcionamento de todos os equipamentos e programas, pois a unidade de controle interpreta e *gerencia a execução de cada instrução do programa*;
+- Administra na memória central (principal) além do programa submetido, os dados transferidos de um elemento ao outro da máquina visando o seu processamento;
+- Recebe dados e comandos do usuário administra-as e as processa de acordo com as instruções armazenadas em sua memória, e fornece resultados como saída;
+- Microprocessadores operam com números e símbolos representados no sistema binário;
+- Ele também transmite estas informações para a placa mãe, que por sua vez as transmite para onde é necessário (como o monitor, impressora, outros dispositivos). A placa mãe serve de ponte entre o processador e os outros componentes de hardware da máquina.
