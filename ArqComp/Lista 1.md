@@ -39,15 +39,19 @@ $$
 Portanto, o tamanho do barramento de endereços deverá ser **25 bits**.
 
 ---
-7) **Um computador, cuja memória RAM (MP) tem uma capacidade máxima de armazenamento de 2K palavras de 16 bits cada, possui um REM e um RDM. Qual é o tamanho desses registradores? Qual é o valor do maior endereço dessa MP e qual é a quantidade total de bits que nela podem ser armazenados?**
-**Tamanho do REM (Registrador de Endereços de Memória): O REM** armazena o endereço de uma palavra na memória. A memória tem 2K palavras, onde $K=1024$, então:
+7) **Um computador, cuja memória RAM (MP) tem uma capacidade máxima de armazenamento de 2K palavras de 16 bits cada, possui um REM e um RDM. Qual é o tamanho desses registradores? Qual é o valor do maior endereço dessa MP e qual é a quantidade total de bits que nela podem ser armazenados?
+
+**Tamanho do REM (Registrador de Endereços de Memória):** O REM armazena o endereço de uma palavra na memória. A memória tem 2K palavras, onde $K=1024$, então:
 $$2K = 2 \times 1024 = 2048 \text{ palavras}$$
 Para endereçar 2048 palavras, o número de bits necessários no REM é dado por $2^n = 2048$, onde $n$ é o número de bits:
-
 $$2^{11} = 2048$$
+
 Logo, o **REM deve ter 11 bits** para endereçar todas as palavras da memória.
+
 **Tamanho do RDM (Registrador de Dados de Memória)**: O **RDM** armazena os dados de uma palavra. Cada palavra na memória tem 16 bits, então o **RDM deve ter 16 bits**, já que ele precisa ser capaz de armazenar uma palavra inteira.
+
 **Valor do maior endereço da MP**: O maior endereço possível é o último endereço da memória, que é o endereço 204720472047 (em decimal), pois os endereços começam do 0. Portanto, o valor do maior endereço é **2047**.    
+
 **Quantidade total de bits que podem ser armazenados na memória**: A memória tem 2048 palavras, e cada palavra tem 16 bits. Assim, a quantidade total de bits que podem ser armazenados é:
 $$2048 \times 16 = 32768 \text{ bits} = 32K \text{ bits}$$
 
