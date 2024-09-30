@@ -80,4 +80,35 @@ Há duas formas de se implementar a unidade de controle:
 - Arquitetura Memória-Memória
 	- Três operandos, podem todos estar na memória
 
+### Modos de Enderençamento
+| **Modo**           | **Exemplo**       | **Significado (RTL)** |
+| ------------------ | ----------------- | --------------------- |
+| Imediato           | `add r4, r4, #3`  | R4 ← R4 + 3           |
+| Registrador        | `add r4, r4, r3`  | R4 ← R4 + R3          |
+| Direto ou Absoluto | `add r1, (1001)`  | R1 ← R1 + M[1001]     |
+| Indireto Reg.      | `add r4, (r1)`    | R4 ← R4 + M[R1]       |
+| Deslocamento       | `ld r4, 100(r1)`  | R4 ← MEM[100 + R1]    |
+| Indexado           | `add r3, (r1+r2)` | R3 ← R3 + M[R1 + R2]  |
+| Indireto Mem.      | `add r1, @(r3)`   | R1 ← R1 + M[M[R3]]    |
+| Pilha              | `pop r1`          | R1 ← M[SP]            |
 ### Sinal de Relógio (Clock)
+O processador tem seu funcionamento sincronizado por um sinal elétrico periódico denominado relógio. O relógio cadencia a execução das instruções em suas diversas fases. *Quanto mais rápido (maior a frequência)* for o sinal de relógio, mais rápido as instruções, e por consequência os programas, serão executados. O atraso dos componentes básicos do processador (portas lógicas, flip-flops, etc.) limitam a frequência máxima que o relógio pode ter.
+
+A frequência e o tempo do ciclo do relógio estão relacionados pela seguinte equação:
+$$
+T_c=\frac{1}{f}
+$$
+Quanto maior a frequência de relógio maior é o consumo de energia e dissipação de calor do processador.
+A dissipação de calor, além do atraso dos componentes, também impõe limites práticos sobre a maior frequência que um processador pode ter.
+	
+| **Símbolo** | **Nome** | **Valor (em potência de 2)** | **Valor Decimal**                 |
+| ----------- | -------- | ---------------------------- | --------------------------------- |
+| K           | Kilo     | \( $2^{10}$ \)               | 1.024                             |
+| M           | Mega     | \( $2^{20}$ \)               | 1.048.576                         |
+| G           | Giga     | \( $2^{30}$ \)               | 1.073.741.824                     |
+| T           | Tera     | \( $2^{40}$ \)               | 1.099.511.627.776                 |
+| P           | Peta     | \( $2^{50}$ \)               | 1.125.899.906.842.624             |
+| E           | Exa      | \( $2^{60}$ \)               | 1.152.921.504.606.846.976         |
+| Z           | Zetta    | \( $2^{70}$ \)               | 1.180.591.620.717.411.303.424     |
+| Y           | Yotta    | \( $2^{80}$ \)               | 1.208.925.819.614.629.174.706.176 |
+
