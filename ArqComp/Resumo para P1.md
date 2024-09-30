@@ -191,3 +191,25 @@ Consequências:
 - Recebe dados e comandos do usuário administra-as e as processa de acordo com as instruções armazenadas em sua memória, e fornece resultados como saída;
 - Microprocessadores operam com números e símbolos representados no sistema binário;
 - Ele também transmite estas informações para a placa mãe, que por sua vez as transmite para onde é necessário (como o monitor, impressora, outros dispositivos). A placa mãe serve de ponte entre o processador e os outros componentes de hardware da máquina.
+
+#### Características
+- Processadores geralmente possuem uma pequena memória interna, portas de entrada e de saída, e são geralmente ligados a outros circuitos digitais como memórias; multiplexadores e circuitos lógicos;
+- Muitas vezes também um processador possui uma porta de entrada de instruções, que determinam a tarefa a ser realizada por ele. Estas sequências de instruções geralmente estão armazenadas em memórias, e formam o programa a ser executado pelo processador.
+
+##### Unidade de Aritmética e Lógica
+Circuito que se encarrega de realizar as operações matemáticas requisitadas por um determinado programa;
+A Unidade de Controle é o que há de mais próximo a um cérebro dentro do processador. Esse controlador define o regime de funcionamento e da ordem às diversas tarefas do processador;
+
+##### Registradores
+Os registradores são pequenas memórias velozes que armazenam comandos ou valores que são utilizados no controle e processamento de cada instrução. 
+Os registradores mais importantes são:
+- Contador de Programa (PC) – Sinaliza para a próxima instrução a ser executada;
+- Registrador de Instrução (IR) – Registra a execução da instrução;
+
+##### Unidade Ponto Flutuante
+Processadores atuais possuem outra unidade para cálculos, conhecida como Unidade de Ponto Flutuante. Essa, por sua vez, serve para trabalhar com números enormes, de 64, 128 bits, por exemplo;
+
+##### Unidade de Gerenciamento de Memória
+A MMU (em inglês: Memory Management Unit) é um dispositivo de hardware que transforma endereços virtuais em endereços físicos e administra a memória principal do computador.
+
+### Memórias
