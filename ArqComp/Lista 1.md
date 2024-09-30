@@ -123,3 +123,8 @@ Sabemos que a memória tem **32.768 células**, e cada célula armazena **8 bits
 
 $$32.768 \, \text{células} \times 8 \, \text{bits por célula} = 2^{15}\times 2^3 = 2^{17} = 262.144 \, \text{bits}.$$
 Como $\text{Kbits} = 2^{10}$, logo, $2^7$ Kbits = 256 Kbits 
+12) Considere uma célula de uma MP cujo endereço é, em hexadecimal, 2C81 e que tem armazenado em seu conteúdo um valor igual a, em hexadecimal, F5A. Sabe-se que, neste sistema, as células têm o mesmo tamanho das palavras e que em cada acesso é lido o valor de uma célula. Pergunta-se:
+a) Qual deve ser o tamanho do REM e do RDM neste sistema?
+
+
+b) Qual deve ser a máxima quantidade de bits que podem ser implementados nessa memória?
