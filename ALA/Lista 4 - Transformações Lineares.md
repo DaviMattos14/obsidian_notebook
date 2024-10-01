@@ -1,7 +1,7 @@
 1. Construa uma matriz que produza uma rotação de 90° no sentido anti-horário.
      Resposta: $\begin{bmatrix}\cos{\frac{\pi}{2}} & \sin{\frac{\pi}{2}}\\ -\sin{\frac{\pi}{2}} & \cos{\frac{\pi}{2}}\end{bmatrix}$
 2. Determine a matriz que transformou o espaço de acordo com a imagem abaixo: 
-	![[matriz_inclinada1.png]]
+	![[./matriz_inclinada1.png]]
 
 	Resposta: $\begin{bmatrix}1 & -1\\ 0 & 1\end{bmatrix}$
 

@@ -3,7 +3,7 @@
 ## Modelo Von Neumann
 ![Modelo Von Neumann](./Imagens/modelo_von_neumann.png)
 ## Modelo de Barramento
-![[modelo_barramento.png]]
+![[./Imagens/modelo_barramento.png]]
 
 ### Memória Principal e Secundária
 - Memória Principal
@@ -67,10 +67,10 @@ Há duas formas de se implementar a unidade de controle:
 
 - Arquitetura de Acumulador
 	- Um operando (em registrador ou memória), o acumulador é usado como operando implícito a maioria das vezes
-	![[arquitetura_acumulador.png]]
+	![[./Imagens/arquitetura_acumulador.png]]
 - Arquitetura de Pilha
 	- Nenhum operando: todos operandos são implícitos no topo da pilha
-	![[arquitetura_pilha.png]]
+	![[./Imagens/arquitetura_pilha.png]]
 - Arquitetura de Registrador (load / store)
 	- Três operandos, todos nos registradores
 	- loads e stores são as únicas instruções que fazem acesso à memória
@@ -259,7 +259,7 @@ Exemplos:
 ##### Memórias de semicondutores
 Rápidas e relativamente caras, se comparadas com outros tipos.
 Exemplos: Registradores, Memória Principal, Memória Cache e SSD.
-![[memoria_semicondutora.png]]
+![[./Imagens/memoria_semicondutora.png]]
 
 - R/W - _Read and Write_
 	- Memória de leitura e escrita, de acesso aleatório e volátil.
@@ -297,7 +297,7 @@ Exemplos: Registradores, Memória Principal, Memória Cache e SSD.
 	- Alimentação via bateria.
 
 ##### Hierarquia de Memória
-![[hierarquia_memoria.png]]
+![[./Imagens/hierarquia_memoria.png]]
 
 A HIERARQUIA DA MEMÓRIA ESTÁ BASEADA NAS SEGUINTES CARACTERÍSTICAS:
 1. Custo
