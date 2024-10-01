@@ -359,3 +359,54 @@ _Sem Anotações_
 - Acessar conteúdo de Arquivos
 - Detectar Erros de execução
 - Contabilizar o Uso do sistema
+
+#### Classificação de SO
+_Sistema Monotarefa_: Admite e gerencia apenas uma tarefa em execução por vez. Ex: DOS
+_Sistema Multitarefa_: Admite e gerencia vários tarefas em processamento concorrente. Ex: Windows 98,Windows 2000/NT/XP, Linux ...
+
+_Sistema Monousuário_: Admite e gerencia apenas um usuário – não permite que mais de um usuário esteja “logado” simultaneamente
+	Ex: Windows 98, Windows NT (exceto versão com Terminal Server)
+
+_Sistema Multiusuário_: Admite e gerencia vários usuários – permite que mais de um usuário esteja “logado” no sistema simultaneamente.
+	Ex: Linux, Windows 2000, VMS
+
+_Sistemas Monoprocessados_
+	Somente reconhece uma única CPU
+	Multitarefa ou monotarefa
+	Ex: Windows 98
+
+_Sistemas Multiprocessados_
+	Reconhece mais de uma CPU
+	execução simultânea
+	Ex:Windows 2000/NT/XP, Linux
+
+_Sistemas Batch_
+Os programas são processados em Lote, um de cada vez, não havendo interação com o usuário.
+
+_Sistemas Time Sharing_
+Os usuários compartilham o tempo de uso do computador que, em seqüência, dedica uma fatia do tempo de processamento para cada usuário.
+
+_Sistemas de Tempo Real_
+	Sistemas que possuem um forte vínculo com o tempo.
+	O resultado correto deve ser dado no tempo previsto.
+*Sistemas Embarcado*
+Sistemas inseridos em produtos com funções específicas como forno de microondas, VCR, equipamentos bélicos etc.
+
+#### Componentes de SO
+![Componentes so](./Imagens/componente_so.png)
+
+#### Posicionamento em Camadas
+![Conceito de Máquina de Camadas](./Imagens/maquina_camadas.png)
+
+#### Interrupções
+- Suspendem a tarefa em execução pela ocorrência de um evento externo (interrupção)
+- Permitem a execução de outras instruções enquanto uma operação de E/S está sendo executada
+- Melhoram a eficiência do processador
+- Acionam uma Rotina do SO chamada de Tratador de
+- Interrupções – “Interrupt Handler”
+<font color="#ff0000">Observação</font>:
+Após o término da interrupção, a tarefa suspensa pode retornar à execução ou uma outra ser selecionada.
+
+#### Tratamento de Exceções
+#### Fluxo de Exceções
+#### Tipos de Exceções

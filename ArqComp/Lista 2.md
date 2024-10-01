@@ -29,3 +29,4 @@ Porque esses sistemas só permitem a execução de um único programa de cada ve
 
 
 8. **Para que servem as interrupções? Explique em poucas palavras - seja sucinto e objetivo.**
+As interrupções servem para avisar a CPU que um evento externo ou interno ocorreu, permitindo que ela pause a tarefa atual para lidar com esse evento, como entradas de dispositivos (teclado, mouse)
