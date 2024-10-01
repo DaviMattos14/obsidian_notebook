@@ -101,18 +101,6 @@ $$
 Quanto maior a frequência de relógio maior é o consumo de energia e dissipação de calor do processador.
 A dissipação de calor, além do atraso dos componentes, também impõe limites práticos sobre a maior frequência que um processador pode ter.
 
-#### Anotações
-| **Símbolo** | **Nome** | **Valor (em potência de 2)** | **Valor Decimal**           |
-|-------------|----------|------------------------------|-----------------------------|
-| K           | Kilo     | \( 2^{10} \)                 | 1.024                       |
-| M           | Mega     | \( 2^{20} \)                 | 1.048.576                   |
-| G           | Giga     | \( 2^{30} \)                 | 1.073.741.824               |
-| T           | Tera     | \( 2^{40} \)                 | 1.099.511.627.776           |
-| P           | Peta     | \( 2^{50} \)                 | 1.125.899.906.842.624       |
-| E           | Exa      | \( 2^{60} \)                 | 1.152.921.504.606.846.976   |
-| Z           | Zetta    | \( 2^{70} \)                 | 1.180.591.620.717.411.303.424 |
-| Y           | Yotta    | \( 2^{80} \)                 | 1.208.925.819.614.629.174.706.176 |
-
 ### Iniciando um Computador
 #### BIOS - Basic Input-Output System
 Responsável por ativar os componentes de hardware do seu computador, garantir que eles estejam funcionando corretamente e, em seguida, executar o gerenciador de partida que vai iniciar o
@@ -213,3 +201,99 @@ Processadores atuais possuem outra unidade para cálculos, conhecida como Unidad
 A MMU (em inglês: Memory Management Unit) é um dispositivo de hardware que transforma endereços virtuais em endereços físicos e administra a memória principal do computador.
 
 ### Memórias
+- Visão Geral:
+	- Manipula Bit
+	- Unidade de informação a ser armazenada, recuperada ou transferida (célula) - Grupo de n bits (n = 8)  1 Byte
+	- ENDEREÇO: é o código de identificação da localização das células (informações).
+	Operações:
+	- ESCRITA: transferência de informações de outro componente do sistema de computação para a memória (CPU $\rightarrow$ memória)
+	- LEITURA: transferência de bits da memória para a CPU, disco.
+Em um sistema de computação não é possível construir e utilizar apenas um tipo de memória.
+Para certas atividades, por exemplo, é fundamental que a transferência de informações seja a mais rápida possível.
+Outras atividades é preferido que os dados sejam armazenados por períodos mais longos.
+Memória de um computador $\rightarrow$ subsistema - construída de vários componentes (vários tipos diferentes de memória) interligados e integrados, com o objetivo de armazenar e recuperar informações.
+
+#### Tempo de Acesso
+Indica quanto tempo a memória gasta para colocar uma informação no barramento de dados após uma determinada posição ter sido endereçada.
+É um dos parâmetros que pode medir o desempenho da memória.
+Também chamado de *latência*, se mede em números de clock necessários.
+**Denominação**: tempo de acesso para leitura (ou tempo de leitura).
+
+Dependente do modo como o sistema de memória é construído e da velocidade dos seus circuitos.
+*Memórias eletrônicas* - igual, independentemente da distância física entre o local de um acesso e o local do próximo acesso - *acesso aleatório (direto)*.
+*Dispositivos eletromecânicos* (discos, fitas, ..) - tempo de acesso varia conforme a distância física entre dois acessos consecutivos - *acesso sequencial*.
+
+#### Capacidade
+Quantidade de informação que pode ser armazenada em uma
+memória;
+Unidade de medida mais comum - byte, podem ser usadas outras unidades como células (no caso de memória principal ou cache), setores (no caso de discos) e bits (no caso de registradores).
+Dependendo do tamanho da memória, isto é, de sua capacidade, indica-se o valor numérico total de elementos de forma simplificada, através da inclusão de K (kilo), M (mega), G (giga) ou T (tera).
+
+| **Símbolo** | **Nome** | **Valor (em potência de 2)** | **Valor Decimal**                 |
+| ----------- | -------- | ---------------------------- | --------------------------------- |
+| K           | Kilo     | \( 2^{10} \)                 | 1.024                             |
+| M           | Mega     | \( 2^{20} \)                 | 1.048.576                         |
+| G           | Giga     | \( 2^{30} \)                 | 1.073.741.824                     |
+| T           | Tera     | \( 2^{40} \)                 | 1.099.511.627.776                 |
+| P           | Peta     | \( 2^{50} \)                 | 1.125.899.906.842.624             |
+| E           | Exa      | \( 2^{60} \)                 | 1.152.921.504.606.846.976         |
+| Z           | Zetta    | \( 2^{70} \)                 | 1.180.591.620.717.411.303.424     |
+| Y           | Yotta    | \( 2^{80} \)                 | 1.208.925.819.614.629.174.706.176 |
+#### Volatilidade
+Memórias podem ser do tipo **volátil** ou **não volátil**.
+- *Volátil* : Perde a informação armazenada na ausência de energia elétrica. Ex.: Registradores, Memória Principal.
+- *Não Volátil*: Retém a informação armazenada quando a energia elétrica é desligada. Ex.: Discos, Fitas.
+É possível manter a energia em uma memória originalmente não volátil - uso de baterias.
+
+#### Tecnologia de Fabricação
+##### Memórias de meio magnético
+Fabricadas de modo a armazenar informações sob a forma de campos magnéticos.
+Método de acesso às informações - _seqüencial_.
+**Exemplos**: disquetes, discos rígidos e fitas magnéticas (de carretel ou de cartucho).
+
+##### Memórias de meio óptico
+Dispositivos que utilizam um feixe de luz para “marcar” o valor (0 ou 1) de cada dado em sua superfície.
+Exemplos:
+- CD-ROM (leitura)
+- CD-RW (leitura e escrita)
+
+##### Memórias de semicondutores
+Rápidas e relativamente caras, se comparadas com outros tipos.
+Exemplos: Registradores, Memória Principal, Memória Cache e SSD.
+![[memoria_semicondutora.png]]
+
+- R/W - _Read and Write_
+	- Memória de leitura e escrita, de acesso aleatório e volátil.
+	- Pode ser estática (SRAM) ou dinâmica (DRAM).
+		- SRAM - uso de circuitos transistorizados (flip-flops)
+		- DRAM - uso de capacitores (1 transistor e 1 capacitor por bit, não usa flip-flops), necessita de refresh
+		- DDR ou SDRAM-II (Double Data Rate SDRAM)
+		- RDRAM (Rambus DRAM)
+
+- ROM - _Read Only Memory_
+	- Memória apenas de leitura. Uma vez gravada não pode mais ser alterada. De acesso aleatório, não é volátil.
+	- Mais lenta que a R/W e mais barata. • Pode ser programada por máscara ("mask programmed“- MROM) em fábrica.
+	- Utilizada geralmente para gravar programas que não se deseja permitir que o usuário possa alterar ou apagar (Ex.: o BIOS - Basic Input Output System e Microprogramas de Memórias de Controle).
+
+- PROM - _Programmable Read Only Memory_
+	- Memória apenas de leitura, programável.
+	- ROM programável com máquinas adequadas (chamadas queimadores de PROM).
+	- Geralmente é comprada "virgem" (sem nada gravado), sendo muito utilizada no processo de testar programas no lugar da ROM, ou sempre que se queira produzir ROM em quantidades pequenas. 
+	- Uma vez programada (em fábrica ou não), não pode mais ser alterada.
+
+- EPROM - _Erasable Programmable Read Only Memory_
+	- Memória apenas de leitura, programável (com queimadores de PROM) e apagável (com máquinas adequadas, à base de raios ultra-violeta).
+
+- EEPROM (ou E2PROM) - _Electrically Erasable Programmable Read Only Memory_
+	- Memória apenas de leitura, programável e eletronicamente alterável. Também chamada EAROM (Electrically Alterable ROM).
+	- EPROM apagável - processo eletrônico, sob controle da UCP (equipamento e programas adequados), menor e mais rápida que a EPROM.
+
+- Flash
+	- Funcionamento similar ao da EEPROM – conteúdo total ou parcial da memória pode ser apagado normalmente por um processo de escrita. 
+	- Apagadas e regravadas por blocos (o apagamento não pode ser efetuado ao nível de byte como na EEPROM), alta capacidade de armazenamento
+	- O termo flash foi imaginado devido à elevada velocidade de apagamento dessas memórias em comparação com as antigas EPROM e EEPROM.
+
+- Memória CMOS - (_Complementary Metal Oxide Semiconductor_)
+	- Tipo especial de memória para armazenamento das opções essenciais de configuração de inicialização $\rightarrow$ quantidade de memória instalada, data, hora.
+	- Alimentação via bateria.
+
