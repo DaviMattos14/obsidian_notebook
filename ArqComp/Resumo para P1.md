@@ -297,3 +297,40 @@ Exemplos: Registradores, Memória Principal, Memória Cache e SSD.
 	- Tipo especial de memória para armazenamento das opções essenciais de configuração de inicialização $\rightarrow$ quantidade de memória instalada, data, hora.
 	- Alimentação via bateria.
 
+##### Hierarquia de Memória
+![[hierarquia_memoria.png]]
+
+A HIERARQUIA DA MEMÓRIA ESTÁ BASEADA NAS SEGUINTES CARACTERÍSTICAS:
+1. Custo
+2. Tamanho 
+3. Velocidade
+Obs: Quanto maior for a velocidade, maior o custo e consequentemente menor o tamanho.
+
+##### Tipos de Memórias
+- Registradores (Internos a CPU)
+- Cache
+	- São medidas conforme a sua latência e dividem-se em alguns casos em L1, L2 e L3;
+	- São dispositivos de armazenamento que seguem uma hierarquia de tamanho, velocidade e custo. Todas são voláteis.
+		- _Cache L1_ (Primária) - Interna ao processador.
+		- _Cache L2_ (Secundária) - Atualmente: localizada no interior da pastilha do processador
+		- _Cache L3_ - localizada externamente ao processador (mas acompanha ele). 
+	- Quanto mais próxima do processador, melhor será o desempenho do mesmo.
+
+- Memória Principal (RAM)
+	- Há normalmente uma pequena quantidade de memória não volátil fazendo parte da memória principal (contém o BIOS).
+	- Cada posição da memória principal tem um endereço único
+	- Geralmente é combinada com uma memória CACHE menor e mais veloz
+	- Endereçamento
+		- A memória principal é organizada como um conjunto de células(ou posições) capazes de armazenar, cada uma, 8 bits (1 byte);
+		- Existe 1 endereço para cada célula de memória, portanto, a célula é a menor unidade de memória endereçável;
+		- Bytes são agrupados em PALAVRAS;
+		- A maioria das instruções opera sobre palavras;
+		- Registradores da CPU geralmente são do tamanho de uma palavra:
+			- 32 bits = 4 células;
+			- 64 bits = 8 células;
+
+- Memória Secundária (CD, DVD, Pen Drive, ...)
+	- É a memória mais barata, com mais espaço e comum nos computadores
+	- São as mais lentas unidades de armazenamento de um sistema computacional.
+
+### Programação em Linguagem de Montagem
