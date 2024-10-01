@@ -122,15 +122,12 @@ O UEFI possui também um modo de compatibilidade com o padrão BIOS, configuráv
 ### Arquiteturas CISC x RISC
 O tempo de execução de um programa pode ser definido pela seguinte equação:
 
-$$
-T_p = C_i \times T_c \times N_i
-
-$$
+$$T_p = C_i \times T_c \times N_i$$
 Onde:
-- \($T_p$  = tempo de execução do programa
-- \( $C_i$ \ = ciclos por instrução
-- \( $T_c$  = tempo de cada ciclo
-- \( $N_i$ = número de instruções
+- $T_p$  = tempo de execução do programa
+- $C_i$  = ciclos por instrução
+- $T_c$  = tempo de cada ciclo
+- $N_i$ = número de instruções
 
 Exemplos de arquitetura CISC eram então os processadores x86 da Intel.
 Já os processadores SPARC, MIPS e ARM são exemplos de arquiteturas RISC.
@@ -202,7 +199,7 @@ A MMU (em inglês: Memory Management Unit) é um dispositivo de hardware que tra
 ### Memórias
 - Visão Geral:
 	- Manipula Bit
-	- Unidade de informação a ser armazenada, recuperada ou transferida (célula) - Grupo de n bits (n = 8)  1 Byte
+	- Unidade de informação a ser armazenada, recuperada ou transferida (célula) - Grupo de n bits (n = 8) $\rightarrow$ 1 Byte
 	- ENDEREÇO: é o código de identificação da localização das células (informações).
 	Operações:
 	- ESCRITA: transferência de informações de outro componente do sistema de computação para a memória (CPU $\rightarrow$ memória)
