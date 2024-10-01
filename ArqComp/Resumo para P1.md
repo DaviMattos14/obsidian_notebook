@@ -330,3 +330,32 @@ Obs: Quanto maior for a velocidade, maior o custo e consequentemente menor o tam
 	- São as mais lentas unidades de armazenamento de um sistema computacional.
 
 ### Programação em Linguagem de Montagem
+_Sem Anotações_
+
+### Introdução a Sistemas Operacionais
+#### O que é?
+- É um software (programa)
+- Atua como intermediário entre o Usuário e o Hardware
+- Fornece um ambiente onde o usuário possa executar programas
+- Garante uma utilização eficiente do Hardware
+- Protege o Sistema de Computação e os usuários
+
+| São recursos de hardware              | São recursos de software                          |
+| ------------------------------------- | ------------------------------------------------- |
+| Tempo de Processador (CPU)            | Programas Utilitários                             |
+| Espaço em Memória                     | Bibliotecas de Funções – DLLs                     |
+| Espaço para armazenamento de arquivos | Rotinas de Serviço                                |
+| Dispositivos de Entrada e de Saída    | Programas Aplicativos                             |
+| Dispositivos de Comunicação de Dados  | Programas de Interface com Dispositivos - Drivers |
+
+#### Visão Simplificada de um SO
+![visao so](./Imagens/visao_so.png)
+
+#### Interface com o usuário
+- Acessar o Sistema – segurança de acesso
+- Criar e Gerir Diretórios / Arquivos e Programas
+- Executar Programas
+- Acessar Dispositivos de E / S
+- Acessar conteúdo de Arquivos
+- Detectar Erros de execução
+- Contabilizar o Uso do sistema
