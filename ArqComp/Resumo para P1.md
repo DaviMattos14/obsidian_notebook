@@ -1,8 +1,7 @@
 # Aula 1 
 
 ## Modelo Von Neumann
-![Modelo Von Neumann](./imagens/modelo_von_neumann.png)
-
+![Modelo Von Neumann](./Imagens/modelo_von_neumann.png)
 ## Modelo de Barramento
 ![[modelo_barramento.png]]
 
