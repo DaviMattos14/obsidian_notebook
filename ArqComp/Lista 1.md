@@ -28,7 +28,7 @@
 $\text{Número de endereços} = 2^{n}$
 Onde:
 - $n$ é o número de bits do barramento de endereços;
-- O número de endereços é 32M, que significa \( $32 \times 10^6$ \) endereços.
+- O número de endereços é 32M, que significa \( $32 \times 10^{20}$ \) endereços.
 Primeiro, transformamos \( $32M$ \) em potência de 2:
 $$32M = 32 \times 2^{20} = 2^5 \times 2^{20} = 2^{25}$$
 Agora, igualamos:
@@ -41,10 +41,10 @@ Portanto, o tamanho do barramento de endereços deverá ser **25 bits**.
 ---
 7) **Um computador, cuja memória RAM (MP) tem uma capacidade máxima de armazenamento de 2K palavras de 16 bits cada, possui um REM e um RDM. Qual é o tamanho desses registradores? Qual é o valor do maior endereço dessa MP e qual é a quantidade total de bits que nela podem ser armazenados?**
 
-**Tamanho do REM (Registrador de Endereços de Memória):** O REM armazena o endereço de uma palavra na memória. A memória tem 2K palavras, onde $K=1024$, então:
-$$2K = 2 \times 1024 = 2048 \text{ palavras}$$
-Para endereçar 2048 palavras, o número de bits necessários no REM é dado por $2^n = 2048$, onde $n$ é o número de bits:
-$$2^{11} = 2048$$
+**Tamanho do REM (Registrador de Endereços de Memória):** O REM armazena o endereço de uma palavra na memória. A memória tem 2K palavras de 16 bits, onde $K=2^{10}$, então:
+$$2K \times 16b= 32 \text{ Kbits}$$
+Porém como o REM armazena em **bytes**
+$$\frac{32}{8} \text{ KB} = 4 KB$$
 
 Logo, o **REM deve ter 11 bits** para endereçar todas as palavras da memória.
 
