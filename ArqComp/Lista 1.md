@@ -78,7 +78,7 @@ O tamanho de cada **célula** é metade de uma palavra, já que o enunciado menc
 
 **a)** **Qual é a quantidade máxima de células que podem ser armazenadas na memória RAM?**
 **Tamanho total da memória (em bits):** 64 Gbits = $2^6 \times 10^{30}$ bits (ou 8GB).
-**Tamanho de cada célula (em bits):** Cada célula armazena 1/8 de uma palavra, ou seja, o tamanho de uma palavra é 8 vezes o tamanho de uma célula.
+**Tamanho de cada célula (em bits):** Cada célula armazena 1/8 de uma palavra, ou seja, o tamanho de uma palavra é 8 vezes o tamanho de uma célula, ou seja, cada célula tem 8 bits.
 
 Se $\text{memória total} = 2^{36} \text{ bits}$ , e uma célula armazena $\frac{1}{8}$ de uma palavra, a quantidade máxima de $\text{Q}_{\text{células}}$  é simplesmente
 
@@ -97,68 +97,61 @@ Tamanho da célula = $\frac{1}{8} \times$ tamanho da palavra
 Tamanho da célula = 8 bits
 Tamanho da palavra = $8\times 8$ = 64 bits
 
-
-
 ---
-10) **Um computador possui um RDM com 16 bits de tamanho e um REM com capacidade para armazenar números com 2º bits. Sabe-se que a célula deste computador armazena dados com 8 bits de tamanho e que ele possui uma quantidade N de células, igual à sua capacidade máxima de armazenamento. Pergunta-se:**
+10) **Um computador possui um RDM com 16 bits de tamanho e um REM com capacidade para armazenar números com 20 bits. Sabe-se que a célula deste computador armazena dados com 8 bits de tamanho e que ele possui uma quantidade N de células, igual à sua capacidade máxima de armazenamento. Pergunta-se:**
 
 **a) Qual é o tamanho do barramento de endereços?**
-Um barramento de endereços com 20 bits pode endereçar 2^{20} posições de memória, pois o número de endereços possíveis é dado por $2^n$, onde $n$ é o número de bits no barramento de endereços.
-
-$$2^{20} = 1.048.576 \, \text{células}.$$
+Tamanho do barramento de endereços = Tamanho do REM = 20 bits.
 
 **b) Quantas células de memória são lidas em uma única operação de leitura?**
-Como o RDM é o registrador responsável por conter os dados transferidos do barramento de dados, ele precisa ser capaz de armazenar os dados de uma operação de leitura. Se o RDM tem 16 bits e cada célula tem 8 bits, então em uma única operação de leitura, o RDM consegue ler:
+Como o RDM tendo o mesmo tamanho do barramento de dados. Se o RDM tem 16 bits e cada célula tem 8 bits, então em uma única operação de leitura, o RDM consegue ler:
 
 $$\frac{16 \, \text{bits (RDM)}}{8 \, \text{bits por célula}} = 2 \, \text{células}.$$
 
 **c) Quantos bits tem a MP?**
-Para calcular o número total de bits da memória principal (MP), basta multiplicar a quantidade total de células pelo número de bits armazenados em cada célula:
-
-$$\text{MP} = 2^{20} \, \text{células} \times 2^{3} \, \text{bits por célula} = 2^{23} \, \text{bits}.$$
+Considerando o registrador REM com 20 bits, sabe se que o processador pode endereçar $2^{20}$ Bytes.
+Logo, a capacidade é $$2^{20}B = 1\text{ MB} = 1 \times 2^{3} \text{ M}= 8 \text{ Mbits}$$
 
 ---
 11) **Um microcomputador possui uma capacidade máxima de MP com 32 K células, cada uma capaz de armazenar uma palavra de 8 bits. Pergunta-se:**
 **a) Qual é o maior endereço, em decimal , desta memória?**
 Sabemos que a memória principal (MP) possui **32 K células**. O número "K" representa **1024** ou $2^{10}$, logo o número total de células é:
-$$32 \times 1024 = 2^5 \times 2^{10} = 2^{15} =32.768 \, \text{células}.$$
+$$32 \times 1024 = 2^5 \times 2^{10} = 2^{15} \text{ Bytes}.$$
 O **maior endereço** de uma memória é sempre igual ao número total de células menos 1 (porque o endereçamento começa do zero). Portanto, o maior endereço, em decimal, é:
-$$32.768 - 1 = 32.767.$$
-Portanto, **o maior endereço desta memória, em decimal, é 32.767**.
+$$2^{15}-1$$
 
 **b) Qual é o tamanho do barramento de endereços deste sistema?**
-O barramento de endereços precisa ser capaz de endereçar todas as **32.768 células** de memória. O tamanho do barramento de endereços em bits é determinado pelo número de endereços que ele pode gerar, que é dado por $2^n$, onde n é o número de bits no barramento.
+O barramento de endereços precisa ser capaz de endereçar todas as $2^{15}-1$ de memória. O tamanho do barramento de endereços em bits é determinado pelo número de endereços que ele pode gerar, que é dado por $2^n$, onde n é o número de bits no barramento.
 Sabemos que:
-$$2^{15} = 32.768.$$
+$$2^{15}$$
 Portanto, o **barramento de endereços tem 15 bits**
 
 **c) Quantos bits podem ser armazenados no RDM e no REM?**
 **RDM (Registrador de Dados de Memória):** O RDM armazena uma **palavra** de dados. Como cada célula da memória armazena uma palavra de **8 bits**, o RDM deve ser capaz de armazenar **8 bits**.
+REM: 15 bits, pois é igual o tamanho do barramento.
 
 **d) Qual é o total máximo de bits que pode existir nesta memória?**
 Para determinar o total máximo de bits que a memória pode armazenar, basta multiplicar o número total de células pela quantidade de bits que cada célula pode armazenar.
 
 Sabemos que a memória tem **32.768 células**, e cada célula armazena **8 bits**. Logo, o total máximo de bits é:
 
-$$32.768 \, \text{células} \times 8 \, \text{bits por célula} = 2^{15}\times 2^3 = 2^{17} = 262.144 \, \text{bits}.$$
-Como $\text{Kbits} = 2^{10}$, logo, $2^7$ Kbits = 256 Kbits 
+$$32.768 \, \text{células} \times 8 \, \text{bits por célula} = 2^{15}\times 2^3 = 2^{18} \, \text{bits}.$$
+Como $\text{Kbits} = 2^{10}$, logo, $2^8$ Kbits = 256 Kbits 
 
 ---
 12) **Considere uma célula de uma MP cujo endereço é, em hexadecimal, 2C81 e que tem armazenado em seu conteúdo um valor igual a, em hexadecimal, F5A. Sabe-se que, neste sistema, as células têm o mesmo tamanho das palavras e que em cada acesso é lido o valor de uma célula. Pergunta-se:**
 **a) Qual deve ser o tamanho do REM e do RDM neste sistema?**
 
 - REM (Registrador de Endereçamento de Memória):
-O REM precisa armazenar o endereço da célula de memória. O endereço fornecido é **2C81** (em hexadecimal). Em formato binário, esse valor é:
+O REM precisa armazenar o endereço da célula de memória. O endereço fornecido é **2C81** (em hexadecimal). Como cada digito em hexa é equivalente a 4 bits, logo:
 $$2C81_{\text{hex}} = 00101100 10000001_{\text{bin}} = 16 \, \text{bits}.$$
 - RDM (Registrador de Dados de Memória):
-O valor armazenado na célula é **F5A** (hexadecimal), que em binário é:
+O valor armazenado na célula é **F5A** (hexadecimal):
 $$F5A_{\text{hex}} = 11110101 1010_{\text{bin}} = 12 \, \text{bits}.$$
 
 **b) Qual deve ser a máxima quantidade de bits que podem ser implementados nessa memória?**
 O número máximo de células endereçáveis é:
-$$2^{16} = 65.536 \, \text{células}.$$
-Como cada célula armazena **12 bits** (tamanho do RDM), a capacidade máxima de armazenamento da memória é:
-$$65.536 \, \text{células} \times 12 \, \text{bits por célula} = 786.432 \, \text{bits}.$$
+$$2^{16}\, \text{ Bytes}. = 2^{16} \times 2^3 \text{ bits} = 2^{19} \text{ bits}$$
 
 ---
 13) **Uma memória ROM pode ser também considerada uma memória do tipo Leitura/Escrita? Por que?**
@@ -171,7 +164,7 @@ Aumenta a eficiência do processador, acelerando o acesso aos dados, reduzindo a
 
 ---
 15)  **Por que não é possível a MP ser totalmente volátil?**
-No entanto, o sistema precisa manter certos dados persistentes, como o sistema operacional, configurações essenciais e outros programas importantes. Se a memória fosse completamente volátil, todas essas informações seriam perdidas a cada desligamento, tornando o sistema inutilizável após a reinicialização
+No entanto, o sistema precisa manter certos dados persistentes, como o sistema operacional, configurações essenciais e outros programas importantes (BIOS/UEFI). Se a memória fosse completamente volátil, todas essas informações seriam perdidas a cada desligamento, tornando o sistema inutilizável após a reinicialização
 
 ---
 16) **Sempre que o processador realiza um acesso à MP para efetuar uma operação de leitura ou de escrita, ele manipula dois valores distintos, mas que estão associados ao acesso. Quais são esses valores?**
