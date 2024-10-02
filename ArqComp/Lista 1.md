@@ -271,6 +271,8 @@ LDA Op $\hspace{4cm}$R0 <- (Op)                           (V)
 - **LDA Op**: R0←(Op)
     - **Operações de memória:** 1 leitura (para o operando Op da memória).
     - **Total de ciclos de memória:** **1 ciclo** de leitura.
+
+No total, são gastos 7 acessos a MP, sendo 5 para leitura e 1 para escrita
     
 ---
 27) Considere um computador com 64 K células de memória, instruções de um operando, tendo possibilidade de ter um conjunto de 256 instruções de máquina. Considerando que cada instrução tem o tamanho de uma célula, que é o mesmo tamanho da palavra do sistema, qual é o tamanho, em bits, dos registradores CI (ou PC) e RDM? Qual é o tamanho total em bits dessa memória? 
