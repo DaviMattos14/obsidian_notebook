@@ -398,6 +398,30 @@ Sistemas inseridos em produtos com funções específicas como forno de microond
 #### Posicionamento em Camadas
 ![Conceito de Máquina de Camadas](./Imagens/maquina_camadas.png)
 
+#### Instruções
+Sequência de bits que são interpretados pela UC e que disparam operações lógicas ou aritméticas a serem executadas pelos circuitos do hardware. (dependente do hardware dependente do hardware)
+![Ciclo Básico de Instruções](./Imagens/ciclo_instrucoes.png)
+
+##### Tipos de Instruções
+- Acesso à memória
+	 - Transferência de dados entre o processador e a memória
+- Entrada / saída
+	 - Transferência de dados entre o processador e o dispositivo
+ - Tratamento de dados
+	 -  Operações aritméticas ou lógicas 
+ - Controle (desvios)
+	 - Alteração da seqüência de execução de instruções
+
+#### Arquiteturas de SO
+1.  Sistema Monolítico
+	1. Dominou até os primeiros grandes sistemas para Mainframes.
+	2. Problemas:
+		1. Bugs
+		2. Memórias
+		3. Complexidade
+3. Sistema Modular (Camadas)
+	1. O sistema é dividido em níveis sobrepostos. Cada nível oferece funções que só podem ser utilizadas pelas camadas mais externas.
+4. Cliente / Servidor
 #### Interrupções
 - Suspendem a tarefa em execução pela ocorrência de um evento externo (interrupção)
 - Permitem a execução de outras instruções enquanto uma operação de E/S está sendo executada
@@ -407,6 +431,35 @@ Sistemas inseridos em produtos com funções específicas como forno de microond
 <font color="#ff0000">Observação</font>:
 Após o término da interrupção, a tarefa suspensa pode retornar à execução ou uma outra ser selecionada.
 
-#### Tratamento de Exceções
-#### Fluxo de Exceções
-#### Tipos de Exceções
+#### Tratamento de Interrupções
+É feito pelo SO, que determina a natureza da interrupção e dispara a Rotina de Serviço adequada para executar as ações que forem necessárias.
+
+A execução do programa corrente é suspensa 
+O endereço da Rotina de Serviço é localizado na tabela de interrupções
+O status do programa corrente é salvo (conteúdo do PC, PSW, registradores, ...)
+O controle do processador é transferido para a rotina de serviço
+O ponto de interrupção pode ocorrer em qualquer ponto do programa
+As rotinas de serviço normalmente fazem parte do Sistema Operacional
+Overhead adicional para ativar e executar a rotina de serviço.
+
+#### Fluxo de Interrupção
+![Fluxo de Interrupção](./Imagens/fluxo_interrupcao.png)
+
+#### Tipos de Interrupções
+##### Sincrona
+- Estados de Exceção (trap)
+	- estouro aritmético
+	- divisão por zero
+	- instrução ilegal
+	- acesso não permitido
+- Interrupção de software
+	- chamada de sistema (system call)
+- Relógio (temporizador)
+	- usado pelo programa
+	-  usado pelo SO (time slice)
+##### Assíncrona
+- Falha de Hardware
+	- Erro de paridade Memória
+	- Falha no disco, etc
+- Entrada e Saída
+	- Sinalização de conclusão

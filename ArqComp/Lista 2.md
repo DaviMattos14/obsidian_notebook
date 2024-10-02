@@ -24,9 +24,26 @@ Porque esses sistemas só permitem a execução de um único programa de cada ve
 
 6. **Com relação ao gerenciamento de processos em um sistema operacional, quais são os possíveis estados dos Processos Ativos. Explique o que ocorre em cada estado e suas transições.**
 
-
+1. _Novo_ (New): O processo foi criado, mas ainda não está pronto para ser executado. Está sendo inicializado pelo sistema.
+	- Transição: Quando a inicialização é concluída, o processo é movido para o estado "Pronto".
+2. _Pronto_ (Ready): O processo está preparado para ser executado e está aguardando ser escalonado para a CPU.
+	- Transição: O processo entra em execução quando o escalonador o escolhe para ocupar a CPU, passando para o estado "Em Execução".
+3. _Em Execução_ (Running): O processo está em execução, utilizando a CPU para realizar suas instruções.
+	-  Transições: Se o processo precisar esperar por um evento ou recurso (como I/O), ele é movido para o estado "Espera".
+	- Se o tempo de CPU alocado for esgotado (em sistemas com preempção), o processo retorna ao estado "Pronto".
+	- Quando o processo termina, ele é movido para o estado "Encerrado".
+4. _Espera_ (Waiting ou Blocked): O processo está aguardando por algum evento, como a conclusão de uma operação de I/O ou a disponibilidade de um recurso.
+	- Transição: Quando o evento que estava sendo aguardado ocorre, o processo volta para o estado "Pronto".
+5. _Encerrado_ (Terminated): O processo finalizou sua execução. Neste estado, ele será removido da tabela de processos pelo sistema operacional.
+	- Transição: Não há transições a partir do estado "Encerrado", pois o processo não existe mais no sistema.
+ 
 7. **Em um sistema operacional, um processo é formado por 3 (três) partes: contexto do software, contexto do hardware e espaço de endereçamento. Cite pelo menos 3 (três) elementos que estão definidos no contexto de hardware.**
 
+_Registradores de propósito geral_ (General Purpose Registers): Contêm valores temporários usados durante a execução das instruções, como resultados de operações aritméticas ou dados a serem manipulados.
+
+_Contador de programa_ (Program Counter - PC): Armazena o endereço da próxima instrução a ser executada no processo.
+
+_Registradores de estado_ (Status Registers): Contêm informações sobre o estado da CPU, como flags de interrupção, condição de overflow, e sinalizadores de comparação.
 
 8. **Para que servem as interrupções? Explique em poucas palavras - seja sucinto e objetivo.**
 As interrupções servem para avisar a CPU que um evento externo ou interno ocorreu, permitindo que ela pause a tarefa atual para lidar com esse evento, como entradas de dispositivos (teclado, mouse)
