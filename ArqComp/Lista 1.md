@@ -45,57 +45,59 @@ Portanto, o tamanho do barramento de endereços deverá ser **25 bits**.
 $$2K \times 16b= 32 \text{ Kbits}$$
 Porém como o REM armazena em **bytes**
 $$\frac{32}{8} \text{ KB} = 4 KB$$
+Para endereçar uma memória de 4KB são necessários
+$$4\text{KB}=2^2 \times 2^{10}= 2^{12} \text{ Bytes} = 2^{12}\times 8 = 2^{12} \times 2^3 = 2^{15}\text{ bits}$$
 
-Logo, o **REM deve ter 11 bits** para endereçar todas as palavras da memória.
+Logo, o **REM deve ter 15 bits** para endereçar todas as palavras da memória.
 
 **Tamanho do RDM (Registrador de Dados de Memória)**: O **RDM** armazena os dados de uma palavra. Cada palavra na memória tem 16 bits, então o **RDM deve ter 16 bits**, já que ele precisa ser capaz de armazenar uma palavra inteira.
 
-**Valor do maior endereço da MP**: O maior endereço possível é o último endereço da memória, que é o endereço 204720472047 (em decimal), pois os endereços começam do 0. Portanto, o valor do maior endereço é **2047**.    
+**Valor do maior endereço da MP**: O maior endereço possível é o último endereço da memória, que é $2^n - 1$, pois os endereços começam do 0. Portanto, o valor do maior endereço é $2^{15} - 1$.    
 
 **Quantidade total de bits que podem ser armazenados na memória**: A memória tem 2048 palavras, e cada palavra tem 16 bits. Assim, a quantidade total de bits que podem ser armazenados é:
-$$2048 \times 16 = 32768 \text{ bits} = 32K \text{ bits}$$
+$$32K \text{ bits}  = 2^5 \times 2^{10} = 2^{15} \text{ bits}$$
 
 ---
 8) **Um processador possui RDM com capacidade de armazenar 32 bits e um REM com capacidade de armazenar 24 bits. Sabendo-se que em cada acesso são lidas duas células da memória RAM (MP) e que o barramento de dados em tamanho igual ao da palavra, pergunta-se:**
 - a) **Qual é a capacidade máxima de endereçamento do microcomputador em questão?**
 A capacidade máxima de endereçamento depende do número de bits do **REM** (Registrador de Endereços de Memória). O REM tem 24 bits, então o número total de endereços que o microcomputador pode acessar é:
-$$2^{24} = 16.777.216 \text{ endereços}$$
-Portanto, o microcomputador pode endereçar **16.777.216 (ou 16M) endereços**.
+$$2^{24} \text{ B}= 2^4 \times 2^{20}\text{ B}= 16 \text{ MB endereços}$$
+Portanto, o microcomputador pode endereçar **16MB endereços**.
 
 - **b) Qual é o total máximo de bits que podem ser armazenados na memória RAM?**
-Sabemos que em cada acesso à memória são lidas **duas células**. Como o **RDM** (Registrador de Dados de Memória) tem 32 bits, cada palavra tem 32 bits. Isso significa que cada célula armazena metade de uma palavra, ou seja, **16 bits** por célula.
-
-Assim, a memória tem $2^{24}$ endereços, e cada endereço (ou célula) armazena 16 bits. O total de bits que podem ser armazenados na memória RAM é:
-$$16 \times 2^{24} = 16 \times 16.777.216 = 268.435.456 \text{ bits}$$
-Portanto, o total máximo de bits que podem ser armazenados na memória RAM é **268.435.456 bits** ou **256 Megabits (Mb)**.
+Sabemos que a MP tem capacidade de 16MB, logo
+$$ 2^{24} \times 8 = 2^{24} \times 2^3 = 2^{27} \text{ bits}$$
+Portanto, o total máximo de bits que podem ser armazenados na memória RAM é  **128 Mbits (Mb)**.
 
 - **c) Qual é o tamanho da palavra e de cada célula da máquina?**
-O tamanho da **palavra** é igual à capacidade do **RDM**, ou seja, **32 bits**.
-O tamanho de cada **célula** é metade de uma palavra, já que o enunciado menciona que em cada acesso são lidas duas células. Portanto, o tamanho de cada célula é **16 bits**.
+O tamanho da **palavra** é igual à capacidade do **RDM**, ou seja, **32 bits = 4 bytes**.
+O tamanho de cada **célula** é metade de uma palavra, já que o enunciado menciona que em cada acesso são lidas duas células. Portanto, o tamanho de cada célula é **16 bits = 2 nytes**.
 
 ---
 9) **Um processador possui um barramento de endereços com capacidade de permitir a transferência de 33 bits de cada vez. Sabe-se que o barramento de dados permite a transferência de 4 palavras em cada acesso e que cada célula da memória RAM armazena 1/8 de cada palavra. Considerando que a memória RAM pode armazenar um máximo de 64 Gbits, pergunta-se:**
 
 **a)** **Qual é a quantidade máxima de células que podem ser armazenadas na memória RAM?**
-**Tamanho total da memória (em bits):** 64 Gbits = $64 \times 10^9$ bits.
+**Tamanho total da memória (em bits):** 64 Gbits = $2^6 \times 10^{30}$ bits (ou 8GB).
 **Tamanho de cada célula (em bits):** Cada célula armazena 1/8 de uma palavra, ou seja, o tamanho de uma palavra é 8 vezes o tamanho de uma célula.
 
-Se $\text{memória total} = 64 \times 10^9$ , e uma célula armazena $\frac{1}{8}$ de uma palavra, a quantidade máxima de $\text{Q}_{\text{células}}$  é simplesmente o número de bits que podem ser armazenados (64 bilhões de bits), já que estamos falando de bits individuais:
+Se $\text{memória total} = 2^{36} \text{ bits}$ , e uma célula armazena $\frac{1}{8}$ de uma palavra, a quantidade máxima de $\text{Q}_{\text{células}}$  é simplesmente
 
-$$\text{Q}_{\text{células}} = 64 \times 10^9 \, \text{bits}
-$$
-Então, **a quantidade máxima de células é 64 bilhões de células**.
+$$\text{Q}_{\text{células}} = \frac{2^{36}}{2^3} = 2^{33} \, \text{ células}$$
+Então, **a quantidade máxima de células é $2^{33}$ de células**.
 
 **b) Qual é o tamanho do REM e do barramento de dados existentes neste computador?**
-Com um barramento de 33 bits, o número máximo de endereços que podem ser representados é: 
-$$2^{33} = 8.589.934.592 \, \text{endereços}.$$
+REM e o barramento de capacidade de 33bits
+Sabemos que o barramento de dados transfere 4 palavras em cada acesso. Logo,
+Tamanho do barramento de dados = $4 \times$ tamanho da palavra
 
-No entanto, como a memória só tem 64 bilhões de células (ou $6,4 \times 10^{10}$ bits), o número de bits no REM corresponde ao que pode ser endereçado pelo barramento de 33 bits.
-
-Sabemos que o barramento de dados transfere 4 palavras em cada acesso. Se considerarmos que cada palavra tem 8 bits, isso significa que o barramento de dados tem que ser capaz de transferir 32 bits por vez (4 palavras × 8 bits por palavra = 32 bits).
+Tamanho do barramento = 4 $\times$ 64 = 256 bits
 
 **c) Qual é o tamanho de cada célula e da palavra desta máquina?**
-**Tamanho da célula: 1 bit, tamanho da palavra: 8 bits.**
+Tamanho da célula = $\frac{1}{8} \times$ tamanho da palavra
+Tamanho da célula = 8 bits
+Tamanho da palavra = $8\times 8$ = 64 bits
+
+
 
 ---
 10) **Um computador possui um RDM com 16 bits de tamanho e um REM com capacidade para armazenar números com 2º bits. Sabe-se que a célula deste computador armazena dados com 8 bits de tamanho e que ele possui uma quantidade N de células, igual à sua capacidade máxima de armazenamento. Pergunta-se:**
