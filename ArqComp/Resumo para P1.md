@@ -47,7 +47,7 @@ Como consequência direta, a largura em bits do maior operando admitido pela UAL
 O processador contém elementos de memória, de pequena capacidade mas de alta velocidade, usados para armazenar resultados temporários, chamados de **registradores**.
 O conjunto desses registradores é denominado banco de **registradores**.
 Existe um registrador invisível ao programador, chamado de registrador de instrução (**RI**), que armazena a instrução que está sendo executada.
-Existe um registrador especial denominado apontador de instruções       (**PC**) , que contém o endereço da próxima instrução que vai ser executada.
+Existe um registrador especial denominado apontador de instruções (**PC**) , que contém o endereço da próxima instrução que vai ser executada.
 
 ### Unidade de Controle
 A unidade de controle é responsável pela coordenação da atividade de todos os componentes do processador.
@@ -132,7 +132,7 @@ Onde:
 Exemplos de arquitetura CISC eram então os processadores x86 da Intel.
 Já os processadores SPARC, MIPS e ARM são exemplos de arquiteturas RISC.
 
-#### CISC
+#### CISC (Memória-Memória)
 Características:
 - Instruções complexas demandando um número grande e variável de ciclos de máquina para sua
 execução.
@@ -147,7 +147,7 @@ Consequências:
 - A unidade de controle é em geral microprogramada.
 - Códigos compactos podem ser gerados pelos compiladores.
 
-#### RISC
+#### RISC (Registrador)
 Características:
 - Instruções mais simples demandando um número fixo de ciclos de máquina para sua execução;
 - Uso de poucos modos simples de endereçamento de operandos;
@@ -180,6 +180,7 @@ Consequências:
 - Processadores geralmente possuem uma pequena memória interna, portas de entrada e de saída, e são geralmente ligados a outros circuitos digitais como memórias; multiplexadores e circuitos lógicos;
 - Muitas vezes também um processador possui uma porta de entrada de instruções, que determinam a tarefa a ser realizada por ele. Estas sequências de instruções geralmente estão armazenadas em memórias, e formam o programa a ser executado pelo processador.
 
+<font color="#ff0000">OBS</font>: Os bytes são agrupados em palavras e a maioria das instruções operam sobre palavras. Assim, os registradores da CPU geralmente são do tamanho de uma palavra, então, se for de 32 bits, são 4 células que podem ser operadas a cada instrução. E, o tamanho da palavra, define normalmente a largura do processador.
 ##### Unidade de Aritmética e Lógica
 Circuito que se encarrega de realizar as operações matemáticas requisitadas por um determinado programa;
 A Unidade de Controle é o que há de mais próximo a um cérebro dentro do processador. Esse controlador define o regime de funcionamento e da ordem às diversas tarefas do processador;
@@ -227,14 +228,14 @@ Dependendo do tamanho da memória, isto é, de sua capacidade, indica-se o valor
 
 | **Símbolo** | **Nome** | **Valor (em potência de 2)** | **Valor Decimal**                 |
 | ----------- | -------- | ---------------------------- | --------------------------------- |
-| K           | Kilo     | \( 2^{10} \)                 | 1.024                             |
-| M           | Mega     | \( 2^{20} \)                 | 1.048.576                         |
-| G           | Giga     | \( 2^{30} \)                 | 1.073.741.824                     |
-| T           | Tera     | \( 2^{40} \)                 | 1.099.511.627.776                 |
-| P           | Peta     | \( 2^{50} \)                 | 1.125.899.906.842.624             |
-| E           | Exa      | \( 2^{60} \)                 | 1.152.921.504.606.846.976         |
-| Z           | Zetta    | \( 2^{70} \)                 | 1.180.591.620.717.411.303.424     |
-| Y           | Yotta    | \( 2^{80} \)                 | 1.208.925.819.614.629.174.706.176 |
+| K           | Kilo     | \( $2^{10}$ \)               | 1.024                             |
+| M           | Mega     | \( $2^{20}$ \)               | 1.048.576                         |
+| G           | Giga     | \( $2^{30}$ \)               | 1.073.741.824                     |
+| T           | Tera     | \( $2^{40}$ \)               | 1.099.511.627.776                 |
+| P           | Peta     | \( $2^{50}$ \)               | 1.125.899.906.842.624             |
+| E           | Exa      | \( $2^{60}$ \)               | 1.152.921.504.606.846.976         |
+| Z           | Zetta    | \( $2^{70}$ \)               | 1.180.591.620.717.411.303.424     |
+| Y           | Yotta    | \( $2^{80}$ \)               | 1.208.925.819.614.629.174.706.176 |
 #### Volatilidade
 Memórias podem ser do tipo **volátil** ou **não volátil**.
 - *Volátil* : Perde a informação armazenada na ausência de energia elétrica. Ex.: Registradores, Memória Principal.
