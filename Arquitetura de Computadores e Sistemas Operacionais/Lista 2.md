@@ -8,7 +8,7 @@ A função de um sistema operacional (SO) é atuar como uma interface entre o ha
 Interação direta com o hardware, gerenciamento manual de memória, etc. Além de ter que programar em um nível extremamente baixo, o que tornaria o desenvolvimento de software muito mais complexo, demorado e propenso a erros
 
 4. **Explique o que é conceito de máquina de camadas (níveis).**
-![Conceito de Máquina de Camadas](./Imagens/maquina_camadas.png)
+![Conceito de Máquina de Camadas](maquina_camadas.png)
 
 É um modelo teórico utilizado para explicar a organização hierárquica de sistemas de computação, especialmente sistemas operacionais e arquitetura de computadores. A ideia central é que um computador pode ser visto como uma série de camadas ou níveis, onde cada camada superior depende da camada imediatamente abaixo para fornecer serviços ou abstrações, mas esconde os detalhes de implementação da camada inferior.
 

@@ -1,9 +1,9 @@
 # Aula 1 
 
 ## Modelo Von Neumann
-![Modelo Von Neumann](./Imagens/modelo_von_neumann.png)
+![Modelo Von Neumann](modelo_von_neumann.png)
 ## Modelo de Barramento
-![Barramento](./Imagens/modelo_barramento.png)
+![Barramento](modelo_barramento.png)
 
 ### Memória Principal e Secundária
 - Memória Principal
@@ -67,10 +67,10 @@ Há duas formas de se implementar a unidade de controle:
 
 - Arquitetura de Acumulador
 	- Um operando (em registrador ou memória), o acumulador é usado como operando implícito a maioria das vezes
-	![Acumulador](./Imagens/arquitetura_acumulador.png)
+	![Acumulador](arquitetura_acumulador.png)
 - Arquitetura de Pilha
 	- Nenhum operando: todos operandos são implícitos no topo da pilha
-	![Pilha](./Imagens/arquitetura_pilha.png)
+	![Pilha](arquitetura_pilha.png)
 - Arquitetura de Registrador (load / store)
 	- Três operandos, todos nos registradores
 	- loads e stores são as únicas instruções que fazem acesso à memória
@@ -257,7 +257,7 @@ Exemplos:
 ##### Memórias de semicondutores
 Rápidas e relativamente caras, se comparadas com outros tipos.
 Exemplos: Registradores, Memória Principal, Memória Cache e SSD.
-![memorioas](./Imagens/memoria_semicondutora.png)
+![memorioas](memoria_semicondutora.png)
 
 - R/W - _Read and Write_
 	- Memória de leitura e escrita, de acesso aleatório e volátil.
@@ -295,7 +295,7 @@ Exemplos: Registradores, Memória Principal, Memória Cache e SSD.
 	- Alimentação via bateria.
 
 ##### Hierarquia de Memória
-![hierarquia de memoria](./Imagens/hierarquia_memoria.png)
+![hierarquia de memoria](hierarquia_memoria.png)
 
 A HIERARQUIA DA MEMÓRIA ESTÁ BASEADA NAS SEGUINTES CARACTERÍSTICAS:
 1. Custo
@@ -350,7 +350,7 @@ _Sem Anotações_
 | Dispositivos de Comunicação de Dados  | Programas de Interface com Dispositivos - Drivers |
 
 #### Visão Simplificada de um SO
-![visao so](./Imagens/visao_so.png)
+![visao so](visao_so.png)
 
 #### Interface com o usuário
 - Acessar o Sistema – segurança de acesso
@@ -394,14 +394,14 @@ _Sistemas de Tempo Real_
 Sistemas inseridos em produtos com funções específicas como forno de microondas, VCR, equipamentos bélicos etc.
 
 #### Componentes de SO
-![Componentes so](./Imagens/componente_so.png)
+![Componentes so](componente_so.png)
 
 #### Posicionamento em Camadas
-![Conceito de Máquina de Camadas](./Imagens/maquina_camadas.png)
+![Conceito de Máquina de Camadas](maquina_camadas.png)
 
 #### Instruções
 Sequência de bits que são interpretados pela UC e que disparam operações lógicas ou aritméticas a serem executadas pelos circuitos do hardware. (dependente do hardware dependente do hardware)
-![Ciclo Básico de Instruções](./Imagens/ciclo_instrucoes.png)
+![Ciclo Básico de Instruções](ciclo_instrucoes.png)
 
 ##### Tipos de Instruções
 - Acesso à memória
@@ -444,7 +444,7 @@ As rotinas de serviço normalmente fazem parte do Sistema Operacional
 Overhead adicional para ativar e executar a rotina de serviço.
 
 #### Fluxo de Interrupção
-![Fluxo de Interrupção](./Imagens/fluxo_interrupcao.png)
+![Fluxo de Interrupção](fluxo_interrupcao.png)
 
 #### Tipos de Interrupções
 ##### Sincrona
