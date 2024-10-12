@@ -149,14 +149,14 @@ $$
 - $E[X] = n \centerdot p$
 - $Var(X)=n\centerdot p \centerdot (1-p)$
 ### Modelo Hipergeométrico
-$X \sim Hip(N,r,n)$
+$X \sim Hip(m,n,k)$
 
->N $\rightarrow$ Tamanho total
->r $\rightarrow$ Número de Casos com atributos de interesse
->n $\rightarrow$ Tamanho da amostra
+>m $\rightarrow$ Sucessos
+>n $\rightarrow$ Fracassos
+>k $\rightarrow$ Tamanho da amostra
 
 $$
-p_X=\mathbb{P}(X=x)=\frac{\binom{r}{x}\centerdot \binom{N-r}{n-x}}{\binom{N}{n}}
+p_X=\mathbb{P}(X=x)=\frac{\binom{m}{x}\centerdot \binom{n}{k-x}}{\binom{m+n}{k}}
 $$
 ### Modelo Geométrico
 ### Modelo Binomial Negativo
