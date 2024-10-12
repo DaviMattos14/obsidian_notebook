@@ -181,12 +181,10 @@ Var(X)= \frac 1x \Bigg( \sum x^2 - \frac{\Big(\sum x\Big)^2}{k} \Bigg)
 $$
 
 ### Modelo Bernoulli
-
 > Sucesso ou Fracasso
-> 
 
 $$
-X \sim Bernoulli(p)\text{, p}(0 < p <1)
+X \sim Bernoulli(p) \hspace{2cm} \text{, p}(0 < p <1)
 $$
 
 $$
@@ -195,14 +193,11 @@ P(0)=P(X=0)=1-P \\ P(1)=P(X=1)=P
 \end{matrix}
 $$
 
-$E[X] = P \\Var(X) = P(1=P)$
+$E[X] = P \hspace{1cm}Var(X) = P(1=P)$
 
 ### Modelo Binomial
-
 $X \sim Binomial(n,p)$
-
 Chama-se de experimento binomial ao experimento que 
-
 - consiste em n ensaios de Bernoulli
 - cujo ensaios são independentes, e
 - para qual a probabilidade de sucessos em casa ensaio é sempre igual a p $(0<p<1)$
@@ -219,8 +214,7 @@ $Var(X)=n\centerdot p \centerdot (1-p)$
 
 $X \sim Geo(p)$
 
-> Número de repetições de um ensaio de Bernoulli com probabilidade de sucesso  $p(0<p<1)$ até ocorrer o primeiro sucesso
-> 
+> Número de repetições de um ensaio de Bernoulli com probabilidade de sucesso  p $(0<p<1)$até ocorrer o primeiro sucesso
 
 $$
 p(x) = \begin{cases} p\centerdot(1 − p)^x−1,& x \in \mathbb{N} \\
@@ -235,11 +229,9 @@ $Var(X)= \frac{1-P}{p^2}$
 
 $X \sim Hipergeométrico(N,r,n)$
 
-N $\rightarrow$ Tamanho total
-
-r $\rightarrow$ Número de Casos com atributos de interesse
-
-n $\rightarrow$ Tamanho da amostra
+>N $\rightarrow$ Tamanho total
+>r $\rightarrow$ Número de Casos com atributos de interesse
+>n $\rightarrow$ Tamanho da amostra
 
 $$
 p(X) = \begin{cases} \frac{\binom{r}{x}\centerdot \binom{N-r}{n-x}}{\binom{N}{n}}, &x \in R_x \\ 0, & \text{Caso contrário}\end{cases}

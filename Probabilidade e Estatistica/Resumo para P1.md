@@ -13,7 +13,7 @@ $$
 P(A) = \frac {A}Ω
 $$
 
-### União - (A ∪ B)
+## União - (A ∪ B)
 
 > Pelo menos um ocorre
 
@@ -21,7 +21,7 @@ $P(A ∪ B) = P(A) + P(B) - P(A ∩ B)$
 
 $P(A ∪ B) = P(A) + P(B)$, Para eventos mutuamente exclusivos.
 
-### Interseção - (A ∩ B)
+## Interseção - (A ∩ B)
 
 > A **e** B ocorrem
 
@@ -31,7 +31,7 @@ $P(A ∩ B) = P(A) \cdot P(B|A)$ - Eventos Dependentes
 
 $A ∩ (B ∪ C) = (A ∩ B) ∪ (A ∩ C)$ 
 
-### Evento Complementar $(A^c)$
+## Evento Complementar $(A^c)$
 
 ![Untitled](evento_complementar.png)
 
@@ -41,7 +41,7 @@ $(A ∩ B)^c = A^c ∪ B^c$
 
 $(A ∪ B)^c = A^c ∩ B^c$
 
-### Permutação e Combinação
+## Permutação e Combinação
 Uma _permutação de k elementos_ é quando a ordem de sorteio importa, e a quantidade de possíveis permutações é dado por
 $$
 P_{n,k}=n(n-1)...(n-k+1)=\frac{n!}{(n-k)!}
@@ -51,7 +51,7 @@ Uma _combinação de k elementos_ é quando a ordem não importa, e a quantidade
 $$
 \binom{n}{k} = \frac{P_{n,k}}{k!}=\frac{n!}{k!(n-k)!}
 $$
-### Axiomas de Probabilidade
+## Axiomas de Probabilidade
 Seja $\Omega$ um espaço amostral. Uma _probabilidade_ é uma função $\mathbb{P}$ que atribui a eventos $A \subseteq \Omega$ um número real $\mathbb{P}(A)$ e satisfaz os seguintes axiomas:
 - $0 \le \mathbb{P}(A) \le 1$ ou $\mathbb{P}(A) \in [0,1]$
 - $\mathbb{P}(\Omega) = 1$
@@ -59,7 +59,7 @@ Seja $\Omega$ um espaço amostral. Uma _probabilidade_ é uma função $\mathbb{
 $$
 \mathbb{P}(\cup^\infty_{i=1} A_i)=\sum^\infty_{n=1}\mathbb{P}(A_n)
 $$
-### Propriedades de Probabilidade
+## Propriedades de Probabilidade
 1. $\mathbb{P}(A^c) = 1-\mathbb{P}(A)$
 2. $A\subset B \rightarrow \mathbb{P}(A)\le \mathbb{P}(B)$
 3. $\mathbb{P}(A\cup B) = \mathbb{P}(A) + \mathbb{P}(B) - \mathbb{P}(A\cap B)$
@@ -77,7 +77,7 @@ $$
 \mathbb{P}(\cup^n_{i=1} A_i)=1-\mathbb{P}(\cap^n_{i=1} A^c_i)
 $$
 # Capítulo 2: Dependência e condicionamento
-### Probabilidade Condicional
+## Probabilidade Condicional
 Para eventos A e B, a probabilidade condicional de _A dado B_ é definida como
 $$
 \mathbb{P}(A|B)=\frac{\mathbb{P}(A\cap B)}{\mathbb{P}(B)}
@@ -94,7 +94,7 @@ Obs: $P(A|B) = P(A)$
 Se A e B são eventos com probabilidade positiva, então
 $$P(A|B) = \frac{(P(A)⋅P(B|A))}{P(B)}$$
 obs: $P(A∩B)=P(A)⋅(B|A)$
-# # Capítulo 3: Variáveis aleatórias discretas
+# Capítulo 3: Variáveis aleatórias discretas
 ## Variável Aleatória
 Seja $\Omega$ um espaço amostral. Uma <font color="#ff0000">variável aleatória</font> (v.a) é uma função
 $$
@@ -113,14 +113,51 @@ $\mathbb{P}_x$ é chama de distribuição de probabilidade da v.a. $X$.
 Uma v.a. X é <font color="#ff0000">discreta</font> se o conjunto $Ω_X ⊂ R$  de _todos os valores possíveis de X_ (não confundir com Ω!) for enumerável.
 A <font color="#ff0000">função massa de probabilidade</font> (f.m.p.) de uma v.a. X discreta é a função $p_X : Ω → [0, 1]$ dada por
 $$p_X(x) = P(X = x).$$
-> Exemplo:
+>Associa a cada valor possível da variável aleatória discreta suas respectiva probabilidade
+
+Tal que,
+
 $$
-X =\left \{ \begin{matrix}0,&\text{se ocorrer } \{(C,C)\}\\ 1,&\text{se ocorrer }\{(C,K),(K,C)\}\\2, &\text{se ocorrer}\{(K,K)\} \end{matrix}\right.
+p(x) =\left \{ \begin{matrix}P(X=x),&x \in Rx\\ 0,& \text{ caso contrário} \end{matrix}\right.
 $$
+
+Satisfazendo, $p(x) \ge 0$ e $\sum_{x\in Rx} p(x) = 1$
 ## Modelos de Variáveis Aleatórias Discretas
 ### Modelo Bernoulli
+> Sucesso ou Fracasso
+
+$$
+X \sim Ber(p) \hspace{1cm}(0 < p <1)
+$$
+$$
+\mathbb{p}_X(x)=p^x(1-p)^{1-x} \hspace{20px}\text{para }x\in \{0,1\}
+$$
+- $E[X] = P$
+- $Var(X) = P(1=P)$
 ### Modelo Binomial
+$X \sim Bin(n,p)$
+
+> Chama-se de experimento binomial ao experimento que 
+> - consiste em n ensaios de Bernoulli
+> - cujo ensaios são independentes, e
+> - para qual a probabilidade de sucessos em casa ensaio é sempre igual a p $(0<p<1)$
+
+$$
+\begin{matrix} p_X=\mathbb{P}(X=x)= \dbinom{n}{x}\centerdot p^x\centerdot(1-p)^{n-x},\\ \dbinom{n}{x}= \frac {n!}{x!(n-x)!} & x \in \{0,1,2,...,n\}\end{matrix}
+$$
+
+- $E[X] = n \centerdot p$
+- $Var(X)=n\centerdot p \centerdot (1-p)$
 ### Modelo Hipergeométrico
+$X \sim Hip(N,r,n)$
+
+>N $\rightarrow$ Tamanho total
+>r $\rightarrow$ Número de Casos com atributos de interesse
+>n $\rightarrow$ Tamanho da amostra
+
+$$
+p_X=\mathbb{P}(X=x)=\frac{\binom{r}{x}\centerdot \binom{N-r}{n-x}}{\binom{N}{n}}
+$$
 ### Modelo Geométrico
 ### Modelo Binomial Negativo
 ### Modelo Poisson
