@@ -112,3 +112,30 @@ $$
 Onde, $x_2\text{ , } x_5$ são **variáveis dependentes** e $x_1\text{ , }x_3\text{ , }x_4$ são **variáveis independentes**, ou seja, $x_2 \text{ e } x_5$ podem ser escritos como combinação linear de $x_1\text{ , }x_3\text{ , }x_4$.
 
 ## Transformações Lineares
+Toda matriz simétrica A pode ser descrita como:
+$$
+A\bigg(
+\begin{bmatrix}
+x \\
+y
+\end{bmatrix}
+\bigg) = 
+R_{\theta}(T(R_\theta^{-1}))
+$$
+Ou seja, $R_\theta \begin{bmatrix}a & b \\c & d\end{bmatrix} R^{-1}_\theta=A$
+#### Identidade
+$$
+\begin{bmatrix}
+1 & 0 \\
+0 & 1
+\end{bmatrix}
+\begin{bmatrix}
+x_1 \\
+y_1 
+\end{bmatrix}
+=
+\begin{bmatrix}
+x_2\\
+y_2
+\end{bmatrix}
+$$
