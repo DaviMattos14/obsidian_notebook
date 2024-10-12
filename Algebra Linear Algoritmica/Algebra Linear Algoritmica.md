@@ -115,7 +115,8 @@ Se $b = Ax$ então $A^{-1}b=x$, ou seja
 $$
 A\cdot A^{-1}= A^{-1}\cdot A=1
 $$
-<font color="#ff0000">Obs</font>: A inversa existe se, e somente se, a eliminação produzir $n$ pivôs 
+<font color="#ff0000">Obs</font>: A inversa existe se, e somente se, a eliminação produzir $n$ pivôs
+Se $\text{Det}(A)=0$, então não tem inversa
 ##### Matriz quadrada $2\times 2$
 $$A^{-1} \leftrightarrow 
 \begin{bmatrix}
@@ -140,6 +141,7 @@ $$
 - $\text{Det}(I)=1$
 - $\text{Det}(A^{-1})=\frac{1}{\text{Det}(A)}$
 - $\text{Det}(AB)=\text{Det}(A)\cdot \text{Det}(B)$
+- $\text{Det}(A^T)=\text{Det}(A)$
 ## Transformações Lineares
 Toda matriz simétrica A pode ser descrita como:
 $$
@@ -153,7 +155,7 @@ R_{\theta}(T(R_\theta^{-1}))
 $$
 Ou seja, $R_\theta \begin{bmatrix}a & b \\c & d\end{bmatrix} R^{-1}_\theta=A$
 #### Identidade
-$$
+$$A=
 \begin{bmatrix}
 1 & 0 \\
 0 & 1
@@ -168,3 +170,42 @@ x_2\\
 y_2
 \end{bmatrix}
 $$
+#### Cisalhamento
+$$
+A=
+\begin{bmatrix}
+1 & a \\
+b & 1
+\end{bmatrix}
+$$
+#### Rotação
+$$
+R_{\thetaº}=
+\begin{bmatrix}
+\cos{\theta} & -\sin{\theta} \\
+\sin{\theta} & \cos{\theta}
+\end{bmatrix}
+$$
+#### Reflexão
+$$
+A=
+\begin{bmatrix}
+0 & 1 \\
+1 & 0
+\end{bmatrix}
+$$
+#### Projeção (no eixo $x$)
+$$
+A=
+\begin{bmatrix}
+1 & 0 \\
+0 & 0
+\end{bmatrix}
+$$
+
+##### Regra de Linearidade
+Para c e d escalares e A, V e W vetores:
+$$
+A(cV+dW)=c(AV)+d(AW)
+$$
+## Autovalores e Autovetores
