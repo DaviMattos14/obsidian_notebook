@@ -117,7 +117,7 @@ A\cdot A^{-1}= A^{-1}\cdot A=1
 $$
 <font color="#ff0000">Obs</font>: A inversa existe se, e somente se, a eliminação produzir $n$ pivôs 
 ##### Matriz quadrada $2\times 2$
-$$A^{-1}=
+$$A^{-1} \leftrightarrow 
 \begin{bmatrix}
 a & b \\
 c & d
@@ -129,7 +129,17 @@ a & -b \\
 \end{bmatrix}
 
 $$
-
+## Determinante
+$$
+\text{Det}\bigg(\begin{bmatrix}
+a & b \\
+c & d
+\end{bmatrix}\bigg) = ad-bc
+$$
+#### Propriedades
+- $\text{Det}(I)=1$
+- $\text{Det}(A^{-1})=\frac{1}{\text{Det}(A)}$
+- $\text{Det}(AB)=\text{Det}(A)\cdot \text{Det}(B)$
 ## Transformações Lineares
 Toda matriz simétrica A pode ser descrita como:
 $$
