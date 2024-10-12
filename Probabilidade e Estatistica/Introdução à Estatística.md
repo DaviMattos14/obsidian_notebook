@@ -213,7 +213,6 @@ $Var(X)=n\centerdot p \centerdot (1-p)$
 ### Modelo Geométrico
 
 $X \sim Geo(p)$
-
 > Número de repetições de um ensaio de Bernoulli com probabilidade de sucesso  p $(0<p<1)$até ocorrer o primeiro sucesso
 
 $$
@@ -222,7 +221,6 @@ p(x) = \begin{cases} p\centerdot(1 − p)^x−1,& x \in \mathbb{N} \\
 $$
 
 $E[X]= \frac{1}{p}$
-
 $Var(X)= \frac{1-P}{p^2}$
 
 ### Modelo Hipergeométrico

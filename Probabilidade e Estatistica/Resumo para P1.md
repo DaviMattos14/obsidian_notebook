@@ -158,6 +158,31 @@ $X \sim Hip(m,n,k)$
 $$
 p_X=\mathbb{P}(X=x)=\frac{\binom{m}{x}\centerdot \binom{n}{k-x}}{\binom{m+n}{k}}
 $$
+- $E[X] = k \centerdot \frac{m}{m+n}$
+- $Var(X)= n \centerdot \frac{k}{m+n}\centerdot \frac{m+n-m}{m+n}\centerdot \frac{m+n-k}{m+n-1}=\frac{n^2k\left(m+n-k\right)}{\left(m+n\right)^2\left(m+n-1\right)}$
 ### Modelo Geométrico
+$X \sim Geom(p)$
+> Número de repetições de um ensaio de Bernoulli com probabilidade de sucesso $(0<p<1)$até ocorrer o primeiro sucesso
+
+$$
+\mathbb{P}(X=x)=p\cdot(1 − p)^x \hspace{1cm},x \in \mathbb{N}
+$$
+- $E[X]= \frac{1}{p}$
+- $Var(X)= \frac{1-P}{p^2}$
 ### Modelo Binomial Negativo
+>Tentativas independentes com mesma probabilidade de sucesso $p ∈ [0, 1]$, sejam realizadas até que se acumule um total de $r$ sucessos.
+
+$$
+\mathbb{P}(X=x)=\binom{x-1}{r-1}p^r\cdot(1 − p)^{x-r},\hspace{1cm}
+x \in \{r,r+1,...\}
+$$
 ### Modelo Poisson
+$X \sim Poi(\lambda)$
+> Eventos Raros
+
+$$
+\begin{matrix} p(x) = e^{-\lambda} \centerdot \frac{\lambda^x}{x!}, & x=\{0,1,2,..\} \end{matrix}
+$$
+
+$E[X] = Var(x) = \lambda$
+
