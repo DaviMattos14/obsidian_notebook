@@ -1,4 +1,4 @@
-### Operações Elementares
+## Operações Elementares
 1. $L_i \rightarrow k \cdot L_i$ (Multiplicar uma linha por um escalar $K$, ex: $2, \frac{1}{2}$)
 2. $L_i \leftrightarrow L_j$ (Inverter linhas)
 3. $L_i \rightarrow L_i + k \cdot L_j$ (Somar duas linhas)
@@ -110,6 +110,25 @@ $$
 \end{bmatrix}
 $$
 Onde, $x_2\text{ , } x_5$ são **variáveis dependentes** e $x_1\text{ , }x_3\text{ , }x_4$ são **variáveis independentes**, ou seja, $x_2 \text{ e } x_5$ podem ser escritos como combinação linear de $x_1\text{ , }x_3\text{ , }x_4$.
+## Matriz Inversa
+Se $b = Ax$ então $A^{-1}b=x$, ou seja
+$$
+A\cdot A^{-1}= A^{-1}\cdot A=1
+$$
+<font color="#ff0000">Obs</font>: A inversa existe se, e somente se, a eliminação produzir $n$ pivôs 
+##### Matriz quadrada $2\times 2$
+$$A^{-1}=
+\begin{bmatrix}
+a & b \\
+c & d
+\end{bmatrix}^{-1}
+=\frac{1}{Det(A)}
+\begin{bmatrix}
+a & -b \\
+-c & d
+\end{bmatrix}
+
+$$
 
 ## Transformações Lineares
 Toda matriz simétrica A pode ser descrita como:
