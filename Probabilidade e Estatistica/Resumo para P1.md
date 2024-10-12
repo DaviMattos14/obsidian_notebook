@@ -89,3 +89,38 @@ $$
 $$
 Independência é o <font color="#ff0000">oposto</font> de mutuamente exclusivos (disjuntos)!
 Obs: $P(A|B) = P(A)$
+
+### Teorema de Bayes
+Se A e B são eventos com probabilidade positiva, então
+$$P(A|B) = \frac{(P(A)⋅P(B|A))}{P(B)}$$
+obs: $P(A∩B)=P(A)⋅(B|A)$
+# # Capítulo 3: Variáveis aleatórias discretas
+## Variável Aleatória
+Seja $\Omega$ um espaço amostral. Uma <font color="#ff0000">variável aleatória</font> (v.a) é uma função
+$$
+X:w\in \Omega \rightarrow X(w)\in \mathbb{R}
+$$
+Varáveis aleatórias são _características numéricas_ de um experimento aleatório representado por $w$.
+
+Também podemos usar a função $\mathbb{P}_x:A\rightarrow [0,1]$ definida por
+$$
+\mathbb{P}_x(A)=\mathbb{P}(X\in A)
+$$
+para calcula probabilidades
+$\mathbb{P}_x$ é chama de distribuição de probabilidade da v.a. $X$.
+
+## Variável Aleatória Discreta
+Uma v.a. X é <font color="#ff0000">discreta</font> se o conjunto $Ω_X ⊂ R$  de _todos os valores possíveis de X_ (não confundir com Ω!) for enumerável.
+A <font color="#ff0000">função massa de probabilidade</font> (f.m.p.) de uma v.a. X discreta é a função $p_X : Ω → [0, 1]$ dada por
+$$p_X(x) = P(X = x).$$
+> Exemplo:
+$$
+X =\left \{ \begin{matrix}0,&\text{se ocorrer } \{(C,C)\}\\ 1,&\text{se ocorrer }\{(C,K),(K,C)\}\\2, &\text{se ocorrer}\{(K,K)\} \end{matrix}\right.
+$$
+## Modelos de Variáveis Aleatórias Discretas
+### Modelo Bernoulli
+### Modelo Binomial
+### Modelo Hipergeométrico
+### Modelo Geométrico
+### Modelo Binomial Negativo
+### Modelo Poisson
