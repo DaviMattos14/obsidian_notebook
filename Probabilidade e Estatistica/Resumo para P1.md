@@ -1,4 +1,4 @@
-# Capítulo 1: Calculo de Probabilidade
+# 1. Calculo de Probabilidade
 **Espaço Amostral** ($Ω$) : Enumeração (finita ou infinita) de todos os resultados possíveis.
 
 $\Omega = {A1, A2, A3, ...}$
@@ -76,7 +76,7 @@ $$
 $$
 \mathbb{P}(\cup^n_{i=1} A_i)=1-\mathbb{P}(\cap^n_{i=1} A^c_i)
 $$
-# Capítulo 2: Dependência e condicionamento
+# 2. Dependência e condicionamento
 ## Probabilidade Condicional
 Para eventos A e B, a probabilidade condicional de _A dado B_ é definida como
 $$
@@ -186,3 +186,13 @@ $$
 
 $E[X] = Var(x) = \lambda$
 
+# Capítulo 4: Esperança e variância
+### **Valor Esperado (Esperança)**
+
+$$
+\left [ E \right ] = \sum_{x \in Rx}x\cdot p(x)
+$$
+
+Onde, $x$ é o valor de X, e $p(x)$ é a probabilidade de X.
+
+O valor esperado é uma **constante**
