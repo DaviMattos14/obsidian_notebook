@@ -65,12 +65,8 @@ $$
 3. $\mathbb{P}(A\cup B) = \mathbb{P}(A) + \mathbb{P}(B) - \mathbb{P}(A\cap B)$
 4.  Princípio da inclusão-exclusão
 $$
-\begin{alignat}{2}
-\mathbb{P}(A\cup B \cup C) = \mathbb{P}(A)+\mathbb{P}(B) +\mathbb{P}(C)
-\\ - \mathbb{P}(A\cap B)-\mathbb{P}(A\cap C)-\mathbb{P}(B\cap C) \\
-
+\mathbb{P}(A\cup B \cup C) = \mathbb{P}(A)+\mathbb{P}(B) +\mathbb{P}(C)- \mathbb{P}(A\cap B)-\mathbb{P}(A\cap C)-\mathbb{P}(B\cap C) 
 +\mathbb{P}(A\cap B \cap C)
-\end{alignat}
 $$
 5. Leis de Morgan
 $$
