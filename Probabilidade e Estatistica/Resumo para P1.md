@@ -183,12 +183,20 @@ $$
 $E[X] = Var(x) = \lambda$
 
 # Capítulo 4: Esperança e variância
-### **Valor Esperado (Esperança)**
+### Valor Esperado (Esperança, média)
 
 $$
-\left [ E \right ] = \sum_{x \in Rx}x\cdot p(x)
+\mathbb{E}(X) = \sum_{x \in \Omega_X}x\cdot\mathbb{P}(X=x)=\sum_{x \in \Omega_X}x\cdot p_X(x)
 $$
 
 Onde, $x$ é o valor de X, e $p(x)$ é a probabilidade de X.
-
 O valor esperado é uma **constante**
+O valor esperado é uma <font color="#ff0000">medida de centralidade</font>. Esse valor depende somente da distribuição da v.a. X, isto é, da f.m.p. $p_X$.
+#### Linearidade da Esperança
+Se X é v.a., então para todos os números reais $a$ e $b$
+$$
+\begin{matrix}
+\mathbb{E}(\alpha X+b)=\alpha\mathbb{E}(X)+b \\
+\mathbb{E}(\alpha X+\beta Y)=\alpha\mathbb{E}(X)+\beta \mathbb{Y}
+\end{matrix}
+$$
