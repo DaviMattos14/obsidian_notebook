@@ -90,6 +90,7 @@ Obs: $P(A|B) = P(A)$
 Se A e B são eventos com probabilidade positiva, então
 $$P(A|B) = \frac{(P(A)⋅P(B|A))}{P(B)}$$
 obs: $P(A∩B)=P(A)⋅(B|A)$
+$P(A|B)+P(A|B^c)=1$
 # Capítulo 3: Variáveis aleatórias discretas
 ## Variável Aleatória
 Seja $\Omega$ um espaço amostral. Uma <font color="#ff0000">variável aleatória</font> (v.a) é uma função
@@ -129,7 +130,7 @@ $$
 \mathbb{p}_X(x)=p^x(1-p)^{1-x} \hspace{20px}\text{para }x\in \{0,1\}
 $$
 - $E[X] = P$
-- $Var(X) = P(1=P)$
+- $Var(X) = P(1-P)$
 ### Modelo Binomial
 $X \sim Bin(n,p)$
 
