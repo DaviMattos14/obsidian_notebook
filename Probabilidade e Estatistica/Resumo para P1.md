@@ -1,4 +1,4 @@
-# 1. Calculo de Probabilidade
+# Capítulo 1: Calculo de Probabilidade
 **Espaço Amostral** ($Ω$) : Enumeração (finita ou infinita) de todos os resultados possíveis.
 
 $\Omega = {A1, A2, A3, ...}$
@@ -72,7 +72,7 @@ $$
 $$
 \mathbb{P}(\cup^n_{i=1} A_i)=1-\mathbb{P}(\cap^n_{i=1} A^c_i)
 $$
-# 2. Dependência e condicionamento
+# Capítulo 2: Dependência e condicionamento
 ## Probabilidade Condicional
 Para eventos A e B, a probabilidade condicional de _A dado B_ é definida como
 $$
@@ -200,3 +200,194 @@ $$
 \mathbb{E}(\alpha X+\beta Y)=\alpha\mathbb{E}(X)+\beta \mathbb{Y}
 \end{matrix}
 $$
+#### Esperança de Função de v.a.
+$$
+\mathbb{E}(g(x)) = \sum_{x \in \Omega_X}g(X)\cdot\mathbb{P}(X=x)
+$$
+### Variância e Desvio Padrão
+- Variância
+$$
+Var(X) = \mathbb{E}((X-\mathbb{E}(X))^2)=\mathbb{E}(X^2)-(\mathbb{E}(X))^2 
+$$
+- Desvio Padrão
+$$
+DP(X)=\sqrt{Var(X)}
+$$
+# Capítulo 5: Distribuições de probabilidades conjuntas
+## Distribuição conjunta 
+Sejam X e Y v.a.s definidas no mesmo espaço amostral. O par (X,Y) é chamado vetor aleatório bidimensional
+
+O vetor aleatório bidimensional (X,Y) é chamado discreto se X e Y são v.a.s discretas
+A <font color="#ff0000">função de massa de probabilidade conjunta</font> do v.a. (X,Y) discreto é a função $p_{X,Y}(x,y)$ definida por
+$$
+p_{X,Y}(x,y)=\mathbb{P}(X=x,Y=y)\text{ para todo }(x,y)\in \Omega_X \times \Omega_Y
+$$
+$$
+\begin{cases}
+p_{X,Y}(x,y)=\mathbb{P}(X=x,Y=y)\text{ para todo }(x,y)\in \Omega_X \times \Omega_Y\\
+\sum_{x\in \Omega_X} \sum_{y\in \Omega_Y} p_{X,Y}=1
+\end{cases}
+$$
+
+## Distribuição Marginal
+$$
+p_X(x)=\sum_{y \in \Omega_Y} \mathbb{P}(X=x,Y=y)\text{ para todo }x\in \Omega_X
+$$
+$$
+p_Y(y)=\sum_{x \in \Omega_X} \mathbb{P}(X=x,Y=y)\text{ para todo }y\in \Omega_Y
+$$
+## Independência
+$$
+\mathbb{P}(X=x,Y=y)=\mathbb{P}(X=x)\mathbb{P}(Y=y)
+$$
+## Distribuição Condicional
+$$
+p_{X|Y}(x|y) = \frac{p_{X,Y}(x, y)}{p_Y(y)} \quad \text{para todo} \quad x \in \Omega_X
+$$
+
+Note que a f.m.p. condicional  $p_{X|Y}$ satisfaz
+$$
+\begin{cases}
+p_{X|Y}(x|y) \geq 0 \quad \text{para todo} \quad (x, y) \in \Omega_X \times \Omega_Y \\
+\sum\limits_{x \in \Omega_X} p_{X|Y}(x|y) = 1 \quad \text{para cada} \quad y \in \Omega_Y
+\end{cases}
+$$
+## Covariância
+$$
+\begin{matrix}
+\text{Cov}(X, Y) = \mathbb{E}[(X - \mathbb{E}(X))(Y - \mathbb{E}(Y))]\\
+= \mathbb{E}[XY] - \mathbb{E}[X]\mathbb{E}[Y] \quad (\text{Linearidade da esperança})
+\end{matrix}
+$$
+As seguintes propriedades são imediatas da definição:
+1. $\text{Cov}(X, X) = \text{Var}(X)$\)
+2. $\text{Cov}(X, Y) = \text{Cov}(Y, X)$
+3. $\text{Cov}(X, Z) = 0$, se Z é uma variável aleatória constante com probabilidade 1
+4. $\text{Cov}(aX, Y) = a \cdot \text{Cov}(X, Y), \quad \text{para } a \in \mathbb{R}$
+5. Para quaisquer números reais $a$, $b$, $c$ e $d$,
+$$
+\text{Cov}(aX + bY, cX + dY) = ac \cdot \text{Var}(X) + bd \cdot \text{Var}(Y) + (ad + bc) \cdot \text{Cov}(X, Y)
+$$
+## Variáveis Aleatórias Contínuas
+
+> Uma $f(x)$ definida sobre o espaço amostral $(\Omega)$ e assumindo valores num intervalo de número reais, é dita uma variável aleatória contínua. Uma v.a. é contínua se existir $F_x: ℝ \to ℝ$, denominada **função de densidade de probabilidade (f.d.p.)**, satisfazendo:
+
+
+$$
+\begin{alignat}{2}
+   f(x)\ge 0, \forall x \in \mathbb{R} \\
+   P(a\le x \le b) = \int_a^b f(x) dx
+\end{alignat}
+$$
+OBS: Satisfazendo $\int_{-\infty}^{+\infty}f(x)dx=1$
+
+> Variável Aleatória Discreta $\to$  **Contagem**
+> Variável Aleatória Contínua $\to$ **Medição**
+
+- Função de Distribuição Acumulada (f.d.a.)
+$$
+\begin{matrix}F(x)=P(X\le x)=\int_{-\infty}^x f(t)dt, &x \subset\mathbb{R } \hspace{0.25cm} \forall f(x)=F'(x)\end{matrix}
+$$
+
+$E[X] = \int_{-\infty}^{+\infty}x\centerdot f(x)dx$
+
+$Var(X)=\int_\mathbb{R} (x-E[X])^2\centerdot f(x)dx = E[X^2]\centerdot E[X]^2$
+
+## Modelos Probabilísticos
+
+### Modelo Uniforme Contínuo
+
+$X\sim Uniforme(a,b)$
+
+> Dizemos que X é uma variável uniforme no intervalo $[a.b], (a,b)\in \mathbb{R}, a<b$, se a função de densidade de probabilidade da variável x é constante nesse intervalo e nula fora dele
+> 
+- Função de densidade de probabilidade
+    
+    $$
+    f(x)=\begin{cases}
+    \frac{1}{b-a}, &a\le x\le b\\
+    0, & \text{caso contrário}
+    \end{cases}
+    $$
+    
+- Função de distribuição
+    
+    $$
+    F(x)= \begin{cases}
+    0, & x \le a\\
+    \frac{x-a}{b-a}, & a\le x \le b\\
+    1, &x \ge b
+    \end{cases}
+    $$
+    
+- Esperança
+    
+    $$
+    E[X]=\frac{a+b}{2}
+    $$
+    
+- Variância
+    
+    $$
+    Var(x)=\frac{(a+b)^2}{12}
+    $$
+    
+
+### Modelo Exponencial
+
+$X\sim Exp(\lambda)$
+
+> Dizemos que X é uma variável exponencial com parâmetro $\lambda$, $\lambda > 0$, se a função de densidade de X é dada por:
+> 
+
+$$
+f(x)=\begin{cases} 
+\lambda \centerdot e^{-\lambda x}, & x \ge 0\\
+0, & x <0
+\end{cases}
+$$
+
+- Função de distribuição
+    
+    $$
+    F(x)=\begin{cases}
+    0, & x<0 \\
+    1-e^{-\lambda x}, & x \ge 0 
+    \end{cases}
+    $$
+    
+- Esperança
+    
+    $$
+    E[X]=\frac{1}{\lambda}
+    $$
+    
+- Variância
+    
+    $$
+    Var(X)=\frac{1}{\lambda^2}
+    $$
+    
+
+### Modelo Normal
+
+$X\sim N(\mu, \sigma^2)$
+
+$$
+\begin{matrix}
+f(x)=\frac{1}{\sigma \centerdot \sqrt{2\pi}} \centerdot e^{-\frac{1}{2}(\frac{x-\mu}{\sigma})}, &\forall x \in \mathbb{R}
+\end{matrix}
+$$
+
+- Esperança
+    
+    $$
+    E[X]=\mu
+    $$
+    
+- Variância
+    
+    $$
+    Var(x)=\sigma^2
+    $$
+    
