@@ -78,6 +78,8 @@ Para eventos A e B, a probabilidade condicional de _A dado B_ é definida como
 $$
 \mathbb{P}(A|B)=\frac{\mathbb{P}(A\cap B)}{\mathbb{P}(B)}
 $$
+- $P(A|B) = 1-P(A^c|B)$
+- $P(A_1 ∪ A_2|B) = P(A_1|B) + P(A_2|B) − P(A_1 ∩ A_2|B)$
 ### Independência
 Dois eventos A e B são independentes se
 $$
