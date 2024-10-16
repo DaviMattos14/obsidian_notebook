@@ -117,7 +117,7 @@ $$p_X(x) = P(X = x).$$
 Tal que,
 
 $$
-p(x) =\left \{ \begin{matrix}P(X=x),&x \in Rx\\ 0,& \text{ caso contrário} \end{matrix}\right.
+p(x) =\left \{ \begin{matrix}P(X=x_i),&i={1,2,3,...} \\ 0,& \text{ caso contrário} \end{matrix}\right.
 $$
 
 Satisfazendo, $p(x) \ge 0$ e $\sum_{x\in Rx} p(x) = 1$
