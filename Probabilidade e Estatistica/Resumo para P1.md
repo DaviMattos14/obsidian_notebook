@@ -151,14 +151,15 @@ $$
 $X \sim Hip(m,n,k)$
 
 >m $\rightarrow$ Sucessos
->n $\rightarrow$ Fracassos
+>n $\rightarrow$ Fracassos (N-m)
 >k $\rightarrow$ Tamanho da amostra
+>m+n $\rightarrow$ N ($\Omega$)
 
 $$
 p_X=\mathbb{P}(X=x)=\frac{\binom{m}{x}\centerdot \binom{n}{k-x}}{\binom{m+n}{k}}
 $$
-- $E[X] = k \centerdot \frac{m}{m+n}$
-- $Var(X)= n \centerdot \frac{k}{m+n}\centerdot \frac{m+n-m}{m+n}\centerdot \frac{m+n-k}{m+n-1}=\frac{n^2k\left(m+n-k\right)}{\left(m+n\right)^2\left(m+n-1\right)}$
+- $E[X] = \frac{k\cdot m}{m+n} =k\cdot \frac{m}{N}=kp$
+- $Var(X)= \frac{k\cdot m}{m+n}\bigg[\frac{(k-1)(m-1)}{m+n-1}+1\bigg]=np(1-p)\frac{N-k}{N-1}$
 ### Modelo Geométrico
 $X \sim Geom(p)$
 > Número de repetições de um ensaio de Bernoulli com probabilidade de sucesso $(0<p<1)$até ocorrer o primeiro sucesso
@@ -175,6 +176,9 @@ $$
 \mathbb{P}(X=x)=\binom{x-1}{r-1}p^r\cdot(1 − p)^{x-r},\hspace{1cm}
 x \in \{r,r+1,...\}
 $$
+- $E[X]=\frac{r}{p}$
+- $Var(X)=\frac{r(1-p)}{p^2}$
+
 ### Modelo Poisson
 $X \sim Poi(\lambda)$
 > Eventos Raros
