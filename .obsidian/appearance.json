@@ -1,0 +1,11 @@
+{
+  "theme": "obsidian",
+  "baseFontSize": 16,
+  "cssTheme": "Blue Topaz",
+  "accentColor": "#005a8a",
+  "showViewHeader": true,
+  "nativeMenus": false,
+  "textFontFamily": "Calibri,Arial",
+  "monospaceFontFamily": "Cascadia Mono",
+  "interfaceFontFamily": "Gadugi,Candara"
+}
