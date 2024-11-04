@@ -4,19 +4,17 @@
     "type": "split",
     "children": [
       {
-        "id": "c45c6fa99ac0de38",
+        "id": "a3f1047726d4bc74",
         "type": "tabs",
         "children": [
           {
-            "id": "54286233fac846f2",
+            "id": "d3257c5d585e53fd",
             "type": "leaf",
             "state": {
-              "type": "release-notes",
-              "state": {
-                "currentVersion": "1.7.4"
-              },
+              "type": "empty",
+              "state": {},
               "icon": "lucide-file",
-              "title": "Release Notes 1.7.4"
+              "title": "Nova aba"
             }
           }
         ]
@@ -164,8 +162,8 @@
             "state": {
               "type": "calendar",
               "state": {},
-              "icon": "calendar-with-checkmark",
-              "title": "Calendar"
+              "icon": "lucide-file",
+              "title": "Plugin desativado"
             }
           },
           {
@@ -197,7 +195,7 @@
       "obsidian-git:Open Git source control": false
     }
   },
-  "active": "54286233fac846f2",
+  "active": "f1b96cfb93a1f04a",
   "lastOpenFiles": [
     "Probabilidade e Estatistica/Livros/Resoluções Sheldon Ross/chap-6-11pt.pdf",
     "Probabilidade e Estatistica/Livros/Paganno_Gauvreau.pdf",
