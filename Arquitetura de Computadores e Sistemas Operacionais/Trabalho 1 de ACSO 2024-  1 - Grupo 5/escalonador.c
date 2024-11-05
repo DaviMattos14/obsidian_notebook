@@ -1,7 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-#define NUM_PROCESSOS 10
+#define NUM_PROCESSOS 5
 #define MAX 256
 #define QUANTUM 5
 
@@ -34,27 +34,92 @@ int lerCSV(Processo p[])
         strcpy(p[i].processo, leitura);
 
         leitura = strtok(NULL, ";");
+        p[i].t_servico = atoi(leitura);
+
+        leitura = strtok(NULL, ";");
         p[i].t_chegada = atoi(leitura);
 
         leitura = strtok(NULL, ";");
         p[i].prioridade = atoi(leitura);
-
-        leitura = strtok(NULL, ";");
-        p[i].t_servico = atoi(leitura);
         i++;
     }
     fclose(arq);
     return i;
 }
+void atualiza_fila(Processo p[], int processo_em_execucao){
+    Processo aux = p[0];
+    for (int i = 0; i < processo_em_execucao-1; i++)
+    {
+        p[i] = p[i+1];
+    }
+    p[processo_em_execucao-1] = aux;
+/*
+    for (int i = 0; i < NUM_PROCESSOS; i++)
+    {
+        printf("Processo: %s \tTempo de Execucao: %d\tTempo de Chegada: %d\tPrioridade: %d\n",
+               p[i].processo, p[i].t_servico, p[i].t_chegada, p[i].prioridade);
+    }
+*/
+}
+
+void round_robin(Processo p[]){
+    int ut = 0;
+    int tempo_execucao = 0;
+    int processos_em_execucao = NUM_PROCESSOS;
+
+    FILE *saida = fopen("Saida.txt","a+");
+    char linha[MAX];
+    while (1)
+    {
+        tempo_execucao++;
+        ut++;
+        p[0].t_servico--;
+        if (p[0].t_servico == 0)
+        {
+            sprintf(linha, "*U.T: %d\t O Processo %s executou por %ds\n", ut, p[0].processo, tempo_execucao);
+            fputs(linha, saida);
+            atualiza_fila(p, processos_em_execucao);
+            tempo_execucao = 0;
+            processos_em_execucao--;
+            if (processos_em_execucao == 0)
+            {
+                fclose(saida);
+                break;
+            }
+            
+            continue;
+        }
+        if (tempo_execucao == QUANTUM){
+            sprintf(linha, "U.T: %d\t O Processo %s executou por %ds\n", ut, p[0].processo, tempo_execucao);
+            fputs(linha, saida);
+            atualiza_fila(p, processos_em_execucao);
+            tempo_execucao = 0;
+        }
+        if (ut == 40)
+        {
+            break;
+        }
+        
+    }
+    
+}
 
 int main()
 {
-    Processo processos[MAX];
+    Processo processos[NUM_PROCESSOS];
     int n = lerCSV(processos);
+    FILE *saida = fopen("Saida.txt","w+");
+    char linha[MAX];
+    sprintf(linha, "\tNum Processsos:%d\n", n);
+    fputs(linha, saida);
+    for (int i = 0; i < n; i++)
+    {
+        sprintf(linha, "\tProcesso: %s \tTempo de Execucao: %d\tTempo de Chegada: %d\tPrioridade: %d\n",
+               processos[i].processo, processos[i].t_servico, processos[i].t_chegada, processos[i].prioridade);
+        fputs(linha, saida);
+    }
+    fclose(saida);
+    round_robin(processos);
 
-    printf("Processo: %s \tTempo de Chegada: %d\tPrioridade: %d\tTempo de Execucao: %d",
-           processos[2].processo, processos[2].t_chegada, processos[2].prioridade, processos[2].t_servico);
-    /*
-     */
     return 0;
 }

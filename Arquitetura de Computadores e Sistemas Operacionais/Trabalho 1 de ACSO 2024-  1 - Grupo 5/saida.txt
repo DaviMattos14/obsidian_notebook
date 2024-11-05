@@ -1,1 +1,20 @@
-Exemplo de Saída
+	Num Processsos:5
+	Processo: P1 	Tempo de Execucao: 13	Tempo de Chegada: 0	Prioridade: 3
+	Processo: P2 	Tempo de Execucao: 11	Tempo de Chegada: 4	Prioridade: 4
+	Processo: P3 	Tempo de Execucao: 7	Tempo de Chegada: 5	Prioridade: 1
+	Processo: P4 	Tempo de Execucao: 8	Tempo de Chegada: 7	Prioridade: 2
+	Processo: P5 	Tempo de Execucao: 16	Tempo de Chegada: 10	Prioridade: 5
+U.T: 5	 O Processo P1 executou por 5s
+U.T: 10	 O Processo P2 executou por 5s
+U.T: 15	 O Processo P3 executou por 5s
+U.T: 20	 O Processo P4 executou por 5s
+U.T: 25	 O Processo P5 executou por 5s
+U.T: 30	 O Processo P1 executou por 5s
+U.T: 35	 O Processo P2 executou por 5s
+*U.T: 37	 O Processo P3 executou por 2s
+*U.T: 40	 O Processo P4 executou por 3s
+U.T: 45	 O Processo P5 executou por 5s
+*U.T: 48	 O Processo P1 executou por 3s
+*U.T: 49	 O Processo P2 executou por 1s
+U.T: 54	 O Processo P5 executou por 5s
+*U.T: 55	 O Processo P5 executou por 1s
