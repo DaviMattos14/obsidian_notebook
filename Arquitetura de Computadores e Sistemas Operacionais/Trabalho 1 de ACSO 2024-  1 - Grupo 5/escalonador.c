@@ -76,7 +76,7 @@ void round_robin(Processo p[]){
         p[0].t_servico--;
         if (p[0].t_servico == 0)
         {
-            sprintf(linha, "*U.T: %d\t O Processo %s executou por %ds\n", ut, p[0].processo, tempo_execucao);
+            sprintf(linha, "*U.T= %d|\t O Processo %s executou por %ds e Terminou\n", ut, p[0].processo, tempo_execucao);
             fputs(linha, saida);
             atualiza_fila(p, processos_em_execucao);
             tempo_execucao = 0;
@@ -90,7 +90,7 @@ void round_robin(Processo p[]){
             continue;
         }
         if (tempo_execucao == QUANTUM){
-            sprintf(linha, "U.T: %d\t O Processo %s executou por %ds\n", ut, p[0].processo, tempo_execucao);
+            sprintf(linha, "U.T= %d|\t O Processo %s executou por %ds e foi para Baixa prioridade\n", ut, p[0].processo, tempo_execucao);
             fputs(linha, saida);
             atualiza_fila(p, processos_em_execucao);
             tempo_execucao = 0;
