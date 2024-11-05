@@ -1,6 +1,6 @@
 Processo;Tempo;Chegada;Prioridade
 P1;13;0;3
-P2;11;4;4
-P3;7;5;1
+P2;11;3;4
+P3;7;4;1
 P4;8;7;2
-P5;16;10;5
+P5;16;9;5
