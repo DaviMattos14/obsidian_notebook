@@ -53,8 +53,7 @@ void atualiza_fila(Processo p[], int processo_em_execucao)
     {
         p[i] = p[i + 1];
     }
-    p[processo_em_execucao - 1] = aux;
-    
+    p[processo_em_execucao - 1] = aux;    
 }
 
 void imprimir(Processo p[], int processo_em_execucao){
@@ -71,7 +70,7 @@ int chegada(Processo p[], Processo fila[], int ut, int processos_em_execucao, in
     int aux = processos_em_execucao;
     for (int i = 0; i < NUM_PROCESSOS; i++)
     {
-        if (ut >= p[i].t_chegada && p[i].t_chegada > (ut - tempo_execucao))
+        if (ut >= p[i].t_chegada && p[i].t_chegada >= (ut - tempo_execucao))
         {
             fila[aux] = p[i];
             aux++;
@@ -93,7 +92,7 @@ void round_robin(Processo p[])
     char linha[MAX];
     while (1)
     {
-        //imprimir(fila, processos_em_execucao);
+        imprimir(fila, processos_em_execucao);
         tempo_execucao++;
         ut++;
         fila[0].t_servico--;
@@ -114,7 +113,6 @@ void round_robin(Processo p[])
                 fclose(saida);
                 break;
             }
-
             continue;
         }
         if (tempo_execucao == QUANTUM)
