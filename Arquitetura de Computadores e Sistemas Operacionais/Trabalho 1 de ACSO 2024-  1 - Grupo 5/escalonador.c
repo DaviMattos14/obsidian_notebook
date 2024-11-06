@@ -3,7 +3,7 @@
 #include <string.h>
 #define NUM_PROCESSOS 5
 #define MAX 256
-#define QUANTUM 5
+#define QUANTUM 4
 
 typedef struct
 {
@@ -106,6 +106,7 @@ void round_robin(Processo p[])
 
     processos_em_execucao = chegada(p, fila, ut, processos_em_execucao, tempo_execucao);
     FILE *saida = fopen("Saida.txt", "a+");
+    fputs("\t\tINICIO DE EXECUÇÃO\n",saida);
     char linha[MAX];
     while (1)
     {
@@ -154,15 +155,18 @@ int main()
     Processo processos[NUM_PROCESSOS];
     int n = lerCSV(processos);
     FILE *saida = fopen("Saida.txt", "w+");
+    fputs("\t TABELA\n",saida);
+    
     char linha[MAX];
-    sprintf(linha, "\tNum Processsos:%d\t\tQuantum: %d\n", n, QUANTUM);
-    fputs(linha, saida);
     for (int i = 0; i < n; i++)
     {
-        sprintf(linha, "\tProcesso: %s \tTempo de Execucao: %d\tTempo de Chegada: %d\tPrioridade: %d\n",
+        sprintf(linha, "\tProcesso: %s \t\tTempo de Execucao: %d\t\tTempo de Chegada: %d\t\tPrioridade: %d\n",
                 processos[i].processo, processos[i].t_servico, processos[i].t_chegada, processos[i].prioridade);
         fputs(linha, saida);
     }
+    sprintf(linha, "\tNum Processsos:%d\t\tQuantum: %d\n", n, QUANTUM);
+    fputs(linha, saida);
+    fputs("\n\n",saida);
     fclose(saida);
     round_robin(processos);
 

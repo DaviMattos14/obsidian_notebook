@@ -1,20 +1,25 @@
-	Num Processsos:5		Quantum: 5
-	Processo: P1 	Tempo de Execucao: 13	Tempo de Chegada: 0	Prioridade: 3
-	Processo: P2 	Tempo de Execucao: 11	Tempo de Chegada: 3	Prioridade: 4
-	Processo: P3 	Tempo de Execucao: 7	Tempo de Chegada: 4	Prioridade: 1
-	Processo: P4 	Tempo de Execucao: 8	Tempo de Chegada: 7	Prioridade: 2
-	Processo: P5 	Tempo de Execucao: 16	Tempo de Chegada: 9	Prioridade: 5
-U.T= 0~5|	 O Processo P1 executou por 5s e foi para Baixa prioridade
-U.T= 5~10|	 O Processo P2 executou por 5s e foi para Baixa prioridade
-U.T= 10~15|	 O Processo P3 executou por 5s e foi para Baixa prioridade
-U.T= 15~20|	 O Processo P1 executou por 5s e foi para Baixa prioridade
-U.T= 20~25|	 O Processo P4 executou por 5s e foi para Baixa prioridade
-U.T= 25~30|	 O Processo P5 executou por 5s e foi para Baixa prioridade
-U.T= 30~35|	 O Processo P2 executou por 5s e foi para Baixa prioridade
-U.T= 35~37|	 O Processo P3 executou por 2s e Terminou
-U.T= 37~40|	 O Processo P1 executou por 3s e Terminou
-U.T= 40~43|	 O Processo P4 executou por 3s e Terminou
-U.T= 43~48|	 O Processo P5 executou por 5s e foi para Baixa prioridade
-U.T= 48~49|	 O Processo P2 executou por 1s e Terminou
-U.T= 49~54|	 O Processo P5 executou por 5s e foi para Baixa prioridade
-U.T= 54~55|	 O Processo P5 executou por 1s e Terminou
+	 TABELA
+	Processo: P1 		Tempo de Execucao: 13		Tempo de Chegada: 0		Prioridade: 3
+	Processo: P2 		Tempo de Execucao: 11		Tempo de Chegada: 4		Prioridade: 4
+	Processo: P3 		Tempo de Execucao: 7		Tempo de Chegada: 5		Prioridade: 1
+	Processo: P4 		Tempo de Execucao: 8		Tempo de Chegada: 7		Prioridade: 2
+	Processo: P5 		Tempo de Execucao: 16		Tempo de Chegada: 10		Prioridade: 5
+	Num Processsos:5		Quantum: 4
+
+
+		INICIO DE EXECUÇÃO
+U.T= 0~4|	 O Processo P1 executou por 4s e foi para Baixa prioridade
+U.T= 4~8|	 O Processo P2 executou por 4s e foi para Baixa prioridade
+U.T= 8~12|	 O Processo P1 executou por 4s e foi para Baixa prioridade
+U.T= 12~16|	 O Processo P3 executou por 4s e foi para Baixa prioridade
+U.T= 16~20|	 O Processo P4 executou por 4s e foi para Baixa prioridade
+U.T= 20~24|	 O Processo P2 executou por 4s e foi para Baixa prioridade
+U.T= 24~28|	 O Processo P5 executou por 4s e foi para Baixa prioridade
+U.T= 28~32|	 O Processo P1 executou por 4s e foi para Baixa prioridade
+U.T= 32~35|	 O Processo P3 executou por 3s e Terminou
+U.T= 35~39|	 O Processo P4 executou por 4s e Terminou
+U.T= 39~42|	 O Processo P2 executou por 3s e Terminou
+U.T= 42~46|	 O Processo P5 executou por 4s e foi para Baixa prioridade
+U.T= 46~47|	 O Processo P1 executou por 1s e Terminou
+U.T= 47~51|	 O Processo P5 executou por 4s e foi para Baixa prioridade
+U.T= 51~55|	 O Processo P5 executou por 4s e Terminou
