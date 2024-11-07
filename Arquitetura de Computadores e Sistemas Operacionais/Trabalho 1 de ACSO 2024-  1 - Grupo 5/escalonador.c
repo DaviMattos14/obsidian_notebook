@@ -125,7 +125,7 @@ void round_robin(Processo p[])
         fila[0].t_servico--;
         if (fila[0].t_servico == 0)
         {
-            sprintf(linha, "U.T= %d~%d|\t O Processo %s executou por %ds e Terminou\n", (ut - tempo_execucao), ut, fila[0].processo, tempo_execucao);
+            sprintf(linha, "U.T= %d-%d|\t O Processo %s executou por %ds e Terminou\n", (ut - tempo_execucao), ut, fila[0].processo, tempo_execucao);
             fputs(linha, saida);
             if (processos_em_execucao > 1)
             {
@@ -143,7 +143,7 @@ void round_robin(Processo p[])
         }
         if (tempo_execucao == QUANTUM)
         {
-            sprintf(linha, "U.T= %d~%d|\t O Processo %s executou por %ds e sofreu preempção (Tempo restante: %d)\n", (ut - tempo_execucao), ut, fila[0].processo, tempo_execucao, fila[0].t_servico);
+            sprintf(linha, "U.T= %d-%d|\t O Processo %s sofreu preempção (Tempo restante: %d)\n", (ut - tempo_execucao), ut, fila[0].processo,  fila[0].t_servico);
             fputs(linha, saida);
             processos_em_execucao = chegada(saida, p, fila, ut, processos_em_execucao, tempo_execucao);
             if (processos_em_execucao > 1)

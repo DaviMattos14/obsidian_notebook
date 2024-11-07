@@ -1,4 +1,4 @@
-Processo;Tempo;Chegada;Prioridade;io
+Processo;Tempo;Chegada;Prioridade;I/O
 P1;13;0;3;A
 P2;11;4;4;B
 P3;7;5;1;A
