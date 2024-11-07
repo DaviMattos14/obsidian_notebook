@@ -5,6 +5,9 @@
 #define MAX 256
 #define QUANTUM 4
 
+/*
+    CRITANDO A ESTRUTURA PROCESSO
+*/
 typedef struct
 {
     char processo[3];
@@ -29,11 +32,13 @@ int lerCSV(Processo p[])
     int i = 0;
 
     fgets(linha, MAX, arq);
-
+/*
+    LENDO AS LINHAS DO ARQUIVO .CSV
+*/
     while (!feof(arq))
     {
         fgets(linha, MAX, arq);
-        char *leitura = strtok(linha, ";");
+        char *leitura = strtok(linha, ";");/* DIVIDE STRING LINHA PELO DELIMITADOR ';' E PEGA A PRIMEIRA STRING*/
         strcpy(p[i].processo, leitura);
 
         leitura = strtok(NULL, ";");
@@ -51,7 +56,8 @@ int lerCSV(Processo p[])
 }
 
 /*
-    ATUALIZA A FILA DE PROCESSOS APÓS O PROCESSO EM EXECUÇÃO TERMINAR (FIM DO TIME SLICE OU FIM DE PROCESSO)
+    ATUALIZA A FILA 
+    COLOCA O PROCESSO NA POSIÇÃO [0] PARA O FIM DA FILA 
 */
 void atualiza_fila(Processo p[], int processo_em_execucao)
 {
@@ -77,10 +83,11 @@ void imprimir(Processo p[], int processo_em_execucao)
 }
 
 /*
-    VERIFICA A CHEGADA DE UM NOVO PROCESSO E O COLOCA NA FILA
+    VERIFICA A CHEGADA DE UM NOVO PROCESSO DURANTE O TIME SLICE E O COLOCA NA FILA
 */
-int chegada(Processo p[], Processo fila[], int ut, int processos_em_execucao, int tempo_execucao)
+int chegada(FILE *saida, Processo p[], Processo fila[], int ut, int processos_em_execucao, int tempo_execucao)
 {
+    char texto[256];
     int aux = processos_em_execucao;
     for (int i = 0; i < NUM_PROCESSOS; i++)
     {
@@ -88,13 +95,15 @@ int chegada(Processo p[], Processo fila[], int ut, int processos_em_execucao, in
         {
             fila[aux] = p[i];
             aux++;
+            sprintf(texto, "U.T: %d|\tO Processo %s chegou no processador\n", p[i].t_chegada, p[i].processo);
+            fputs(texto,saida);
         }
     }
     return aux;
 }
 
 /*
-    EXECUTA O ALGORITMO DE ROUND ROBIN COM QUANTUM = 5 E SALVA A SAÍDA EM UM .TXT
+    EXECUTA O ALGORITMO DE ROUND ROBIN E SALVA A SAÍDA EM UM .TXT
 */
 void round_robin(Processo p[])
 {
@@ -103,10 +112,10 @@ void round_robin(Processo p[])
     int processos_em_execucao = 0;
 
     Processo fila[NUM_PROCESSOS];
-
-    processos_em_execucao = chegada(p, fila, ut, processos_em_execucao, tempo_execucao);
     FILE *saida = fopen("Saida.txt", "a+");
     fputs("\t\tINICIO DE EXECUÇÃO\n",saida);
+
+    processos_em_execucao = chegada(saida, p, fila, ut, processos_em_execucao, tempo_execucao);
     char linha[MAX];
     while (1)
     {
@@ -134,9 +143,9 @@ void round_robin(Processo p[])
         }
         if (tempo_execucao == QUANTUM)
         {
-            processos_em_execucao = chegada(p, fila, ut, processos_em_execucao, tempo_execucao);
-            sprintf(linha, "U.T= %d~%d|\t O Processo %s executou por %ds e foi para Baixa prioridade\n", (ut - tempo_execucao), ut, fila[0].processo, tempo_execucao);
+            sprintf(linha, "U.T= %d~%d|\t O Processo %s executou por %ds e sofreu preempção (Tempo restante: %d)\n", (ut - tempo_execucao), ut, fila[0].processo, tempo_execucao, fila[0].t_servico);
             fputs(linha, saida);
+            processos_em_execucao = chegada(saida, p, fila, ut, processos_em_execucao, tempo_execucao);
             if (processos_em_execucao > 1)
             {
                 atualiza_fila(fila, processos_em_execucao);
@@ -168,7 +177,8 @@ int main()
     fputs(linha, saida);
     fputs("\n\n",saida);
     fclose(saida);
-    round_robin(processos);
+    
+    round_robin(processos); /* CHAMA A EXECUÇÃO DO ROUND ROBIN*/
 
     return 0;
 }

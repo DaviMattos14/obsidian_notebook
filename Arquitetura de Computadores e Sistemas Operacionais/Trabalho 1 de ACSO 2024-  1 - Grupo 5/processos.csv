@@ -1,6 +1,6 @@
-Processo;Tempo;Chegada;Prioridade
-P1;13;0;3
-P2;11;4;4
-P3;7;5;1
-P4;8;7;2
-P5;16;10;5
+Processo;Tempo;Chegada;Prioridade;io
+P1;13;0;3;A
+P2;11;4;4;B
+P3;7;5;1;A
+P4;8;7;2;C
+P5;16;10;5;A
