@@ -1,6 +1,6 @@
-Processo;Tempo;Chegada;Prioridade;I/O
-P1;13;0;3;A
-P2;11;4;4;B
-P3;7;5;1;A
-P4;8;7;2;C
-P5;16;10;5;A
+Processo;Tempo_Serviço;Tempo_Chegada;T_Chegada_I/O;Tempo_I/O
+P1;13;0;4;A
+P2;11;4;2,6;B,A
+P3;7;5;-;-
+P4;8;7;-;-
+P5;16;10;2,7;A,B

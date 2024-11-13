@@ -1,10 +1,10 @@
 	 TABELA
-	Processo: P1 		Tempo de Execucao: 13		Tempo de Chegada: 0		Prioridade: 3
-	Processo: P2 		Tempo de Execucao: 11		Tempo de Chegada: 4		Prioridade: 4
-	Processo: P3 		Tempo de Execucao: 7		Tempo de Chegada: 5		Prioridade: 1
-	Processo: P4 		Tempo de Execucao: 8		Tempo de Chegada: 7		Prioridade: 2
-	Processo: P5 		Tempo de Execucao: 16		Tempo de Chegada: 10		Prioridade: 5
-	Num Processsos:5		Quantum: 4
+	Numero de Processos: 5
+	Processo: P1 	Tempo de Execucao: 13	Tempo de Chegada: 0	 Nº I/O:1	Tempo de Chamada I/O: 4		Tipo I/O: A
+	Processo: P2 	Tempo de Execucao: 11	Tempo de Chegada: 4	 Nº I/O:2	Tempo de Chamada I/O: 2, 6		Tipo I/O: B, A
+	Processo: P3 	Tempo de Execucao: 7	Tempo de Chegada: 5	 Nº I/O:0	
+	Processo: P4 	Tempo de Execucao: 8	Tempo de Chegada: 7	 Nº I/O:0	
+	Processo: P5 	Tempo de Execucao: 16	Tempo de Chegada: 10	 Nº I/O:2	Tempo de Chamada I/O: 2, 7		Tipo I/O: A, B
 
 
 		INICIO DE EXECUÇÃO
