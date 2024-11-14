@@ -30,9 +30,21 @@
               "icon": "lucide-file",
               "title": "Release Notes 1.7.5"
             }
+          },
+          {
+            "id": "9116cd04b42df447",
+            "type": "leaf",
+            "state": {
+              "type": "release-notes",
+              "state": {
+                "currentVersion": "1.7.6"
+              },
+              "icon": "lucide-file",
+              "title": "Release Notes 1.7.6"
+            }
           }
         ],
-        "currentTab": 1
+        "currentTab": 2
       }
     ],
     "direction": "vertical"
@@ -212,7 +224,7 @@
       "obsidian-git:Open Git source control": false
     }
   },
-  "active": "0b2571c15163eee4",
+  "active": "9116cd04b42df447",
   "lastOpenFiles": [
     "Arquitetura de Computadores e Sistemas Operacionais/Estrutura do Sistema Operacional.md",
     "Arquitetura de Computadores e Sistemas Operacionais/Trabalho 1 de ACSO 2024-  1 - Grupo 5/Trabalho1.pdf",

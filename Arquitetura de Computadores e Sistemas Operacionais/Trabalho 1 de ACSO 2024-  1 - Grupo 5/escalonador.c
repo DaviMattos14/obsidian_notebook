@@ -4,6 +4,10 @@
 #define NUM_PROCESSOS 5
 #define MAX 512
 #define QUANTUM 4
+#define A 7 
+#define B 4
+#define C 3
+
 
 /*
     CRITANDO A ESTRUTURA I/O
@@ -12,6 +16,7 @@ typedef struct entrada_saida
 {
     int chegada;
     char tipo[2];
+    struct entrada_saida* prox;
 } ES;
 
 /*
@@ -22,9 +27,15 @@ typedef struct Processo
     char processo[3];
     int t_chegada;
     int t_servico;
-    struct entrada_saida operacoes_io[MAX];
+    struct entrada_saida* operacoes_io;
     int num_io;
 } Processo;
+
+typedef struct Fila{
+    Processo processo;
+    struct Fila* prox;
+}Fila;
+
 
 /*IMPRIMINDO A TABELA NO ARQUIVO DE SAIDA*/
 void imprimir_processos(const char *filename, Processo p[])
@@ -63,78 +74,96 @@ void imprimir_processos(const char *filename, Processo p[])
     fclose(arq);
 }
 
-/*
-    ATUALIZA A FILA
-    COLOCA O PROCESSO NA POSIÇÃO [0] PARA O FIM DA FILA
-*/
-void atualiza_fila(Processo p[], int processo_em_execucao)
-{
-    Processo aux = p[0];
-    for (int i = 0; i < processo_em_execucao - 1; i++)
+
+void inserir_io(ES* io, int tempo, char tipo[]){
+    ES* nova_chamada = (ES*) malloc(sizeof(ES));
+    nova_chamada->chegada= tempo;
+    strcpy(tipo,nova_chamada->tipo);
+    nova_chamada->prox=NULL;
+    if (io == NULL)
     {
-        p[i] = p[i + 1];
+        io = nova_chamada;
+    }else if (io != NULL)
+    {
+        while (io->prox!=NULL)
+        {
+            io = io->prox;
+        }
+        io->prox = nova_chamada;
     }
-    p[processo_em_execucao - 1] = aux;
+    
+    
 }
 
-/*
-    VERIFICA A CHEGADA DE UM NOVO PROCESSO DURANTE O TIME SLICE E O COLOCA NA FILA
-*/
-int chegada(FILE *saida, Processo p[], Processo fila[], int ut, int processos_em_execucao, int tempo_execucao)
+void colocar_na_fila(Fila* fila, Processo p){
+    Fila* novo_elemento = (Fila*) malloc(sizeof(Fila));
+    novo_elemento->processo=p;
+    while (fila->prox!=NULL)
+    {
+        fila = fila->prox;
+    }
+    fila->prox=novo_elemento;
+    novo_elemento->prox=NULL;
+}
+Fila* remover_da_fila(Fila* fila){
+    if(fila == NULL) return NULL;
+
+    Fila* temp = fila;
+    fila = fila->prox;
+    free(temp);
+    return fila;
+}
+
+void chegada(FILE *saida, Processo p[], Fila* fila, int ut, int tempo_execucao)
 {
     char texto[256];
-    int aux = processos_em_execucao;
     for (int i = 0; i < NUM_PROCESSOS; i++)
     {
         if (ut == p[i].t_chegada || (ut > p[i].t_chegada && p[i].t_chegada > (ut - tempo_execucao)))
         {
-            fila[aux] = p[i];
-            aux++;
+            colocar_na_fila(fila, p[i]);
             sprintf(texto, "U.T: %d|\tO Processo %s chegou no processador\n", p[i].t_chegada, p[i].processo);
-            fputs(texto, saida);
+            fputs(texto,saida);
         }
     }
-    return aux;
 }
 
-/*
-    EXECUTA O ALGORITMO DE ROUND ROBIN E SALVA A SAÍDA EM UM .TXT
-*/
-void round_robin(const char *filename, Processo p[])
-{
-    int ut = 0;                    // Contador de Unidade de Tempo
-    int tempo_execucao = 0;        // Contador de Tempo de Execução de Processo
-    int processos_em_execucao = 0; // Contador de Processos em Execução
+int bloqueado(Fila* io, Processo p){
+    while (io != NULL)
+    {
+        if (strcmp(io->processo.processo,p.processo)==0)
+        {
+            return 1; // BLOQUEADO
+        }
+        io = io->prox;
+    }
+    return 0; // NÃO ESTÁ BLOQUEADO
+}
 
-    Processo fila_alta[NUM_PROCESSOS];  // Fila de Alta Prioridade
-    Processo fila_baixa[NUM_PROCESSOS]; // Fila de Baixa Prioridade
-    Processo fila_io[NUM_PROCESSOS];    // Fila de I/O
-
-    FILE *saida = fopen(filename, "a+");
-    fputs("\t\tINICIO DE EXECUÇÃO\n", saida);
-
-    processos_em_execucao = chegada(saida, p, fila_alta, ut, processos_em_execucao, tempo_execucao); /*
-        Verifica se algum processo chegou na unidade de tempo "ut", e o coloca na fila de alta prioridade
-    */
+int round_robin(const char *filename, Fila* fila1, Fila* fila2, Processo p[], int ut){
+    int tempo_execucao = 0;
     char linha[MAX];
-    while (1) /* LOOP INIFINITO DE EXECUÇÃO*/
+    FILE *arquivo = fopen(filename, "a+");
+
+    fputs("\t\tINICIO DE EXECUÇÃO\n", arquivo);
+
+    chegada(arquivo, p, fila1, ut, tempo_execucao); /* Verifica se algum processo chegou durante o tempo de execução*/
+
+    while (1)
     {
         tempo_execucao++;
         ut++;
-        fila_alta[0].t_servico--;
-        if (fila_alta[0].t_servico == 0) /*  VERIFICA SE O PROCESSO TERMINOU   */
+        fila1->processo.t_servico--;
+
+        if (fila1->processo.t_servico == 0)
         {
-            sprintf(linha, "U.T= %d-%d|\t O Processo %s executou por %ds e Terminou\n", (ut - tempo_execucao), ut, fila_alta[0].processo, tempo_execucao);
-            fputs(linha, saida);
-            if (processos_em_execucao > 1) /* SE HOUVER PROCESSO EM EXECUÇÃO ... */
-            {
-                atualiza_fila(fila_alta, processos_em_execucao); /* CHAMA  O PROXIMO PROCESS0 */
-            }
+            sprintf(linha, "U.T= %d-%d|\t O Processo %s executou por %ds e Terminou\n", (ut - tempo_execucao), ut, fila1->processo.processo, tempo_execucao);
+            fputs(linha, arquivo);
+            remover_da_fila(fila1);
             tempo_execucao = 0;             /* REINICIA O TEMPO DE EXECUÇÃO DO PROCESSO */
-            processos_em_execucao--;        /* ATUALIZA O CONTADOR */
-            if (processos_em_execucao == 0) /* SE NÃO HOUVER PROCESSO EM EXECUÇÃO...*/
+            if (fila1 == NULL) /* SE NÃO HOUVER PROCESSO EM EXECUÇÃO...*/
             {
-                fclose(saida);
+                fclose(arquivo);
                 break; /* TERMINA */
             }
 
@@ -142,30 +171,47 @@ void round_robin(const char *filename, Processo p[])
         }
         if (tempo_execucao == QUANTUM) /* SE O PROCESSO EXECUTOU A FATIA DE TEMPO DELE */
         {
-            sprintf(linha, "U.T= %d-%d|\t O Processo %s sofreu preempção (Tempo restante: %d)\n", (ut - tempo_execucao), ut, fila_alta[0].processo, fila_alta[0].t_servico);
-            fputs(linha, saida);
-            processos_em_execucao = chegada(saida, p, fila_alta, ut, processos_em_execucao, tempo_execucao); /* VERIFICA SE CHEGOU ALGUM PROCESSO DURANTE A EXECUÇÃO */
-            if (processos_em_execucao > 1)
-            {
-                atualiza_fila(fila_alta, processos_em_execucao); /* CHAMA O PRÓXIMO PROCESSO*/
-            }
-
+            sprintf(linha, "U.T= %d-%d|\t O Processo %s sofreu preempção (Tempo restante: %d)\n", 
+                (ut - tempo_execucao), ut, fila1->processo.processo, fila1->processo.t_servico);
+            fputs(linha, arquivo);
+            chegada(arquivo, p, fila1, ut, tempo_execucao);
+            colocar_na_fila(fila2, fila1->processo); /* Diminui a prioridade */
             tempo_execucao = 0; /* REINICIA O TEMPO */
         }
     }
+    return ut;
+}
+
+void Imprime_Lista_Encadeada(ES *pt) {
+  while (pt != NULL) {
+    printf("%d - %s\n", pt->chegada, pt->tipo);
+    pt = pt->prox;
+  }
 }
 
 int main()
 {
     const char *arquivo_saida = "Saida.txt";
-    const char *arquivo_leitura = "processos.txt";
+    // const char *arquivo_leitura = "processos.txt";
     Processo p[] = {
-        {"P1", 0, 13, {{4, "A"}}, 1},
-        {"P2", 4, 11, {{2, "B"}, {6, "A"}}, 2},
-        {"P3", 5, 7, {{-1, ""}}, 0},
-        {"P4", 7, 8, {{-1, ""}}, 0},
-        {"P5", 10, 16, {{2, "A"}, {7, "B"}}, 2}}; /* TABELA INICIALIZADA DIRETAMENTE POR QUE LER .CSV EM C É UM CU */
-    imprimir_processos(arquivo_saida, p);         /* IMPRIME A TABELA NO ARQUIVO DE SAÍDA*/
-    round_robin(arquivo_saida, p);                /* CHAMA O ALGORITMO DE RR */
+        {"P1", 0, 13, NULL, 1},
+        {"P2", 4, 11, NULL, 2},
+        {"P3", 5, 7, NULL, 0},
+        {"P4", 7, 8, NULL, 0},
+        {"P5", 10, 16, NULL, 2}}; /* TABELA INICIALIZADA DIRETAMENTE POR QUE LER .CSV EM C É UM CU */
+        
+    inserir_io(p[0].operacoes_io,4,"A");
+    inserir_io(p[1].operacoes_io,2,"B");
+    inserir_io(p[1].operacoes_io,6,"A");
+    inserir_io(p[4].operacoes_io,2,"A");
+    inserir_io(p[4].operacoes_io,7,"B");
+    //imprimir_processos(arquivo_saida, p);         /* IMPRIME A TABELA NO ARQUIVO DE SAÍDA*/
+    
+    //Fila *fila_alta = (Fila*) malloc(sizeof(Fila));
+    //Fila *fila_baixa = (Fila*) malloc(sizeof(Fila));
+    //Fila *fila_io = (Fila*) malloc(sizeof(Fila));
+    
+    //int ut = 0;
+    //ut = round_robin(arquivo_saida,fila_alta, fila_baixa, p, ut); /* CHAMA O ALGORITMO DE RR */
     return 0;
 }

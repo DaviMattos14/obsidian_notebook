@@ -12,19 +12,31 @@ U.T: 0|	O Processo P1 chegou no processador
 U.T= 0-4|	 O Processo P1 sofreu preempção (Tempo restante: 9)
 U.T: 4|	O Processo P2 chegou no processador
 U.T= 4-8|	 O Processo P2 sofreu preempção (Tempo restante: 7)
+U.T: 8|	O Processo P2 está executando I/O e foi bloqueado (Tempo: 4)
+U.T: 8|	O Processo P2 está executando I/O e foi bloqueado (Tempo: 7)
 U.T: 5|	O Processo P3 chegou no processador
 U.T: 7|	O Processo P4 chegou no processador
 U.T= 8-12|	 O Processo P1 sofreu preempção (Tempo restante: 5)
+U.T: 12|	O Processo P1 está executando I/O e foi bloqueado (Tempo: 7)
 U.T: 10|	O Processo P5 chegou no processador
 U.T= 12-16|	 O Processo P3 sofreu preempção (Tempo restante: 3)
 U.T= 16-20|	 O Processo P4 sofreu preempção (Tempo restante: 4)
 U.T= 20-24|	 O Processo P2 sofreu preempção (Tempo restante: 3)
+U.T: 24|	O Processo P2 está executando I/O e foi bloqueado (Tempo: 4)
+U.T: 24|	O Processo P2 está executando I/O e foi bloqueado (Tempo: 7)
 U.T= 24-28|	 O Processo P5 sofreu preempção (Tempo restante: 12)
+U.T: 28|	O Processo P5 está executando I/O e foi bloqueado (Tempo: 7)
+U.T: 28|	O Processo P5 está executando I/O e foi bloqueado (Tempo: 4)
 U.T= 28-32|	 O Processo P1 sofreu preempção (Tempo restante: 1)
+U.T: 32|	O Processo P1 está executando I/O e foi bloqueado (Tempo: 7)
 U.T= 32-35|	 O Processo P3 executou por 3s e Terminou
 U.T= 35-39|	 O Processo P4 executou por 4s e Terminou
 U.T= 39-42|	 O Processo P2 executou por 3s e Terminou
 U.T= 42-46|	 O Processo P5 sofreu preempção (Tempo restante: 8)
+U.T: 46|	O Processo P5 está executando I/O e foi bloqueado (Tempo: 7)
+U.T: 46|	O Processo P5 está executando I/O e foi bloqueado (Tempo: 4)
 U.T= 46-47|	 O Processo P1 executou por 1s e Terminou
 U.T= 47-51|	 O Processo P5 sofreu preempção (Tempo restante: 4)
+U.T: 51|	O Processo P5 está executando I/O e foi bloqueado (Tempo: 7)
+U.T: 51|	O Processo P5 está executando I/O e foi bloqueado (Tempo: 4)
 U.T= 51-55|	 O Processo P5 executou por 4s e Terminou
