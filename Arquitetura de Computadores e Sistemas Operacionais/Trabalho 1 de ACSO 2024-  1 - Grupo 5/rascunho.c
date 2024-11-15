@@ -231,3 +231,14 @@ int main()
     round_robin(arquivo_saida, p);                /* CHAMA O ALGORITMO DE RR */
     return 0;
 }
+
+/*
+            if (fila1->tipo == Baixa)
+            {
+                printf("oi");
+                sprintf(linha, "U.T= %d-%d|\t O Processo %s sofreu preempção (Tempo restante: %d)\n", (ut - tempo_execucao), ut, fila1->processo.processo, fila1->processo.t_servico);
+                fputs(linha, arq);
+                fila1 = retira_da_fila(fila1);
+                fila1 = adiciona_na_fila(fila1, preemp, Baixa); // DEIXA O PROCESSO NA FILA DE BAIXA  
+            }
+            */

@@ -164,7 +164,6 @@ Fila *retira_da_fila(Fila *inicio)
 {
     if (inicio == NULL)
         return NULL;
-
     Fila *temp = inicio;
     inicio = inicio->prox;
     free(temp);
@@ -205,8 +204,17 @@ void round_robin(const char *filename, Processo p[], Fila *fila1, Fila *fila2, F
         tempo_execucao++;
         ut++;
         fila1->processo.t_servico--;
-        if (ut == 100)
-            break;
+
+        Processo preemp = fila1->processo;
+        
+        if (preemp.num_io != 0)
+        {
+            if (preemp.operacoes_io->chegada == ut)
+            {
+                puts("tem chamada\n");
+            }
+        }
+        
 
         if (fila1->processo.t_servico == 0)
         {
@@ -222,17 +230,31 @@ void round_robin(const char *filename, Processo p[], Fila *fila1, Fila *fila2, F
             processos_em_execucao--;
             continue;
         }
+
+        
         if (tempo_execucao == QUANTUM)
         {
-            sprintf(linha, "U.T= %d-%d|\t O Processo %s sofreu preempção (Tempo restante: %d)\n", (ut - tempo_execucao), ut, fila1->processo.processo, fila1->processo.t_servico);
-            fputs(linha, arq);
+            
+            if (fila1->tipo == Baixa)
+            {
+                sprintf(linha, "U.T= %d-%d|\t O Processo %s sofreu preempção (Tempo restante: %d)\n", (ut - tempo_execucao), ut, fila1->processo.processo, fila1->processo.t_servico);
+                fputs(linha, arq);
+                fila1 = retira_da_fila(fila1);
+                fila1 = adiciona_na_fila(fila1, preemp, Baixa); // DEIXA O PROCESSO NA FILA DE BAIXA  
+            }
+
+            if (fila1->tipo == Alta)
+            {
+                sprintf(linha, "U.T= %d-%d|\t O Processo %s sofreu preempção e foi pra fila de Baixa (Tempo restante: %d)\n", (ut - tempo_execucao), ut, fila1->processo.processo, fila1->processo.t_servico);
+                fputs(linha, arq);
+                fila1 = retira_da_fila(fila1);                
+                fila2 = adiciona_na_fila(fila2, preemp, Baixa); // COLOCA O PROCESSO NA FILA DE BAIXA
+            }
             processos_em_execucao = chegada(arq, p, &fila1, tempo_execucao);
-
-            Processo preemp = fila1->processo;
-            fila1 = retira_da_fila(fila1);
-            fila1 = adiciona_na_fila(fila1, preemp, Alta); // ALTERA "Alta" POR "Baixa" PARA TROCAR A FILA
-
             tempo_execucao = 0;
+
+        if (fila1 == NULL)
+            break;
         }
     }
     fclose(arq);
@@ -267,5 +289,6 @@ int main()
 
     round_robin(arquivo_saida, p, fila_alta, fila_baixa, fila_io);
 
+    
     return 0;
 }
