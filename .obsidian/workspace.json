@@ -4,23 +4,11 @@
     "type": "split",
     "children": [
       {
-        "id": "c45c6fa99ac0de38",
+        "id": "a3f1047726d4bc74",
         "type": "tabs",
         "children": [
           {
-            "id": "54286233fac846f2",
-            "type": "leaf",
-            "state": {
-              "type": "pdf",
-              "state": {
-                "file": "Arquitetura de Computadores e Sistemas Operacionais/Trabalho 1 de ACSO 2024-  1 - Grupo 5/Trabalho1.pdf"
-              },
-              "icon": "lucide-file-text",
-              "title": "Trabalho1"
-            }
-          },
-          {
-            "id": "0b2571c15163eee4",
+            "id": "d3257c5d585e53fd",
             "type": "leaf",
             "state": {
               "type": "release-notes",
@@ -32,7 +20,7 @@
             }
           },
           {
-            "id": "9116cd04b42df447",
+            "id": "bdf3b82e43f61bbd",
             "type": "leaf",
             "state": {
               "type": "release-notes",
@@ -44,7 +32,7 @@
             }
           }
         ],
-        "currentTab": 2
+        "currentTab": 1
       }
     ],
     "direction": "vertical"
@@ -198,15 +186,12 @@
             "type": "leaf",
             "state": {
               "type": "outline",
-              "state": {
-                "file": "Arquitetura de Computadores e Sistemas Operacionais/Trabalho 1 de ACSO 2024-  1 - Grupo 5/Trabalho1.pdf"
-              },
+              "state": {},
               "icon": "lucide-list",
-              "title": "Sumário de Trabalho1"
+              "title": "Sumário"
             }
           }
-        ],
-        "currentTab": 1
+        ]
       }
     ],
     "direction": "horizontal",
@@ -224,21 +209,21 @@
       "obsidian-git:Open Git source control": false
     }
   },
-  "active": "9116cd04b42df447",
+  "active": "bdf3b82e43f61bbd",
   "lastOpenFiles": [
-    "Arquitetura de Computadores e Sistemas Operacionais/Estrutura do Sistema Operacional.md",
-    "Arquitetura de Computadores e Sistemas Operacionais/Trabalho 1 de ACSO 2024-  1 - Grupo 5/Trabalho1.pdf",
-    "Arquitetura de Computadores e Sistemas Operacionais/Trabalho 1 de ACSO 2024-  1 - Grupo 5/saida.txt",
-    "Arquitetura de Computadores e Sistemas Operacionais/Trabalho 1 de ACSO 2024-  1 - Grupo 5/processos.csv",
-    "Arquitetura de Computadores e Sistemas Operacionais/Trabalho 1 de ACSO 2024-  1 - Grupo 5/Makefile",
-    "Arquitetura de Computadores e Sistemas Operacionais/Trabalho 1 de ACSO 2024-  1 - Grupo 5/escalonador.out",
-    "Arquitetura de Computadores e Sistemas Operacionais/Trabalho 1 de ACSO 2024-  1 - Grupo 5/escalonador.exe",
-    "Arquitetura de Computadores e Sistemas Operacionais/Trabalho 1 de ACSO 2024-  1 - Grupo 5/escalonador.c",
-    "Arquitetura de Computadores e Sistemas Operacionais/Trabalho 1 de ACSO 2024-  1 - Grupo 5",
+    "Arquitetura de Computadores e Sistemas Operacionais/Trabalho 1 de ACSO 2024-  1 - Grupo 5/output/escalonador.exe",
+    "Arquitetura de Computadores e Sistemas Operacionais/Trabalho 1 de ACSO 2024-  1 - Grupo 5/output",
     "Probabilidade e Estatistica/Livros/Resoluções Sheldon Ross/chap-6-11pt.pdf",
     "Probabilidade e Estatistica/Livros/Paganno_Gauvreau.pdf",
     "Probabilidade e Estatistica/Resumo para P1.md",
+    "Probabilidade e Estatistica/Livros/Resoluções Sheldon Ross/chap-5-11pt.pdf",
+    "Probabilidade e Estatistica/PDFs/Resumo_P1_ProbEst.pdf",
+    "Probabilidade e Estatistica/PDFs/Introdução à Estatística.pdf",
+    "Probabilidade e Estatistica/PDFs/Resumo para P1.pdf",
+    "Probabilidade e Estatistica/Livros/Livro_Probabilidade_Um_Curso_Moderno.pdf",
     "Probabilidade e Estatistica/Introdução à Estatística.md",
+    "Probabilidade e Estatistica/Livros/Resoluções Sheldon Ross/chap-4-11pt.pdf",
+    "Probabilidade e Estatistica/Livros/Resoluções Sheldon Ross/chap-1-11pt.pdf",
     "Algebra Linear Algoritmica/Algebra Linear Algoritmica.md",
     "Algebra Linear Algoritmica/Lista 4 - Transformações Lineares.md",
     "Probabilidade e Estatistica/imagens/distribuição amostral.png",
@@ -253,6 +238,7 @@
     "Arquitetura de Computadores e Sistemas Operacionais/Memórias.md",
     "Arquitetura de Computadores e Sistemas Operacionais/Introdução aos Sistemas Operacionais.md",
     "Arquitetura de Computadores e Sistemas Operacionais/Fundamentos de Hardware e Software.md",
+    "Arquitetura de Computadores e Sistemas Operacionais/Estrutura do Sistema Operacional.md",
     "Arquitetura de Computadores e Sistemas Operacionais/Imagens/interrupcao em cascata.jpg",
     "Arquitetura de Computadores e Sistemas Operacionais/Imagens/interrupcao sequencial.jpg",
     "Arquitetura de Computadores e Sistemas Operacionais/Imagens/multiplas interrupcoes.jpg",

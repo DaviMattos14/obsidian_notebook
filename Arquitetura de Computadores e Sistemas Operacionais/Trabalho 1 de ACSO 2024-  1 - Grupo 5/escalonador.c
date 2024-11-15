@@ -4,9 +4,6 @@
 #define NUM_PROCESSOS 5
 #define MAX 512
 #define QUANTUM 4
-#define A 7 
-#define B 4
-#define C 3
 
 
 /*
@@ -20,7 +17,7 @@ typedef struct entrada_saida
 } ES;
 
 /*
-    CRITANDO A ESTRUTURA Processo
+    CRITANDO A ESTRUTURA DO PROCESSO
 */
 typedef struct Processo
 {
@@ -31,187 +28,230 @@ typedef struct Processo
     int num_io;
 } Processo;
 
+/*
+    CRIANDO A ESTUTURA DA FILA
+*/
 typedef struct Fila{
     Processo processo;
     struct Fila* prox;
 }Fila;
 
-
-/*IMPRIMINDO A TABELA NO ARQUIVO DE SAIDA*/
-void imprimir_processos(const char *filename, Processo p[])
+/* CRIANDO A CHAMADA DE I/O*/
+ES* cria_io(const char* tipo, int t_chegada)
 {
-    FILE *arq = fopen("Saida.txt", "w+");
+    ES* temp = (ES*)malloc(sizeof(ES));
+    temp->chegada = t_chegada;
+    strncpy(temp->tipo, tipo, 2);
+    temp->prox = NULL;
+    return temp;
+}
+
+/* INSERINDO A(S) CHAMADA(S) DE I/O(S) NA ESTRUTURA DO PROCESSO*/
+ES* inserir_io(ES* head, int t_chegada, const char* tipo){
+    if (head == NULL)
+    {
+        return cria_io(tipo, t_chegada);;
+    }
+    else
+    {
+        ES* atual = head;
+        while (atual->prox != NULL)
+        {
+            atual = atual->prox;
+        }
+        atual->prox = cria_io(tipo, t_chegada);;
+    }
+    return head;
+}
+
+/* IMPRIMINDO A(S) CHAMADA(S) DE I/O(S) NO ARQUIVO DE SAIDA*/
+void imprimir_io(FILE* arq, ES* head){
+    ES* ptcab = head;
+    
+    char saida[MAX] ="";
+    char tempo[64] = "Tempo de Chamada I/O: ";
+    char tipo[64] = "Tipo I/O: ";
+    
+    while (ptcab != NULL)
+    {
+        char converte[2];
+        sprintf(converte, "%d", ptcab->chegada);
+        strcat(tempo, converte);
+        strcat(tipo, ptcab->tipo);
+        if (ptcab->prox != NULL)
+        {
+            strcat(tempo, ", ");
+            strcat(tipo, ", ");
+        }
+        ptcab = ptcab->prox;
+    }
+    strcat(tempo, "\t");
+    strcat(tempo, tipo);
+    strcat(saida, tempo);
+    strcat(saida, "\n");
+    fputs(saida,arq);
+}
+
+/* IMPRIMINDO A "TABELA" DE PROCESSOS NO ARQUIVO DE SAIDA */
+void imprimir_tabela_processos(const char *filename, Processo p[])
+{
+    FILE *arq = fopen(filename, "w+");
     fputs("\t TABELA\n", arq);
     fputs("\tNumero de Processos: 5\n", arq);
     for (int i = 0; i < 5; i++)
     {
         char saida[MAX] = "";
-        sprintf(saida, "\tProcesso: %s \tTempo de Execucao: %d\tTempo de Chegada: %d\t Nº I/O:%d\t", p[i].processo, p[i].t_servico, p[i].t_chegada, p[i].num_io);
-        if (p[i].num_io > 0)
-        {
-            char tempo[64] = "Tempo de Chamada I/O: ";
-            char tipo[64] = "Tipo I/O: ";
-            for (int j = 0; j < p[i].num_io; j++)
-            {
-                char converte[2];
-                sprintf(converte, "%d", p[i].operacoes_io[j].chegada);
-                strcat(tempo, converte);
-                strcat(tipo, p[i].operacoes_io[j].tipo);
-                if (j < p[i].num_io - 1)
-                {
-                    strcat(tempo, ", ");
-                    strcat(tipo, ", ");
-                }
-            }
-            strcat(tempo, "\t\t");
-            strcat(tempo, tipo);
-            strcat(saida, tempo);
-        }
-        strcat(saida, "\n");
+        sprintf(saida, "\tProcesso: %s \tTempo de Execucao: %d\tTempo de Chegada: %d\t ", p[i].processo, p[i].t_servico, p[i].t_chegada);
         fputs(saida, arq);
+        if (p[i].num_io != 0)
+        {
+            imprimir_io(arq, p[i].operacoes_io);
+        }
+        if (p[i].num_io == 0 )
+        {
+            fputs("Tempo de Chamada I/O: - \tTipo I/O: -\n", arq);
+        }        
     }
     fputs("\n\n", arq);
     fclose(arq);
 }
 
-
-void inserir_io(ES* io, int tempo, char tipo[]){
-    ES* nova_chamada = (ES*) malloc(sizeof(ES));
-    nova_chamada->chegada= tempo;
-    strcpy(tipo,nova_chamada->tipo);
-    nova_chamada->prox=NULL;
-    if (io == NULL)
-    {
-        io = nova_chamada;
-    }else if (io != NULL)
-    {
-        while (io->prox!=NULL)
-        {
-            io = io->prox;
-        }
-        io->prox = nova_chamada;
-    }
-    
-    
-}
-
-void colocar_na_fila(Fila* fila, Processo p){
+/*
+    CRIA O ELEMENTO DA FILA
+*/
+Fila* inicia_a_fila(Processo p){
     Fila* novo_elemento = (Fila*) malloc(sizeof(Fila));
-    novo_elemento->processo=p;
-    while (fila->prox!=NULL)
+    novo_elemento->processo = p;
+    novo_elemento->prox = NULL;
+    return novo_elemento;
+}
+
+/*
+    ADICIONA O PROCESSO NA FILA
+*/
+Fila* adiciona_na_fila(Fila* inicio, Processo p){
+    if (inicio == NULL)
     {
-        fila = fila->prox;
+        return inicia_a_fila(p);
     }
-    fila->prox=novo_elemento;
-    novo_elemento->prox=NULL;
+    else
+    {
+        Fila* atual = inicio;
+        while (atual->prox != NULL)
+        {
+            atual = atual->prox;
+        }
+        atual->prox = inicia_a_fila(p);
+    }
+    return inicio;
 }
-Fila* remover_da_fila(Fila* fila){
-    if(fila == NULL) return NULL;
 
-    Fila* temp = fila;
-    fila = fila->prox;
+Fila* retira_da_fila(Fila* inicio){
+    if (inicio == NULL)
+        return NULL;
+
+    Fila* temp = inicio;
+    inicio = inicio->prox;
     free(temp);
-    return fila;
+    return inicio;  
 }
 
-void chegada(FILE *saida, Processo p[], Fila* fila, int ut, int tempo_execucao)
+/*VARIAVEL GLOBAL PRA CONTAR O TEMPO E VERIFICAR OS PROCESSOS EM EXECUÇÃO*/
+int ut = 0;
+int processos_em_execucao = 0;
+
+int chegada(FILE *saida, Processo p[], Fila** fila, int tempo_execucao)
 {
     char texto[256];
+    int aux = processos_em_execucao;
     for (int i = 0; i < NUM_PROCESSOS; i++)
     {
         if (ut == p[i].t_chegada || (ut > p[i].t_chegada && p[i].t_chegada > (ut - tempo_execucao)))
         {
-            colocar_na_fila(fila, p[i]);
+            *fila = adiciona_na_fila(*fila,p[i]);
+            aux++;
             sprintf(texto, "U.T: %d|\tO Processo %s chegou no processador\n", p[i].t_chegada, p[i].processo);
             fputs(texto,saida);
         }
     }
+    return aux;
 }
 
-int bloqueado(Fila* io, Processo p){
-    while (io != NULL)
-    {
-        if (strcmp(io->processo.processo,p.processo)==0)
-        {
-            return 1; // BLOQUEADO
-        }
-        io = io->prox;
-    }
-    return 0; // NÃO ESTÁ BLOQUEADO
-}
-
-int round_robin(const char *filename, Fila* fila1, Fila* fila2, Processo p[], int ut){
+void round_robin(const char* filename, Processo p[], Fila* fila1, Fila* fila2, Fila* ios){
+    FILE* arq = fopen(filename,"a+");
+    
     int tempo_execucao = 0;
     char linha[MAX];
-    FILE *arquivo = fopen(filename, "a+");
 
-    fputs("\t\tINICIO DE EXECUÇÃO\n", arquivo);
-
-    chegada(arquivo, p, fila1, ut, tempo_execucao); /* Verifica se algum processo chegou durante o tempo de execução*/
-
+    processos_em_execucao = chegada(arq,p, &fila1, tempo_execucao);
     while (1)
     {
         tempo_execucao++;
         ut++;
         fila1->processo.t_servico--;
-
+        if (ut == 100)
+            break;
+        
         if (fila1->processo.t_servico == 0)
         {
             sprintf(linha, "U.T= %d-%d|\t O Processo %s executou por %ds e Terminou\n", (ut - tempo_execucao), ut, fila1->processo.processo, tempo_execucao);
-            fputs(linha, arquivo);
-            remover_da_fila(fila1);
-            tempo_execucao = 0;             /* REINICIA O TEMPO DE EXECUÇÃO DO PROCESSO */
-            if (fila1 == NULL) /* SE NÃO HOUVER PROCESSO EM EXECUÇÃO...*/
+            fputs(linha, arq);
+            if (fila1->prox == NULL)
             {
-                fclose(arquivo);
-                break; /* TERMINA */
+                fclose(arq);
+                break;
             }
-
-            continue; /* SE AINDA HOUVER VÁ PARA O PROXIMO */
+            fila1 = retira_da_fila(fila1);
+            tempo_execucao = 0;
+            processos_em_execucao--;
+            continue;
         }
-        if (tempo_execucao == QUANTUM) /* SE O PROCESSO EXECUTOU A FATIA DE TEMPO DELE */
+        if (tempo_execucao == QUANTUM)
         {
-            sprintf(linha, "U.T= %d-%d|\t O Processo %s sofreu preempção (Tempo restante: %d)\n", 
-                (ut - tempo_execucao), ut, fila1->processo.processo, fila1->processo.t_servico);
-            fputs(linha, arquivo);
-            chegada(arquivo, p, fila1, ut, tempo_execucao);
-            colocar_na_fila(fila2, fila1->processo); /* Diminui a prioridade */
-            tempo_execucao = 0; /* REINICIA O TEMPO */
+            sprintf(linha, "U.T= %d-%d|\t O Processo %s sofreu preempção (Tempo restante: %d)\n", (ut - tempo_execucao), ut, fila1->processo.processo,  fila1->processo.t_servico);
+            fputs(linha, arq);
+            processos_em_execucao = chegada(arq,p, &fila1, tempo_execucao);
+            
+            Processo preemp = fila1->processo;
+            fila1 = retira_da_fila(fila1);
+            fila1 = adiciona_na_fila(fila1, preemp); // ALTERA "FILA1" POR "FILA2" PARA TROCAR A FILA
+            
+            tempo_execucao = 0;
         }
+        /*
+        */
     }
-    return ut;
-}
-
-void Imprime_Lista_Encadeada(ES *pt) {
-  while (pt != NULL) {
-    printf("%d - %s\n", pt->chegada, pt->tipo);
-    pt = pt->prox;
-  }
+    fclose(arq);
 }
 
 int main()
 {
     const char *arquivo_saida = "Saida.txt";
-    // const char *arquivo_leitura = "processos.txt";
+
+    /* TABELA INICIALIZADA DIRETAMENTE*/
     Processo p[] = {
         {"P1", 0, 13, NULL, 1},
         {"P2", 4, 11, NULL, 2},
         {"P3", 5, 7, NULL, 0},
         {"P4", 7, 8, NULL, 0},
-        {"P5", 10, 16, NULL, 2}}; /* TABELA INICIALIZADA DIRETAMENTE POR QUE LER .CSV EM C É UM CU */
-        
-    inserir_io(p[0].operacoes_io,4,"A");
-    inserir_io(p[1].operacoes_io,2,"B");
-    inserir_io(p[1].operacoes_io,6,"A");
-    inserir_io(p[4].operacoes_io,2,"A");
-    inserir_io(p[4].operacoes_io,7,"B");
-    //imprimir_processos(arquivo_saida, p);         /* IMPRIME A TABELA NO ARQUIVO DE SAÍDA*/
-    
-    //Fila *fila_alta = (Fila*) malloc(sizeof(Fila));
-    //Fila *fila_baixa = (Fila*) malloc(sizeof(Fila));
-    //Fila *fila_io = (Fila*) malloc(sizeof(Fila));
-    
-    //int ut = 0;
-    //ut = round_robin(arquivo_saida,fila_alta, fila_baixa, p, ut); /* CHAMA O ALGORITMO DE RR */
+        {"P5", 10, 16, NULL, 2}};
+
+    /* CRIANDO OS CHAMADOS DE I/O*/
+    p[0].operacoes_io = inserir_io(p[0].operacoes_io,4,"A");
+    p[1].operacoes_io = inserir_io(p[1].operacoes_io,2,"B");
+    p[1].operacoes_io = inserir_io(p[1].operacoes_io,6,"A");
+    p[4].operacoes_io = inserir_io(p[4].operacoes_io,2,"A");
+    p[4].operacoes_io = inserir_io(p[4].operacoes_io,7,"B");
+
+    /* IMPRIMINDO A TABELA NO ARQUIVO DE SAIDA*/
+    imprimir_tabela_processos(arquivo_saida,p);
+
+    /* CRIDANDO AS FILA */
+    Fila* fila_alta = NULL;
+    Fila* fila_baixa = NULL;
+    Fila* fila_io = NULL;
+
+    round_robin(arquivo_saida,p, fila_alta, fila_baixa, fila_io);    
+
     return 0;
 }
