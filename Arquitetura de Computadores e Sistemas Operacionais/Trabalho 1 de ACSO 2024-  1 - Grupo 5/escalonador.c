@@ -5,7 +5,6 @@
 #define MAX 512
 #define QUANTUM 4
 
-
 /*
     CRITANDO A ESTRUTURA I/O
 */
@@ -13,7 +12,7 @@ typedef struct entrada_saida
 {
     int chegada;
     char tipo[2];
-    struct entrada_saida* prox;
+    struct entrada_saida *prox;
 } ES;
 
 /*
@@ -24,24 +23,30 @@ typedef struct Processo
     char processo[3];
     int t_chegada;
     int t_servico;
-    struct entrada_saida* operacoes_io;
+    struct entrada_saida *operacoes_io;
     int num_io;
 } Processo;
 
-enum tipo_fila{Alta, Baixa}; // 0 PARA ALTA    1 PARA BAIXA
+enum tipo_fila
+{
+    Alta,
+    Baixa,
+    IO
+}; // 0 PARA ALTA - 1 PARA BAIXA - 2 PARA I/O
 /*
     CRIANDO A ESTUTURA DA FILA
 */
-typedef struct Fila{
+typedef struct Fila
+{
     Processo processo;
-    int tipo; 
-    struct Fila* prox;
-}Fila;
+    int tipo;
+    struct Fila *prox;
+} Fila;
 
 /* CRIANDO A CHAMADA DE I/O*/
-ES* cria_io(const char* tipo, int t_chegada)
+ES *cria_io(const char *tipo, int t_chegada)
 {
-    ES* temp = (ES*)malloc(sizeof(ES));
+    ES *temp = (ES *)malloc(sizeof(ES));
     temp->chegada = t_chegada;
     strncpy(temp->tipo, tipo, 2);
     temp->prox = NULL;
@@ -49,31 +54,35 @@ ES* cria_io(const char* tipo, int t_chegada)
 }
 
 /* INSERINDO A(S) CHAMADA(S) DE I/O(S) NA ESTRUTURA DO PROCESSO*/
-ES* inserir_io(ES* head, int t_chegada, const char* tipo){
+ES *inserir_io(ES *head, int t_chegada, const char *tipo)
+{
     if (head == NULL)
     {
-        return cria_io(tipo, t_chegada);;
+        return cria_io(tipo, t_chegada);
+        ;
     }
     else
     {
-        ES* atual = head;
+        ES *atual = head;
         while (atual->prox != NULL)
         {
             atual = atual->prox;
         }
-        atual->prox = cria_io(tipo, t_chegada);;
+        atual->prox = cria_io(tipo, t_chegada);
+        ;
     }
     return head;
 }
 
 /* IMPRIMINDO A(S) CHAMADA(S) DE I/O(S) NO ARQUIVO DE SAIDA*/
-void imprimir_io(FILE* arq, ES* head){
-    ES* ptcab = head;
-    
-    char saida[MAX] ="";
+void imprimir_io(FILE *arq, ES *head)
+{
+    ES *ptcab = head;
+
+    char saida[MAX] = "";
     char tempo[64] = "Tempo de Chamada I/O: ";
     char tipo[64] = "Tipo I/O: ";
-    
+
     while (ptcab != NULL)
     {
         char converte[2];
@@ -91,7 +100,7 @@ void imprimir_io(FILE* arq, ES* head){
     strcat(tempo, tipo);
     strcat(saida, tempo);
     strcat(saida, "\n");
-    fputs(saida,arq);
+    fputs(saida, arq);
 }
 
 /* IMPRIMINDO A "TABELA" DE PROCESSOS NO ARQUIVO DE SAIDA */
@@ -109,10 +118,10 @@ void imprimir_tabela_processos(const char *filename, Processo p[])
         {
             imprimir_io(arq, p[i].operacoes_io);
         }
-        if (p[i].num_io == 0 )
+        if (p[i].num_io == 0)
         {
             fputs("Tempo de Chamada I/O: - \tTipo I/O: -\n", arq);
-        }        
+        }
     }
     fputs("\n\n", arq);
     fclose(arq);
@@ -121,8 +130,9 @@ void imprimir_tabela_processos(const char *filename, Processo p[])
 /*
     CRIA O ELEMENTO DA FILA
 */
-Fila* inicia_a_fila(Processo p, int tipo){
-    Fila* novo_elemento = (Fila*) malloc(sizeof(Fila));
+Fila *inicia_a_fila(Processo p, int tipo)
+{
+    Fila *novo_elemento = (Fila *)malloc(sizeof(Fila));
     novo_elemento->processo = p;
     novo_elemento->tipo = tipo;
     novo_elemento->prox = NULL;
@@ -132,14 +142,15 @@ Fila* inicia_a_fila(Processo p, int tipo){
 /*
     ADICIONA O PROCESSO NA FILA
 */
-Fila* adiciona_na_fila(Fila* inicio, Processo p, int tipo){
+Fila *adiciona_na_fila(Fila *inicio, Processo p, int tipo)
+{
     if (inicio == NULL)
     {
-        return inicia_a_fila(p,tipo);
+        return inicia_a_fila(p, tipo);
     }
     else
     {
-        Fila* atual = inicio;
+        Fila *atual = inicio;
         while (atual->prox != NULL)
         {
             atual = atual->prox;
@@ -149,21 +160,22 @@ Fila* adiciona_na_fila(Fila* inicio, Processo p, int tipo){
     return inicio;
 }
 
-Fila* retira_da_fila(Fila* inicio){
+Fila *retira_da_fila(Fila *inicio)
+{
     if (inicio == NULL)
         return NULL;
 
-    Fila* temp = inicio;
+    Fila *temp = inicio;
     inicio = inicio->prox;
     free(temp);
-    return inicio;  
+    return inicio;
 }
 
 /*VARIAVEL GLOBAL PRA CONTAR O TEMPO E VERIFICAR OS PROCESSOS EM EXECUÇÃO*/
 int ut = 0;
 int processos_em_execucao = 0;
 
-int chegada(FILE *saida, Processo p[], Fila** fila, int tempo_execucao)
+int chegada(FILE *saida, Processo p[], Fila **fila, int tempo_execucao)
 {
     char texto[256];
     int aux = processos_em_execucao;
@@ -171,22 +183,23 @@ int chegada(FILE *saida, Processo p[], Fila** fila, int tempo_execucao)
     {
         if (ut == p[i].t_chegada || (ut > p[i].t_chegada && p[i].t_chegada > (ut - tempo_execucao)))
         {
-            *fila = adiciona_na_fila(*fila,p[i],Alta);
+            *fila = adiciona_na_fila(*fila, p[i], Alta);
             aux++;
             sprintf(texto, "U.T: %d|\tO Processo %s chegou no processador\n", p[i].t_chegada, p[i].processo);
-            fputs(texto,saida);
+            fputs(texto, saida);
         }
     }
     return aux;
 }
 
-void round_robin(const char* filename, Processo p[], Fila* fila1, Fila* fila2, Fila* ios){
-    FILE* arq = fopen(filename,"a+");
-    
+void round_robin(const char *filename, Processo p[], Fila *fila1, Fila *fila2, Fila *ios)
+{
+    FILE *arq = fopen(filename, "a+");
+
     int tempo_execucao = 0;
     char linha[MAX];
 
-    processos_em_execucao = chegada(arq,p, &fila1, tempo_execucao);
+    processos_em_execucao = chegada(arq, p, &fila1, tempo_execucao);
     while (1)
     {
         tempo_execucao++;
@@ -194,7 +207,7 @@ void round_robin(const char* filename, Processo p[], Fila* fila1, Fila* fila2, F
         fila1->processo.t_servico--;
         if (ut == 100)
             break;
-        
+
         if (fila1->processo.t_servico == 0)
         {
             sprintf(linha, "U.T= %d-%d|\t O Processo %s executou por %ds e Terminou\n", (ut - tempo_execucao), ut, fila1->processo.processo, tempo_execucao);
@@ -211,14 +224,14 @@ void round_robin(const char* filename, Processo p[], Fila* fila1, Fila* fila2, F
         }
         if (tempo_execucao == QUANTUM)
         {
-            sprintf(linha, "U.T= %d-%d|\t O Processo %s sofreu preempção (Tempo restante: %d)\n", (ut - tempo_execucao), ut, fila1->processo.processo,  fila1->processo.t_servico);
+            sprintf(linha, "U.T= %d-%d|\t O Processo %s sofreu preempção (Tempo restante: %d)\n", (ut - tempo_execucao), ut, fila1->processo.processo, fila1->processo.t_servico);
             fputs(linha, arq);
-            processos_em_execucao = chegada(arq,p, &fila1, tempo_execucao);
-            
+            processos_em_execucao = chegada(arq, p, &fila1, tempo_execucao);
+
             Processo preemp = fila1->processo;
             fila1 = retira_da_fila(fila1);
             fila1 = adiciona_na_fila(fila1, preemp, Alta); // ALTERA "Alta" POR "Baixa" PARA TROCAR A FILA
-            
+
             tempo_execucao = 0;
         }
     }
@@ -238,21 +251,21 @@ int main()
         {"P5", 10, 16, NULL, 2}};
 
     /* CRIANDO OS CHAMADOS DE I/O*/
-    p[0].operacoes_io = inserir_io(p[0].operacoes_io,4,"A");
-    p[1].operacoes_io = inserir_io(p[1].operacoes_io,2,"B");
-    p[1].operacoes_io = inserir_io(p[1].operacoes_io,6,"A");
-    p[4].operacoes_io = inserir_io(p[4].operacoes_io,2,"A");
-    p[4].operacoes_io = inserir_io(p[4].operacoes_io,7,"B");
+    p[0].operacoes_io = inserir_io(p[0].operacoes_io, 4, "A");
+    p[1].operacoes_io = inserir_io(p[1].operacoes_io, 2, "B");
+    p[1].operacoes_io = inserir_io(p[1].operacoes_io, 6, "A");
+    p[4].operacoes_io = inserir_io(p[4].operacoes_io, 2, "A");
+    p[4].operacoes_io = inserir_io(p[4].operacoes_io, 7, "B");
 
     /* IMPRIMINDO A TABELA NO ARQUIVO DE SAIDA*/
-    imprimir_tabela_processos(arquivo_saida,p);
+    imprimir_tabela_processos(arquivo_saida, p);
 
     /* CRIDANDO AS FILA */
-    Fila* fila_alta = NULL;
-    Fila* fila_baixa = NULL;
-    Fila* fila_io = NULL;
+    Fila *fila_alta = NULL;
+    Fila *fila_baixa = NULL;
+    Fila *fila_io = NULL;
 
-    round_robin(arquivo_saida,p, fila_alta, fila_baixa, fila_io);    
+    round_robin(arquivo_saida, p, fila_alta, fila_baixa, fila_io);
 
     return 0;
 }
