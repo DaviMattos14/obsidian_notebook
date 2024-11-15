@@ -28,11 +28,13 @@ typedef struct Processo
     int num_io;
 } Processo;
 
+enum tipo_fila{Alta, Baixa}; // 0 PARA ALTA    1 PARA BAIXA
 /*
     CRIANDO A ESTUTURA DA FILA
 */
 typedef struct Fila{
     Processo processo;
+    int tipo; 
     struct Fila* prox;
 }Fila;
 
@@ -119,9 +121,10 @@ void imprimir_tabela_processos(const char *filename, Processo p[])
 /*
     CRIA O ELEMENTO DA FILA
 */
-Fila* inicia_a_fila(Processo p){
+Fila* inicia_a_fila(Processo p, int tipo){
     Fila* novo_elemento = (Fila*) malloc(sizeof(Fila));
     novo_elemento->processo = p;
+    novo_elemento->tipo = tipo;
     novo_elemento->prox = NULL;
     return novo_elemento;
 }
@@ -129,10 +132,10 @@ Fila* inicia_a_fila(Processo p){
 /*
     ADICIONA O PROCESSO NA FILA
 */
-Fila* adiciona_na_fila(Fila* inicio, Processo p){
+Fila* adiciona_na_fila(Fila* inicio, Processo p, int tipo){
     if (inicio == NULL)
     {
-        return inicia_a_fila(p);
+        return inicia_a_fila(p,tipo);
     }
     else
     {
@@ -141,7 +144,7 @@ Fila* adiciona_na_fila(Fila* inicio, Processo p){
         {
             atual = atual->prox;
         }
-        atual->prox = inicia_a_fila(p);
+        atual->prox = inicia_a_fila(p, tipo);
     }
     return inicio;
 }
@@ -168,7 +171,7 @@ int chegada(FILE *saida, Processo p[], Fila** fila, int tempo_execucao)
     {
         if (ut == p[i].t_chegada || (ut > p[i].t_chegada && p[i].t_chegada > (ut - tempo_execucao)))
         {
-            *fila = adiciona_na_fila(*fila,p[i]);
+            *fila = adiciona_na_fila(*fila,p[i],Alta);
             aux++;
             sprintf(texto, "U.T: %d|\tO Processo %s chegou no processador\n", p[i].t_chegada, p[i].processo);
             fputs(texto,saida);
@@ -214,12 +217,10 @@ void round_robin(const char* filename, Processo p[], Fila* fila1, Fila* fila2, F
             
             Processo preemp = fila1->processo;
             fila1 = retira_da_fila(fila1);
-            fila1 = adiciona_na_fila(fila1, preemp); // ALTERA "FILA1" POR "FILA2" PARA TROCAR A FILA
+            fila1 = adiciona_na_fila(fila1, preemp, Alta); // ALTERA "Alta" POR "Baixa" PARA TROCAR A FILA
             
             tempo_execucao = 0;
         }
-        /*
-        */
     }
     fclose(arq);
 }
