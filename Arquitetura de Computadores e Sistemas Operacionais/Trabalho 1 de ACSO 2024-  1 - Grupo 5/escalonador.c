@@ -191,32 +191,32 @@ int chegada(FILE *saida, Processo p[], Fila **fila, int tempo_execucao)
     return aux;
 }
 
-void round_robin(const char *filename, Processo p[], Fila *fila1, Fila *fila2, Fila *ios)
+void round_robin(const char *filename, Processo p[], Fila **fila1, Fila **fila2, Fila **ios)
 {
     FILE *arq = fopen(filename, "a+");
 
     int tempo_execucao = 0;
     char linha[MAX];
 
-    processos_em_execucao = chegada(arq, p, &fila1, tempo_execucao);
+    processos_em_execucao = chegada(arq, p, fila1, tempo_execucao);
     while (1)
     {
         tempo_execucao++;
         ut++;
-        fila1->processo.t_servico--;
+        (*fila1)->processo.t_servico--;
 
-        Processo preemp = fila1->processo;
-        int chamou_io = (fila1 != NULL && fila1->processo.operacoes_io != NULL && fila1->processo.operacoes_io->chegada == ut);
-        if (fila1->processo.t_servico == 0)
+        Processo preemp = (*fila1)->processo;
+        int chamou_io = ((*fila1) != NULL && (*fila1)->processo.operacoes_io != NULL && (*fila1)->processo.operacoes_io->chegada == ut);
+        if ((*fila1)->processo.t_servico == 0)
         {
-            sprintf(linha, "U.T= %d-%d|\t O Processo %s executou por %ds e Terminou\n", (ut - tempo_execucao), ut, fila1->processo.processo, tempo_execucao);
+            sprintf(linha, "U.T= %d-%d|\t O Processo %s executou por %ds e Terminou\n", (ut - tempo_execucao), ut, (*fila1)->processo.processo, tempo_execucao);
             fputs(linha, arq);
-            if (fila1->prox == NULL)
+            if ((*fila1)->prox == NULL)
             {
                 fclose(arq);
                 break;
             }
-            fila1 = retira_da_fila(fila1);
+            *fila1 = retira_da_fila(*fila1);
             tempo_execucao = 0;
             processos_em_execucao--;
             continue;
@@ -226,32 +226,32 @@ void round_robin(const char *filename, Processo p[], Fila *fila1, Fila *fila2, F
         if (tempo_execucao == QUANTUM || chamou_io)
         {
             
-            if (fila1->tipo == Baixa)
+            if ((*fila1)->tipo == Baixa)
             {
                 if(tempo_execucao == QUANTUM)
-                    sprintf(linha, "U.T= %d-%d|\t O Processo %s sofreu preempção (Tempo restante: %d)\n", (ut - tempo_execucao), ut, fila1->processo.processo, fila1->processo.t_servico);
+                    sprintf(linha, "U.T= %d-%d|\t O Processo %s sofreu preempção (Tempo restante: %d)\n", (ut - tempo_execucao), ut, (*fila1)->processo.processo, (*fila1)->processo.t_servico);
                 if (chamou_io)
-                    sprintf(linha, "U.T= %d-%d|\t O Processo %s foi bloqueado\n", (ut - tempo_execucao), ut, fila1->processo.processo);
+                    sprintf(linha, "U.T= %d-%d|\t O Processo %s foi bloqueado\n", (ut - tempo_execucao), ut, (*fila1)->processo.processo);
 
                 fputs(linha, arq);
-                fila1 = retira_da_fila(fila1);
-                fila1 = adiciona_na_fila(fila1, preemp, Baixa); // DEIXA O PROCESSO NA FILA DE BAIXA  
+                (*fila1) = retira_da_fila(*fila1);
+                (*fila1) = adiciona_na_fila(*fila1, preemp, Baixa); // DEIXA O PROCESSO NA FILA DE BAIXA  
             }
 
-            if (fila1->tipo == Alta)
+            if ((*fila1)->tipo == Alta)
             {
                 if (tempo_execucao == QUANTUM)
-                    sprintf(linha, "U.T= %d-%d|\t O Processo %s sofreu preempção e foi pra fila de Baixa (Tempo restante: %d)\n", (ut - tempo_execucao), ut, fila1->processo.processo, fila1->processo.t_servico);
+                    sprintf(linha, "U.T= %d-%d|\t O Processo %s sofreu preempção e foi pra fila de Baixa (Tempo restante: %d)\n", (ut - tempo_execucao), ut, (*fila1)->processo.processo, (*fila1)->processo.t_servico);
                 if (chamou_io)
-                    sprintf(linha, "U.T= %d-%d|\t O Processo %s foi bloqueado\n", (ut - tempo_execucao), ut, fila1->processo.processo);
+                    sprintf(linha, "U.T= %d-%d|\t O Processo %s foi bloqueado\n", (ut - tempo_execucao), ut, (*fila1)->processo.processo);
                 fputs(linha, arq);
-                fila1 = retira_da_fila(fila1);                
-                fila2 = adiciona_na_fila(fila2, preemp, Baixa); // COLOCA O PROCESSO NA FILA DE BAIXA
+                (*fila1) = retira_da_fila(*fila1);                
+                (*fila2) = adiciona_na_fila(*fila2, preemp, Baixa); // COLOCA O PROCESSO NA FILA DE BAIXA
             }
-            processos_em_execucao = chegada(arq, p, &fila1, tempo_execucao);
+            processos_em_execucao = chegada(arq, p, fila1, tempo_execucao);
             tempo_execucao = 0;
 
-        if (fila1 == NULL)
+        if (*fila1 == NULL)
             break;
         }
     }
@@ -285,8 +285,7 @@ int main()
     Fila *fila_baixa = NULL;
     Fila *fila_io = NULL;
 
-    round_robin(arquivo_saida, p, fila_alta, fila_baixa, fila_io);
-
-    
+    round_robin(arquivo_saida, p, &fila_alta, &fila_baixa, &fila_io);  
+    (fila_baixa == NULL)? puts("sim"): printf("%s", fila_baixa->processo.processo);
     return 0;
 }
