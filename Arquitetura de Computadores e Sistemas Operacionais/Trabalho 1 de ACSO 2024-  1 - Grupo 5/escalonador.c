@@ -206,16 +206,7 @@ void round_robin(const char *filename, Processo p[], Fila *fila1, Fila *fila2, F
         fila1->processo.t_servico--;
 
         Processo preemp = fila1->processo;
-        
-        if (preemp.num_io != 0)
-        {
-            if (preemp.operacoes_io->chegada == ut)
-            {
-                puts("tem chamada\n");
-            }
-        }
-        
-
+        int chamou_io = (fila1 != NULL && fila1->processo.operacoes_io != NULL && fila1->processo.operacoes_io->chegada == ut);
         if (fila1->processo.t_servico == 0)
         {
             sprintf(linha, "U.T= %d-%d|\t O Processo %s executou por %ds e Terminou\n", (ut - tempo_execucao), ut, fila1->processo.processo, tempo_execucao);
@@ -232,12 +223,16 @@ void round_robin(const char *filename, Processo p[], Fila *fila1, Fila *fila2, F
         }
 
         
-        if (tempo_execucao == QUANTUM)
+        if (tempo_execucao == QUANTUM || chamou_io)
         {
             
             if (fila1->tipo == Baixa)
             {
-                sprintf(linha, "U.T= %d-%d|\t O Processo %s sofreu preempção (Tempo restante: %d)\n", (ut - tempo_execucao), ut, fila1->processo.processo, fila1->processo.t_servico);
+                if(tempo_execucao == QUANTUM)
+                    sprintf(linha, "U.T= %d-%d|\t O Processo %s sofreu preempção (Tempo restante: %d)\n", (ut - tempo_execucao), ut, fila1->processo.processo, fila1->processo.t_servico);
+                if (chamou_io)
+                    sprintf(linha, "U.T= %d-%d|\t O Processo %s foi bloqueado\n", (ut - tempo_execucao), ut, fila1->processo.processo);
+
                 fputs(linha, arq);
                 fila1 = retira_da_fila(fila1);
                 fila1 = adiciona_na_fila(fila1, preemp, Baixa); // DEIXA O PROCESSO NA FILA DE BAIXA  
@@ -245,7 +240,10 @@ void round_robin(const char *filename, Processo p[], Fila *fila1, Fila *fila2, F
 
             if (fila1->tipo == Alta)
             {
-                sprintf(linha, "U.T= %d-%d|\t O Processo %s sofreu preempção e foi pra fila de Baixa (Tempo restante: %d)\n", (ut - tempo_execucao), ut, fila1->processo.processo, fila1->processo.t_servico);
+                if (tempo_execucao == QUANTUM)
+                    sprintf(linha, "U.T= %d-%d|\t O Processo %s sofreu preempção e foi pra fila de Baixa (Tempo restante: %d)\n", (ut - tempo_execucao), ut, fila1->processo.processo, fila1->processo.t_servico);
+                if (chamou_io)
+                    sprintf(linha, "U.T= %d-%d|\t O Processo %s foi bloqueado\n", (ut - tempo_execucao), ut, fila1->processo.processo);
                 fputs(linha, arq);
                 fila1 = retira_da_fila(fila1);                
                 fila2 = adiciona_na_fila(fila2, preemp, Baixa); // COLOCA O PROCESSO NA FILA DE BAIXA

@@ -8,7 +8,7 @@
 
 
 U.T: 0|	O Processo P1 chegou no processador
-U.T= 0-4|	 O Processo P1 sofreu preempção e foi pra fila de Baixa (Tempo restante: 9)
+U.T= 0-4|	 O Processo P1 foi bloqueado
 U.T: 4|	O Processo P2 chegou no processador
 U.T= 4-8|	 O Processo P2 sofreu preempção e foi pra fila de Baixa (Tempo restante: 7)
 U.T: 5|	O Processo P3 chegou no processador
