@@ -142,32 +142,30 @@ Fila *inicia_a_fila(Processo p, int tipo)
 /*
     ADICIONA O PROCESSO NA FILA
 */
-Fila *adiciona_na_fila(Fila *inicio, Processo p, int tipo)
+void adiciona_na_fila(Fila **inicio, Processo p, int tipo)
 {
-    if (inicio == NULL)
+    if (*inicio == NULL)
     {
-        return inicia_a_fila(p, tipo);
+        (*inicio) =  inicia_a_fila(p, tipo);
     }
     else
     {
-        Fila *atual = inicio;
+        Fila *atual = *inicio;
         while (atual->prox != NULL)
         {
             atual = atual->prox;
         }
         atual->prox = inicia_a_fila(p, tipo);
     }
-    return inicio;
 }
 
-Fila *retira_da_fila(Fila *inicio)
+void remove_da_fila(Fila **inicio)
 {
-    if (inicio == NULL)
-        return NULL;
-    Fila *temp = inicio;
-    inicio = inicio->prox;
+    if (*inicio == NULL)
+        return;
+    Fila *temp = *inicio;
+    *inicio = (*inicio)->prox;
     free(temp);
-    return inicio;
 }
 
 /*VARIAVEL GLOBAL PRA CONTAR O TEMPO E VERIFICAR OS PROCESSOS EM EXECUÇÃO*/
@@ -182,7 +180,7 @@ int chegada(FILE *saida, Processo p[], Fila **fila, int tempo_execucao)
     {
         if (ut == p[i].t_chegada || (ut > p[i].t_chegada && p[i].t_chegada > (ut - tempo_execucao)))
         {
-            *fila = adiciona_na_fila(*fila, p[i], Alta);
+            adiciona_na_fila(fila, p[i], Alta);
             aux++;
             sprintf(texto, "U.T: %d|\tO Processo %s chegou no processador\n", p[i].t_chegada, p[i].processo);
             fputs(texto, saida);
@@ -216,7 +214,7 @@ void round_robin(const char *filename, Processo p[], Fila **fila1, Fila **fila2,
                 fclose(arq);
                 break;
             }
-            *fila1 = retira_da_fila(*fila1);
+            remove_da_fila(fila1);
             tempo_execucao = 0;
             processos_em_execucao--;
             continue;
@@ -234,8 +232,8 @@ void round_robin(const char *filename, Processo p[], Fila **fila1, Fila **fila2,
                     sprintf(linha, "U.T= %d-%d|\t O Processo %s foi bloqueado\n", (ut - tempo_execucao), ut, (*fila1)->processo.processo);
 
                 fputs(linha, arq);
-                (*fila1) = retira_da_fila(*fila1);
-                (*fila1) = adiciona_na_fila(*fila1, preemp, Baixa); // DEIXA O PROCESSO NA FILA DE BAIXA  
+                remove_da_fila(fila1);
+                adiciona_na_fila(fila1, preemp, Baixa); // DEIXA O PROCESSO NA FILA DE BAIXA  
             }
 
             if ((*fila1)->tipo == Alta)
@@ -245,8 +243,8 @@ void round_robin(const char *filename, Processo p[], Fila **fila1, Fila **fila2,
                 if (chamou_io)
                     sprintf(linha, "U.T= %d-%d|\t O Processo %s foi bloqueado\n", (ut - tempo_execucao), ut, (*fila1)->processo.processo);
                 fputs(linha, arq);
-                (*fila1) = retira_da_fila(*fila1);                
-                (*fila2) = adiciona_na_fila(*fila2, preemp, Baixa); // COLOCA O PROCESSO NA FILA DE BAIXA
+                remove_da_fila(fila1);                
+                adiciona_na_fila(fila2, preemp, Baixa); // COLOCA O PROCESSO NA FILA DE BAIXA
             }
             processos_em_execucao = chegada(arq, p, fila1, tempo_execucao);
             tempo_execucao = 0;
@@ -286,6 +284,8 @@ int main()
     Fila *fila_io = NULL;
 
     round_robin(arquivo_saida, p, &fila_alta, &fila_baixa, &fila_io);  
-    (fila_baixa == NULL)? puts("sim"): printf("%s", fila_baixa->processo.processo);
+    ((fila_io->processo.processo== NULL) && (fila_alta->processo.processo == NULL))? printf("Sim - %s", fila_alta->processo.processo): printf("Nao - %s", fila_baixa->processo.processo);
+    
     return 0;
 }
+
