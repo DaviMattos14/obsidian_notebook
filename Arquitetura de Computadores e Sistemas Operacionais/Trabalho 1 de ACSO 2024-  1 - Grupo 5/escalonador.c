@@ -161,8 +161,10 @@ void adiciona_na_fila(Fila **inicio, Processo p, int tipo)
 
 void remove_da_fila(Fila **inicio)
 {
-    if (*inicio == NULL)
+    if (*inicio == NULL){
+        (*inicio) = NULL;
         return;
+    }
     Fila *temp = *inicio;
     *inicio = (*inicio)->prox;
     free(temp);
@@ -284,7 +286,7 @@ int main()
     Fila *fila_io = NULL;
 
     round_robin(arquivo_saida, p, &fila_alta, &fila_baixa, &fila_io);  
-    ((fila_io->processo.processo== NULL) && (fila_alta->processo.processo == NULL))? printf("Sim - %s", fila_alta->processo.processo): printf("Nao - %s", fila_baixa->processo.processo);
+    (fila_alta == NULL)? printf("Sim - %s", "yay"): printf("Nao - %s", "oh");
     
     return 0;
 }
