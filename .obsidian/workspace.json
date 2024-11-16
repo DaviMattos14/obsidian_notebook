@@ -18,33 +18,8 @@
               "icon": "lucide-file-text",
               "title": "Trabalho1"
             }
-          },
-          {
-            "id": "0b2571c15163eee4",
-            "type": "leaf",
-            "state": {
-              "type": "release-notes",
-              "state": {
-                "currentVersion": "1.7.5"
-              },
-              "icon": "lucide-file",
-              "title": "Release Notes 1.7.5"
-            }
-          },
-          {
-            "id": "9116cd04b42df447",
-            "type": "leaf",
-            "state": {
-              "type": "release-notes",
-              "state": {
-                "currentVersion": "1.7.6"
-              },
-              "icon": "lucide-file",
-              "title": "Release Notes 1.7.6"
-            }
           }
-        ],
-        "currentTab": 2
+        ]
       }
     ],
     "direction": "vertical"
@@ -224,7 +199,7 @@
       "obsidian-git:Open Git source control": false
     }
   },
-  "active": "9116cd04b42df447",
+  "active": "54286233fac846f2",
   "lastOpenFiles": [
     "Arquitetura de Computadores e Sistemas Operacionais/Estrutura do Sistema Operacional.md",
     "Arquitetura de Computadores e Sistemas Operacionais/Trabalho 1 de ACSO 2024-  1 - Grupo 5/Trabalho1.pdf",
