@@ -5,6 +5,11 @@
 #define MAX 512
 #define QUANTUM 4
 
+/* TIPOS DE I/O*/
+#define DISCO 7 // A
+#define FITA_MAGNETICA 4 // B
+#define IMPRESSORA 2 // C
+
 /*
     CRITANDO A ESTRUTURA I/O
 */
@@ -60,7 +65,6 @@ ES *inserir_io(ES *head, int t_chegada, const char *tipo)
     if (head == NULL)
     {
         return cria_io(tipo, t_chegada);
-        ;
     }
     else
     {
@@ -142,6 +146,7 @@ Fila *inicia_a_fila(Processo p, int tipo)
 
 /*
     ADICIONA O PROCESSO NA FILA
+    (FILA EM QUE O PROCESSO TEM QUE ENTRAR, PROCESSO, TIPO DA FILA)
 */
 void adiciona_na_fila(Fila **inicio, Processo p, int tipo)
 {
@@ -186,7 +191,7 @@ int chegada(FILE *saida, Processo p[], Fila **fila, int tempo_execucao)
         if (ut == p[i].t_chegada || (ut > p[i].t_chegada && p[i].t_chegada > (ut - tempo_execucao)))
         {
             adiciona_na_fila(fila, p[i], Alta);
-            aux++;
+            (aux == 5 ) ? aux = NUM_PROCESSOS : aux++;
             sprintf(texto, "U.T: %d|\tO Processo %s chegou no processador\n", p[i].t_chegada, p[i].processo);
             fputs(texto, saida);
         }
@@ -194,41 +199,144 @@ int chegada(FILE *saida, Processo p[], Fila **fila, int tempo_execucao)
     return aux;
 }
 
+/* VERIFICA O TIPO DE I/O */
+int tipo_io(ES** io){
+    if (strcmp((*io)->tipo, "A") == 0)
+        return DISCO;
+    else if (strcmp((*io)->tipo, "B") == 0)
+        return FITA_MAGNETICA;
+    else if (strcmp((*io)->tipo, "C") == 0)
+        return IMPRESSORA;
+    return -1;    
+}
+
+/* PROCURA SE O PROCESSO ESTÁ NA FILA (DE I/Os)*/
+int procurar_io(Fila** inicio, char pid[3]){
+    Fila *aux = *inicio;
+    while (aux != NULL)
+    {
+        if(strcmp(aux->processo.processo, pid) == 0){
+            return 1;
+        }
+        aux = aux->prox;
+    }
+    free(aux);
+    return 0;
+}
+
+/* VERIFICA SE O PROCESSO JA TERMINOU A SUA CHAMADA DE I/O */
+void atualizar_ios(FILE *arq, Fila **alta, Fila **baixa, Fila **ios)
+{
+    if (*ios == NULL)
+        return;
+
+    char linha[MAX]="";
+    Fila *atual = *ios;
+
+    while (atual != NULL)
+    {
+        Processo aux = atual->processo;
+
+        // Verifica se a operação de I/O terminou
+        if (aux.t_chegada == ut && aux.t_servico != 0)
+        {
+            int io_tipo = tipo_io(&aux.operacoes_io);
+            remove_da_fila(ios); // Remove da fila de I/O
+
+            // Verifica para qual fila o processo deve retornar
+            if (io_tipo == DISCO)
+            {
+                sprintf(linha, "U.T= %d|\t O Processo %s terminou a operação de I/O (Disco) e retornou para fila de baixa\n", ut, aux.processo);
+                fputs(linha, arq);
+                adiciona_na_fila(baixa, aux, Baixa);
+            }
+            else if (io_tipo == FITA_MAGNETICA)
+            {
+                sprintf(linha, "U.T= %d|\t O Processo %s terminou a operação de I/O (Fita Magnética) e retornou para fila de Alta\n", ut, aux.processo);
+                fputs(linha, arq);
+                adiciona_na_fila(alta, aux, Alta);
+            }
+            else if (io_tipo == IMPRESSORA)
+            {
+                sprintf(linha, "U.T= %d|\t O Processo %s terminou a operação de I/O (Impressora) e retornou para fila de Alta\n", ut, aux.processo);
+                fputs(linha, arq);
+                adiciona_na_fila(alta, aux, Alta);
+            }
+        }
+
+        // Caso o processo terminou e não precisa retornar para outra fila
+        else if (aux.t_chegada == ut && aux.t_servico == 0)
+        {
+            remove_da_fila(ios);
+            if (tipo_io(&aux.operacoes_io) == DISCO)
+                sprintf(linha, "U.T= %d|\t O Processo %s terminou a operação de I/O (Disco) e terminou\n", ut, aux.processo);
+            else if (tipo_io(&aux.operacoes_io) == FITA_MAGNETICA)
+                sprintf(linha, "U.T= %d|\t O Processo %s terminou a operação de I/O (Fita Magnética) e terminou\n", ut, aux.processo);
+            else if (tipo_io(&aux.operacoes_io) == IMPRESSORA)
+                sprintf(linha, "U.T= %d|\t O Processo %s terminou a operação de I/O (Impressora) e terminou\n", ut, aux.processo);
+            fputs(linha, arq);
+        }
+
+        atual = *ios; // Atualiza o ponteiro para o próximo elemento da fila
+    }
+}
+
+/* VERIFICA SE O PROCESSO TEM UMA CHAMADA DE I/O */
+void verificar_io(FILE* arq, Processo p, int tempo_execucao, Fila** ios){
+    char linha[MAX]="";
+
+    int tempo_chegada = p.operacoes_io->chegada;
+    int esta_na_fila = procurar_io(ios, p.processo); // 1 PARA TRUE / 0 PARA FALSE
+
+    if ((tempo_chegada == ut || tempo_chegada < (ut - tempo_execucao)) && !esta_na_fila)
+    {
+        sprintf(linha, "U.T= %d|\t O Processo %s foi bloqueado\n", ut, p.processo);
+        fputs(linha, arq);
+        p.t_chegada = ut + tipo_io(&p.operacoes_io);
+        adiciona_na_fila(ios, p, IO);
+    }
+}
+
 void round_robin(const char *filename, Processo p[], Fila **fila1, Fila **fila2, Fila **ios)
 {
     FILE *arq = fopen(filename, "a+");
 
     int tempo_execucao = 0;
-    char linha[MAX];
+    char linha[MAX] = "";
 
     /* FAZ A LEITURA DA 'TABELA' E VERIFICA SE ALGUM PROCESSO CHEGOU NO INSTANTE UT=0 */
     processos_em_execucao = chegada(arq, p, fila1, tempo_execucao);
     while (1)
-    {
+    {   
+        sprintf(linha, "U.T= %d|\t Executando o Processo %s \n", ut, (*fila1)->processo.processo);
+        fputs(linha, arq);
+        
         tempo_execucao++;
         ut++;
         (*fila1)->processo.t_servico--;
-
+        ((*fila1)->tipo == Alta) ? atualizar_ios(arq, fila1, fila2, ios) : atualizar_ios(arq, fila2, fila1, ios);
         Processo preemp = (*fila1)->processo;
+        
         if ((*fila1)->processo.t_servico == 0) // SE O PROCESSO TERMINAR DURANTE A SUA FATIA DE TEMPO
         {
-            sprintf(linha, "U.T= %d-%d|\t O Processo %s executou por %ds e Terminou\n", (ut - tempo_execucao), ut, (*fila1)->processo.processo, tempo_execucao);
+            remove_da_fila(fila1);
+            sprintf(linha, "U.T= %d|\t O Processo %s Terminou\n", ut, (*fila1)->processo.processo );
             fputs(linha, arq);
-            if ((*fila1)->prox == NULL)
+            if (fila1 == NULL)
             {
-                // FALTA VERIFICAR SE TEM CHAMDA DE I/O
+                //verificar_io(arq, preemp, tempo_execucao, ios);
                 fclose(arq);
                 break;
             }
-            remove_da_fila(fila1);
-            // FALTA VERIFICAR SE TEM CHAMDA DE I/O
+            //verificar_io(arq, preemp, tempo_execucao, ios);
             tempo_execucao = 0;
-            processos_em_execucao--;
             continue;
         }
 
         /* VERIFICANDO SE O PROCESSO CHAMOU I/O DURANTE SUA FATIA DE TEMPO*/
-        int chamou_io = ((*fila1) != NULL && (*fila1)->processo.operacoes_io != NULL && (*fila1)->processo.operacoes_io->chegada == ut);
+        int chamou_io = ((*fila1) != NULL 
+                        && (*fila1)->processo.num_io != 0 
+                        && (*fila1)->processo.operacoes_io->chegada == ut);
         
         /* ALTERAR A FILA DE PRIORIDADE DO PROCESSO SE TERMINOU SUA FATIA DE TEMPO OU CHAMOU I/O*/
         if (tempo_execucao == QUANTUM || chamou_io)
@@ -236,33 +344,42 @@ void round_robin(const char *filename, Processo p[], Fila **fila1, Fila **fila2,
             
             if ((*fila1)->tipo == Baixa) // SE A FILA 1 == FILA_BAIXA
             {
-                if(tempo_execucao == QUANTUM)// TERMINOU A FATIA DE TEMPO
-                    sprintf(linha, "U.T= %d-%d|\t O Processo %s sofreu preempção (Tempo restante: %d)\n", (ut - tempo_execucao), ut, (*fila1)->processo.processo, (*fila1)->processo.t_servico);
-                if (chamou_io)// CHAMOU A FATIA DE TEMPO DURANTE A FATIA DE TEMPO
-                    sprintf(linha, "U.T= %d-%d|\t O Processo %s foi bloqueado\n", (ut - tempo_execucao), ut, (*fila1)->processo.processo);
-
-                fputs(linha, arq);
                 remove_da_fila(fila1);
-                adiciona_na_fila(fila1, preemp, Baixa); // DEIXA O PROCESSO NA FILA DE BAIXA
-                break;  
+                if (chamou_io)// CHAMOU I/O DURANTE A FATIA DE TEMPO
+                    //verificar_io(arq, preemp, tempo_execucao, ios);
+                if (tempo_execucao == QUANTUM && !chamou_io) // TERMINOU A FATIA DE TEMPO
+                {
+                    //verificar_io(arq, preemp, tempo_execucao, ios);
+                    if (!procurar_io(ios,preemp.processo))
+                    {
+                        adiciona_na_fila(fila1, preemp, Baixa); // DEIXA O PROCESSO NA FILA DE BAIXA
+                        sprintf(linha, "U.T= %d-%d|\t O Processo %s sofreu preempção e foi pra fila de Baixa (Tempo restante: %d)\n", (ut - tempo_execucao), ut, (*fila1)->processo.processo, (*fila1)->processo.t_servico);
+                        fputs(linha, arq);
+                    }
+                }
             }
 
             if ((*fila1)->tipo == Alta) // SE A FILA 1 == FILA_ALTA
             {
-                if (tempo_execucao == QUANTUM) // TERMINOU A FATIA DE TEMPO
-                    sprintf(linha, "U.T= %d-%d|\t O Processo %s sofreu preempção e foi pra fila de Baixa (Tempo restante: %d)\n", (ut - tempo_execucao), ut, (*fila1)->processo.processo, (*fila1)->processo.t_servico);
-                if (chamou_io) // CHAMOU A FATIA DE TEMPO DURANTE A FATIA DE TEMPO
-                    sprintf(linha, "U.T= %d-%d|\t O Processo %s foi bloqueado\n", (ut - tempo_execucao), ut, (*fila1)->processo.processo);
-                fputs(linha, arq);
                 remove_da_fila(fila1);                
-                adiciona_na_fila(fila2, preemp, Baixa); // COLOCA O PROCESSO NA FILA DE BAIXA
+                if (chamou_io) // CHAMOU A FATIA DE TEMPO DURANTE A FATIA DE TEMPO
+                    //verificar_io(arq, preemp, tempo_execucao, ios);
+                if (tempo_execucao == QUANTUM && !chamou_io) // TERMINOU A FATIA DE TEMPO
+                {
+                    //verificar_io(arq, preemp, tempo_execucao, ios);
+                    if (!procurar_io(ios,preemp.processo))
+                    {
+                        adiciona_na_fila(fila2, preemp, Baixa); // COLOCA O PROCESSO NA FILA DE BAIXA
+                        sprintf(linha, "U.T= %d-%d|\t O Processo %s sofreu preempção e foi pra fila de Baixa (Tempo restante: %d)\n", (ut - tempo_execucao), ut, (*fila1)->processo.processo, (*fila1)->processo.t_servico);
+                        fputs(linha, arq);
+                    }
+                }
             }
-            processos_em_execucao = chegada(arq, p, fila1, tempo_execucao); // VERIFICA SE ALGUM PROCESSO CHEGOU NO INSTANTE U.T.
             tempo_execucao = 0;
-
+        }
+        processos_em_execucao = chegada(arq, p, fila1, tempo_execucao); // VERIFICA SE ALGUM PROCESSO CHEGOU NO INSTANTE U.T.
         if (*fila1 == NULL) // SE A FILA ESTÁ VAZIA - > TERMINA
             break;
-        }
     }
     fclose(arq);
 }
@@ -295,7 +412,14 @@ int main()
     Fila *fila_io = NULL;
 
     round_robin(arquivo_saida, p, &fila_alta, &fila_baixa, &fila_io);  
+    round_robin(arquivo_saida, p, &fila_baixa, &fila_alta, &fila_io);
+/*
+    do
+    {
+    } while (fila_alta != NULL && fila_baixa != NULL & fila_io != NULL);
+*/
     
+
     return 0;
 }
 

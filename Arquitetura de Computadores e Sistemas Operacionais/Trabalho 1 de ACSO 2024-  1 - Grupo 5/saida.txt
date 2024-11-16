@@ -10,10 +10,16 @@
 U.T: 0|	O Processo P1 chegou no processador
 U.T= 0-4|	 O Processo P1 foi bloqueado
 U.T: 4|	O Processo P2 chegou no processador
-U.T= 4-8|	 O Processo P2 sofreu preempção e foi pra fila de Baixa (Tempo restante: 7)
+U.T: 5|	O Processo P3 chegou no processador
+U.T: 5|	O Processo P3 chegou no processador
 U.T: 5|	O Processo P3 chegou no processador
 U.T: 7|	O Processo P4 chegou no processador
-U.T= 8-12|	 O Processo P3 sofreu preempção e foi pra fila de Baixa (Tempo restante: 3)
+U.T= 4-8|	 O Processo P2 sofreu preempção e foi pra fila de Baixa (Tempo restante: 7)
 U.T: 10|	O Processo P5 chegou no processador
-U.T= 12-16|	 O Processo P4 sofreu preempção e foi pra fila de Baixa (Tempo restante: 4)
-U.T= 16-20|	 O Processo P5 sofreu preempção e foi pra fila de Baixa (Tempo restante: 12)
+U.T: 10|	O Processo P5 chegou no processador
+U.T= 8-12|	 O Processo P3 sofreu preempção e foi pra fila de Baixa (Tempo restante: 3)
+U.T= 12-16|	 O Processo P3 sofreu preempção e foi pra fila de Baixa (Tempo restante: 3)
+U.T= 16-20|	 O Processo P3 sofreu preempção e foi pra fila de Baixa (Tempo restante: 3)
+U.T= 20-24|	 O Processo P4 sofreu preempção e foi pra fila de Baixa (Tempo restante: 4)
+U.T= 24-28|	 O Processo P5 sofreu preempção e foi pra fila de Baixa (Tempo restante: 12)
+U.T= 28-32|	 O Processo P5 sofreu preempção e foi pra fila de Baixa (Tempo restante: 12)
