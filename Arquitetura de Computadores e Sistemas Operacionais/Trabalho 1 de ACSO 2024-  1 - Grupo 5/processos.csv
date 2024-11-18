@@ -1,4 +1,4 @@
-Processo;Tempo_Serviço;Tempo_Chegada;T_Chegada_I/O;Tempo_I/O
+Processo;Tempo_Serviço;Tempo_Chegada;Instante_I/O;Tempo_I/O
 P1;13;0;4;A
 P2;11;4;2,6;B,A
 P3;7;5;-;-
