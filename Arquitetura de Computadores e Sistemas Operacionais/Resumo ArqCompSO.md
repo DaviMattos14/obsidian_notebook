@@ -119,7 +119,8 @@ Ou seja, o UEFI carrega programas executáveis, compilados com um formato defini
 padrão.
 O UEFI possui também um modo de compatibilidade com o padrão BIOS, configurável na interface de usuário.
 
-### Arquiteturas CISC x RISC
+# Aula 2
+## Arquiteturas CISC x RISC
 O tempo de execução de um programa pode ser definido pela seguinte equação:
 
 $$T_p = C_i \times T_c \times N_i$$
@@ -161,7 +162,8 @@ Consequências:
 - A unidade de controle é em geral “hardwired”;
 - Processo de compilação é complexo e requer cuidados especiais para otimização do desempenho do código gerado.
 
-### Processadores
+# Aula 3
+## Processadores
 #### O que é?
 - O *microprocessador*, ou comumente chamado de processador;
 - É uma espécie de microchip especializado;
@@ -197,7 +199,8 @@ Processadores atuais possuem outra unidade para cálculos, conhecida como Unidad
 ##### Unidade de Gerenciamento de Memória
 A MMU (em inglês: Memory Management Unit) é um dispositivo de hardware que transforma endereços virtuais em endereços físicos e administra a memória principal do computador.
 
-### Memórias
+# Aula 4
+## Memórias
 - Visão Geral:
 	- Manipula Bit
 	- Unidade de informação a ser armazenada, recuperada ou transferida (célula) - Grupo de n bits (n = 8) $\rightarrow$ 1 Byte
@@ -330,10 +333,12 @@ Obs: Quanto maior for a velocidade, maior o custo e consequentemente menor o tam
 	- É a memória mais barata, com mais espaço e comum nos computadores
 	- São as mais lentas unidades de armazenamento de um sistema computacional.
 
-### Programação em Linguagem de Montagem
+# Aula 5
+## Programação em Linguagem de Montagem
 _Sem Anotações_
 
-### Introdução a Sistemas Operacionais
+# Aula 6
+## Introdução a Sistemas Operacionais
 #### O que é?
 - É um software (programa)
 - Atua como intermediário entre o Usuário e o Hardware
@@ -393,7 +398,10 @@ _Sistemas de Tempo Real_
 *Sistemas Embarcado*
 Sistemas inseridos em produtos com funções específicas como forno de microondas, VCR, equipamentos bélicos etc.
 
-#### Componentes de SO
+# Aula 7
+_Sem anotações_
+# Aula 8
+### Componentes de SO
 ![Componentes so](componente_so.png)
 
 #### Posicionamento em Camadas
@@ -464,3 +472,165 @@ Overhead adicional para ativar e executar a rotina de serviço.
 	- Falha no disco, etc
 - Entrada e Saída
 	- Sinalização de conclusão
+
+# Aula 9
+## Processos
+### Estrutura de um processo
+ ![[processo.png]]
+### Estrutura de Controle
+![[estrutura_controle.png]]
+### Modos de Execução de um SO
+Modo usuário $\rightarrow$ instruções associadas ao uso não privilegiado
+Modo kernel $\rightarrow$ instruções associadas ao uso privilegiado
+### Etapas de criação de um processo
+1. Atribui um identificador único (PID)
+2. Aloca uma entrada na tabela de processos
+3. Aloca espaço para o processo
+4. Inicializa o PCB (Process Control Block)
+5. Coloca o processo na fila apropriada
+6. Cria estruturas auxiliares
+
+### Execução
+A execução de um processo leva a as possíveis situações
+#### Trocas de Contexto
+##### Causas
+- <u>Interrupção</u> : Reação a um evento assíncrono
+- <u>Trap</u> : Associado a erro na execução de uma instrução
+- <u>System Call</u> : Requisição explícita.
+##### Ações Tomadas
+- Salva o estado do processador
+- Muda o estado do processo
+- Muda o processo para a fila apropriada
+- Seleciona o novo processo
+- Atualiza o PCB do novo processo
+- Modifica os mapeamentos de memória
+- Restaura o estado do processador
+![[troca_de_contexto.png]]
+#### Trocas de Modo de Execução
+É uma troca menor e mais rápida que a troca de contexto;
+O estado do processo corrente não é alterado;
+Ocorre geralmente quando o processador ao final de um ciclo de instrução detecta a existência de uma interrupção pendente. Nestes casos o processador realiza os seguintes passos:
+• Salva o PC e a PSW do processo em execução na pilha;
+• Carrega o PC com o endereço inicial da rotina de interrupção;
+• Troca o modo de execução de usuário para kernel (privilegiado) para que instruções privilegiadas do tratador de interrupções possam ser executas.
+![[troca_modo_execucao.png]]
+#### Formas de Execução de SO
+• Como Kernel separado
+	Nesta abordagem as rotinas do SO sempre são executadas como entidades separadas que operam no modo privilegiado e no espaço de endereçamento do Kernel.
+• Dentro do processo usuário
+	Nesta abordagem as rotinas do SO são executadas dentro dos processos usuários, que apenas mudam de modo de execução.
+• Como processos separados
+	Nesta abordagem as rotinas do SO são executadas como processos no modo usuário, trocando o modo de execução quando necessário.
+
+# Aula 10
+## Escalonamento de Processo
+Escalonar é uma função do SO que consiste em escolher (determinar) dentre os processos candidatos aquele que:
+	a) Ganhará acesso ao ambiente de processamento
+	b) Será retirado do ambiente de processamento
+	c) Ganhará a posse da CPU
+As estratégias de escalonamento adotadas em um SO têm por principais objetivos:
+- Manter o processador ocupado a maior parte do tempo (reduzir o idle time)
+- Balancear o uso da CPU pelos processos ativos;
+- Privilegiar a execução de aplicações críticas;
+- Maximizar o throughput do sistema;
+- Proporcionar tempos de resposta razoáveis para usuários interativos.
+### Níveis de Escalonamento
+![[niveis_escalonamento.png]]
+Utilização do Processador:
+Usuário $\rightarrow$ Tempo gasto desde o submissão do requerimento até o início da resposta (**Tempo de Resposta**)
+Sistema $\rightarrow$ Número de processos completados por unidade de tempo (**Throughput**)
+#### Longo prazo
+Trata da admissão de novos processos
+- Batch: escolhe o próximo processo a ser executado
+- Usuário interativo: recusa ou não a sessão
+
+Determina quais e quantos processos são aceitos para execução
+O escalonamento de Longo Prazo pode tentar manter uma mistura de processos tipo <font color="#ff0000">CPU-bounded</font> e <font color="#ff0000">I/O bounded</font>
+Controla o grau de multiprogramação
+
+Se mais processos são aceitos:
+- É menos provável que todos os processos estejam bloqueados em um determinado instante de tempo, aumentando assim a concorrência (melhor uso da CPU); 
+- Cada processo terá uma fração menor do tempo de CPU;
+- Se o número de processos ativos for muito alto, o overhead causado pela troca de processos será tão grande que o tempo útil de utilização da CPU cairá.
+#### Médio prazo
+Trata da admissão de processos que estão na condição de suspensos (completamente fora da memória principal).
+- Implementa o swapping
+	A decisão de swapping é baseada na necessidade do gerenciamento da multiprogramação
+	Feito pelo software de gerenciamento de memória
+
+Determina qual será o próximo processo a ser executado (também chamado de escalonamento de CPU)
+Conduz a escolha de outro processo para execução: (Scheduler)
+- Interrupção de clock
+- Interrupção de E/S
+- System Calls e traps
+- Sinais
+
+#### Curto prazo
+Trata da execução dos processos que estão na condição de prontos.
+
+**Preempção**:
+As políticas de escalonamento podem ser classificadas segundo a possibilidade do SO interromper ou não um processo em execução e substituí-lo por outro.
+- Sem Preempção
+	O processo fica executando até terminar ou até ser bloqueado em consequência a uma chamada ao sistema (I/O ou pedido de recurso do S.O.)
+
+- Com Preempção
+	O processo em execução pode ser interrompido:
+	-  Quando chega um novo processo
+	- Se um outro processo de maior prioridade fica pronto
+	- Quando interrompido pelo clock (timeslice ou quantum)
+	Evita que um processo monopolize o processador,oferecendo um melhor serviço
+	**Quantum** $\rightarrow$ Tempo máximo que um processo pode deter o controle da CPU.
+- <font color="#0070c0">Escalonamento Não-Preemptivo</font>: 
+Foi o primeiro tipo de escalonamento implementado nos sistema multiprogramáveis, onde predominava o processamento batch.
+- <font color="#ff0000">Escalonamento Preemptivo</font>:
+Caracterizado pela possibilidade do SO suspender a execução de um processo e substituí-lo por outro que esteja no estado de pronto.
+
+#### Escalonamento de E/S
+Trata da requisição de dispositivo de E/S pelos processos com E/S pendentes.
+
+### Parâmetros de Avaliação
+![[parametros_avaliacao.png]]
+### Algoritmos de Escalonamento de Curto Prazo
+#### Por Prioridade 
+Cada processo recebe uma prioridade ao ser iniciado
+O escalonador seleciona o processo pronto de maior prioridade
+Existem várias filas “pronto”, uma para cada nível de prioridade
+
+*Problema*: Processos de baixa prioridade podem sofrer Starvation
+*Solução*: Mudar dinamicamente a prioridade de acordo com a “idade” ou o histórico de execução do processo
+
+#### First-Come First-Served (FCFS)
+Sem preempção
+Processos são executados na ordem de chegada
+Processos curtos podem esperar em demasia
+Favorece processo CPU-bound
+- processos I/O-bound esperam processo CPU-bound terminar ou ficar bloqueado
+- quando este fica bloqueado, a CPU fica ociosa
+#### Round Robin
+Usa preempção baseado num “quantum”(time slice, fatia de tempo)
+*Quantum*: tempo máximo que um processo pode manter o controle da CPU.
+- muito curto: maior o overhead de escalonamento
+- muito longo: degenera em FCFS
+Busca democratizar a distribuição do tempo da CPU
+#### Shortest Process Next (SPN)
+Política sem preempção
+Processo com o tempo esperado de serviço ($T_s$) menor é selecionado primeiro
+Favorece processos curtos em detrimento dos longos
+Utilizado em sistemas batch
+#### Shortest Remaining Time (SRT)
+Versão com preempção (na ativação) da política do processo mais curto
+	Quando o processo chega na CPU e ele tem um temo de execução menor do que o processo que já está em execução, o processo em execução sofre preempção e então a CPU passa a executar o novo processo.
+O tempo de execução deve ser estimado
+Favorece mais ainda processos curtos
+#### Highest Response Ratio Next (HRRN)
+Escolhe o processo com o maior valor para:
+$$\frac{\text{tempo em espera } + \text{ tempo de execução estimado}}{\text{tempo de execução estimado}}$$
+Busca privilegiar o balanceamento
+#### Feedback
+Penaliza os processos executados há mais tempo
+- não é necessário saber o tempo de execução
+Utiliza múltiplas filas com prioridades dinâmicas
+- a cada ciclo de execução a prioridade diminui
+- starvation: prioridade menor implica em quantum maior ou muita espera aumenta a prioridade
+- Favorece processos curtos e I/O bounded
+

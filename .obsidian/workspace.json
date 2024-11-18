@@ -4,19 +4,21 @@
     "type": "split",
     "children": [
       {
-        "id": "c45c6fa99ac0de38",
+        "id": "258aa97401118315",
         "type": "tabs",
         "children": [
           {
-            "id": "54286233fac846f2",
+            "id": "13c8e1a575da26dc",
             "type": "leaf",
             "state": {
-              "type": "pdf",
+              "type": "markdown",
               "state": {
-                "file": "Arquitetura de Computadores e Sistemas Operacionais/Trabalho 1 de ACSO 2024-  1 - Grupo 5/Trabalho1.pdf"
+                "file": "Arquitetura de Computadores e Sistemas Operacionais/Resumo ArqCompSO.md",
+                "mode": "source",
+                "source": false
               },
-              "icon": "lucide-file-text",
-              "title": "Trabalho1"
+              "icon": "lucide-file",
+              "title": "Resumo ArqCompSO"
             }
           }
         ]
@@ -174,10 +176,10 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "Arquitetura de Computadores e Sistemas Operacionais/Trabalho 1 de ACSO 2024-  1 - Grupo 5/Trabalho1.pdf"
+                "file": "Arquitetura de Computadores e Sistemas Operacionais/Resumo ArqCompSO.md"
               },
               "icon": "lucide-list",
-              "title": "Sumário de Trabalho1"
+              "title": "Sumário de Resumo ArqCompSO"
             }
           }
         ],
@@ -199,10 +201,18 @@
       "obsidian-git:Open Git source control": false
     }
   },
-  "active": "54286233fac846f2",
+  "active": "f1b96cfb93a1f04a",
   "lastOpenFiles": [
-    "Arquitetura de Computadores e Sistemas Operacionais/Estrutura do Sistema Operacional.md",
+    "Arquitetura de Computadores e Sistemas Operacionais/Imagens/parametros_avaliacao.png",
+    "Arquitetura de Computadores e Sistemas Operacionais/Imagens/niveis_escalonamento.png",
+    "Arquitetura de Computadores e Sistemas Operacionais/Imagens/troca_modo_execucao.png",
+    "Arquitetura de Computadores e Sistemas Operacionais/Imagens/troca_de_contexto.png",
+    "Arquitetura de Computadores e Sistemas Operacionais/Imagens/estrutura_controle.png",
+    "Arquitetura de Computadores e Sistemas Operacionais/Imagens/processo.png",
+    "Arquitetura de Computadores e Sistemas Operacionais/Imagens/programa.png",
+    "Arquitetura de Computadores e Sistemas Operacionais/Introdução aos Sistemas Operacionais.md",
     "Arquitetura de Computadores e Sistemas Operacionais/Trabalho 1 de ACSO 2024-  1 - Grupo 5/Trabalho1.pdf",
+    "Arquitetura de Computadores e Sistemas Operacionais/Estrutura do Sistema Operacional.md",
     "Arquitetura de Computadores e Sistemas Operacionais/Trabalho 1 de ACSO 2024-  1 - Grupo 5/saida.txt",
     "Arquitetura de Computadores e Sistemas Operacionais/Trabalho 1 de ACSO 2024-  1 - Grupo 5/processos.csv",
     "Arquitetura de Computadores e Sistemas Operacionais/Trabalho 1 de ACSO 2024-  1 - Grupo 5/Makefile",
@@ -220,18 +230,11 @@
     "Probabilidade e Estatistica/imagens/evento_independente.png",
     "Probabilidade e Estatistica/imagens/Testes Bilaterais e Unilaterais.png",
     "Probabilidade e Estatistica/imagens/notação.png",
-    "Probabilidade e Estatistica/imagens/Amostra.png",
-    "Probabilidade e Estatistica/imagens/evento_complementar.png",
-    "Probabilidade e Estatistica/imagens/Testes de Hipóteses.png",
     "Arquitetura de Computadores e Sistemas Operacionais/RISC x CISC.md",
     "Arquitetura de Computadores e Sistemas Operacionais/Processadores.md",
     "Arquitetura de Computadores e Sistemas Operacionais/Memórias.md",
-    "Arquitetura de Computadores e Sistemas Operacionais/Introdução aos Sistemas Operacionais.md",
     "Arquitetura de Computadores e Sistemas Operacionais/Fundamentos de Hardware e Software.md",
-    "Arquitetura de Computadores e Sistemas Operacionais/Imagens/interrupcao em cascata.jpg",
-    "Arquitetura de Computadores e Sistemas Operacionais/Imagens/interrupcao sequencial.jpg",
-    "Arquitetura de Computadores e Sistemas Operacionais/Imagens/multiplas interrupcoes.jpg",
-    "Arquitetura de Computadores e Sistemas Operacionais/Resumo para P1.md",
+    "Arquitetura de Computadores e Sistemas Operacionais/Resumo ArqCompSO.md",
     "Arquitetura de Computadores e Sistemas Operacionais/Lista 1.md",
     "Arquitetura de Computadores e Sistemas Operacionais/Lista 2.md",
     "[.md",
