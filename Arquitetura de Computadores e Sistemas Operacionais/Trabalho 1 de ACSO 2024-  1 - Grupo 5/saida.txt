@@ -1,60 +1,61 @@
-	 TABELA
-	Numero de Processos: 5
-	Processo: P1 	Tempo de Execucao: 13	Tempo de Chegada: 0	 Tempo de Chamada I/O: 4	Tipo I/O: A
-	Processo: P2 	Tempo de Execucao: 11	Tempo de Chegada: 4	 Tempo de Chamada I/O: 2, 6	Tipo I/O: B, A
-	Processo: P3 	Tempo de Execucao: 7	Tempo de Chegada: 5	 Tempo de Chamada I/O: - 	Tipo I/O: -
-	Processo: P4 	Tempo de Execucao: 8	Tempo de Chegada: 7	 Tempo de Chamada I/O: - 	Tipo I/O: -
-	Processo: P5 	Tempo de Execucao: 16	Tempo de Chegada: 10	 Tempo de Chamada I/O: 2, 7	Tipo I/O: A, B
+	TABELA
+Numero de Processos: 5
+Processo: P1 	Tempo de Execucao: 13	Tempo de Chegada: 0	 Tempo de Chamada I/O: 4	Tipo I/O: A
+Processo: P2 	Tempo de Execucao: 11	Tempo de Chegada: 4	 Tempo de Chamada I/O: 2, 6	Tipo I/O: B, A
+Processo: P3 	Tempo de Execucao: 7	Tempo de Chegada: 5	 Tempo de Chamada I/O: - 	Tipo I/O: -
+Processo: P4 	Tempo de Execucao: 8	Tempo de Chegada: 7	 Tempo de Chamada I/O: - 	Tipo I/O: -
+Processo: P5 	Tempo de Execucao: 16	Tempo de Chegada: 10	 Tempo de Chamada I/O: 2, 7	Tipo I/O: A, B
 
 
-U.T: 0|	O Processo P1 chegou no processador (Fila de Alta)
-U.T= 0|	Executando o Processo P1 (Fila de Alta)
-U.T= 4|	O Processo P1 foi bloqueado para realizar I/O (Tempo restante: 9)
-U.T: 4|	O Processo P2 chegou no processador (Fila de Alta)
-U.T= 4|	Executando o Processo P2 (Fila de Alta)
-U.T= 6|	O Processo P2 foi bloqueado para realizar I/O (Tempo restante: 9)
-U.T: 5|	O Processo P3 chegou no processador (Fila de Alta)
-U.T= 6|	Executando o Processo P3 (Fila de Alta)
-U.T= 10|	O Processo P3 terminou sua fatia de tempo e foi para Fila de Baixa (Tempo restante: 3)
-U.T: 7|	O Processo P4 chegou no processador (Fila de Alta)
-U.T: 10|	O Processo P5 chegou no processador (Fila de Alta)
-U.T= 10|	 O Processo P2 terminou a operação de I/O (Fita Magnética) e retornou para fila de Alta
-U.T= 10|	Executando o Processo P4 (Fila de Alta)
-U.T= 14|	O Processo P4 terminou sua fatia de tempo e foi para Fila de Baixa (Tempo restante: 4)
-U.T= 11|	 O Processo P1 terminou a operação de I/O (Disco) e retornou para fila de baixa
-U.T= 14|	Executando o Processo P2 (Fila de Alta)
-U.T= 18|	O Processo P2 foi bloqueado para realizar I/O (Tempo restante: 5)
-U.T= 18|	Executando o Processo P5 (Fila de Alta)
-U.T= 20|	O Processo P5 foi bloqueado para realizar I/O (Tempo restante: 14)
-U.T= 20|	Executando o Processo P3 (Fila de Baixa)
+--------- INICIO DE EXECUÇÂO ---------
+O Processo P1 chegou no processador no instante U.T.= 0 (Fila de Alta)
+U.T= 0| 	Executando o Processo P1 (Fila de Alta)
+U.T= 4| 	O Processo P1 foi bloqueado (Tempo restante: 9)
+O Processo P2 chegou no processador no instante U.T.= 4 (Fila de Alta)
+U.T= 4| 	Executando o Processo P2 (Fila de Alta)
+U.T= 6| 	O Processo P2 foi bloqueado (Tempo restante: 9)
+O Processo P3 chegou no processador no instante U.T.= 5 (Fila de Alta)
+U.T= 6| 	Executando o Processo P3 (Fila de Alta)
+U.T= 10|	O Processo P3 terminou sua fatia de tempo e foi movido para Fila de Baixa (Tempo restante: 3)
+O Processo P4 chegou no processador no instante U.T.= 7 (Fila de Alta)
+O Processo P5 chegou no processador no instante U.T.= 10 (Fila de Alta)
+O Processo P2 terminou a operação de I/O (Fita Magnética) no instante UT= 10 e retornou para CPU (Fila de Alta)
+U.T= 10| 	Executando o Processo P4 (Fila de Alta)
+U.T= 14|	O Processo P4 terminou sua fatia de tempo e foi movido para Fila de Baixa (Tempo restante: 4)
+O Processo P1 terminou a operação de I/O (Disco) no instante UT = 11 e retornou para CPU (Fila de Baixa)
+U.T= 14| 	Executando o Processo P2 (Fila de Alta)
+U.T= 18| 	O Processo P2 foi bloqueado (Tempo restante: 5)
+U.T= 18| 	Executando o Processo P5 (Fila de Alta)
+U.T= 20| 	O Processo P5 foi bloqueado (Tempo restante: 14)
+U.T= 20| 	Executando o Processo P3 (Fila de Baixa)
 U.T= 23|	O Processo P3 terminou (Tempo Total de Execução: 23)
-U.T= 23|	Executando o Processo P1 (Fila de Baixa)
-U.T= 27|	O Processo P1 terminou sua fatia de tempo e foi para Fila de Baixa (Tempo restante: 5)
-U.T= 25|	 O Processo P2 terminou a operação de I/O (Disco) e retornou para fila de baixa
-U.T= 27|	 O Processo P5 terminou a operação de I/O (Disco) e retornou para fila de baixa
-U.T= 27|	Executando o Processo P4 (Fila de Baixa)
+U.T= 23| 	Executando o Processo P1 (Fila de Baixa)
+U.T= 27|	O Processo P1 terminou sua fatia de tempo e foi movido para Fila de Baixa (Tempo restante: 5)
+O Processo P2 terminou a operação de I/O (Disco) no instante UT = 25 e retornou para CPU (Fila de Baixa)
+O Processo P5 terminou a operação de I/O (Disco) no instante UT = 27 e retornou para CPU (Fila de Baixa)
+U.T= 27| 	Executando o Processo P4 (Fila de Baixa)
 U.T= 31|	O Processo P4 terminou (Tempo Total de Execução: 31)
-U.T= 31|	Executando o Processo P2 (Fila de Baixa)
-U.T= 35|	O Processo P2 terminou sua fatia de tempo e foi para Fila de Baixa (Tempo restante: 1)
-U.T= 35|	Executando o Processo P5 (Fila de Baixa)
-U.T= 39|	O Processo P5 terminou sua fatia de tempo e foi para Fila de Baixa (Tempo restante: 10)
-U.T= 39|	Executando o Processo P1 (Fila de Baixa)
-U.T= 43|	O Processo P1 terminou sua fatia de tempo e foi para Fila de Baixa (Tempo restante: 1)
-U.T= 43|	Executando o Processo P2 (Fila de Baixa)
+U.T= 31| 	Executando o Processo P2 (Fila de Baixa)
+U.T= 35|	O Processo P2 terminou sua fatia de tempo e foi movido para Fila de Baixa (Tempo restante: 1)
+U.T= 35| 	Executando o Processo P5 (Fila de Baixa)
+U.T= 39|	O Processo P5 terminou sua fatia de tempo e foi movido para Fila de Baixa (Tempo restante: 10)
+U.T= 39| 	Executando o Processo P1 (Fila de Baixa)
+U.T= 43|	O Processo P1 terminou sua fatia de tempo e foi movido para Fila de Baixa (Tempo restante: 1)
+U.T= 43| 	Executando o Processo P2 (Fila de Baixa)
 U.T= 44|	O Processo P2 terminou (Tempo Total de Execução: 44)
-U.T= 44|	Executando o Processo P5 (Fila de Baixa)
-U.T= 45|	O Processo P5 foi bloqueado para realizar I/O (Tempo restante: 9)
-U.T= 45|	Executando o Processo P1 (Fila de Baixa)
+U.T= 44| 	Executando o Processo P5 (Fila de Baixa)
+U.T= 45| 	O Processo P5 foi bloqueado (Tempo restante: 9)
+U.T= 45| 	Executando o Processo P1 (Fila de Baixa)
 U.T= 46|	O Processo P1 terminou (Tempo Total de Execução: 46)
 U.T= 46|	CPU OCIOSA
 U.T= 47|	CPU OCIOSA
 U.T= 48|	CPU OCIOSA
-U.T= 49|	 O Processo P5 terminou a operação de I/O (Fita Magnética) e retornou para fila de Alta
-U.T= 49|	Executando o Processo P5 (Fila de Baixa)
-U.T= 53|	O Processo P5 terminou sua fatia de tempo e foi para Fila de Baixa (Tempo restante: 5)
-U.T= 53|	Executando o Processo P5 (Fila de Baixa)
-U.T= 57|	O Processo P5 terminou sua fatia de tempo e foi para Fila de Baixa (Tempo restante: 1)
-U.T= 57|	Executando o Processo P5 (Fila de Baixa)
+O Processo P5 terminou a operação de I/O (Fita Magnética) no instante UT= 49 e retornou para CPU (Fila de Alta)
+U.T= 49| 	Executando o Processo P5 (Fila de Baixa)
+U.T= 53|	O Processo P5 terminou sua fatia de tempo e foi movido para Fila de Baixa (Tempo restante: 5)
+U.T= 53| 	Executando o Processo P5 (Fila de Baixa)
+U.T= 57|	O Processo P5 terminou sua fatia de tempo e foi movido para Fila de Baixa (Tempo restante: 1)
+U.T= 57| 	Executando o Processo P5 (Fila de Baixa)
 U.T= 58|	O Processo P5 terminou (Tempo Total de Execução: 58)
-
+--------- FIM DE EXECUÇÂO ---------
 Simulacao Concluida

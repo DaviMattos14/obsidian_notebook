@@ -131,12 +131,12 @@ void imprimir_io(FILE *arq, ES *head)
 void imprimir_tabela_processos(const char *filename, Processo p[])
 {
     FILE *arq = fopen(filename, "w+");
-    fputs("\t TABELA\n", arq);
-    fprintf(arq, "\tNumero de Processos: %d\n", NUM_MAX_PROCESSOS);
+    fputs("\tTABELA\n", arq);
+    fprintf(arq, "Numero de Processos: %d\n", NUM_MAX_PROCESSOS);
     for (int i = 0; i < NUM_MAX_PROCESSOS; i++)
     {
         char saida[MAX] = "";
-        sprintf(saida, "\tProcesso: %s \tTempo de Execucao: %d\tTempo de Chegada: %d\t ", p[i].pid, p[i].t_servico, p[i].t_chegada);
+        sprintf(saida, "Processo: %s \tTempo de Execucao: %d\tTempo de Chegada: %d\t ", p[i].pid, p[i].t_servico, p[i].t_chegada);
         fputs(saida, arq);
         if (p[i].num_io != 0)
         {
@@ -260,7 +260,7 @@ void chegou_na_cpu(FILE *saida, Processo p[], Fila **alta, int tempo_execucao)
     {
         if (ut == p[i].t_chegada || (ut > p[i].t_chegada && p[i].t_chegada > (ut - tempo_execucao)))
         {
-            fprintf(saida, "U.T: %d|\tO Processo %s chegou no processador (Fila de Alta)\n", p[i].t_chegada, p[i].pid);
+            fprintf(saida, "O Processo %s chegou no processador no instante U.T.= %d (Fila de Alta)\n", p[i].pid, p[i].t_chegada);
             adiciona_fim_fila(alta, p[i], Alta);
         }
     }
@@ -272,7 +272,7 @@ void round_robin(const char *filename, Processo p[], Fila **alta, Fila **baixa, 
     int tempo_execucao = 0;
     int processos_completos = 0;
     int fila = Alta;
-
+    fputs("--------- INICIO DE EXECUÇÂO ---------\n", arq);
     chegou_na_cpu(arq,p,alta,tempo_execucao);
     while (processos_completos < (NUM_MAX_PROCESSOS)) 
     {
@@ -285,7 +285,7 @@ void round_robin(const char *filename, Processo p[], Fila **alta, Fila **baixa, 
 
         if (processo_em_execucao != NULL)
         {
-            fprintf(arq, "U.T= %d|\tExecutando o Processo %s ", ut, processo_em_execucao->pid);
+            fprintf(arq, "U.T= %d| \tExecutando o Processo %s ", ut, processo_em_execucao->pid);
             (fila == Alta)? fprintf(arq,"(Fila de Alta)\n") : fprintf(arq,"(Fila de Baixa)\n"); 
             if (processo_em_execucao->num_io == 0)
             {
@@ -295,7 +295,7 @@ void round_robin(const char *filename, Processo p[], Fila **alta, Fila **baixa, 
                 ut += tempo_execucao;
                 if (processo_em_execucao->t_servico > 0)
                 {
-                    fprintf(arq, "U.T= %d|\tO Processo %s terminou sua fatia de tempo e foi para Fila de Baixa (Tempo restante: %d)\n", ut, processo_em_execucao->pid, processo_em_execucao->t_servico);
+                    fprintf(arq, "U.T= %d|\tO Processo %s terminou sua fatia de tempo e foi movido para Fila de Baixa (Tempo restante: %d)\n", ut, processo_em_execucao->pid, processo_em_execucao->t_servico);
                     processo_em_execucao->t_chegada = ut;
                     adiciona_fim_fila(baixa, (*processo_em_execucao), Baixa);
                 }
@@ -322,13 +322,13 @@ void round_robin(const char *filename, Processo p[], Fila **alta, Fila **baixa, 
 
                 if (chamada_io > QUANTUM)
                 {
-                    fprintf(arq, "U.T= %d|\tO Processo %s terminou sua fatia de tempo e foi para Fila de Baixa (Tempo restante: %d)\n", ut, processo_em_execucao->pid, processo_em_execucao->t_servico);
+                    fprintf(arq, "U.T= %d|\tO Processo %s terminou sua fatia de tempo e foi movido para Fila de Baixa (Tempo restante: %d)\n", ut, processo_em_execucao->pid, processo_em_execucao->t_servico);
                     processo_em_execucao->t_chegada = ut;
                     adiciona_fim_fila(baixa, (*processo_em_execucao), Baixa);
                 }
                 if (chamada_io <= QUANTUM)
                 {
-                    fprintf(arq, "U.T= %d|\tO Processo %s foi bloqueado para realizar I/O (Tempo restante: %d)\n", ut, processo_em_execucao->pid, processo_em_execucao->t_servico);
+                    fprintf(arq, "U.T= %d| \tO Processo %s foi bloqueado (Tempo restante: %d)\n", ut, processo_em_execucao->pid, processo_em_execucao->t_servico);
                     processo_em_execucao->operacoes_io->saida = (ut + tipo_io(&processo_em_execucao->operacoes_io));
                     adiciona_fim_fila(ios, (*processo_em_execucao), IO);
                 }
@@ -353,7 +353,7 @@ void round_robin(const char *filename, Processo p[], Fila **alta, Fila **baixa, 
                     // Verifica para qual fila o processo deve retornar
                     if (tipo == DISCO)
                     {
-                        fprintf(arq, "U.T= %d|\t O Processo %s terminou a operação de I/O (Disco) e retornou para fila de baixa\n", saida_io, io_processo->pid);
+                        fprintf(arq, "O Processo %s terminou a operação de I/O (Disco) no instante UT = %d e retornou para CPU (Fila de Baixa)\n", io_processo->pid, saida_io);
                         io_processo->num_io--;
                         ES* chamada = remover_Io(&io_processo->operacoes_io);
                         free(chamada);
@@ -361,7 +361,7 @@ void round_robin(const char *filename, Processo p[], Fila **alta, Fila **baixa, 
                     }
                     else if (tipo == FITA_MAGNETICA)
                     {
-                        fprintf(arq, "U.T= %d|\t O Processo %s terminou a operação de I/O (Fita Magnética) e retornou para fila de Alta\n", saida_io, io_processo->pid);
+                        fprintf(arq, "O Processo %s terminou a operação de I/O (Fita Magnética) no instante UT= %d e retornou para CPU (Fila de Alta)\n", io_processo->pid, saida_io);
                         io_processo->num_io--;
                         ES* chamada = remover_Io(&io_processo->operacoes_io);
                         free(chamada);
@@ -369,7 +369,7 @@ void round_robin(const char *filename, Processo p[], Fila **alta, Fila **baixa, 
                     }
                     else if (tipo == IMPRESSORA)
                     {
-                        fprintf(arq, "U.T= %d|\t O Processo %s terminou a operação de I/O (Impressora) e retornou para fila de Alta\n", saida_io, io_processo->pid);
+                        fprintf(arq, "O Processo %s terminou a operação de I/O (Impressora) no instante UT= %d e retornou para CPU (Fila de Alta)\n", io_processo->pid, saida_io);
                         io_processo->num_io--;
                         ES* chamada = remover_Io(&io_processo->operacoes_io);
                         free(chamada);
@@ -385,22 +385,22 @@ void round_robin(const char *filename, Processo p[], Fila **alta, Fila **baixa, 
         }
         if (processos_completos == NUM_MAX_PROCESSOS)
         {
-            fputs("\nSimulacao Concluida\n", arq);
+            fputs("--------- FIM DE EXECUÇÂO ---------", arq);
+            fputs("\nSimulacao Concluida", arq);
         }
         if (*ios != NULL && processo_em_execucao == NULL)
         {
             fprintf(arq,"U.T= %d|\tCPU OCIOSA\n", ut);
             ut++;
         }
-        
-
+    
         //if (*baixa == NULL && ut > 100) break; /* IMPEDIR QUE O ESCALONADOR ENTRE EM LOOP */
     }
 }
 
 int main()
 {
-    const char *arquivo_saida = "Saida.txt";
+    const char *arquivo_saida = "saida.txt";
 
     /* TABELA INICIALIZADA DIRETAMENTE*/
     Processo p[] = {
