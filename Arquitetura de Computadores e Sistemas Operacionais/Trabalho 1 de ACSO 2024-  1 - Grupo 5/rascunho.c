@@ -9,7 +9,7 @@
 /* TIPOS DE I/O*/
 #define DISCO 7 // A
 #define FITA_MAGNETICA 4 // B
-#define IMPRESSORA 10 // C
+#define IMPRESSORA 2 // C
 
 /*VARIAVEL GLOBAL PRA CONTAR O TEMPO E VERIFICAR OS PROCESSOS EM EXECUÇÃO*/
 int ut = 0; // UT -> UNIDADE DE TEMPO
@@ -411,7 +411,7 @@ int main()
         {"P5", 10, 16, NULL, 2}};
 
     /* CRIANDO OS CHAMADOS DE I/O*/
-    p[0].operacoes_io = inserir_io(p[0].operacoes_io, 4, "C");
+    p[0].operacoes_io = inserir_io(p[0].operacoes_io, 4, "A");
     p[1].operacoes_io = inserir_io(p[1].operacoes_io, 2, "B");
     p[1].operacoes_io = inserir_io(p[1].operacoes_io, 6, "A");
     p[4].operacoes_io = inserir_io(p[4].operacoes_io, 2, "A");
