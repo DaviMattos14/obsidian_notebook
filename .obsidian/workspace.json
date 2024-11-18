@@ -182,8 +182,7 @@
               "title": "Sumário de Resumo ArqCompSO"
             }
           }
-        ],
-        "currentTab": 1
+        ]
       }
     ],
     "direction": "horizontal",
@@ -203,13 +202,17 @@
   },
   "active": "f1b96cfb93a1f04a",
   "lastOpenFiles": [
+    "Arquitetura de Computadores e Sistemas Operacionais/Imagens/traducao_mem_virt.png",
+    "Arquitetura de Computadores e Sistemas Operacionais/Imagens/pag_virt.png",
+    "Arquitetura de Computadores e Sistemas Operacionais/Imagens/hierarquia_memoria 1.png",
+    "Arquitetura de Computadores e Sistemas Operacionais/Imagens/traducao_enderecos.png",
+    "Arquitetura de Computadores e Sistemas Operacionais/Imagens/traducao_segmentacao.png",
+    "Arquitetura de Computadores e Sistemas Operacionais/Imagens/traducao_logico_fisico.png",
+    "Arquitetura de Computadores e Sistemas Operacionais/Imagens/endereco-logico.png",
+    "Arquitetura de Computadores e Sistemas Operacionais/Imagens/organizacao_fisica_memoria.png",
+    "Arquitetura de Computadores e Sistemas Operacionais/Imagens/funcionalidades_memoria.png",
     "Arquitetura de Computadores e Sistemas Operacionais/Imagens/parametros_avaliacao.png",
     "Arquitetura de Computadores e Sistemas Operacionais/Imagens/niveis_escalonamento.png",
-    "Arquitetura de Computadores e Sistemas Operacionais/Imagens/troca_modo_execucao.png",
-    "Arquitetura de Computadores e Sistemas Operacionais/Imagens/troca_de_contexto.png",
-    "Arquitetura de Computadores e Sistemas Operacionais/Imagens/estrutura_controle.png",
-    "Arquitetura de Computadores e Sistemas Operacionais/Imagens/processo.png",
-    "Arquitetura de Computadores e Sistemas Operacionais/Imagens/programa.png",
     "Arquitetura de Computadores e Sistemas Operacionais/Introdução aos Sistemas Operacionais.md",
     "Arquitetura de Computadores e Sistemas Operacionais/Trabalho 1 de ACSO 2024-  1 - Grupo 5/Trabalho1.pdf",
     "Arquitetura de Computadores e Sistemas Operacionais/Estrutura do Sistema Operacional.md",
@@ -226,10 +229,6 @@
     "Probabilidade e Estatistica/Introdução à Estatística.md",
     "Algebra Linear Algoritmica/Algebra Linear Algoritmica.md",
     "Algebra Linear Algoritmica/Lista 4 - Transformações Lineares.md",
-    "Probabilidade e Estatistica/imagens/distribuição amostral.png",
-    "Probabilidade e Estatistica/imagens/evento_independente.png",
-    "Probabilidade e Estatistica/imagens/Testes Bilaterais e Unilaterais.png",
-    "Probabilidade e Estatistica/imagens/notação.png",
     "Arquitetura de Computadores e Sistemas Operacionais/RISC x CISC.md",
     "Arquitetura de Computadores e Sistemas Operacionais/Processadores.md",
     "Arquitetura de Computadores e Sistemas Operacionais/Memórias.md",

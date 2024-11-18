@@ -298,7 +298,7 @@ Exemplos: Registradores, Memória Principal, Memória Cache e SSD.
 	- Alimentação via bateria.
 
 ##### Hierarquia de Memória
-![hierarquia de memoria](hierarquia_memoria.png)
+![hierarquia de memoria](Arquitetura%20de%20Computadores%20e%20Sistemas%20Operacionais/Imagens/hierarquia_memoria.png)
 
 A HIERARQUIA DA MEMÓRIA ESTÁ BASEADA NAS SEGUINTES CARACTERÍSTICAS:
 1. Custo
@@ -634,3 +634,272 @@ Utiliza múltiplas filas com prioridades dinâmicas
 - starvation: prioridade menor implica em quantum maior ou muita espera aumenta a prioridade
 - Favorece processos curtos e I/O bounded
 
+### Escalonamento em Multiprocessadores
+#### Formas de Acoplamento
+- Fracamente acoplados (ou cluster):
+	Uma coleção de sistemas relativamente autônomos onde cada processador tem sua própria memória principal e canais de entrada e saída (rede de computadores).
+- Fortemente acoplados:
+	Uma coleção de processadores que compartilham memória principal e estão sob controle integrado de um sistema operacional
+	- Mestre / Escravo 
+	- SMP (Multiprocessamento Simétrico)
+#### Granularidade da Sincronização
+- Independente
+	Processos independentes. Não é preciso sincronização.
+- Muito grossa
+	Processos em diferentes nós de uma rede (fracamente acoplados) – intervalo de 2000 a 1 milhão de instruções
+- Grossa
+	Processos em multiprocessamento – intervalo de 200 a 2000
+- Média
+	Rotinas de um mesmo processo – intervalo de 20 a 200
+- Fina
+	Instruções de um mesmo processo – intervalo < 20
+#### Estratégias
+Processo:
+	Quanto mais processadores, menos importante é o escalonamento. Uso do FCFS
+Threads:
+• Load Sharing
+	Garantia de compartilhamento dos recursos e uso do processador. Fila única de processos
+
+• Gang Scheduling:
+	Conjunto de threads relacionadas é escalonado para trabalhar num conjunto de processadores ao mesmo tempo, numa base de um-para- um
+
+• Dedicated Processor Assignment:
+	Para cada programa é alocado um número de processadores igual ao número de threads, para o tempo total de execução do programa
+
+• Dynamic Scheduling
+	O número de threads no programa pode ser alterado durante o curso de execução
+#### Sistemas de Tempo Real
+Sistema de tempo real pode ser definido como aquele em que o funcionamento correto da aplicação não depende apenas do resultado gerado mas também do tempo em que o mesmo é gerado.
+
+**Tarefa Hard Real Time**
+Os deadlines são imperativos. Não sendo cumprido os resultados de nada servirão.
+**Tarefa Soft Real Time**
+Os deadlines são desejáveis porém não mandatórios.
+##### Características
+*Sem anotações*
+##### Funcionalidades
+*Sem anotações*
+##### Escalonamento
+*Sem anotações*
+
+# Aula 11
+## Gerenciamento de Memória
+Gerenciar a memória consiste na tarefa de subdividir e alocar espaços para acomodar os processos em execução.
+
+- Espaços são requeridos requeridos (alocados) e liberados, a medida que os processos são executados.
+- Os espaços de memória ocupados pelos processos precisam ser preservados (protegidos)
+- Os processos podem ter a necessidade de aumentar o espaços ocupado ou mesmo compartilhar espaço com outros
+### Organização e Funcionalidades
+#### Funcionalidades
+![[funcionalidades_memoria.png]]
+
+#### Organização Física
+![[organizacao_fisica_memoria.png]]
+
+#### Organização Lógica
+Consiste na forma como a memória é vista (particionada) logicamente pelo SO.
+##### Contíguo Simples
+##### Estático
+- Endereços absolutos são gerados de forma estática - Linkeditor ou Carregador
+- Simples implementação
+- Baixo desempenho
+- Fragmentação interna
+##### Estático Relocável
+- Endereçamento relativo
+- Endereços absolutos dinâmicos, calculados em tempo de execução
+- Baixo desempenho
+- Fragmentação interna
+##### Dinâmico
+- A quantidade e o tamanho das partições são variáveis
+- Para cada processo, é alocado o espaço exato que for necessário (não tem fragmentação interna)
+- Eventualmente, são criados “buracos” de tamanho pequeno, sem utilidade de uso (fragmentação externa)
+- Os processos, de tempos em tempos, precisam ser re-alocados para eliminar os “buracos” (compactação)
+###### Esquemas de Alocação:
+- **First-Fit**
+	Procura a partir da memória o primeiro bloco livre que sirva
+	Pode criar muitos pequenos blocos livres no início da memória
+	Considerado o algoritmo mais rápido
+- **Next-Fit**
+	Escolhe o próximo bloco livre a partir da última alocação em que caiba o processo
+	Tende a acabar com o grande bloco livre no final da memória
+- **Worst-Fit**
+	Escolhe o maior bloco livre a partir início da memória.
+	Tende deixar buracos maiores que o Best-fit
+- **Best-Fit**
+	Escolhe o menor bloco que comporte o processo
+	Cria muitos buracos pequenos, exigindo mais compactações
+	Oferece o pior desempenho
+##### Paginado
+A memória é particionada em pedaços de tamanho igual, assim como os processos;
+
+Os pedaços que compõem os processos são chamados de páginas e os pedaços de memória são as molduras de página (frames);
+
+| # Págs | Frames |
+| ------ | ------ |
+Quando um processo é carregado, suas páginas são alocadas em quaisquer molduras disponíveis, não necessariamente contíguas;
+
+O S.O. precisa manter uma tabela de páginas por processo e uma lista de molduras disponíveis.
+
+*Tabelas de Páginas*: Precisa ser mantida uma para cada processo, de forma a associar a página do processo com o frame correspondente em memória utilizado.
+
+- Endereço Lógico
+	![[endereco-logico.png]]
+	Tradução Lógico $\rightarrow$ Físico:
+		![[traducao_logico_fisico.png]]
+##### Segmentado
+Cada programa é subdividido em blocos de diferentes tamanhos, chamados segmentos.
+Quando um processo é carregado para a memória principal, cada segmento diferente pode ocupar qualquer lugar.
+O SO mantém uma tabela de segmentos de cada processo. Cada entrada contém:
+	o início do endereço físico daquele segmento
+	o tamanho do segmento (por proteção)
+ Apresenta fragmentação externa
+- Tradução Lógico $\rightarrow$ Físico:
+	![[traducao_segmentacao.png]]
+### Tradução de Endereços
+![[traducao_enderecos.png]]
+
+### Vantagens da Paginação e Segmentação
+Maior flexibilidade na alocação de espaços em memória (tabelas de páginas e de segmentos livres)
+Endereçamento não contínuo em memória
+Baixa fragmentação interna
+Correlação com a lógica do programa
+### Hierarquia de Memória
+![[hierarquia_memoria 1.png]]
+### Cache
+*Sem anotações*
+
+# Aula 11
+## Memória Virtual
+Consiste na utilização de espaços do disco rígido como extensão lógica da memória primária.
+
+A memória virtual é transparente para o programador e para o processador.
+A memória virtual expande o tamanho da memória primária.
+A memória virtual não é ilimitada.
+O sistema ganha em flexibilidade e perde em termos de desempenho.
+
+### Características
+Todas as referências a memória passam a ser com endereços lógicos virtuais (VA), que são traduzidos em endereços físicos, em tempo de execução.
+
+Uma tarefa é dividida em partes (páginas ou segmentos), não necessariamente localizados em áreas contíguas na memória.
+
+Com a memória virtual acaba a necessidade de todas as partes de uma tarefa estarem carregadas em memória primária.
+
+Uma tarefa pode ocupar diferentes áreas de memória durante a sua execução
+
+O uso da memória virtual é transparente ao usuário e à própria CPU
+
+Maior tempo de resposta para as referências à memória.
+
+Maior complexidade do hardware e do esquema de
+gerenciamento.
+
+Impossibilidade de estimar de forma precisa e segura, o
+tempo a ser gasto em qualquer referência à memória.
+
+Uma mesma referência à memória pode consumir tempos
+diferentes de execução.
+
+### Vantagens
+Mais processos mantidos em MP
+	os processos são carregados parcialmente
+	maior eficiência na utilização do processador
+
+Processos podem ser maiores que a memória principal
+	Todo programador tem disponível uma memória de trabalho (virtual) de tamanho igual a todo espaço de endereçamento disponível.
+
+O SO se encarrega de trazer para a memória física as partes
+necessárias para a execução do programa.
+
+### Endereçamento
+Cada referência virtual é convertida para o endereçamento físico em tempo de execução. Este processo de conversão é chamado de mapeamento.
+
+Hardware:
+– Tradução (mapeamento) eficiente de endereços.
+– Movimentação eficaz dos trechos de informação entre a memória virtual e a física.
+
+SO:
+– Re-alocação eficiente da memória física.
+– Princípio da Localidade x Trashing
+
+*OBS: Memória Virtual $\neq$ Swapping*
+
+### Princípio da Localidade
+As referências de memória tendem a ser agrupadas em termos espaciais e/ou temporais.
+
+• Somente alguns trechos do código são necessários para a execução num curto espaço de tempo;
+• É possível ter uma razoável noção dos trechos de código que serão utilizados num futuro próximo, reduzindo os riscos de trashing.
+
+### Trashing
+<u>Trashing</u> é a situação onde o sistema passa a maior parte do tempo removendo e trazendo partes de processos ao invés de executar instruções dos mesmos.
+A memória normalmente está toda ocupada com partes de diversos processos.
+Quando o SO precisa carregar uma nova parte, um outro pode precisar ser removido para abrir espaço.
+Se for removida uma parte que seja referenciada logo a seguir, esta precisará ser carregada novamente.
+
+### Paginação
+Cada processo tem sua própria tabela de páginas
+Cada entrada contém um bit de presença (P) indicando se a página se encontra na memória física ou não
+Se a página está presente, a entrada contém o número da moldura da página correspondente
+Cada entrada também contém um bit de modificação (M)
+	páginas não modificadas não precisam ser gravadas em disco quando removidas
+![[pag_virt.png]]
+
+### Tradução de Endereços
+![[traducao_mem_virt.png]]
+
+### Múltiplas Tabelas
+### Tabelas Invertidas
+### Transaction Lookaside Buffer - TLB
+### Tamanho da Página
+Quanto menor a página = Menor a fragmentação interna
+Quanto menor a página = Mais páginas por processo
+	maior a tabela de páginas
+	mais tabelas na memória secundária
+	mais falta de páginas (page faults)
+A transferência de dados com a memória secundária é mais eficiente com blocos maiores
+O número de falta de páginas (page faults):
+	diminui à medida que o tamanho da página aumenta (até certo ponto) 
+	depois deste ponto, começa a baixar (fenômeno da saturação)
+
+### Estratégias de SO (Segmentação Paginada)
+#### Busca
+Determina quando uma página deve ser carregada
+
+**Por demanda**
+	Somente traz as páginas referenciadas
+	Existem muitas faltas de página quando o processo começa
+**Por carga antecipada**
+	Traz mais páginas do que o necessário
+	É mais eficiente trazer várias páginas contíguas em disco do que cada uma individualmente
+	Se torna ineficiente se são trazidas páginas que não serão referenciadas
+#### Alocação
+Determina onde será carregada a página ou segmento na memória
+Irrelevante em sistemas paginados => A eficiência do hardware é a mesma para qualquer combinação página-moldura
+Em sistemas com segmentação pura deve ser usado um dos algoritmos first-fit, worst-fit, next-fit
+
+#### Re-alocação
+Determina a página a ser removida quando uma nova página está sendo carregada
+- Algoritmos
+	- *Ótimo*
+		Seleciona a página cuja próxima referência será a mais distante
+		- Resulta no menor número de falta de páginas
+		- Irrealizável já que não é possível prever o futuro
+		- Útil para avaliar a eficiência de outras políticas
+	- *Least Recently Used - LRU*
+		Substitui a página que não é referenciada há mais tempo (Least Recently Used)
+		- Pelo princípio de localidade, esta deve ser a página com menos probabilidade de ser referenciada no futuro próximo
+		- O desempenho pode ser quase tão bom quanto a política ótima
+		- Implementação computacionalmente cara
+	- *First in, First out - FIFO*
+		Substitui a página carregada há mais tempo (First in, First out)
+		- As molduras formam um buffer circular
+		- Algoritmo extremamente simples
+		- A página residente há mais tempo na memória não significa que não será mais utilizada
+		- É possível que hajam trechos utilizados constantemente durante toda a execução do programa
+	- *Do Relógios*
+		Aproximação do algoritmo LRU
+		- Variações conhecidas como NRU (Not Recently Used)
+		- Requer um bit adicional na tabela de páginas: o bit de uso (ou referência)
+		- Quando a página é carregada, o bit de uso é ligado e avança o ponteiro para o próximo frame 
+		- Quando a página é referenciada, o bit de uso é ligado 
+		- A primeira página com o bit de uso igual a zero é removida
+		- Durante a procura da página a ser substituída, os bits de uso das páginas pesquisadas são desligados
