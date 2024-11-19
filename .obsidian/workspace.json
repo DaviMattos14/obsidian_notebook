@@ -25,12 +25,14 @@
             "id": "78858d14e49fd7f7",
             "type": "leaf",
             "state": {
-              "type": "release-notes",
+              "type": "markdown",
               "state": {
-                "currentVersion": "1.7.7"
+                "file": "Arquitetura de Computadores e Sistemas Operacionais/Resumo ArqCompSO.md",
+                "mode": "source",
+                "source": false
               },
               "icon": "lucide-file",
-              "title": "Release Notes 1.7.7"
+              "title": "Resumo ArqCompSO"
             }
           }
         ],
@@ -215,6 +217,7 @@
   },
   "active": "78858d14e49fd7f7",
   "lastOpenFiles": [
+    "Arquitetura de Computadores e Sistemas Operacionais/PDFs/Resumo ArqCompSO.pdf",
     "Arquitetura de Computadores e Sistemas Operacionais/Imagens/traducao_mem_virt.png",
     "Arquitetura de Computadores e Sistemas Operacionais/Imagens/pag_virt.png",
     "Arquitetura de Computadores e Sistemas Operacionais/Imagens/hierarquia_memoria 1.png",
@@ -225,7 +228,6 @@
     "Arquitetura de Computadores e Sistemas Operacionais/Imagens/organizacao_fisica_memoria.png",
     "Arquitetura de Computadores e Sistemas Operacionais/Imagens/funcionalidades_memoria.png",
     "Arquitetura de Computadores e Sistemas Operacionais/Imagens/parametros_avaliacao.png",
-    "Arquitetura de Computadores e Sistemas Operacionais/Imagens/niveis_escalonamento.png",
     "Arquitetura de Computadores e Sistemas Operacionais/Introdução aos Sistemas Operacionais.md",
     "Arquitetura de Computadores e Sistemas Operacionais/Trabalho 1 de ACSO 2024-  1 - Grupo 5/Trabalho1.pdf",
     "Arquitetura de Computadores e Sistemas Operacionais/Estrutura do Sistema Operacional.md",
