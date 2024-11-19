@@ -20,8 +20,21 @@
               "icon": "lucide-file",
               "title": "Resumo ArqCompSO"
             }
+          },
+          {
+            "id": "78858d14e49fd7f7",
+            "type": "leaf",
+            "state": {
+              "type": "release-notes",
+              "state": {
+                "currentVersion": "1.7.7"
+              },
+              "icon": "lucide-file",
+              "title": "Release Notes 1.7.7"
+            }
           }
-        ]
+        ],
+        "currentTab": 1
       }
     ],
     "direction": "vertical"
@@ -200,7 +213,7 @@
       "obsidian-git:Open Git source control": false
     }
   },
-  "active": "f1b96cfb93a1f04a",
+  "active": "78858d14e49fd7f7",
   "lastOpenFiles": [
     "Arquitetura de Computadores e Sistemas Operacionais/Imagens/traducao_mem_virt.png",
     "Arquitetura de Computadores e Sistemas Operacionais/Imagens/pag_virt.png",

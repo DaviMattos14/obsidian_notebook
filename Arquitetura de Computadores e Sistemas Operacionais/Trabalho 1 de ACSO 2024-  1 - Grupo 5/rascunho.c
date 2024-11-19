@@ -11,7 +11,7 @@
 #define FITA_MAGNETICA 4 // B
 #define IMPRESSORA 2 // C
 
-/*VARIAVEL GLOBAL PRA CONTAR O TEMPO E VERIFICAR OS PROCESSOS EM EXECUÇÃO*/
+/*VARIAVEIS GLOBAL PRA CONTAR O TEMPO E PROCESSOS COMPLETOS*/
 int ut = 0; // UT -> UNIDADE DE TEMPO
 int processos_completos = 0;
 
@@ -28,7 +28,7 @@ typedef struct entrada_saida
 } ES;
 
 /*
-    CRITANDO A ESTRUTURA DO PROCESSO
+    CRIANDO A ESTRUTURA DO PROCESSO
 */
 typedef struct Processo
 {
@@ -88,6 +88,7 @@ ES *inserir_io(ES *head, int t_chegada, const char *tipo)
     return head;
 }
 
+/* REMOVENDO A CHAMADA DE I/O DO PROCESSO*/
 ES* remover_Io(ES **inicio){
     if (*inicio == NULL)
         return NULL;
@@ -183,7 +184,7 @@ void adiciona_fim_fila(Fila **inicio, Processo p, int tipo)
     }
 }
 
-/* ADICIONA NO MEIO DA FILA*/
+/* ADICIONA NO MEIO DA FILA COM BASE NO TEMPO DE CHEGADA/RETORNO E A UT ATUAL*/
 void adiciona_meio_fila(Fila **inicio, Processo p, int tipo, int t)
 {
     Fila* pos = *inicio;
@@ -278,16 +279,16 @@ void round_robin(const char *filename, Processo p[], Fila **alta, Fila **baixa, 
     {
         Processo* processo_em_execucao = &remove_da_fila(alta)->processo;
 
-        if (processo_em_execucao == NULL){
+        if (processo_em_execucao == NULL){ // CASO A FILA DE ALTA ESTEJA VAZIA PEGA O PROCESSO NA FILA DE BAIXA
             fila = Baixa;
             processo_em_execucao = &remove_da_fila(baixa)->processo;
         }
 
-        if (processo_em_execucao != NULL)
+        if (processo_em_execucao != NULL) // CASO UMA DAS DUAS FILAS NÃO ESTEJA VAZIA
         {
             fprintf(arq, "U.T= %d| \tExecutando o Processo %s ", ut, processo_em_execucao->pid);
             (fila == Alta)? fprintf(arq,"(Fila de Alta)\n") : fprintf(arq,"(Fila de Baixa)\n"); 
-            if (processo_em_execucao->num_io == 0)
+            if (processo_em_execucao->num_io == 0) // SE O PROCESSO NÃO TEM OPERAÇÃO DE I/O
             {
                 tempo_execucao = (processo_em_execucao->t_servico < QUANTUM) ?
                                     processo_em_execucao->t_servico : QUANTUM;
@@ -306,7 +307,7 @@ void round_robin(const char *filename, Processo p[], Fila **alta, Fila **baixa, 
                 }
                 
             }
-            if (processo_em_execucao->num_io > 0)
+            if (processo_em_execucao->num_io > 0) // SE O PROCESSO TEM OPERAÇÃO DE I/O
             {
                 int chamada_io = processo_em_execucao->operacoes_io->chegada;
                 tempo_execucao = (chamada_io <= QUANTUM) ? chamada_io : QUANTUM;
@@ -320,13 +321,13 @@ void round_robin(const char *filename, Processo p[], Fila **alta, Fila **baixa, 
                     aux = aux->prox;
                 }
 
-                if (chamada_io > QUANTUM)
+                if (chamada_io > QUANTUM) // SE A OPERAÇÃO I/O NÃO OCORRE DURANTE A FATIA DE TEMPO ATUAL
                 {
                     fprintf(arq, "U.T= %d|\tO Processo %s terminou sua fatia de tempo e foi movido para Fila de Baixa (Tempo restante: %d)\n", ut, processo_em_execucao->pid, processo_em_execucao->t_servico);
                     processo_em_execucao->t_chegada = ut;
                     adiciona_fim_fila(baixa, (*processo_em_execucao), Baixa);
                 }
-                if (chamada_io <= QUANTUM)
+                if (chamada_io <= QUANTUM) // SE A OPERAÇÃO I/O OCORRE DURANTE A FATIA DE TEMPO ATUAL
                 {
                     fprintf(arq, "U.T= %d| \tO Processo %s foi bloqueado (Tempo restante: %d)\n", ut, processo_em_execucao->pid, processo_em_execucao->t_servico);
                     processo_em_execucao->operacoes_io->saida = (ut + tipo_io(&processo_em_execucao->operacoes_io));
@@ -335,9 +336,9 @@ void round_robin(const char *filename, Processo p[], Fila **alta, Fila **baixa, 
             }
         }
         
-        chegou_na_cpu(arq,p,alta,tempo_execucao);
+        chegou_na_cpu(arq,p,alta,tempo_execucao); // VERIFICA SE ALGUM PROCESSO CHEGOU NA CPU
         
-        if (*ios != NULL || processo_em_execucao != NULL)
+        if (*ios != NULL || processo_em_execucao != NULL) // VERIFICA SE HÁ PROCESSO EM OPERAÇÃO I/O
         {
             int aux = processos_em_io(ios);
             for (int i = 0; i < aux; i++)
@@ -357,7 +358,7 @@ void round_robin(const char *filename, Processo p[], Fila **alta, Fila **baixa, 
                         io_processo->num_io--;
                         ES* chamada = remover_Io(&io_processo->operacoes_io);
                         free(chamada);
-                        adiciona_meio_fila(baixa, (*io_processo), Baixa, saida_io);
+                        adiciona_meio_fila(baixa, (*io_processo), Baixa, saida_io); // RETORNA PARA DE BAIXA
                     }
                     else if (tipo == FITA_MAGNETICA)
                     {
@@ -365,7 +366,7 @@ void round_robin(const char *filename, Processo p[], Fila **alta, Fila **baixa, 
                         io_processo->num_io--;
                         ES* chamada = remover_Io(&io_processo->operacoes_io);
                         free(chamada);
-                        adiciona_meio_fila(alta, (*io_processo), Alta, saida_io);
+                        adiciona_meio_fila(alta, (*io_processo), Alta, saida_io); // RETORNA PARA DE ALTA
                     }
                     else if (tipo == IMPRESSORA)
                     {
@@ -373,22 +374,22 @@ void round_robin(const char *filename, Processo p[], Fila **alta, Fila **baixa, 
                         io_processo->num_io--;
                         ES* chamada = remover_Io(&io_processo->operacoes_io);
                         free(chamada);
-                        adiciona_meio_fila(alta, (*io_processo), Alta, saida_io);
+                        adiciona_meio_fila(alta, (*io_processo), Alta, saida_io);// RETORNA PARA DE ALTA
                     }
                 }
                 else
                 {
-                    adiciona_fim_fila(ios, (*io_processo), IO);
+                    adiciona_fim_fila(ios, (*io_processo), IO); // SE NENHUM PROCESSO RETORNOU DE I/O
                 }
             }
             
         }
-        if (processos_completos == NUM_MAX_PROCESSOS)
+        if (processos_completos == NUM_MAX_PROCESSOS) // SE TODOS OS PROCESSO TERMINARAM
         {
             fputs("--------- FIM DE EXECUÇÂO ---------", arq);
             fputs("\nSimulacao Concluida", arq);
         }
-        if (*ios != NULL && processo_em_execucao == NULL)
+        if (*ios != NULL && processo_em_execucao == NULL) // SE AINDA HÁ PROCESSO BLOQUEADO E A CPU NÃO ESTA EXECUTANDO NADA
         {
             fprintf(arq,"U.T= %d|\tCPU OCIOSA\n", ut);
             ut++;
