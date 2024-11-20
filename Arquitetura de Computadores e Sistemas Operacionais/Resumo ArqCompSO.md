@@ -590,7 +590,8 @@ Trata da requisição de dispositivo de E/S pelos processos com E/S pendentes.
 
 ### Parâmetros de Avaliação
 ![[parametros_avaliacao.png]]
-$\rho \rightarrow$ Número de CPU   
+$\rho \rightarrow$ Número de CPU 
+$turnaround \rightarrow$ Tempo total de execução
 ### Algoritmos de Escalonamento de Curto Prazo
 #### Por Prioridade 
 Cada processo recebe uma prioridade ao ser iniciado
