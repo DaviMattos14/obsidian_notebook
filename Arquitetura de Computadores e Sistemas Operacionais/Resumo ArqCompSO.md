@@ -860,6 +860,9 @@ Cada entrada também contém um bit de modificação (M)
 ![[pag_virt.png]]
 
 ### Tradução de Endereços
+Exemplo 1:
+![[Pasted image 20241120191614.png]]
+Exemplo 2:
 ![[traducao_mem_virt.png]]
 
 ### Múltiplas Tabelas
