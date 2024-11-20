@@ -922,3 +922,5 @@ Determina a página a ser removida quando uma nova página está sendo carregada
 		- Quando a página é referenciada, o bit de uso é ligado 
 		- A primeira página com o bit de uso igual a zero é removida
 		- Durante a procura da página a ser substituída, os bits de uso das páginas pesquisadas são desligados
+
+*OBS: Tem mais matéria após esse tópico, porém como esta foi a ultima parte abordada, presumo que a matéria para prova termina aqui.*
