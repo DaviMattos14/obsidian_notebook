@@ -698,7 +698,7 @@ Gerenciar a memória consiste na tarefa de subdividir e alocar espaços para aco
 #### Organização Física
 ![[organizacao_fisica_memoria.png]]
 
-#### Organização Lógica
+#### Organização Lógica (Particionamento)
 Consiste na forma como a memória é vista (particionada) logicamente pelo SO.
 ##### Contíguo Simples
 ##### Estático
@@ -711,7 +711,7 @@ Consiste na forma como a memória é vista (particionada) logicamente pelo SO.
 - Endereços absolutos dinâmicos, calculados em tempo de execução
 - Baixo desempenho
 - Fragmentação interna
-##### Dinâmico
+##### Dinâmico 
 - A quantidade e o tamanho das partições são variáveis
 - Para cada processo, é alocado o espaço exato que for necessário (não tem fragmentação interna)
 - Eventualmente, são criados “buracos” de tamanho pequeno, sem utilidade de uso (fragmentação externa)
@@ -731,6 +731,13 @@ Consiste na forma como a memória é vista (particionada) logicamente pelo SO.
 	Escolhe o menor bloco que comporte o processo
 	Cria muitos buracos pequenos, exigindo mais compactações
 	Oferece o pior desempenho
+- **Buddy System**
+	A memória é organizada em blocos de $2^k$
+	$L ≤ K ≤ U$ 
+	$2^L$ – menor bloco que pode ser alocado
+	$2^U$ – maior bloco (tamanho da memória)
+	reduz problema da colcha de retalhos (re-agrupamento)
+	insere fragmentação interna
 ##### Paginado
 A memória é particionada em pedaços de tamanho igual, assim como os processos;
 
