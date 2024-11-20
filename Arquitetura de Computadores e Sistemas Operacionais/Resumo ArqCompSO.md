@@ -716,7 +716,7 @@ Consiste na forma como a memória é vista (particionada) logicamente pelo SO.
 - Para cada processo, é alocado o espaço exato que for necessário (não tem fragmentação interna)
 - Eventualmente, são criados “buracos” de tamanho pequeno, sem utilidade de uso (fragmentação externa)
 - Os processos, de tempos em tempos, precisam ser re-alocados para eliminar os “buracos” (compactação)
-###### Esquemas de Alocação:
+###### Esquemas de Alocação
 - **First-Fit**
 	Procura a partir da memória o primeiro bloco livre que sirva
 	Pode criar muitos pequenos blocos livres no início da memória
@@ -777,7 +777,8 @@ Correlação com a lógica do programa
 Um processo saí memória para outro entrar 
 ![[swapping.png]]
 ### Overlay
-
+Consiste em pegar parte da memória disponível e dividi-la em duas parte, *Módulo Principal* e *Área de Overlay*
+![[overlay.jpg]]
 ### Hierarquia de Memória
 ![[hierarquia_memoria 1.png]]
 ### Cache
