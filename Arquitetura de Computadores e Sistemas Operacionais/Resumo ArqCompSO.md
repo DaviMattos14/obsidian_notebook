@@ -773,6 +773,11 @@ Maior flexibilidade na alocação de espaços em memória (tabelas de páginas e
 Endereçamento não contínuo em memória
 Baixa fragmentação interna
 Correlação com a lógica do programa
+### Swapping
+Um processo saí memória para outro entrar 
+![[swapping.png]]
+### Overlay
+
 ### Hierarquia de Memória
 ![[hierarquia_memoria 1.png]]
 ### Cache
