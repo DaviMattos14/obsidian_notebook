@@ -738,6 +738,7 @@ Consiste na forma como a memória é vista (particionada) logicamente pelo SO.
 	$2^U$ – maior bloco (tamanho da memória)
 	reduz problema da colcha de retalhos (re-agrupamento)
 	insere fragmentação interna
+	Exemplo: ![[exemplo_buddy.png]] 
 ##### Paginado
 A memória é particionada em pedaços de tamanho igual, assim como os processos;
 
