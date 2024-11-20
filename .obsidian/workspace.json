@@ -197,7 +197,8 @@
               "title": "Sumário de Resumo ArqCompSO"
             }
           }
-        ]
+        ],
+        "currentTab": 1
       }
     ],
     "direction": "horizontal",
@@ -215,7 +216,7 @@
       "obsidian-git:Open Git source control": false
     }
   },
-  "active": "78858d14e49fd7f7",
+  "active": "734150a0bd3375d4",
   "lastOpenFiles": [
     "Arquitetura de Computadores e Sistemas Operacionais/PDFs/Resumo ArqCompSO.pdf",
     "Arquitetura de Computadores e Sistemas Operacionais/Imagens/traducao_mem_virt.png",
