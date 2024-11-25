@@ -445,5 +445,38 @@ Temos que $E(Z_n)=0$ e Var($Z_n$) $=1$. Isso significa que $Z_n$ tem uma distrib
 O TCL permite conhecer a distribuição limite de $Z_n$ (quando n $\rightarrow \infty$)
 **Teorema Central do Limite**: A distribuição $Z_n$ se aproxima de uma normal padrão $Z\sim N(0,1)$, ou seja, para todos $x \in R$,
 $$
-
+P\bigg(\frac{S_n-n\mu}{\sqrt{n}\sigma}\leq x\bigg) \rightarrow P(Z\leq x) = \phi(x)
 $$
+# Capítulo 8: Gráficos e Estatística Descritiva (Estatística)
+>Estatística é um conjunto de conceitos e métodos para coletar, organizar, analisar e interpretar dados
+
+<font color="#ff0000">Estatística descritiva</font>: se preocupa com a organização e apresentação dos dados observados (tabelas, gráficos, medidas descritivas como média e variância...)
+<font color="#ff0000">Inferência estatística</font>: se preocupa de como dar informação sobre um universo (população) a partir de um conjunto de dados observados (amostra)
+
+## Estatística Descritiva
+População ($N$): conjuntos de todos os elementos sob investigação
+Amostra ($n$): subconjuntos finitos da população
+Parâmetro: característica numérica de uma população
+
+Exemplo: Pesquisa eleitoral no estado do Rio de Janeiro
+$$
+\begin{matrix}
+\text{população} &&→&& \text{todos os eleitores}\\
+\text{amostra} &&→&& \text{1000 eleitores entrevistados}\\
+\text{parâmetro} &&→ &&\text{idade média da população}\\
+\end{matrix}
+$$
+### Tipologia de Variáveis
+Dada uma população ou amostra, podemos estar interessados em várias características dos elementos constituintes; essas características são chamadas variáveis
+- *Quantitativa*: assume um valor numérico
+	- discreta: número finito ou enumerável 
+	- contínua: número não enumerável
+- *Qualitativa*: classificada em categorias
+	- nominal: categorias não-ordenadas
+	- ordinal: categorias ordenadas
+
+### Distribuições de Frequências
+*Distribuições de Frequências*: tabelas e gráficos
+*Frequência absoluta*: número de vezes que cada valor é observado
+*Frequência relativa*: número de vezes que cada valor é observado dividido pelo tamanho da amostra
+*Frequência acumulada*: soma das frequências absolutas dos valores inferiores ou iguais ao valor dado
