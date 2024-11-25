@@ -513,8 +513,9 @@ Para ter uma caracterização melhor outras medidas, chamada *medidas de dispers
 Dados os valores $x_1,...,x_n$, definimos
 - Variância Amostral
 	$$
-	s^2 \coloneqq \frac{\sum^n_{i=1}(x_i-\overline{x})^2}{n-1}= \frac{\sum^n_{i=1}x_i^2-n\overline{x}^2}{n-1}
+	S^2 \coloneqq \frac{\sum^n_{i=1}(x_i-\overline{x})^2}{n-1}= \frac{\sum^n_{i=1}x_i^2-n\overline{x}^2}{n-1}
 	$$
+	- $E(S^2)=\sigma^2$ 
 - Desvio Padrão Amostral
 	$$
 	s \coloneqq \sqrt{\frac{\sum^n_{i=1}(x_i-\overline{x})^2}{n-1}}
@@ -524,3 +525,99 @@ Dados os valores $x_1,...,x_n$, definimos
 	cv\coloneqq \frac{s}{\overline{x}}
 	$$
 # Capítulo 9: Intervalos de Confiança
+## Estimativa Pontual
+1. Uso $\overline{x}$ para estimar $E(x)$
+2. Uso $S^2=\frac{1}{n-1}\sum(x_i-\overline{x})^2$ para estimar $\text{Var}(x)=\sigma^2$
+3. Uso $S=\sqrt{S^2}$ para estimar $DP=\sqrt{\text{Var}(x)}=\sigma$
+
+## Caso $\sigma$ conhecido
+Se $$X \sim N(\mu, \frac{\sigma^2}{n})\rightarrow Z = \frac{\overline{X}-\mu}{\frac{\sigma}{\sqrt{n}}} \sim N(0,1)$$
+![[nivel_de_confianca.png]]
+Dado $\alpha \in (0,1)$, o valor de $(1-\alpha = \gamma)$  é o que chamamos de nível de confiança do intervalo $IC_{\mu}(\gamma)$. Em geral, $\gamma$ será um valor próximo de 1, como por exemplo $0.95,0.98$ ou até $0.99$.
+
+### Construindo o intervalo
+Digamos que $\gamma = 0.95$ e $\frac{\alpha}{2}=q$:
+$$
+\begin{aligned}
+\gamma = 0.95 
+&= P(-q< Z < q)\\
+&=P(-q< \frac{\overline{X}-\mu}{\frac{\sigma}{\sqrt{n}}} < q)\\
+&= P(-q\frac{\sigma}{\sqrt{n}}< \overline{X}-\mu < q\frac{\sigma}{\sqrt{n}})\\
+&= p(-\overline{X}-q\frac{\sigma}{\sqrt{n}}< \mu <-\overline{X}+q\frac{\sigma}{\sqrt{n}})\\
+&= p(\overline{X}-q\frac{\sigma}{\sqrt{n}}< \mu <\overline{X}+q\frac{\sigma}{\sqrt{n}})
+\end{aligned}
+$$
+Logo,
+$$
+IC_{\mu}(\gamma)=\Bigg[\overline{X}-q\frac{\sigma}{\sqrt{n}};\overline{X}+q\frac{\sigma}{\sqrt{n}}\Bigg]
+$$
+Com $\gamma = 0.95$ temos, $q$ = 1.96.
+(Procurar na tabela normal $P(Z < q) = \frac{\gamma +1}{2}=0.975 \rightarrow q$)
+
+## Caso $\sigma$ desconhecido
+Estimamos $\sigma^2$ usando $S^2$ e padronizamos $\overline{X}$ por:
+$$
+T = \frac{\overline{X}-\mu}{\frac{S}{\sqrt{n}}}
+$$
+A variável aleatória T é diferente de Z, e sua distribuição deixa de ser normal e passa a ser t-Student:
+$$
+T\sim(n-1)
+$$
+Onde, $(n-1)$ são graus de liberdade, e $n$ é o tamanho da amostra.
+Portanto,
+$$
+IC_{\mu}(\gamma)=\Bigg[\overline{X}-t\frac{S}{\sqrt{n}};\overline{X}+t\frac{S}{\sqrt{n}}\Bigg]
+$$
+
+## Intervalos de Confiança para Proporção
+Dada uma amostra $X_1, \dots, X_n \sim Bern(p)$:
+$$
+\overline{X} = \frac{X_1+\dots+X_i}{n} = \hat{p} \approx N(E(\overline{X}),\text{Var}(\overline{X})) \therefore N\Big(p,\frac{p(1-p)}{n}\Big)
+$$
+- $E(\overline{X}) = E(X_i)=p$
+- $\text{Var}(\overline{X}) = \frac{\text{Var}(X_i)}{n}=\frac{p(1-p)}{n}$
+- Z = $\frac{\hat{p}-p}{\sqrt{\frac{p(1-p)}{n}}} \approx N(0,1)$
+Temos que,
+$$
+IC^*_{p}(\gamma)=P\Bigg( \hat{p}-q\sqrt{\frac{p(1-p)}{n}} < p < \hat{p}+q\sqrt{\frac{p(1-p)}{n}}\Bigg)
+$$
+ Onde $q = \frac{1+\gamma}{2}$.
+ **Abordagem não conservadora**: Substituímos $p$ na equação por $\hat{p}$
+ **Abordagem conservadora**: Consideramos um $\gamma$ acima do nível de confiança fixado inicialmente
+$$
+IC_{\mu}(\gamma)=\Bigg[\hat{p}-q\frac{1}{\sqrt{4n}};\hat{p}+q\frac{1}{\sqrt{4n}}\Bigg]
+$$
+# Capítulo 10: Testes de Hipóteses
+## Construção de Testes de Hipóteses
+Considere $X_1, \dots, X_n$ uma amostra aleatória com $E(X_i)=\mu$ e $\text{Var}(X_i)=\sigma^2$
+Formulamos duas hipóteses:
+$$
+\begin{cases}
+H_0: \mu = x, & \text{Hipótese Nula}\\
+H_1: \mu \neq x,&\text{Hipótese Alternativa}
+\end{cases}
+$$
+Calcule a média amostral: $\overline{X}$
+
+### Tipos de Erro
+- <font color="#ff0000">Tipo 1</font>: Rejeitar $H_0$ dado que $H_0$ é verdade
+- <font color="#ff0000">Tipo 2</font>: Não rejeitar $H_0$ dado que $H_0$ é falsa (i.e. dado $H_1$)
+
+## Realização de Testes de Hipóteses
+1. Defina um nível de significância $\alpha$ (1%, 5%, 10%)
+2. Definir uma Regra de Decisão:
+	$\alpha$ = P(Rejeitar $H_0$|$H_0$ verdade) = $P\Bigg(\Bigg|\frac{\overline{X}-\mu}{\frac{S}{\sqrt{n}}}\Bigg| \neq q | \mu = x\Bigg)$
+3. Achar $q = t_{n-1}\text{(t-Student)}$  que vai determinar a regra de decisão de teste.
+
+## Teste para Proporções
+$X_1,\dots, X_n$: Amostra aleatória $X_i \sim Bern(p)$
+![[teste_hipotese_proporcao.png]]
+### Estatística de Teste:
+$$
+Z = \Bigg(\Bigg|\frac{\hat{p}-p}{\sqrt{\frac{p(1-p)}{n}}}\Bigg| \neq q | \mu = \overline{x}\Bigg)
+$$
+## P-Valor
+P-valor é a probabilidade sob $H_0$ de observarmos um valor mais extremo (de acordo com $H_1$) para estatística de teste do que aquele observado na amostra.
+**Regra de Teste**: Rejeitamos $H_0$ se P-valor $< \alpha$
+Quanto <font color="#ff0000">menor</font> o p-valor mais evidência temos contrária a $H_0$
+![[p_valor.png]]
