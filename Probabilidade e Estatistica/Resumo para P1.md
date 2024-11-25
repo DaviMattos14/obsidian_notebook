@@ -510,3 +510,17 @@ Dada uma coleção de valores de uma variável quantitativa é útil definir for
 
 ### Medidas de Dispersão
 Para ter uma caracterização melhor outras medidas, chamada *medidas de dispersão* são introduzidas. Essas são indicadores do grau de espalhamento dos valores em torno da média
+Dados os valores $x_1,...,x_n$, definimos
+- Variância Amostral
+	$$
+	s^2 \coloneqq \frac{\sum^n_{i=1}(x_i-\overline{x})^2}{n-1}= \frac{\sum^n_{i=1}x_i^2-n\overline{x}^2}{n-1}
+	$$
+- Desvio Padrão Amostral
+	$$
+	s \coloneqq \sqrt{\frac{\sum^n_{i=1}(x_i-\overline{x})^2}{n-1}}
+	$$
+- Coeficiente de variação amostral:
+	$$
+	cv\coloneqq \frac{s}{\overline{x}}
+	$$
+# Capítulo 9: Intervalos de Confiança
