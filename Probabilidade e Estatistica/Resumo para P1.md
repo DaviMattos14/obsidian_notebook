@@ -275,7 +275,7 @@ As seguintes propriedades são imediatas da definição:
 $$
 \text{Cov}(aX + bY, cX + dY) = ac \cdot \text{Var}(X) + bd \cdot \text{Var}(Y) + (ad + bc) \cdot \text{Cov}(X, Y)
 $$
-## Variáveis Aleatórias Contínuas
+# Capítulo 6: Variáveis Aleatórias Contínuas
 
 > Uma $f(x)$ definida sobre o espaço amostral $(\Omega)$ e assumindo valores num intervalo de número reais, é dita uma variável aleatória contínua. Uma v.a. é contínua se existir $F_x: ℝ \to ℝ$, denominada **função de densidade de probabilidade (f.d.p.)**, satisfazendo:
 
@@ -386,15 +386,64 @@ f(x)=\frac{1}{\sigma \centerdot \sqrt{2\pi}} \centerdot e^{-\frac{1}{2}(\frac{x-
 \end{matrix}
 $$
 
-- Esperança
-    
-    $$
-    E[X]=\mu
-    $$
-    
-- Variância
-    
-    $$
-    Var(x)=\sigma^2
-    $$
-    
+#### Propriedades
+- Esperança:  $E[X]=\mu$
+- Variância:  $Var(x)=\sigma^2$
+- A f.d.p. de X é simétrica com respeito a $X=\mu$, logo,
+	$f_x(\mu+x)=f_x(\mu -x)$
+- Em particular, $\phi(−z) = 1 − \phi(z)$, para todo $z \in R$
+- $aX + b ∼ N(a\mu + b, a^2\sigma^2)$
+
+#### Padronização
+> Seja X uma v.a. tal que $E[X]=\mu$ e $Var(x)=\sigma^2$, para $N(\mu,\sigma^2)$
+> Queremos $N(0,1)$,  Então: $E[Z]=0$ e $Var(Z)=1$
+$$
+X~N(\mu,\sigma^2)\rightarrow Z = \frac{X-\mu}{\sigma}~N(0,1)
+$$
+- $P(a\leq X \leq b) = P\Big(\frac{a-\mu}{\sigma}\leq Z \leq \frac{b-\mu}{\sigma}\Big)=\phi\Big(\frac{b-\mu}{\sigma}\Big)-\phi\Big(\frac{a-\mu}{\sigma}\Big)$
+- $P(X\leq a)=P\Big(Z\leq\frac{a-\mu}{\sigma}\Big)=\phi\Big(\frac{a-\mu}{\sigma}\Big)$ 
+- $P(X\geq a)=P\Big(Z\geq\frac{a-\mu}{\sigma}\Big)=1-\phi\Big(\frac{a-\mu}{\sigma}\Big)$ 
+# Capítulo 7: Teorema Central do Limite e Lei dos Grandes Números
+## Lei dos Grandes Números
+>Sejam $X_1, X_2, . . .$ v.a. independentes e identicamente distribuídas (i.i.d.) com média $μ$ e variância $\sigma^2$ e $S_n := \sum^n_{i=1}X_i$ . Sabemos que
+$$\begin{matrix}
+E(S_n) = nμ && \text{Var}(S_n) = n\sigma^2
+\end{matrix}
+$$
+ Se considerarmos a média $M_n:=\frac{S_n}{n}$, temos
+$$
+\begin{matrix}
+E(M_n) = μ && \text{Var}(M_n) = \frac{\sigma^2}{n}
+\end{matrix}
+$$
+#### Lei dos Grandes Números:
+> Para todo $\epsilon > 0$, no limite $n\rightarrow\infty$
+ $$
+P(|M_n-\mu|\ge\epsilon)\rightarrow 0
+$$
+## Soma de variáveis aleatórias
+> Dadas $n$ variáveis aleatórias $X_1,...X_n$, podemos definir uma nova variável aleatória como
+$$
+S_n\coloneqq \sum^n_{i=1}X_i
+$$
+### Distribuições da soma de variáveis aleatórias independentes
+$$
+\begin{align}
+X_i\sim Ber(p) &&\rightarrow &&\sum^n_{i=1}X_i\sim Bin(n,p) \\
+X_i\sim Bin(m_i,p) &&\rightarrow &&\sum^n_{i=1} X_i\sim  Bin\Big(\sum^n_{i=1}m_i,p\Big)\\
+X_i\sim Poi(\lambda_i) && \rightarrow &&\sum^n_{i=1} X_i\sim  Poi\Big(\sum^n_{i=1}\lambda_i\Big)\\
+X_i\sim N(\mu_i,\sigma^2_i) && \rightarrow &&\sum^n_{i=1} X_i\sim  N\Big(\sum^n_{i=1}\mu_i, \sum^n_{i=1}\sigma^2_i \Big)\\
+\end{align}
+$$
+## Teorema Central do Limite
+Sejam $X_1,X_2,...$ v.a. independentes e identicamente distribuídas (i.i.d) com média $\mu$ e variância $\sigma^2$ e $S_n\coloneqq \sum^n_{i=1}X_i$.
+Consideramos uma nova variável aleatória
+$$
+Z_n = \frac{S_n-E(S_n)}{\sqrt{\text{Var}(S_n)}}=\frac{S_n-n\mu}{\sqrt{n}\sigma}
+$$
+Temos que $E(Z_n)=0$ e Var($Z_n$) $=1$. Isso significa que $Z_n$ tem uma distribuição que não se concentra ao redor do valor médio (a variância não vai para zero com $n$)
+O TCL permite conhecer a distribuição limite de $Z_n$ (quando n $\rightarrow \infty$)
+**Teorema Central do Limite**: A distribuição $Z_n$ se aproxima de uma normal padrão $Z\sim N(0,1)$, ou seja, para todos $x \in R$,
+$$
+
+$$

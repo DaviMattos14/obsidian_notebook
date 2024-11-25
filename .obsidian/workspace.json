@@ -13,12 +13,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "Arquitetura de Computadores e Sistemas Operacionais/Resumo ArqCompSO.md",
+                "file": "Probabilidade e Estatistica/Resumo para P1.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "Resumo ArqCompSO"
+              "title": "Resumo para P1"
             }
           }
         ]
@@ -87,7 +87,7 @@
       }
     ],
     "direction": "horizontal",
-    "width": 345.5
+    "width": 207.5
   },
   "right": {
     "id": "32d40f02cd76403a",
@@ -176,10 +176,10 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "Arquitetura de Computadores e Sistemas Operacionais/Resumo ArqCompSO.md"
+                "file": "Probabilidade e Estatistica/Resumo para P1.md"
               },
               "icon": "lucide-list",
-              "title": "Sumário de Resumo ArqCompSO"
+              "title": "Sumário de Resumo para P1"
             }
           }
         ],
@@ -203,8 +203,8 @@
   },
   "active": "13c8e1a575da26dc",
   "lastOpenFiles": [
-    "Algebra Linear Algoritmica/matriz_inclinada1.png",
     "Arquitetura de Computadores e Sistemas Operacionais/Resumo ArqCompSO.md",
+    "Algebra Linear Algoritmica/matriz_inclinada1.png",
     "Arquitetura de Computadores e Sistemas Operacionais/Processadores.md",
     "Arquitetura de Computadores e Sistemas Operacionais/Imagens/Pasted image 20241120191614.png",
     "Arquitetura de Computadores e Sistemas Operacionais/Imagens/overlay.jpg",
@@ -216,7 +216,6 @@
     "Arquitetura de Computadores e Sistemas Operacionais/Imagens/hierarquia_memoria 1.png",
     "Arquitetura de Computadores e Sistemas Operacionais/Imagens/traducao_enderecos.png",
     "Arquitetura de Computadores e Sistemas Operacionais/Imagens/traducao_segmentacao.png",
-    "Arquitetura de Computadores e Sistemas Operacionais/Imagens/traducao_logico_fisico.png",
     "Arquitetura de Computadores e Sistemas Operacionais/Introdução aos Sistemas Operacionais.md",
     "Arquitetura de Computadores e Sistemas Operacionais/Trabalho 1 de ACSO 2024-  1 - Grupo 5/Trabalho1.pdf",
     "Arquitetura de Computadores e Sistemas Operacionais/Estrutura do Sistema Operacional.md",
