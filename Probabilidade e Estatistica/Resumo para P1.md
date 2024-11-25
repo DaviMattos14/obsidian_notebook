@@ -480,3 +480,33 @@ Dada uma população ou amostra, podemos estar interessados em várias caracter�
 *Frequência absoluta*: número de vezes que cada valor é observado
 *Frequência relativa*: número de vezes que cada valor é observado dividido pelo tamanho da amostra
 *Frequência acumulada*: soma das frequências absolutas dos valores inferiores ou iguais ao valor dado
+
+### Gráficos para variáveis qualitativas/quantitativas
+- Gráfico de Barra (Barras, Histograma)
+- Gráfico de Setores (de Pizza)
+- Diagrama de Disperssão
+- Boxplot
+
+#### Construção de Boxplot
+1. Encontre os 3 quartis
+2. Classifica-se como outliers á direita, pontos que se encontram a mais de 1.5×(distância interquartílica) unidades à direita do 3º quartil
+3. Classifica-se como outliers à esquerda, pontos que se encontram a mais de 1.5×(distância interquartílica) unidades á esquerda do 1º quartil
+4. A linha se estende atá os valores mais extremos do conjunto de dados que não sejam outliers
+
+### Medidas de Centralidade
+Dada uma coleção de valores de uma variável quantitativa é útil definir formas de resumir esses dados. Uma maneira de fazer isso é através de *medidas de centralidade*.
+- <font color="#ff0000">Média aritmética</font>: dados valores $x_1,...,x_n$, definimos
+	$$
+	\overline{x}\coloneqq \frac{\sum^n_{i=1}x_i}{n}
+	$$
+- <font color="#ff0000">Mediana</font>: dados valores $x_1,...x_n$, sejam $x_{1},x_{2}, ..., x_{n}$ os mesmos valores ordenados. Definimos $Q2$ como
+	$$
+	Q2 \coloneqq \begin{cases}
+	x_{(\frac{n+1}{n})} & \text{se n é ímpar (valor na posição central)} \\
+	\frac{x_{(\frac{n}{2})}+x_{(\frac{n}{2}+1)}}{2} & \text{se n é par (média dos valores nas posições centrais)}
+	\end{cases}
+	$$
+- <font color="#ff0000">Moda</font>: é aquele valor que ocorre com mais frequência 
+
+### Medidas de Dispersão
+Para ter uma caracterização melhor outras medidas, chamada *medidas de dispersão* são introduzidas. Essas são indicadores do grau de espalhamento dos valores em torno da média
