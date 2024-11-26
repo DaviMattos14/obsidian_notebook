@@ -13,12 +13,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "Probabilidade e Estatistica/Resumo para P1.md",
+                "file": "Probabilidade e Estatistica/Resumo Prob.Est..md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "Resumo para P1"
+              "title": "Resumo Prob.Est."
             }
           }
         ]
@@ -176,10 +176,10 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "Probabilidade e Estatistica/Resumo para P1.md"
+                "file": "Probabilidade e Estatistica/Resumo Prob.Est..md"
               },
               "icon": "lucide-list",
-              "title": "Sumário de Resumo para P1"
+              "title": "Sumário de Resumo Prob.Est."
             }
           }
         ],
@@ -201,8 +201,11 @@
       "obsidian-git:Open Git source control": false
     }
   },
-  "active": "f1b96cfb93a1f04a",
+  "active": "13c8e1a575da26dc",
   "lastOpenFiles": [
+    "Probabilidade e Estatistica/Livros/Livro_Probabilidade_Um_Curso_Moderno.pdf",
+    "Probabilidade e Estatistica/Livros/Estatística básica (Morettin) 6. ed. - www.meulivro.biz.pdf",
+    "Probabilidade e Estatistica/Resumo Prob.Est..md",
     "Probabilidade e Estatistica/imagens/teste_hipotese_proporcao.png",
     "Probabilidade e Estatistica/imagens/p_valor.png",
     "Probabilidade e Estatistica/imagens/nivel_de_confianca.png",
@@ -216,7 +219,6 @@
     "Arquitetura de Computadores e Sistemas Operacionais/PDFs/Resumo ArqCompSO.pdf",
     "Arquitetura de Computadores e Sistemas Operacionais/Imagens/traducao_mem_virt.png",
     "Arquitetura de Computadores e Sistemas Operacionais/Imagens/pag_virt.png",
-    "Arquitetura de Computadores e Sistemas Operacionais/Imagens/hierarquia_memoria 1.png",
     "Arquitetura de Computadores e Sistemas Operacionais/Introdução aos Sistemas Operacionais.md",
     "Arquitetura de Computadores e Sistemas Operacionais/Trabalho 1 de ACSO 2024-  1 - Grupo 5/Trabalho1.pdf",
     "Arquitetura de Computadores e Sistemas Operacionais/Estrutura do Sistema Operacional.md",
@@ -227,8 +229,6 @@
     "Arquitetura de Computadores e Sistemas Operacionais/Trabalho 1 de ACSO 2024-  1 - Grupo 5/escalonador.exe",
     "Arquitetura de Computadores e Sistemas Operacionais/Trabalho 1 de ACSO 2024-  1 - Grupo 5/escalonador.c",
     "Arquitetura de Computadores e Sistemas Operacionais/Trabalho 1 de ACSO 2024-  1 - Grupo 5",
-    "Probabilidade e Estatistica/Livros/Resoluções Sheldon Ross/chap-6-11pt.pdf",
-    "Probabilidade e Estatistica/Resumo para P1.md",
     "Probabilidade e Estatistica/Introdução à Estatística.md",
     "Algebra Linear Algoritmica/Algebra Linear Algoritmica.md",
     "Algebra Linear Algoritmica/Lista 4 - Transformações Lineares.md",
