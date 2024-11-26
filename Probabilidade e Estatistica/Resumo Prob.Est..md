@@ -445,11 +445,11 @@ Temos que $E(Z_n)=0$ e Var($Z_n$) $=1$. Isso significa que $Z_n$ tem uma distrib
 O TCL permite conhecer a distribuição limite de $Z_n$ (quando n $\rightarrow \infty$)
 **Teorema Central do Limite**: A distribuição $Z_n$ se aproxima de uma normal padrão $Z\sim N(0,1)$, ou seja, para todos $x \in R$,
 $$
-P\bigg(\frac{S_n-n\mu}{\sqrt{n}\sigma}\leq x\bigg) \rightarrow P(Z\leq x) = \phi(x)
+P\bigg(\frac{\overline{X}-\mu}{\frac{\sigma}{\sqrt{n}}}\ge x\bigg) \rightarrow P(Z\geq x) = 1-\phi(x)
 $$
 $X_1, X_2, \dots$ i.i.d com média $\mu$ e variância $\sigma^2, S_n=\sum_{i=1}^n X_i$
 $$
-P(S_n \le c) = P\Bigg(\frac{S_n-n\mu}{\sigma\sqrt{n}}\le\frac{c-n\mu}{\sigma\sqrt{n}}\Bigg)\approx_{TCL} \phi\Bigg(\frac{c-n\mu}{\sigma\sqrt{n}}\Bigg)
+P(S_n \le c) = P\Bigg(\frac{S_n-\mu}{\sqrt{\frac{\sigma^2}{n}}}\le\frac{c-\mu}{\sqrt{\frac{\sigma^2}{n}}}\Bigg)\approx_{TCL} \phi\Bigg(\frac{c-\mu}{\sqrt{\frac{\sigma^2}{n}}}\Bigg)
 $$
 Onde $Z\sim N(0,1)$ e a aproximação melhora a medida que n cresce.
 # Capítulo 8: Gráficos e Estatística Descritiva (Estatística)
