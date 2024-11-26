@@ -439,7 +439,7 @@ $$
 Sejam $X_1,X_2,...$ v.a. independentes e identicamente distribuídas (i.i.d) com média $\mu$ e variância $\sigma^2$ e $S_n\coloneqq \sum^n_{i=1}X_i$.
 Consideramos uma nova variável aleatória
 $$
-Z_n = \frac{S_n-E(S_n)}{\sqrt{\text{Var}(S_n)}}=\frac{S_n-n\mu}{\sqrt{n}\sigma}
+Z_n = \frac{S_n-E(S_n)}{\sqrt{\text{Var}(S_n)}}=\frac{S_n-n\mu}{\sigma\sqrt{n}}
 $$
 Temos que $E(Z_n)=0$ e Var($Z_n$) $=1$. Isso significa que $Z_n$ tem uma distribuição que não se concentra ao redor do valor médio (a variância não vai para zero com $n$)
 O TCL permite conhecer a distribuição limite de $Z_n$ (quando n $\rightarrow \infty$)
@@ -447,6 +447,11 @@ O TCL permite conhecer a distribuição limite de $Z_n$ (quando n $\rightarrow \
 $$
 P\bigg(\frac{S_n-n\mu}{\sqrt{n}\sigma}\leq x\bigg) \rightarrow P(Z\leq x) = \phi(x)
 $$
+$X_1, X_2, \dots$ i.i.d com média $\mu$ e variância $\sigma^2, S_n=\sum_{i=1}^n X_i$
+$$
+P(S_n \le c) = P\Bigg(\frac{S_n-n\mu}{\sigma\sqrt{n}}\le\frac{c-n\mu}{\sigma\sqrt{n}}\Bigg)\approx_{TCL} \phi\Bigg(\frac{c-n\mu}{\sigma\sqrt{n}}\Bigg)
+$$
+Onde $Z\sim N(0,1)$ e a aproximação melhora a medida que n cresce.
 # Capítulo 8: Gráficos e Estatística Descritiva (Estatística)
 >Estatística é um conjunto de conceitos e métodos para coletar, organizar, analisar e interpretar dados
 
