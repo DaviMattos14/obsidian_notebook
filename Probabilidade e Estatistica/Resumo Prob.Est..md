@@ -449,7 +449,7 @@ P\bigg(\frac{S_n-n\mu}{\sigma\sqrt{n}}\ge x\bigg) \rightarrow P(Z\geq x) = 1-\ph
 $$
 $X_1, X_2, \dots$ i.i.d com média $\mu$ e variância $\sigma^2, S_n=\sum_{i=1}^n X_i$
 $$
-P(S_n \le c) = P\Bigg(\frac{S_n-n\mu}{\sqrt{\sigma}n}\le\frac{c-n\mu}{\sqrt{\sigma}n}\Bigg)\approx_{TCL} \phi\Bigg(\frac{c-\mu}{\sqrt{\sigma}n}\Bigg)
+P(S_n \le c) = P\Bigg(\frac{S_n-n\mu}{\sqrt{n}\sigma}\le\frac{c-n\mu}{\sqrt{n}\sigma}\Bigg)\approx_{TCL} \phi\Bigg(\frac{c-\mu}{\sqrt{n}\sigma}\Bigg)
 $$
 Onde $Z\sim N(0,1)$ e a aproximação melhora a medida que n cresce.
 # Capítulo 8: Gráficos e Estatística Descritiva (Estatística)
