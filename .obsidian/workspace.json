@@ -33,8 +33,7 @@
               "title": "Resumo Prob.Est."
             }
           }
-        ],
-        "currentTab": 1
+        ]
       }
     ],
     "direction": "vertical"
@@ -189,10 +188,10 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "Probabilidade e Estatistica/Resumo Prob.Est..md"
+                "file": "Probabilidade e Estatistica/Livros/Resoluções Sheldon Ross/chap-8-11pt.pdf"
               },
               "icon": "lucide-list",
-              "title": "Sumário de Resumo Prob.Est."
+              "title": "Sumário de chap-8-11pt"
             }
           }
         ],
@@ -214,10 +213,10 @@
       "obsidian-git:Open Git source control": false
     }
   },
-  "active": "f5ec41faee2db1ea",
+  "active": "13c8e1a575da26dc",
   "lastOpenFiles": [
-    "Probabilidade e Estatistica/Livros/Resoluções Sheldon Ross/chap-8-11pt.pdf",
     "Probabilidade e Estatistica/Resumo Prob.Est..md",
+    "Probabilidade e Estatistica/Livros/Resoluções Sheldon Ross/chap-8-11pt.pdf",
     "Probabilidade e Estatistica/Livros/Livro_Probabilidade_Um_Curso_Moderno.pdf",
     "Probabilidade e Estatistica/Livros/Estatística básica (Morettin) 6. ed. - www.meulivro.biz.pdf",
     "Probabilidade e Estatistica/imagens/teste_hipotese_proporcao.png",
