@@ -13,10 +13,10 @@
             "state": {
               "type": "pdf",
               "state": {
-                "file": "Probabilidade e Estatistica/Livros/Resoluções Sheldon Ross/chap-8-11pt.pdf"
+                "file": "Probabilidade e Estatistica/Livros/Livro_Probabilidade_Um_Curso_Moderno.pdf"
               },
               "icon": "lucide-file-text",
-              "title": "chap-8-11pt"
+              "title": "Livro_Probabilidade_Um_Curso_Moderno"
             }
           },
           {
@@ -214,12 +214,12 @@
       "obsidian-git:Open Git source control": false
     }
   },
-  "active": "f5ec41faee2db1ea",
+  "active": "734150a0bd3375d4",
   "lastOpenFiles": [
-    "Probabilidade e Estatistica/Livros/Resoluções Sheldon Ross/chap-8-11pt.pdf",
-    "Probabilidade e Estatistica/Resumo Prob.Est..md",
     "Probabilidade e Estatistica/Livros/Livro_Probabilidade_Um_Curso_Moderno.pdf",
     "Probabilidade e Estatistica/Livros/Estatística básica (Morettin) 6. ed. - www.meulivro.biz.pdf",
+    "Probabilidade e Estatistica/Livros/Resoluções Sheldon Ross/chap-8-11pt.pdf",
+    "Probabilidade e Estatistica/Resumo Prob.Est..md",
     "Probabilidade e Estatistica/imagens/teste_hipotese_proporcao.png",
     "Probabilidade e Estatistica/imagens/p_valor.png",
     "Probabilidade e Estatistica/imagens/nivel_de_confianca.png",
