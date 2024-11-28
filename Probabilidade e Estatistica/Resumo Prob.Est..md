@@ -493,14 +493,17 @@ Dada uma população ou amostra, podemos estar interessados em várias caracter�
 - Boxplot
 
 #### Construção de Boxplot
+![[Pasted image 20241128111922.png]]
 1. Encontre os 3 quartis
 	1. Quartil 1 (probabilidade 25%): Q1 - valor que deixa 1/4 das observações à esquerda
 	2. Quartil 2, ou mediana (probabilidade 50%): Q2 - valor que deixa 2/4 das observações à esquerda
 	3. Quartil 3 (probabilidade 75%): Q3 - valor que deixa 3/4 das observações à esquerda
 	4. Distância interquartílica: Q3 − Q1 - medida de dispersão
-2. Classifica-se como outliers á direita, pontos que se encontram a mais de 1.5×(distância interquartílica) unidades à direita do 3º quartil
-3. Classifica-se como outliers à esquerda, pontos que se encontram a mais de 1.5×(distância interquartílica) unidades á esquerda do 1º quartil
-4. A linha se estende atá os valores mais extremos do conjunto de dados que não sejam outliers
+2. Classifica-se como outliers á direita, pontos que se satisfazem o seguinte
+	1.  $X_i > LS \text{ (Limite Superior)}$, para $LS=Q_3 + 1.5\times(Q_3-Q_1)$
+3. Classifica-se como outliers à esquerda, pontos que se satisfazem o seguinte
+	1. $X_i < LI \text{ (Limite Inferior)}$, para $LI=Q_1 - 1.5\times(Q_3-Q_1)$
+4. A linha se estende até os valores mais extremos do conjunto de dados que não sejam outliers
 
 ### Medidas de Centralidade
 Dada uma coleção de valores de uma variável quantitativa é útil definir formas de resumir esses dados. Uma maneira de fazer isso é através de *medidas de centralidade*.
