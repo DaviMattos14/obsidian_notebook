@@ -23,14 +23,12 @@
             "id": "f5ec41faee2db1ea",
             "type": "leaf",
             "state": {
-              "type": "markdown",
+              "type": "pdf",
               "state": {
-                "file": "Probabilidade e Estatistica/Resumo Prob.Est..md",
-                "mode": "source",
-                "source": false
+                "file": "Probabilidade e Estatistica/Livros/Solutions_Manual_A_First_Course_in_P_ROB.pdf"
               },
-              "icon": "lucide-file",
-              "title": "Resumo Prob.Est."
+              "icon": "lucide-file-text",
+              "title": "Solutions_Manual_A_First_Course_in_P_ROB"
             }
           }
         ],
@@ -189,10 +187,10 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "Probabilidade e Estatistica/Resumo Prob.Est..md"
+                "file": "Probabilidade e Estatistica/Livros/Solutions_Manual_A_First_Course_in_P_ROB.pdf"
               },
               "icon": "lucide-list",
-              "title": "Sumário de Resumo Prob.Est."
+              "title": "Sumário de Solutions_Manual_A_First_Course_in_P_ROB"
             }
           }
         ],
@@ -216,11 +214,11 @@
   },
   "active": "f5ec41faee2db1ea",
   "lastOpenFiles": [
+    "Probabilidade e Estatistica/Resumo Prob.Est..md",
     "Pasted image 20241128111922.png",
     "Probabilidade e Estatistica/Livros/Livro_Probabilidade_Um_Curso_Moderno.pdf",
     "Probabilidade e Estatistica/Livros/Estatística básica (Morettin) 6. ed. - www.meulivro.biz.pdf",
     "Probabilidade e Estatistica/Livros/Resoluções Sheldon Ross/chap-8-11pt.pdf",
-    "Probabilidade e Estatistica/Resumo Prob.Est..md",
     "Probabilidade e Estatistica/imagens/teste_hipotese_proporcao.png",
     "Probabilidade e Estatistica/imagens/p_valor.png",
     "Probabilidade e Estatistica/imagens/nivel_de_confianca.png",
@@ -233,7 +231,6 @@
     "Arquitetura de Computadores e Sistemas Operacionais/Imagens/exemplo_buddy.png",
     "Arquitetura de Computadores e Sistemas Operacionais/PDFs/Resumo ArqCompSO.pdf",
     "Arquitetura de Computadores e Sistemas Operacionais/Imagens/traducao_mem_virt.png",
-    "Arquitetura de Computadores e Sistemas Operacionais/Imagens/pag_virt.png",
     "Arquitetura de Computadores e Sistemas Operacionais/Introdução aos Sistemas Operacionais.md",
     "Arquitetura de Computadores e Sistemas Operacionais/Trabalho 1 de ACSO 2024-  1 - Grupo 5/Trabalho1.pdf",
     "Arquitetura de Computadores e Sistemas Operacionais/Estrutura do Sistema Operacional.md",
