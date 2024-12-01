@@ -616,10 +616,20 @@ Calcule a média amostral: $\overline{X}$
 - <font color="#ff0000">Tipo 2</font>: Não rejeitar $H_0$ dado que $H_0$ é falsa (i.e. dado $H_1$)
 
 ## Realização de Testes de Hipóteses
-1. Defina um nível de significância $\alpha$ (1%, 5%, 10%)
-2. Definir uma Regra de Decisão:
-	$\alpha$ = P(Rejeitar $H_0$|$H_0$ verdade) = $P\Bigg(\Bigg|\frac{\overline{X}-\mu}{\frac{S}{\sqrt{n}}}\Bigg| \neq q | \mu = x\Bigg)$
-3. Achar $q = t_{n-1}\text{(t-Student)}$  que vai determinar a regra de decisão de teste.
+1. Definir $\alpha$: nível de significância, como 1%, 5%, ou 10%.
+2. Formular Hipóteses $H_0$ e $H_1$
+3. Estabelecer a estatística de teste: determina plausibilidade de H₀.
+	1. t-Student: $t(n-1,\gamma)$
+	2. Normal:  $N(\mu,\sigma^2) = N(\mu,\frac{s}{\sqrt{n}})$
+4. Identificar a região crítica (RC): valores da estatística incompatíveis com H₀.
+	Unilateral:
+		$\alpha$ = P(Rejeitar $H_0$|$H_0$ verdade) = $P\Bigg(\Bigg|\frac{\overline{X}-\mu}{\frac{S}{\sqrt{n}}}\Bigg| < q | \mu = x\Bigg)$
+	Bilateral :
+		$\alpha$ = P(Rejeitar $H_0$|$H_0$ verdade) = $P\Bigg(\Bigg|\frac{\overline{X}-\mu}{\frac{S}{\sqrt{n}}}\Bigg| \neq q | \mu = x\Bigg)$
+5. Conclusão:
+    - Rejeitar H₀ se a estatística de teste estiver na RC.
+    - Não rejeitar H₀ caso contrário.
+![[Pasted image 20241129163603.png]]
 
 ## Teste para Proporções
 $X_1,\dots, X_n$: Amostra aleatória $X_i \sim Bern(p)$
@@ -633,3 +643,13 @@ P-valor é a probabilidade sob $H_0$ de observarmos um valor mais extremo (de ac
 **Regra de Teste**: Rejeitamos $H_0$ se P-valor $< \alpha$
 Quanto <font color="#ff0000">menor</font> o p-valor mais evidência temos contrária a $H_0$
 ![[p_valor.png]]
+
+Define o nível de significância mínimo ($\alpha$) necessário para rejeitar H₀.
+Cálculo:
+    1. Estatística de teste (T).
+    2. Probabilidade de observar valores tão extremos quanto o da amostra sob H₀.
+
+Exemplo prático:
+- $H₀: \mu = 0,72,H₁: \mu > 0,72.$
+- Estatística: $T=2,00$
+- $p\text{-valor} = 0,0319$: rejeitamos H₀ para $\alpha > 3,19\%$

@@ -25,10 +25,10 @@
             "state": {
               "type": "pdf",
               "state": {
-                "file": "Probabilidade e Estatistica/Livros/Solutions_Manual_A_First_Course_in_P_ROB.pdf"
+                "file": "Probabilidade e Estatistica/PDFs/Resumo Prob.Est..pdf"
               },
               "icon": "lucide-file-text",
-              "title": "Solutions_Manual_A_First_Course_in_P_ROB"
+              "title": "Resumo Prob.Est."
             }
           }
         ],
@@ -187,10 +187,10 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "Probabilidade e Estatistica/Livros/Solutions_Manual_A_First_Course_in_P_ROB.pdf"
+                "file": "Probabilidade e Estatistica/PDFs/Resumo Prob.Est..pdf"
               },
               "icon": "lucide-list",
-              "title": "Sumário de Solutions_Manual_A_First_Course_in_P_ROB"
+              "title": "Sumário de Resumo Prob.Est."
             }
           }
         ],
@@ -215,6 +215,13 @@
   "active": "f5ec41faee2db1ea",
   "lastOpenFiles": [
     "Probabilidade e Estatistica/Resumo Prob.Est..md",
+    "Probabilidade e Estatistica/PDFs/Resumo Prob.Est..pdf",
+    "Pasted image 20241129163603.png",
+    "Probabilidade e Estatistica/Livros/Solutions_Manual_A_First_Course_in_P_ROB.pdf",
+    "Probabilidade e Estatistica/Livros/pdfcoffee.com_bioestatistica-pagano-pdf-free.pdf",
+    "Probabilidade e Estatistica/Livros/pdfcoffee.com_bioestatistica-pagano-pdf-free.pdf.crdownload",
+    "Probabilidade e Estatistica/Livros/Paganno_Gauvreau.pdf",
+    "Probabilidade e Estatistica/Livros/Paganno_Gauvreau.pdf.crdownload",
     "Pasted image 20241128111922.png",
     "Probabilidade e Estatistica/Livros/Livro_Probabilidade_Um_Curso_Moderno.pdf",
     "Probabilidade e Estatistica/Livros/Estatística básica (Morettin) 6. ed. - www.meulivro.biz.pdf",
@@ -230,15 +237,8 @@
     "Arquitetura de Computadores e Sistemas Operacionais/Imagens/swapping.png",
     "Arquitetura de Computadores e Sistemas Operacionais/Imagens/exemplo_buddy.png",
     "Arquitetura de Computadores e Sistemas Operacionais/PDFs/Resumo ArqCompSO.pdf",
-    "Arquitetura de Computadores e Sistemas Operacionais/Imagens/traducao_mem_virt.png",
     "Arquitetura de Computadores e Sistemas Operacionais/Introdução aos Sistemas Operacionais.md",
-    "Arquitetura de Computadores e Sistemas Operacionais/Trabalho 1 de ACSO 2024-  1 - Grupo 5/Trabalho1.pdf",
     "Arquitetura de Computadores e Sistemas Operacionais/Estrutura do Sistema Operacional.md",
-    "Arquitetura de Computadores e Sistemas Operacionais/Trabalho 1 de ACSO 2024-  1 - Grupo 5/saida.txt",
-    "Arquitetura de Computadores e Sistemas Operacionais/Trabalho 1 de ACSO 2024-  1 - Grupo 5/processos.csv",
-    "Arquitetura de Computadores e Sistemas Operacionais/Trabalho 1 de ACSO 2024-  1 - Grupo 5/Makefile",
-    "Arquitetura de Computadores e Sistemas Operacionais/Trabalho 1 de ACSO 2024-  1 - Grupo 5/escalonador.out",
-    "Arquitetura de Computadores e Sistemas Operacionais/Trabalho 1 de ACSO 2024-  1 - Grupo 5/escalonador.exe",
     "Probabilidade e Estatistica/Introdução à Estatística.md",
     "Algebra Linear Algoritmica/Algebra Linear Algoritmica.md",
     "Algebra Linear Algoritmica/Lista 4 - Transformações Lineares.md",
