@@ -11,28 +11,17 @@
             "id": "13c8e1a575da26dc",
             "type": "leaf",
             "state": {
-              "type": "pdf",
+              "type": "markdown",
               "state": {
-                "file": "Probabilidade e Estatistica/Livros/Livro_Probabilidade_Um_Curso_Moderno.pdf"
+                "file": "Probabilidade e Estatistica/Resumo Prob.Est..md",
+                "mode": "source",
+                "source": false
               },
-              "icon": "lucide-file-text",
-              "title": "Livro_Probabilidade_Um_Curso_Moderno"
-            }
-          },
-          {
-            "id": "f5ec41faee2db1ea",
-            "type": "leaf",
-            "state": {
-              "type": "pdf",
-              "state": {
-                "file": "Probabilidade e Estatistica/PDFs/Resumo Prob.Est..pdf"
-              },
-              "icon": "lucide-file-text",
+              "icon": "lucide-file",
               "title": "Resumo Prob.Est."
             }
           }
-        ],
-        "currentTab": 1
+        ]
       }
     ],
     "direction": "vertical"
@@ -187,7 +176,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "Probabilidade e Estatistica/PDFs/Resumo Prob.Est..pdf"
+                "file": "Probabilidade e Estatistica/Resumo Prob.Est..md"
               },
               "icon": "lucide-list",
               "title": "Sumário de Resumo Prob.Est."
@@ -212,17 +201,18 @@
       "obsidian-git:Open Git source control": false
     }
   },
-  "active": "f5ec41faee2db1ea",
+  "active": "13c8e1a575da26dc",
   "lastOpenFiles": [
+    "Probabilidade e Estatistica/PDFs/Resumo_ProbEst.pdf",
+    "Probabilidade e Estatistica/imagens/teste_hipótese.png",
+    "Probabilidade e Estatistica/imagens/boxplot.png",
     "Probabilidade e Estatistica/Resumo Prob.Est..md",
     "Probabilidade e Estatistica/PDFs/Resumo Prob.Est..pdf",
-    "Pasted image 20241129163603.png",
     "Probabilidade e Estatistica/Livros/Solutions_Manual_A_First_Course_in_P_ROB.pdf",
     "Probabilidade e Estatistica/Livros/pdfcoffee.com_bioestatistica-pagano-pdf-free.pdf",
     "Probabilidade e Estatistica/Livros/pdfcoffee.com_bioestatistica-pagano-pdf-free.pdf.crdownload",
     "Probabilidade e Estatistica/Livros/Paganno_Gauvreau.pdf",
     "Probabilidade e Estatistica/Livros/Paganno_Gauvreau.pdf.crdownload",
-    "Pasted image 20241128111922.png",
     "Probabilidade e Estatistica/Livros/Livro_Probabilidade_Um_Curso_Moderno.pdf",
     "Probabilidade e Estatistica/Livros/Estatística básica (Morettin) 6. ed. - www.meulivro.biz.pdf",
     "Probabilidade e Estatistica/Livros/Resoluções Sheldon Ross/chap-8-11pt.pdf",

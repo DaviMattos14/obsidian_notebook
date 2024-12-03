@@ -493,7 +493,7 @@ Dada uma população ou amostra, podemos estar interessados em várias caracter�
 - Boxplot
 
 #### Construção de Boxplot
-![[Pasted image 20241128111922.png]]
+![[boxplot.png]]
 1. Encontre os 3 quartis
 	1. Quartil 1 (probabilidade 25%): Q1 - valor que deixa 1/4 das observações à esquerda
 	2. Quartil 2, ou mediana (probabilidade 50%): Q2 - valor que deixa 2/4 das observações à esquerda
@@ -588,16 +588,16 @@ $$
 $$
 - $E(\overline{X}) = E(X_i)=p$
 - $\text{Var}(\overline{X}) = \frac{\text{Var}(X_i)}{n}=\frac{p(1-p)}{n}$
-- Z = $\frac{\hat{p}-p}{\sqrt{\frac{p(1-p)}{n}}} \approx N(0,1)$
+- Z = $\frac{\hat{p}-p}{\sqrt{\frac{p(1-p)}{n}}} \approx$ <font color="#ff0000">N(0,1)</font>
 Temos que,
 $$
 IC^*_{p}(\gamma)=P\Bigg( \hat{p}-q\sqrt{\frac{p(1-p)}{n}} < p < \hat{p}+q\sqrt{\frac{p(1-p)}{n}}\Bigg)
 $$
  Onde $q = \frac{1+\gamma}{2}$.
- **Abordagem não conservadora**: Substituímos $p$ na equação por $\hat{p}$
+ **Abordagem não conservadora**: Substituímos $p$ na equação por $\hat{p} \sim N(0,1)=\gamma$ 
  **Abordagem conservadora**: Consideramos um $\gamma$ acima do nível de confiança fixado inicialmente
 $$
-IC_{\mu}(\gamma)=\Bigg[\hat{p}-q\frac{1}{\sqrt{4n}};\hat{p}+q\frac{1}{\sqrt{4n}}\Bigg]
+IC_{\mu}(\gamma)=\Bigg[\hat{p}-q\frac{1}{2\sqrt{n}};\hat{p}+q\frac{1}{2\sqrt{n}}\Bigg]
 $$
 # Capítulo 10: Testes de Hipóteses
 ## Construção de Testes de Hipóteses
@@ -623,13 +623,13 @@ Calcule a média amostral: $\overline{X}$
 	2. Normal:  $N(\mu,\sigma^2) = N(\mu,\frac{s}{\sqrt{n}})$
 4. Identificar a região crítica (RC): valores da estatística incompatíveis com H₀.
 	Unilateral:
-		$\alpha$ = P(Rejeitar $H_0$|$H_0$ verdade) = $P\Bigg(\Bigg|\frac{\overline{X}-\mu}{\frac{S}{\sqrt{n}}}\Bigg| < q | \mu = x\Bigg)$
+		$\alpha$ = P(Rejeitar $H_0$|$H_0$ verdade) = $P\Bigg(\Bigg|\frac{\overline{X}-\mu}{\frac{S}{\sqrt{n}}}\Bigg| < q | \mu = x\Bigg) \rightarrow$ RC  $= Z_n < q$ 
 	Bilateral :
-		$\alpha$ = P(Rejeitar $H_0$|$H_0$ verdade) = $P\Bigg(\Bigg|\frac{\overline{X}-\mu}{\frac{S}{\sqrt{n}}}\Bigg| \neq q | \mu = x\Bigg)$
+		$\alpha$ = P(Rejeitar $H_0$|$H_0$ verdade) = $P\Bigg(\Bigg|\frac{\overline{X}-\mu}{\frac{S}{\sqrt{n}}}\Bigg| \neq q | \mu = x\Bigg) \rightarrow$ RC $= -q < Z_n < q$
 5. Conclusão:
     - Rejeitar H₀ se a estatística de teste estiver na RC.
     - Não rejeitar H₀ caso contrário.
-![[Pasted image 20241129163603.png]]
+![[teste_hipótese.png]]
 
 ## Teste para Proporções
 $X_1,\dots, X_n$: Amostra aleatória $X_i \sim Bern(p)$
@@ -646,10 +646,15 @@ Quanto <font color="#ff0000">menor</font> o p-valor mais evidência temos contr�
 
 Define o nível de significância mínimo ($\alpha$) necessário para rejeitar H₀.
 Cálculo:
-    1. Estatística de teste (T).
-    2. Probabilidade de observar valores tão extremos quanto o da amostra sob H₀.
-
-Exemplo prático:
-- $H₀: \mu = 0,72,H₁: \mu > 0,72.$
-- Estatística: $T=2,00$
-- $p\text{-valor} = 0,0319$: rejeitamos H₀ para $\alpha > 3,19\%$
+    1. Construa o teste de hipótese
+    2. Defina o nível de significância $(\alpha)$
+    3. Tome uma amostra e calcule sua estatística de teste T
+	    $Z_{teste}=\frac{\hat{p}-p}{\sqrt{\frac{p(1-p)}{n}}}$
+    4. $p-valor$: p($H_1$|$H_0$)
+	    1. Teste unilateral
+	    $Z\sim N(0,1) = 1-\phi(Z)$
+	    3. Teste bilateral
+	    $Z\sim N(0,1) = 2\cdot(1-\phi(Z))$
+    1. Se
+	    1. $p-valor < \alpha \rightarrow$ Rejeito $H_0$
+	    2. $p-valor > \alpha \rightarrow$ Não Rejeito $H_0$
