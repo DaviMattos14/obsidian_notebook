@@ -290,6 +290,14 @@ $N(A)$ é o complemento ortogonal de $c(A^T)$
 $N(A^T)$ é o complemento ortogonal de $c(A)$
 
 Complemento ortogonal ($V^{\perp}$) é o conjunto de vetores que é ortogonal a um subespaço 
+# Produto Interno
+$$
+<w,v>=w^Tv=[w_1\space w_2]\begin{bmatrix}v_1\\v_2\end{bmatrix}=w_1v_1+w_2v_2
+$$
+**Propriedades**
+- $w^Tv=v^Tw$
+- $||v||^2=v^tv=v_1^2+v_2^2$
+- 
 # Ortogonalidade
 Dois vetores são ortogonais se $p^Tv=\overline{0}=<p,v>$.
 Se p e v são ortogonais então:
@@ -307,6 +315,7 @@ $$
 Seja P um operador que leva qualquer vetor $\overrightarrow{v}$ ao vetor P, então
 $$ Pv=p$$
 $$p = \alpha u =u\frac{u^Tv}{u^Tu} =\frac{uu^T}{u^Tu}v$$
+obs: $v^Tu=u^Tv$
 Logo,
 $$
 P = \frac{uu^T}{u^Tu}
@@ -336,8 +345,53 @@ $$
 $$
 Seja A uma matriz cujas as colunas são LI
 Queremos transformar essas colunas em vetores ortonormais, ou seja, transformar A em Q.
-tomar $q_1=\frac{u_1}{||u_1||}=\frac{v_1}{||v_1||}$
+tomar $e_1=q_1=\frac{u_1}{||u_1||}=\frac{v_1}{||v_1||}$
 Para $$\text{proj}_{u}(v)=\frac{<v,u>}{<u,u>}u=\frac{v^Tu}{u^Tu}u$$
 Então,
 ![[Gram-Schmidt.png]]
 
+**OBS:**
+$A=Q\cdot R \rightarrow R = Q^TA$
+# Determinante
+Dada uma matriz $A_{m\times n}$, $A=[A_{ij}]$, então
+$$
+det(A)=|A|=det[A_{ij}]=\sum(-1)^ja_{1f1}\cdot a_{1f2}\times \dots \times a_{nfn}
+$$
+Onde $j = (j_1, j_2, ..., j_n)$ é o número de inversões para cada permutação de$\left\lbrace 1, 2, ..., n\right\rbrace = (f_1,f_2,f_3,\dots)$
+Exemplo: $j = (0,1) \rightarrow f=\{(1,2),(2,1)\}$ e $A = A_{2\times2}$
+$$
+det(A)=(-1)^0 a_{11}\cdot a_{22}+(-1)^1a_{12}\cdot a_{21}=a_{11}\cdot a_{22}-a_{12}\cdot a_{21}
+$$
+Generalizando:
+$$
+det(A)=\sum(-1)^{i+j}a_{ij}|A_{ij}|
+$$
+onde $|A_{ij}|$ é uma matriz formada após se retirar de A a linha i e coluna j.
+# Matriz Adjunta
+Definimos o cofator $\Delta_{ij}$ do elemento $a_{ij}$ de uma matriz $A_{m\times n}$, por
+$$
+\Delta_{ij}=(-1)^{i+j}det(A_{ij})
+$$
+onde $A_{ij}$ é a submatriz de A obtida após retirar a linha i e a coluna j.
+A matriz $\overline{A}$ de cofatores de A é definida por $A=[\Delta_{ij}]$ e a matriz adjunta é definida por $\text{adj}(A)=\overline{A}$.
+
+Teorema: $A\cdot A^{-1}=A\cdot \text{adj}(A)=det(A)I$.
+
+# Autovalores e Autovetores
+$$
+A = X D X^{-1}
+$$
+onde $D$ é uma matriz diagonalizável, $X$ é a matriz de autovetores invertível.
+$$
+Av=\lambda v
+$$
+Manipulando a equação acima:
+$$
+\begin{align}
+Av=\lambda v \\
+Av-\lambda v= \overline{0} \\
+Av-\lambda \text{I}v = \overline{0}\\
+(A-\lambda\text{I})v=\overline{0}
+\end{align}
+$$
+Como consequência, sabemos que: $det(A-\lambda\text{I})=\overline{0}$
