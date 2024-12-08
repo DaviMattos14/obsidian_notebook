@@ -2,7 +2,7 @@
 #include <stdlib.h>
 #include <string.h>
 #include <stdbool.h>
-#define NUM_MAX_PROCESSOS 5
+#define NUM_MAX_PROCESSOS 4
 #define MAX 512
 #define QUANTUM 4
 
@@ -408,15 +408,15 @@ int main()
         {"P1", 0, 13, NULL, 1},
         {"P2", 4, 11, NULL, 2},
         {"P3", 5, 7, NULL, 0},
-        {"P4", 7, 8, NULL, 0},
-        {"P5", 10, 16, NULL, 2}};
+        {"P4", 7, 8, NULL, 0}};
+        //{"P5", 10, 16, NULL, 2}};
 
     /* CRIANDO OS CHAMADOS DE I/O*/
     p[0].operacoes_io = inserir_io(p[0].operacoes_io, 4, "A");
     p[1].operacoes_io = inserir_io(p[1].operacoes_io, 2, "B");
     p[1].operacoes_io = inserir_io(p[1].operacoes_io, 6, "A");
-    p[4].operacoes_io = inserir_io(p[4].operacoes_io, 2, "A");
-    p[4].operacoes_io = inserir_io(p[4].operacoes_io, 7, "B");
+    //p[4].operacoes_io = inserir_io(p[4].operacoes_io, 2, "A");
+    //p[4].operacoes_io = inserir_io(p[4].operacoes_io, 7, "B");
 
     /* IMPRIMINDO A TABELA NO ARQUIVO DE SAIDA*/
     imprimir_tabela_processos(arquivo_saida, p);

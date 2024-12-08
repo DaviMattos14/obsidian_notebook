@@ -209,3 +209,135 @@ $$
 A(cV+dW)=c(AV)+d(AW)
 $$
 ## Autovalores e Autovetores
+$$
+Av=\lambda v
+$$
+Manipulando a equação acima:
+$$
+\begin{align}
+Av=\lambda v \\
+Av-\lambda v= \overline{0} \\
+Av-\lambda \text{I}v = \overline{0}\\
+(A-\lambda\text{I})v=\overline{0}
+\end{align}
+$$
+Como consequência, sabemos que: $det(A-\lambda\text{I})=\overline{0}$
+# Espaços Vetoriais
+Um espaço vetorial é um conjunto V, não vazio, munido de duas operações:
+- Soma ($V\times V\rightarrow V$)
+- Produto ($\mathbb{R} \times V \rightarrow V$)
+Temos que,
+1. $(\overrightarrow{u}+\overrightarrow{v})+\overrightarrow{w}=\overrightarrow{u}+(\overrightarrow{v}+\overrightarrow{w})$ - Comutatividade
+2. $\overrightarrow{u}+\overrightarrow{v}=\overrightarrow{v}+\overrightarrow{u}$
+3. $\exists\space \overline{0}\in V \space|\space \overrightarrow{u}+\overline{0}=u$ 
+4. $\exists \space -\overrightarrow{u} \in V\space | \space \overrightarrow{u} + (-\overrightarrow{u})=\overline{0}$
+5. $a(\overrightarrow{u}+\overrightarrow{v})=a\overrightarrow{u}+a\overrightarrow{v}$
+6. $(a+b)\overrightarrow{v}=a\overrightarrow{v}+b\overrightarrow{b}$
+7. $(ab)\overrightarrow{v}=a(b\overrightarrow{v})$
+8. $1\times\overrightarrow{u}=\overrightarrow{u}$
+
+## Subespaço vetorial
+Seja V um espaço vetorial. $W\subset C$ é um subespaço vetorial se $\overline{0} \in W$ e:
+- $\overrightarrow{u} + V \in W$
+- $a\overrightarrow{u} \in W, \forall a \in \mathbb{R}$
+
+### Espaço Coluna ($c(A)$)
+Dado o SL $A_{m\times n}x_n=b_m$ 
+	Se A é inversível, a solução do SL é única
+	Se A não tem inversa, há infinitas soluções ou nenhuma
+
+De um modo gera
+$$
+Ax+b=A_1x_1+A_2x_2+\dots+x_nA_n=b
+$$
+onde $A_n$ é a i-ésima vetor coluna de A.
+Para que o SL tenha solução, é preciso que $b$ possa ser descrito como uma combinação linear de A.
+$Ax=b$ tem solução $\leftrightarrow$ $b$ está no espaço coluna de A
+
+### Espaço Nulo ou Núcleo ($n(A)$)
+O espaço nulo, ou núcleo, do SL homogêneo, é o conjunto de vetores que satisfazem $A_{m\times n}x_n=\overline{0}$ .
+OBS: A quantidade de variáveis livres (variáveis que são combinações lineares) nos diz a dimensão do vetor
+
+### Espaço Linha e Posto de A ($c(A^T)/r(A)$)
+O posto de uma matriz $A_{m\times n}$ é o número de pivôs, ou seja, o número de linhas não nulas da matriz escalonada.
+Os vetor colunas que não tem pivôs são combinações lineares as colunas com pivôs.
+
+1. $r(A)=m=n$
+	- Matriz quadrada invertível
+	- $Ax=b$ tem solução única
+	- Posto linha completo, posto coluna completo
+2. $r(A) = m <n$
+	- $Ax=b$ tem infinitas sol.
+	- Posto linha completo
+3. $r(A) = n<m$
+	- $Ax=b$ tem 1 ou 0 sol.
+	- Posto coluna completo
+4. $r(A)<n,r(A)<m$
+	- $Ax=b$ tem 0 ou infinitas sol.
+
+As colunas de A são linearmente independentes (LI) quando $r(A) = n$, ou seja, há $n$ pivôs e nenhum variável livre. $\rightarrow N(A)=\{0\}$
+
+Um conjunto de vetores é uma base de um espaço vetorial se:
+	Não são nulos
+	São LI
+	Eles geram o espaço
+A Dimensão de um espaço vetorial é a quantidade de vetores na base, ou seja, é a quantidade mínima necessária para representarmos um vetor qualquer do espaço como combinação linear dos vetores.
+
+# Teorema Fundamental da Algebra Linear
+$c(A)$ tem dimensão $r(A)$ e $N(A^T)$ tem dimensão $m-r(A)$, ambos são subespaço $R^m$
+$c(A^T)$ tem dimensão $r(A)$ e $N(A)$ tem dimensão $n-r(A)$, ambos são subespaços de $R^n$
+$N(A)$ é o complemento ortogonal de $c(A^T)$
+$N(A^T)$ é o complemento ortogonal de $c(A)$
+
+Complemento ortogonal ($V^{\perp}$) é o conjunto de vetores que é ortogonal a um subespaço 
+# Ortogonalidade
+Dois vetores são ortogonais se $p^Tv=\overline{0}=<p,v>$.
+Se p e v são ortogonais então:
+$$
+||p+v||^2=||p||^2+||v||^2
+$$
+Dois espaços vetoriais V e W são ortogonais se todos os vetores de V são ortogonais a todos vetores de W.
+
+# Projeção
+![[projecao.png]]
+Seja $e = v-p$, temos que $P=\alpha \overrightarrow{u}$
+$$
+\alpha=\frac{u^Tv}{u^Tu}
+$$
+Seja P um operador que leva qualquer vetor $\overrightarrow{v}$ ao vetor P, então
+$$ Pv=p$$
+$$p = \alpha u =u\frac{u^Tv}{u^Tu} =\frac{uu^T}{u^Tu}v$$
+Logo,
+$$
+P = \frac{uu^T}{u^Tu}
+$$
+
+**Tamanho**: $||v||$
+obs: $||v||^2=v^Tv$
+**Distância**: $d(v,w) = ||v-w||$
+**Ângulo**: $cos(\theta)=\frac{P_vw}{w}$
+**Projeção ortogonal de W em V**: $P_v(w)=(\frac{w^Tv}{||v||^2})\cdot v$
+**Tamanho da projeção**: $w^T\cdot \tilde{v}$
+**Normalização**: $\tilde{v}=\frac{v}{||v||}$
+
+## Projeção sobre um subespaço
+$$
+\begin{matrix}
+A^TA{}=A^Tv\rightarrow \overline{x}=(A^TA)^{-1}A^Tv \\
+p = A(A^TA)^{-1}A^Tv \rightarrow\text{Projeção de v sobre o espaço}\\
+P=A(A^TA)^{-1}A^T \rightarrow\text{Matriz de Projeção}
+\end{matrix}
+$$
+# Bases Ortogonais e Gran-Schmitt
+Os vetores são ortonormais se:
+$$
+<z_i,z_j>=z_i\cdot z_j=z_i^T\cdot z_j=\begin{cases}0&\text{se i}\neq j\\
+1& \text{se i}=j\end{cases}
+$$
+Seja A uma matriz cujas as colunas são LI
+Queremos transformar essas colunas em vetores ortonormais, ou seja, transformar A em Q.
+tomar $q_1=\frac{u_1}{||u_1||}=\frac{v_1}{||v_1||}$
+Para $$\text{proj}_{u}(v)=\frac{<v,u>}{<u,u>}u=\frac{v^Tu}{u^Tu}u$$
+Então,
+![[Gram-Schmidt.png]]
+
