@@ -352,6 +352,21 @@ Então,
 
 **OBS:**
 $A=Q\cdot R \rightarrow R = Q^TA$
+
+## Fatoração QR
+- $A=QR$, mutiplique ambos os lador por $Q^T$:
+- $Q^T A = Q^T Q R$
+- Dado $Q^TQ=I$, teremos $R=Q^TA$
+- Dados $A = \Bigg[ \mathop{\mathbf a_1}\limits_|^| \ \mathop{\mathbf a_2}\limits_|^| \ \cdots \ \mathop{\mathbf a_n}\limits_|^| \Bigg]$ e $Q = \Bigg[ \mathop{\mathbf q_1}\limits_|^| \ \mathop{\mathbf q_2}\limits_|^| \ \cdots \  \mathop{\mathbf q_n}\limits_|^| \Bigg]$
+- Então: $<q,a>=q^ta=q_1a_1+q_2a_2+\dots$
+$$
+R = Q^T A = \begin{bmatrix} \mathbf q_1^T \mathbf a_1 & \mathbf q_1^T \mathbf a_2 & \cdots & \mathbf q_1^T \mathbf a_n \\\mathbf q_2^T \mathbf a_1 & \mathbf q_2^T \mathbf a_2 & \cdots & \mathbf q_2^T \mathbf a_n \\\vdots & \vdots & \ddots & \vdots \\\mathbf q_n^T \mathbf a_1 & \mathbf q_n^T \mathbf a_2 & \cdots & \mathbf q_n^T \mathbf a_n \\\end{bmatrix}=\begin{bmatrix} 
+\mathbf q_1^T \mathbf a_1 & \mathbf q_1^T \mathbf a_2 & \cdots & \mathbf q_1^T \mathbf a_n \\
+0 & \mathbf q_2^T \mathbf a_2 & \cdots & \mathbf q_2^T \mathbf a_n \\
+\vdots & \vdots & \ddots & \vdots \\
+0 & 0 & \cdots & \mathbf q_n^T \mathbf a_n \\
+\end{bmatrix}
+$$
 # Determinante
 Dada uma matriz $A_{m\times n}$, $A=[A_{ij}]$, então
 $$
