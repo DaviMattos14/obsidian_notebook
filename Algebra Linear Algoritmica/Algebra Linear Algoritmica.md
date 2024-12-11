@@ -306,7 +306,7 @@ $$
 $$
 Dois espaços vetoriais V e W são ortogonais se todos os vetores de V são ortogonais a todos vetores de W.
 
-# Projeção
+ # Projeção
 ![[projecao.png]]
 Seja $e = v-p$, temos que $P=\alpha \overrightarrow{u}$
 $$
