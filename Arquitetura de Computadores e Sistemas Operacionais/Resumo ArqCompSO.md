@@ -678,11 +678,25 @@ Os deadlines são imperativos. Não sendo cumprido os resultados de nada servir�
 **Tarefa Soft Real Time**
 Os deadlines são desejáveis porém não mandatórios.
 ##### Características
-*Sem anotações*
+*Determinismo* – tempo de execução predeterminado
+*Tempo de resposta* – atraso de tempo (latência) necessária para o sistema iniciar o tratamento de uma interrupção
+*Controle pelo usuário* – o usuário tem que ter a possibilidade de determinar o tipo de suas aplicações (soft ou hard), bem como definir a prioridade das mesmas.
+*Confiabilidade* – é muito mais importante em sistemas de tempo real do que em todos as demais modalidades.
+*Tolerância a falhas* – um SO de tempo real é dito estável se na impossibilidade de atender ao deadline de todas as tarefas ativas, garante o atendimento daquelas mais críticas.
 ##### Funcionalidades
-*Sem anotações*
+– Troca de contexto rápida
+– Tamanho reduzido
+– Resposta rápida à interrupções
+– Multitarefa com funcionalidades de IPC e concorrência
+– Escalonamento preemptivo com base em prioridade
+– Minimização dos intervalos em que as interrupções estão desabilitadas
+– Primitivas para atrasar por um tempo fixo, para suspender ou parar tarefas em execução
+– Alarmes e timeouts especiais
 ##### Escalonamento
-*Sem anotações*
+1. Round Robin Premptivo
+2. Por Prioridade Não-Preemptivo
+3. Por Prioridade Preemptivo em Determinados Pontos
+4. Preempção Imediata
 
 # Aula 11
 ## Gerenciamento de Memória

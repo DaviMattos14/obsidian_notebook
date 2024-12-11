@@ -13,12 +13,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "Algebra Linear Algoritmica/Algebra Linear Algoritmica.md",
+                "file": "Arquitetura de Computadores e Sistemas Operacionais/Resumo ArqCompSO.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "Algebra Linear Algoritmica"
+              "title": "Resumo ArqCompSO"
             }
           }
         ]
@@ -176,10 +176,10 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "Algebra Linear Algoritmica/Algebra Linear Algoritmica.md"
+                "file": "Arquitetura de Computadores e Sistemas Operacionais/Resumo ArqCompSO.md"
               },
               "icon": "lucide-list",
-              "title": "Sumário de Algebra Linear Algoritmica"
+              "title": "Sumário de Resumo ArqCompSO"
             }
           }
         ],
@@ -201,8 +201,9 @@
       "obsidian-git:Open Git source control": false
     }
   },
-  "active": "f1b96cfb93a1f04a",
+  "active": "21ff259ac0178718",
   "lastOpenFiles": [
+    "Algebra Linear Algoritmica/Algebra Linear Algoritmica.md",
     "Algebra Linear Algoritmica/Livros/8522107440_sumario.pdf",
     "Algebra Linear Algoritmica/Livros/8522107440_sumario.pdf.crdownload",
     "Algebra Linear Algoritmica/Livros/ufmg_algebra_linear.pdf",
@@ -211,7 +212,6 @@
     "Algebra Linear Algoritmica/PDFs",
     "Algebra Linear Algoritmica/Nova pasta",
     "Probabilidade e Estatistica/Livros/Paganno_Gauvreau.pdf",
-    "Algebra Linear Algoritmica/Algebra Linear Algoritmica.md",
     "Algebra Linear Algoritmica/Gram-Schmidt.png",
     "Algebra Linear Algoritmica/projecao.png",
     "Algebra Linear Algoritmica/projecao 1.png",
@@ -222,7 +222,6 @@
     "Probabilidade e Estatistica/PDFs/Resumo_ProbEst.pdf",
     "Probabilidade e Estatistica/imagens/teste_hipótese.png",
     "Probabilidade e Estatistica/imagens/boxplot.png",
-    "Probabilidade e Estatistica/PDFs/Resumo Prob.Est..pdf",
     "Probabilidade e Estatistica/imagens/teste_hipotese_proporcao.png",
     "Probabilidade e Estatistica/imagens/p_valor.png",
     "Probabilidade e Estatistica/imagens/nivel_de_confianca.png",
