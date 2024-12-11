@@ -348,6 +348,16 @@ Queremos transformar essas colunas em vetores ortonormais, ou seja, transformar 
 tomar $e_1=q_1=\frac{u_1}{||u_1||}=\frac{v_1}{||v_1||}$
 Para $$\text{proj}_{u}(v)=\frac{<v,u>}{<u,u>}u=\frac{v^Tu}{u^Tu}u$$
 Então,
+$$
+\begin{matrix}
+u_1=v_1, &&q_1=\frac{u_1}{||u_1||}\\
+u_2=v_2-\text{proj}_{u_1}(v_2) &&q_2=\frac{u_2}{||u_2||}\\
+u_3 =v_3 - \text{proj}_{u_1}(v_3)-\text{proj}_{q_2}(v_3) && q_1=\frac{u_3}{||u_3||}\\
+u_4 =v_4 - \text{proj}_{u_1}(v_4)-\text{proj}_{q_2}(v_4)-\text{proj}_{q_3}(v_4) && q_1=\frac{u_4}{||u_4||}
+\\\vdots &&\vdots \\
+u_k=v_k\sum\text{proj}_{q_j}(v_k) && q_k=\frac{u_k}{||u_k||}
+\end{matrix}
+$$
 ![[Gram-Schmidt.png]]
 
 **OBS:**
