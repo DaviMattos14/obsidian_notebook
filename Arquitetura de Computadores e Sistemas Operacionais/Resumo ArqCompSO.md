@@ -880,8 +880,14 @@ Exemplo 2:
 ![[traducao_mem_virt.png]]
 
 ### Múltiplas Tabelas
+As tabelas de páginas são mantidas em memória
+O espaço de endereçamento virtual pode ser muito grande ou esparso: a
+tabela de páginas pode ocupar muito espaço na memória
 ### Tabelas Invertidas
+Técnica para reduzir o gasto com tabelas de páginas
+	gasto proporcional ao tamanho da memória real
 ### Transaction Lookaside Buffer - TLB
+Cada referência à memória virtual pode gerar dois ou mais acessos à memória real:
 ### Tamanho da Página
 Quanto menor a página = Menor a fragmentação interna
 Quanto menor a página = Mais páginas por processo
