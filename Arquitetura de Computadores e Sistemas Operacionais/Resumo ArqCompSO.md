@@ -888,6 +888,8 @@ Técnica para reduzir o gasto com tabelas de páginas
 	gasto proporcional ao tamanho da memória real
 ### Transaction Lookaside Buffer - TLB
 Cada referência à memória virtual pode gerar dois ou mais acessos à memória real:
+	1 - Busca a entrada da tabela de página apropriada
+	2 - Busca o dado necessário
 ### Tamanho da Página
 Quanto menor a página = Menor a fragmentação interna
 Quanto menor a página = Mais páginas por processo
