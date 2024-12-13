@@ -72,7 +72,7 @@ g \circ{f} \bigg(\begin{bmatrix}x_1\\x_2\end{bmatrix}\bigg) =
 \begin{bmatrix}85&62\\67&48\end{bmatrix}^C
 \cdot \begin{bmatrix}x_1\\x_2\end{bmatrix}
 $$
-Onde $A\cdot B = C$, é o mesmo que $A_(\text{Linha i}) \cdot B(\text{Coluna j}) = C_{(i,j)}$ 
+Onde $A\cdot B = C$, é o mesmo que $A_{(\text{Linha i})} \cdot B_{(\text{Coluna j})} = C_{(i,j)}$ 
 Exemplo: $\begin{bmatrix}10&11\\14&5\end{bmatrix}^A\cdot\begin{bmatrix}3&2\\5&4\end{bmatrix}^B = \begin{bmatrix}((A_{(1,1)}\cdot B_{(1,1)})+(A_{(1,2)}\cdot B_{(2,1)}) )&((A_{(1,1)}\cdot B_{(2,1)})+(A_{(1,2)}\cdot B_{(2,2)}) )\\((A_{(2,1)}\cdot B_{(1,1)})+(A_{(2,2)}\cdot B_{(2,1)}) )&((A_{(2,1)}\cdot B_{(1,2)})+(A_{(2,2)}\cdot B_{(2,2)}) )\end{bmatrix}$
 ### Função Inversa
 $f(x)=y \leftrightarrow x = g(y)$ 

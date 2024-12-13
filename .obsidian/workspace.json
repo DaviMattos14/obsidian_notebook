@@ -13,12 +13,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "Arquitetura de Computadores e Sistemas Operacionais/Resumo ArqCompSO.md",
+                "file": "Algebra Linear Algoritmica/Algebra Linear Algoritmica.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "Resumo ArqCompSO"
+              "title": "Algebra Linear Algoritmica"
             }
           }
         ]
@@ -176,10 +176,10 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "Arquitetura de Computadores e Sistemas Operacionais/Resumo ArqCompSO.md"
+                "file": "Algebra Linear Algoritmica/Algebra Linear Algoritmica.md"
               },
               "icon": "lucide-list",
-              "title": "Sumário de Resumo ArqCompSO"
+              "title": "Sumário de Algebra Linear Algoritmica"
             }
           }
         ],
@@ -203,6 +203,7 @@
   },
   "active": "21ff259ac0178718",
   "lastOpenFiles": [
+    "Arquitetura de Computadores e Sistemas Operacionais/Resumo ArqCompSO.md",
     "Algebra Linear Algoritmica/Algebra Linear Algoritmica.md",
     "Algebra Linear Algoritmica/Livros/8522107440_sumario.pdf",
     "Algebra Linear Algoritmica/Livros/8522107440_sumario.pdf.crdownload",
@@ -225,7 +226,6 @@
     "Probabilidade e Estatistica/imagens/teste_hipotese_proporcao.png",
     "Probabilidade e Estatistica/imagens/p_valor.png",
     "Probabilidade e Estatistica/imagens/nivel_de_confianca.png",
-    "Arquitetura de Computadores e Sistemas Operacionais/Resumo ArqCompSO.md",
     "Algebra Linear Algoritmica/matriz_inclinada1.png",
     "Arquitetura de Computadores e Sistemas Operacionais/Processadores.md",
     "Arquitetura de Computadores e Sistemas Operacionais/Introdução aos Sistemas Operacionais.md",
