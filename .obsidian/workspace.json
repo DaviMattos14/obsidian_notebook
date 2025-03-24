@@ -173,13 +173,12 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "Algebra Linear Algoritmica/Livros/ufmg_algebra_linear.pdf",
                 "followCursor": false,
                 "showSearch": false,
                 "searchQuery": ""
               },
               "icon": "lucide-list",
-              "title": "Sumário de ufmg_algebra_linear"
+              "title": "Sumário"
             }
           }
         ],
@@ -201,19 +200,19 @@
       "obsidian-git:Open Git source control": false
     }
   },
-  "active": "f1b96cfb93a1f04a",
+  "active": "38795122e67497f8",
   "lastOpenFiles": [
+    "Linguagens Formais/Livros/Resumo LF.docx",
+    "Linguagens Formais/Livros/Não confirmado 493708.crdownload",
+    "Linguagens Formais/Livros/NotasLF collier&menasche.pdf",
+    "Linguagens Formais/Livros/NotasLF collier&menasche.pdf.crdownload",
+    "Computadores e Programação/PDFs/CSAPP.pdf",
+    "Computadores e Programação/PDFs/CSAPP.pdf.crdownload",
+    "Algebra Linear Algoritmica/Livros/ufmg_algebra_linear.pdf",
     "Projeto Prático/PDFs",
     "Projeto Prático/Livros",
     "Projeto Prático/imagens",
     "Otimização/PDFs",
-    "Otimização/Livros",
-    "Otimização/imagens",
-    "Linguagens Formais/PDFs",
-    "Linguagens Formais/Livros",
-    "Linguagens Formais/imagens",
-    "Computadores e Programação/PDFs",
-    "Computadores e Programação/Livros",
     "Algebra Linear Algoritmica/Algebra Linear Algoritmica.md",
     "Algebra Linear Algoritmica/Gram-Schmidt.png",
     "README.md",
