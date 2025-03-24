@@ -40,7 +40,8 @@
             "state": {
               "type": "file-explorer",
               "state": {
-                "sortOrder": "alphabetical"
+                "sortOrder": "alphabetical",
+                "autoReveal": false
               },
               "icon": "lucide-folder-closed",
               "title": "Explorador de arquivos"
@@ -166,8 +167,8 @@
             "state": {
               "type": "calendar",
               "state": {},
-              "icon": "calendar-with-checkmark",
-              "title": "Calendar"
+              "icon": "lucide-file",
+              "title": "Plugin desativado"
             }
           },
           {
@@ -176,7 +177,10 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "Algebra Linear Algoritmica/Algebra Linear Algoritmica.md"
+                "file": "Algebra Linear Algoritmica/Algebra Linear Algoritmica.md",
+                "followCursor": false,
+                "showSearch": false,
+                "searchQuery": ""
               },
               "icon": "lucide-list",
               "title": "Sumário de Algebra Linear Algoritmica"
