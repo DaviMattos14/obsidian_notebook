@@ -4,21 +4,17 @@
     "type": "split",
     "children": [
       {
-        "id": "52f45b406ccd2158",
+        "id": "be54ea85cd501b78",
         "type": "tabs",
         "children": [
           {
-            "id": "21ff259ac0178718",
+            "id": "a13cbd2cba80764c",
             "type": "leaf",
             "state": {
-              "type": "markdown",
-              "state": {
-                "file": "Algebra Linear Algoritmica/Algebra Linear Algoritmica.md",
-                "mode": "source",
-                "source": false
-              },
+              "type": "empty",
+              "state": {},
               "icon": "lucide-file",
-              "title": "Algebra Linear Algoritmica"
+              "title": "Nova aba"
             }
           }
         ]
@@ -177,13 +173,13 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "Algebra Linear Algoritmica/Algebra Linear Algoritmica.md",
+                "file": "Algebra Linear Algoritmica/Livros/ufmg_algebra_linear.pdf",
                 "followCursor": false,
                 "showSearch": false,
                 "searchQuery": ""
               },
               "icon": "lucide-list",
-              "title": "Sumário de Algebra Linear Algoritmica"
+              "title": "Sumário de ufmg_algebra_linear"
             }
           }
         ],
@@ -205,26 +201,28 @@
       "obsidian-git:Open Git source control": false
     }
   },
-  "active": "21ff259ac0178718",
+  "active": "f1b96cfb93a1f04a",
   "lastOpenFiles": [
-    "Arquitetura de Computadores e Sistemas Operacionais/Resumo ArqCompSO.md",
+    "Projeto Prático/PDFs",
+    "Projeto Prático/Livros",
+    "Projeto Prático/imagens",
+    "Otimização/PDFs",
+    "Otimização/Livros",
+    "Otimização/imagens",
+    "Linguagens Formais/PDFs",
+    "Linguagens Formais/Livros",
+    "Linguagens Formais/imagens",
+    "Computadores e Programação/PDFs",
+    "Computadores e Programação/Livros",
     "Algebra Linear Algoritmica/Algebra Linear Algoritmica.md",
-    "Algebra Linear Algoritmica/Livros/8522107440_sumario.pdf",
-    "Algebra Linear Algoritmica/Livros/8522107440_sumario.pdf.crdownload",
-    "Algebra Linear Algoritmica/Livros/ufmg_algebra_linear.pdf",
-    "Algebra Linear Algoritmica/Livros/ufmg_algebra_linear.pdf.crdownload",
-    "Algebra Linear Algoritmica/PDFs/Algebra Linear Algoritmica.pdf",
-    "Algebra Linear Algoritmica/PDFs",
-    "Algebra Linear Algoritmica/Nova pasta",
-    "Probabilidade e Estatistica/Livros/Paganno_Gauvreau.pdf",
     "Algebra Linear Algoritmica/Gram-Schmidt.png",
+    "README.md",
+    "Arquitetura de Computadores e Sistemas Operacionais/Resumo ArqCompSO.md",
     "Algebra Linear Algoritmica/projecao.png",
     "Algebra Linear Algoritmica/projecao 1.png",
     "Algebra Linear Algoritmica/projecao.png",
     "Probabilidade e Estatistica/Introdução à Estatística.md",
-    "Probabilidade e Estatistica/PDFs/Introdução à Estatística.pdf",
     "Probabilidade e Estatistica/Resumo Prob.Est..md",
-    "Probabilidade e Estatistica/PDFs/Resumo_ProbEst.pdf",
     "Probabilidade e Estatistica/imagens/teste_hipótese.png",
     "Probabilidade e Estatistica/imagens/boxplot.png",
     "Probabilidade e Estatistica/imagens/teste_hipotese_proporcao.png",
