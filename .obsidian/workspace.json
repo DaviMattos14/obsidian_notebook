@@ -11,10 +11,14 @@
             "id": "a13cbd2cba80764c",
             "type": "leaf",
             "state": {
-              "type": "empty",
-              "state": {},
+              "type": "markdown",
+              "state": {
+                "file": "Otimização/Otimização - Parte 1.md",
+                "mode": "source",
+                "source": false
+              },
               "icon": "lucide-file",
-              "title": "Nova aba"
+              "title": "Otimização - Parte 1"
             }
           }
         ]
@@ -173,12 +177,13 @@
             "state": {
               "type": "outline",
               "state": {
+                "file": "Otimização/Otimização - Parte 1.md",
                 "followCursor": false,
                 "showSearch": false,
                 "searchQuery": ""
               },
               "icon": "lucide-list",
-              "title": "Sumário"
+              "title": "Sumário de Otimização - Parte 1"
             }
           }
         ],
@@ -200,8 +205,9 @@
       "obsidian-git:Open Git source control": false
     }
   },
-  "active": "38795122e67497f8",
+  "active": "f1b96cfb93a1f04a",
   "lastOpenFiles": [
+    "Otimização/Otimização - Parte 1.md",
     "Linguagens Formais/Livros/Resumo LF.docx",
     "Linguagens Formais/Livros/Não confirmado 493708.crdownload",
     "Linguagens Formais/Livros/NotasLF collier&menasche.pdf",
@@ -212,7 +218,6 @@
     "Projeto Prático/PDFs",
     "Projeto Prático/Livros",
     "Projeto Prático/imagens",
-    "Otimização/PDFs",
     "Algebra Linear Algoritmica/Algebra Linear Algoritmica.md",
     "Algebra Linear Algoritmica/Gram-Schmidt.png",
     "README.md",
