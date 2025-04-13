@@ -13,12 +13,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "Otimização/Otimização - Parte 1.md",
+                "file": "Otimização/Otimização.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "Otimização - Parte 1"
+              "title": "Otimização"
             }
           }
         ]
@@ -177,13 +177,13 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "Otimização/Otimização - Parte 1.md",
+                "file": "Otimização/Otimização.md",
                 "followCursor": false,
                 "showSearch": false,
                 "searchQuery": ""
               },
               "icon": "lucide-list",
-              "title": "Sumário de Otimização - Parte 1"
+              "title": "Sumário de Otimização"
             }
           }
         ],
@@ -205,9 +205,9 @@
       "obsidian-git:Open Git source control": false
     }
   },
-  "active": "f1b96cfb93a1f04a",
+  "active": "a13cbd2cba80764c",
   "lastOpenFiles": [
-    "Otimização/Otimização - Parte 1.md",
+    "Otimização/Otimização.md",
     "Linguagens Formais/Livros/Resumo LF.docx",
     "Linguagens Formais/Livros/Não confirmado 493708.crdownload",
     "Linguagens Formais/Livros/NotasLF collier&menasche.pdf",
