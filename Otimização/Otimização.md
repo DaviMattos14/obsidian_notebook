@@ -49,3 +49,14 @@ $$
 
 #### Resolução Geométrica
 ![[nao_negatividade.png]]![[restricao1.png]]![[restricao2.png]]![[conjunto_viavel1.png]]![[conjunto_viavel.png]]
+#### Possíveis Melhores Soluções
+![[sol_possiveis.png]]
+
+Como queremos Maximizar $x_1$ **e** $x_2$, então podemos desconsiderar **P1, P2 e P4**
+Logo, substituindo $P4$, na função objetiva, $z=4x_1+x-2$, temos:
+$$
+\begin{matrix}
+(1,9) && 4\cdot1+9=13\\
+\end{matrix}
+$$
+Então a solução ótima é $x_1=1$ e $x_2=9$, para o valor ótimo $=13$
