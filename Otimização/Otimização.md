@@ -60,3 +60,46 @@ $$
 \end{matrix}
 $$
 Então a solução ótima é $x_1=1$ e $x_2=9$, para o valor ótimo $=13$
+
+# Problema de Programação Linear - PPL
+==PPL Inteira==
+$$\begin{matrix}
+\text{min (ou max) } z = c^tx \\
+\text{sujeito a}\\
+\hspace{3cm} Ax=b\\
+\hspace{3cm}x \in \mathbb{Z}^n
+
+
+\end{matrix}
+$$
+PPL Inteira-Mista
+$$\begin{matrix}
+\text{min (ou max) } z = c^tx +d^ty\\
+\text{sujeito a}\\
+\hspace{3cm} Ax+By=b\\
+\hspace{3cm}x \in \mathbb{R}^n, y\in\mathbb{Z}^p
+
+
+\end{matrix}
+$$
+## A Terminologia para um PPL
+**Função Objetivo**:
+A função a ser maximizada ou minimizada é chamada <u>Função objetivo f</u>.
+
+**Restrição**:
+As condições impostas pelo modelo são denominadas <u>Restrições do PPL</u>.
+As restrições $x_j ≥ 0$ são denominadas <u>Restrições de não negatividade</u>.
+As outras <u>Restrições funcionais</u>.
+
+**Solução Viáve**l:
+Uma <u>Solução Viável</u> é uma solução para a qual todas as restrições são satisfeitas.
+
+**Solução Inviável**:
+Uma Solução Inviável é uma solução para a qual pelo menos uma restrição é violada.
+
+**Região Viável**:
+a região viável é o conjunto de todas as soluções viáveis.
+
+**Solução Ótima**:
+Uma solução ótima ié uma solução viável onde onde a função objetivo atinge valor máximo(
+PPL maximização) ou mínimo (PPL minimização)
