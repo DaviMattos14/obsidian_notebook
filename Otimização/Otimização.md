@@ -48,4 +48,4 @@ $$
 ![[ex_ppl.png]]
 
 #### Resolução Geométrica
-![[nao_negatividade.png]]![[restricao1.png]]![[restricao2.png]]
+![[nao_negatividade.png]]![[restricao1.png]]![[restricao2.png]]![[conjunto_viavel1.png]]![[conjunto_viavel.png]]
