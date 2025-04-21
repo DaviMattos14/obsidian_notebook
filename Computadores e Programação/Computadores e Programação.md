@@ -148,3 +148,4 @@ Dado pelo menor dos endereços dos bytes do objeto
 Seja x uma variável inteira, se &x = 0x100 (endereço de x), os quatro bytes de x são armazenados nos bytes: 0x100, 0x101, 0x102, 0x103
 
 #### Ordenação dos Bytes na memória
+![[ordenacao_byte_memoria.png]]![[big_little_endian.png]]
