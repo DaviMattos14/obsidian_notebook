@@ -54,4 +54,71 @@ O resultado é o arquivo hello, um arquivo objeto executável que está pronto p
 Nesse ponto, nosso programa fonte hello. c pode ser executado no shell Unix 
 O shell é um interpretador de linha de comando que exibe um prompt e espera pela entrada de comandos
 
-- Um breve resumo de [[Resumo ArqCompSO]]
+### Resumo de [[Resumo ArqCompSO]]
+#### Abstrações de SO
+##### Arquivo
+Um arquivo é uma sequência de bytes com um determinado tamanho (em bytes) 
+Todo dispositivo de E/S (disco, teclado, monitor, rede) é modelado como um arquivo 
+Toda tarefa de E/S é executada lendo e escrevendo em arquivos através de chamadas de sistema do SO 
+<font color="#00b050">Vantagem</font>: Usa-se primitivas de nível mais alto e não é preciso conhecer a tecnologia de cada dispositivo
+
+##### Redes
+Os sistemas de computador modernos estão normalmente ligados entre si através de infraestruturas de redes 
+Do ponto de vista de um sistema isolado, a rede pode ser vista como mais um dispositivo de E/S 
+O processador pode copiar dados entre a memória principal e o adaptador de rede (em geral via DMA), permitindo a comunicação entre diferentes máquinas
+
+#### Concorrência e Paralelismo
+**Concorrência** é o termo usado para referenciar a noção geral de um sistema com atividades simultâneas 
+**Paralelismo** é o termo usado para referenciar o <font color="#ff0000">uso da concorrência para fazer um sistema executar mais rápido </font>
+O paralelismo pode ser explorado em diferentes níveis de abstracão threads, instrucão e SIMD (Single-Instruction, Multiple-Data)
+
+### Representação e Manipulação da Informação
+Os computadores armazenam e processam informações representadas como valores binários 
+Os circuitos eletrônicos para armazenar, processar e transmitir sinais binários são muito mais simples de construir e manter
+Consideraremos as três principais formas de representação de numeros: 
+- **Sem sinal**: notação binária tradicional, representando números maiores ou iguais a zero 
+- **Complemento a 2**: forma mais comum para representar números negativos 
+	Exemplo:
+$$
+\begin{matrix}
+0101=-0\cdot2^3+1\cdot2^2+0\cdot2^1+1\cdot2^0=-0+5=5 \\
+1011=-1\cdot2^3+0\cdot2^2+1\cdot2^1+1\cdot2^1=-8+3=-5
+\end{matrix}
+$$
+- **Ponto-flutuante**: versão na base binária da notação científica para representar números reais (veremos detalhes mais a frente)
+A representação de números no computador usa uma quantidade limitada de bits 
+Em razão disso, algumas operações podem causar <font color="#c00000">estouro</font> (overflow) quando os resultados obtidos são maiores que o que é possível representar 
+Acontece também o arredondamento de valores (aproximações, a serem estudadas com detalhes em cálculo numérico)
+
+## Armazenamento de informações no Computador (Aula 4)
+### Endereços de Memória
+• Cada byte da memória é identificado por um número único, chamado endereço 
+• O conjunto de todos os possíveis endereços é chamado espaço de endereçamento virtual (visto pelos programas como um vetor de bytes monolítico) 
+Por ex., o valor de um ponteiro em C é o endereço virtual do primeiro byte de um bloco contínuo de armazenamento
+
+### Sistema de Numeração
+Permite quantificar coisas e é formado por: 
+- Conjunto de algarismos 
+- Conjunto de regras que estabelecem como representar quantidades numéricas com os algarismos
+- Conjunto de operações que podem ser efetuadas com as quantidades numéricas
+
+### Bases de Potenciação
+Os números podem ser representados em qualquer base de pontenciação (ou simplesmente base) 
+Uma base K requer K símbolos diferentes para representar os dígitos de 0 a (K-1) 
+- O sistema binário possui 2 símbolos: **0 1** 
+- O sistema octal possui 8 símbolos: **0 1 2 3 4 5 6 7** 
+- O sistema decimal possui 10 símbolos: **0 1 2 3 4 5 6 7 8 9** 
+- O sistema hexadecimal possui 16 símbolos: **0 1 2 3 4 5 6 7 8 9 A B C D E F**
+
+### Notação Posicional
+A forma geral de representação e interpretação de quantidades numéricas usa a idéia de **valor posicional** 
+A posição dos algarismos determina o seu valor 
+O valor do i-ésimo dígito D é $D * Base^i$ 
+	**i** é a posição do algarismo no número, sendo i = 0 a posição menos significativa, à direita
+O valor total é a soma dos valores relativos
+![[notacao_posicional.png]]
+
+### Conversão entre bases
+#### Binário
+#### Octal
+#### Hexadecimal
