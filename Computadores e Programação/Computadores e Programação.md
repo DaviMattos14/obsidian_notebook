@@ -137,3 +137,4 @@ O valor total é a soma dos valores relativos
 ![[oct_bin.png]]![[hex_bin.png]]
 #### Binário $\rightarrow$ Octal, Hexadecimal
 ![[bin_hex_octa.png]]
+### Tamanho de Palavra e formatos de dados
