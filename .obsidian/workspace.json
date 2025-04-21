@@ -11,12 +11,14 @@
             "id": "4cfb5fe9d80d6dda",
             "type": "leaf",
             "state": {
-              "type": "pdf",
+              "type": "markdown",
               "state": {
-                "file": "Computadores e Programação/Livros/Randal_E_Bryant,_David_R_O'Hallaron_Computer_Systems_A_Programmer's.pdf"
+                "file": "Otimização/Otimização.md",
+                "mode": "source",
+                "source": false
               },
-              "icon": "lucide-file-text",
-              "title": "Randal_E_Bryant,_David_R_O'Hallaron_Computer_Systems_A_Programmer's"
+              "icon": "lucide-file",
+              "title": "Otimização"
             }
           }
         ]
@@ -165,8 +167,8 @@
             "state": {
               "type": "calendar",
               "state": {},
-              "icon": "lucide-file",
-              "title": "Plugin desativado"
+              "icon": "calendar-with-checkmark",
+              "title": "Calendar"
             }
           },
           {
@@ -175,17 +177,16 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "Computadores e Programação/Livros/Randal_E_Bryant,_David_R_O'Hallaron_Computer_Systems_A_Programmer's.pdf",
-                "followCursor": false,
+                "file": "Otimização/Otimização.md",
+                "followCursor": true,
                 "showSearch": false,
                 "searchQuery": ""
               },
               "icon": "lucide-list",
-              "title": "Sumário de Randal_E_Bryant,_David_R_O'Hallaron_Computer_Systems_A_Programmer's"
+              "title": "Sumário de Otimização"
             }
           }
-        ],
-        "currentTab": 1
+        ]
       }
     ],
     "direction": "horizontal",
@@ -205,10 +206,11 @@
   },
   "active": "4cfb5fe9d80d6dda",
   "lastOpenFiles": [
-    "Computadores e Programação/Computadores e Programação.md",
-    "Computadores e Programação/Livros/Randal_E_Bryant,_David_R_O'Hallaron_Computer_Systems_A_Programmer's.pdf",
-    "Computadores e Programação/Livros/Randal_E_Bryant,_David_R_O'Hallaron_Computer_Systems_A_Programmer's.pdf.crdownload",
+    "Probabilidade e Estatistica/PDFs/Resumo Prob.Est..pdf",
     "Otimização/Otimização.md",
+    "Computadores e Programação/Livros/Randal_E_Bryant,_David_R_O'Hallaron_Computer_Systems_A_Programmer's.pdf",
+    "Computadores e Programação/Computadores e Programação.md",
+    "Computadores e Programação/Livros/Randal_E_Bryant,_David_R_O'Hallaron_Computer_Systems_A_Programmer's.pdf.crdownload",
     "Otimização/Livros/HILLIER_Frederick_S_LIEBERMAN_Gerald_J_I (1).pdf",
     "Otimização/Livros/Livro_Programacao_Linear_UzedaMacambira_Maculan_Fromiga Cabral_LimaPintoPARTE 2.pdf",
     "Otimização/Livros/2016_Book_LinearAndNonlinearProgramming.pdf",
