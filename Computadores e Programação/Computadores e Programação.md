@@ -6,6 +6,11 @@ Consistem de hardware e sistemas de software que funcionam juntos para executar 
 Um programa começa com um programa fonte escrito por um programador, em uma linguagem de alto
 nível e armazenado em um arquivo (*hello.c*)
 
-O programa fonte  é uma sequência de bits (0s e 1s), organizados em grupos de 8 bits chamados bytes.
+O programa fonte  é uma **sequência de bits** (0s e 1s), organizados em grupos de 8 bits chamados **bytes**.
 
-Cada byte representa um caracter alfa numérico (de texto) A maioria dos sistemas modernos representa caracteres usando o padrão ASCII.
+Cada byte representa um **caractere** alfa numérico (de texto) A maioria dos sistemas modernos representa caracteres usando o padrão ASCII.
+
+Arquivos como *hello.c*, constituídos exclusivamente de caracteres ASCII (i.e., sem formatação), são conhecidos como **arquivos texto**.
+
+Todos os outros arquivos são conhecidos como **arquivos binários**
+
