@@ -119,6 +119,12 @@ O valor total é a soma dos valores relativos
 ![[notacao_posicional.png]]
 
 ### Conversão entre bases
-#### Binário
-#### Octal
-#### Hexadecimal
+#### Decimal $\rightarrow$ Binário
+
+![[dec_bin.png]]
+#### Decimal $\rightarrow$ Octal
+![[dec_oct.png]]
+#### Decimal $\rightarrow$ Hexadecimal
+![[dec_hex.png]]
+#### Octal $\rightarrow$ Decimal
+<img src="oct_dec_1.png" width="330"/> <img src="oct_dec_2.png" width="330"/>

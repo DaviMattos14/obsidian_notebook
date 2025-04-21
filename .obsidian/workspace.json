@@ -8,13 +8,13 @@
         "type": "tabs",
         "children": [
           {
-            "id": "4cfb5fe9d80d6dda",
+            "id": "bfb09ff9afaf8cee",
             "type": "leaf",
             "state": {
               "type": "markdown",
               "state": {
                 "file": "Computadores e Programação/Computadores e Programação.md",
-                "mode": "source",
+                "mode": "preview",
                 "source": false
               },
               "icon": "lucide-file",
@@ -204,11 +204,16 @@
       "obsidian-git:Open Git source control": false
     }
   },
-  "active": "f1b96cfb93a1f04a",
+  "active": "bfb09ff9afaf8cee",
   "lastOpenFiles": [
+    "oct_dec_2.png",
+    "oct_dec_1.png",
+    "Computadores e Programação/imagens/dec_hex.png",
+    "Computadores e Programação/imagens/dec_oct.png",
+    "Computadores e Programação/Computadores e Programação.md",
+    "Computadores e Programação/imagens/dec_bin.png",
     "Computadores e Programação/imagens/notacao_posicional.png",
     "Arquitetura de Computadores e Sistemas Operacionais/Resumo ArqCompSO.md",
-    "Computadores e Programação/Computadores e Programação.md",
     "Arquitetura de Computadores e Sistemas Operacionais/Fundamentos de Hardware e Software.md",
     "Arquitetura de Computadores e Sistemas Operacionais/Introdução aos Sistemas Operacionais.md",
     "Arquitetura de Computadores e Sistemas Operacionais/Estrutura do Sistema Operacional.md",
@@ -228,12 +233,7 @@
     "Otimização/imagens/conjunto_viavel.png",
     "Otimização/imagens/conjunto_viavel1.png",
     "Otimização/imagens/restricao2.png",
-    "Otimização/imagens/restricao1.png",
-    "Otimização/imagens/nao_negatividade.png",
-    "Pasted image 20250413180033.png",
-    "Otimização/imagens/ex_ppl.png",
     "Algebra Linear Algoritmica/Algebra Linear Algoritmica.md",
-    "Algebra Linear Algoritmica/Gram-Schmidt.png",
     "README.md",
     "Probabilidade e Estatistica/Introdução à Estatística.md",
     "Probabilidade e Estatistica/Resumo Prob.Est..md",
