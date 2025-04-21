@@ -126,5 +126,14 @@ O valor total é a soma dos valores relativos
 ![[dec_oct.png]]
 #### Decimal $\rightarrow$ Hexadecimal
 ![[dec_hex.png]]
+#### Binário $\rightarrow$ Decimal
+![[bin_dec1.png]]
+![[bin_dec2.png]]
 #### Octal $\rightarrow$ Decimal
 <img src="oct_dec_1.png" width="330"/> <img src="oct_dec_2.png" width="330"/>
+#### Hexadecimal $\rightarrow$ Decimal
+![[hex_dec1.png]]![[hex_dec2.png]]
+#### Binário, Hexadecimal $\rightarrow$ Binário
+![[oct_bin.png]]![[hex_bin.png]]
+#### Binário $\rightarrow$ Octal, Hexadecimal
+![[bin_hex_octa.png]]
