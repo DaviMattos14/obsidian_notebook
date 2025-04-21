@@ -14,3 +14,5 @@ Arquivos como *hello.c*, constituídos exclusivamente de caracteres ASCII (i.e.,
 
 Todos os outros arquivos são conhecidos como **arquivos binários**
 
+- Toda informação em um sistema (incluindo arquivos no disco, programas ou dados do usuário na memória, dados transferidos na rede) é representada como conjunto de bits.
+- A  única coisa que diferencia é o contexto no qual a informação (conjunto de bits) é vista (ex., a mesma sequência de bits pode ser vista como um número inteiro, uma string, uma instrução de máquina, etc.)
