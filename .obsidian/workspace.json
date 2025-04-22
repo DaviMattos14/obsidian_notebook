@@ -8,7 +8,7 @@
         "type": "tabs",
         "children": [
           {
-            "id": "bfb09ff9afaf8cee",
+            "id": "bddf46386063db9e",
             "type": "leaf",
             "state": {
               "type": "markdown",
@@ -177,16 +177,17 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "Otimização/Otimização.md",
+                "file": "Computadores e Programação/Computadores e Programação.md",
                 "followCursor": true,
                 "showSearch": false,
                 "searchQuery": ""
               },
               "icon": "lucide-list",
-              "title": "Sumário de Otimização"
+              "title": "Sumário de Computadores e Programação"
             }
           }
-        ]
+        ],
+        "currentTab": 1
       }
     ],
     "direction": "horizontal",
@@ -206,6 +207,9 @@
   },
   "active": "f1b96cfb93a1f04a",
   "lastOpenFiles": [
+    "Computadores e Programação/imagens/org_hardware.png",
+    "Computadores e Programação/Livros/Randal_E_Bryant,_David_R_O'Hallaron_Computer_Systems_A_Programmer's.pdf",
+    "Computadores e Programação/Computadores e Programação.md",
     "Computadores e Programação/imagens/big_little_endian.png",
     "Computadores e Programação/imagens/ordenacao_byte_memoria.png",
     "Computadores e Programação/imagens/bin_hex_octa.png",
@@ -216,8 +220,6 @@
     "Computadores e Programação/imagens/hex_dec2.png",
     "Computadores e Programação/imagens/hex_dec1.png",
     "Computadores e Programação/imagens/oct_dec_2.png",
-    "Computadores e Programação/imagens/oct_dec_1.png",
-    "Computadores e Programação/Computadores e Programação.md",
     "Arquitetura de Computadores e Sistemas Operacionais/Resumo ArqCompSO.md",
     "Arquitetura de Computadores e Sistemas Operacionais/Fundamentos de Hardware e Software.md",
     "Arquitetura de Computadores e Sistemas Operacionais/Introdução aos Sistemas Operacionais.md",
@@ -225,7 +227,6 @@
     "Computadores e Programação/PDFs/Computadores e Programação.pdf",
     "Otimização/Otimização.md",
     "Probabilidade e Estatistica/PDFs/Resumo Prob.Est..pdf",
-    "Computadores e Programação/Livros/Randal_E_Bryant,_David_R_O'Hallaron_Computer_Systems_A_Programmer's.pdf",
     "Computadores e Programação/Livros/Randal_E_Bryant,_David_R_O'Hallaron_Computer_Systems_A_Programmer's.pdf.crdownload",
     "Otimização/Livros/HILLIER_Frederick_S_LIEBERMAN_Gerald_J_I (1).pdf",
     "Otimização/Livros/Livro_Programacao_Linear_UzedaMacambira_Maculan_Fromiga Cabral_LimaPintoPARTE 2.pdf",

@@ -54,6 +54,8 @@ O resultado é o arquivo hello, um arquivo objeto executável que está pronto p
 Nesse ponto, nosso programa fonte hello. c pode ser executado no shell Unix 
 O shell é um interpretador de linha de comando que exibe um prompt e espera pela entrada de comandos
 
+### Organização do hardware de um sistema
+![[org_hardware.png]]
 ### Resumo de [[Resumo ArqCompSO]]
 #### Abstrações de SO
 ##### Arquivo
