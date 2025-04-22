@@ -226,3 +226,5 @@ Seja x uma variável inteira, se &x = 0x100 (endereço de x), os quatro bytes de
 #### Ordenação dos Bytes na memória
 ![[ordenacao_byte_memoria.png]]![[big_little_endian.png]]
 ## # Representação e armazenamento no computador (Aula 5)
+### Operações com bits
+![[Pasted image 20250422190250.png]]
