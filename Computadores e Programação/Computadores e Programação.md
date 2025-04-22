@@ -56,6 +56,63 @@ O shell é um interpretador de linha de comando que exibe um prompt e espera pel
 
 ### Organização do hardware de um sistema
 ![[org_hardware.png]]
+
+##### Barramentos:
+- Condutores elétricos que carregam bytes de informação entre os demais componentes 
+- São projetados para transferir bytes agrupados em palavras (ex., 4bytes, 8bytes) 
+##### Dispositivos de E/S 
+- Conexão do sistema com o mundo externo
+##### Memória Principal
+  - Dispositivo de armazenamento temporário que armazena programas e os dados usados por eles enquanto o processador está executando o programa 
+  - Logicamente a memória é organizada como um vetor de bytes, cada byte com seu próprio endereço Espaço máximo de endereçamento: 
+	  - 4G (232) bytes, sem extensão, arquitetura de 32 bits 
+	  - 16EXA (264) bytes, teórico na arquitetura de 64 bits, embora 256 TERA (248) bytes usado nos processadores x86-64 atuais
+##### Processador
+A CPU (Unidade Central de Processamento) é a máquina que interpreta e executa as instruções armazenadas na memória principal 
+O PC (Ponteiro ou Contador de Programa) contém o endereço da próxima instrução a ser executada em linguagem de máquina 
+Operações básicas executadas pela CPU: 
+- carga/armazenamento de dados da memória/ registrador 
+- operações lógicas/ aritméticas nos registradores 
+- desvio para outros pontos do programa
+
+#### Uso de Cache
+Cache é uma memória bem mas rápida (e cara) que a memória principal e de tamanho bem menor
+Idéia básica: duplicar em cache uma área da memória para permitir o acesso mais rápido à informação (que teria que ser buscada na memória mais lenta se a cache não existisse)
+Cache só é eficiente se houver localidade (tendência dos programas de acessar instruções e dados em regiões localizadas proximamente)
+Acesso e atualizações da cache são feitos pelo hardware de forma transparente
+![[Computadores e Programação/imagens/hierarquia_memoria.png]]
+#### Funcionalidades de Sistema Operacional
+O Sistema Operacional (SO) tem duas funções básicas: 
+1. O Proteger o hardware do uso inapropriado pelas aplicações 
+2. Prover mecanismos elementares para interação das aplicações com os dispositivos de hardware, simplificando a tarefa dos desenvolvedores de aplicações
+![[so.png]]
+![[abstracao_so.png]]
+
+#### Processos
+Caracteriza um **programa em execução** 
+Vários processos podem executar **concorrentemente**, i.e., a execução das instruções de um processo pode alternar com a execução das instruções de outro processo num mesmo computador 
+O SO usa o mecanismo de **troca de contexto** para alternar entre a execução de um processo e outro 
+Para isso, **informações de contexto** são armazenadas para cada processo (estado das variáveis, ponteiro de programa, pilha de execução, conteúdo da memória, etc.)
+
+#### Threads
+Threads é o nome dado às diferentes **unidades de execução** de um processo 
+As threads compartilham o código e variáveis globais do processo 
+**Multithreading** é um modelo de programação com importância crescente, devido à demanda por aplicações com melhor desempenho e uso apropriado das arquiteturas multicore
+
+#### Memória Virtual
+Abstração que dá a cada processo a ilusão de que ele possui uso exclusivo da memória principal 
+Todo processo tem a mesma visão da memória principal, chamada espaço de endereçamento virtual 
+O espaço de endereçamento virtual é dividido em áreas de propósito específico: 
+1. Código e dados: carregados diretamente a partir do conteúdo do arquivo objeto executável
+2. Heap: espaço de dados criado dinamicamente (ex., malloc free)
+3. Bibliotecas compartilhadas: código e dados para bibliotecas compartilhadas
+4. Pilha: uso especial para implementar chamadas de funções (cresce e diminui dinamicamente)
+5. Memória virtual do kernel: o kernel é a parte do SO que fica sempre residente na memória em área que as aplicações não podem ler escrever executar diretamente
+##### Funcionamento
+Para que a abstração de memória virtual funcione, é preciso um esquema sofisticado de interação entre o hardware e o SO 
+Páginas da memória virtual são mapeadas em páginas da memória física
+	Requer tradução pelo hardware de todo endereço de memória gerado pelo processador 
+A idéia básica consiste em armazenar o conteúdo da memória virtual no disco e usar a memória principal como cache para o disco
 ### Resumo de [[Resumo ArqCompSO]]
 #### Abstrações de SO
 ##### Arquivo
