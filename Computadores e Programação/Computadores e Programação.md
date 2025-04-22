@@ -129,8 +129,25 @@ O processador pode copiar dados entre a memória principal e o adaptador de rede
 #### Concorrência e Paralelismo
 **Concorrência** é o termo usado para referenciar a noção geral de um sistema com atividades simultâneas 
 **Paralelismo** é o termo usado para referenciar o <font color="#ff0000">uso da concorrência para fazer um sistema executar mais rápido </font>
-O paralelismo pode ser explorado em diferentes níveis de abstracão threads, instrucão e SIMD (Single-Instruction, Multiple-Data)
-
+O paralelismo pode ser explorado em diferentes níveis de abstracão:
+- Threads
+Vários fluxos de controle dentro do mesmo processo 
+Os sistemas de computador podem ser: uniprocessador (um único processador sob o controle do SO) ou multiprocessador (vários processadores sob o controle do mesmo SO) 
+Os sistemas multiprocessador têm se tornado mais comuns com o advento das tecnologias multicore e hyperthreading
+Hyperthreading (ou multithreading simultâneo)
+	Técnica que permite uma única CPU executar vários fluxos de controle de um mesmo processo 
+	Requer várias cópias de um mesmo hardware (como PC e registradores), enquanto outras partes são compartilhadas (ex., unidade de aritmética de ponto flutuante)
+	Requer bem menos ciclos de relógio (clock) para chavear entre threads
+	
+- Instrucão 
+No passado, vários ciclos de relógio por instrução
+Hoje, em processadores superescalares, várias instruções por ciclo de clock, com uso de pipelining
+Pipelining 
+	As ações requeridas para executar uma instrução são divididas em diferentes passos e o hardware do processador é organizado como uma série de estágios, cada um executando um desses passos 
+	Hardware pode executar mais de uma instrução simultaneamente, mas com comportamento equivalente ao sequencial
+- SIMD (Single-Instruction, Multiple-Data)
+No nível mais baixo, os processadores modernos possuem hardware especial que permite uma única instrução disparar várias operações para serem executadas em paralelo (ex., instruções Intel e AMD que permitem somar mais de um par de números fracionários em paralelo) 
+Maior eficiência para aplicações envolvendo processamento vetorial e matrizes
 ### Representação e Manipulação da Informação
 Os computadores armazenam e processam informações representadas como valores binários 
 Os circuitos eletrônicos para armazenar, processar e transmitir sinais binários são muito mais simples de construir e manter
