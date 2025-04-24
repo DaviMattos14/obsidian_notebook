@@ -273,5 +273,13 @@ Funciona como uma aproximação para a aritmética real
 #### Número Binários Fracionários
 ![[frac_bin.png]]![[frac_bin2.png]]
 #### Ponto Flutuando do IEEE
-
+![[float_ieee.png]]
+#### Precisão Simples IEEE
+##### Normalizado
+##### Não normalizado, Infinito e Não é um Número (NaN)
+![[precisao_simples_ieee_nan.png]]
+#### Precisão Dupla IEEE
+$$
+...
+$$
 ## Aula 6 - Representação de programas em linguagem de montagem

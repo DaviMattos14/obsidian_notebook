@@ -4,19 +4,21 @@
     "type": "split",
     "children": [
       {
-        "id": "79a2dbcc84a30397",
+        "id": "aa4e80d4a35e3c85",
         "type": "tabs",
         "children": [
           {
-            "id": "d520d537ddd3d3ed",
+            "id": "393852953b58b9c5",
             "type": "leaf",
             "state": {
-              "type": "release-notes",
+              "type": "markdown",
               "state": {
-                "currentVersion": "1.8.10"
+                "file": "Computadores e Programação/Computadores e Programação.md",
+                "mode": "source",
+                "source": false
               },
-              "icon": "lucide-book-up",
-              "title": "Release Notes 1.8.10"
+              "icon": "lucide-file",
+              "title": "Computadores e Programação"
             }
           }
         ]
@@ -175,12 +177,13 @@
             "state": {
               "type": "outline",
               "state": {
+                "file": "Computadores e Programação/Computadores e Programação.md",
                 "followCursor": true,
                 "showSearch": false,
                 "searchQuery": ""
               },
               "icon": "lucide-list",
-              "title": "Sumário"
+              "title": "Sumário de Computadores e Programação"
             }
           }
         ],
@@ -202,8 +205,10 @@
       "obsidian-git:Open Git source control": false
     }
   },
-  "active": "d520d537ddd3d3ed",
+  "active": "f1b96cfb93a1f04a",
   "lastOpenFiles": [
+    "Computadores e Programação/imagens/precisao_simples_ieee_nan.png",
+    "Computadores e Programação/imagens/float_ieee.png",
     "Computadores e Programação/Computadores e Programação.md",
     "Computadores e Programação/imagens/frac_bin2.png",
     "Computadores e Programação/imagens/frac_bin.png",
@@ -215,7 +220,6 @@
     "Computadores e Programação/Livros/Randal_E_Bryant,_David_R_O'Hallaron_Computer_Systems_A_Programmer's.pdf",
     "Computadores e Programação/imagens/big_little_endian.png",
     "Computadores e Programação/imagens/ordenacao_byte_memoria.png",
-    "Computadores e Programação/imagens/bin_hex_octa.png",
     "Arquitetura de Computadores e Sistemas Operacionais/Resumo ArqCompSO.md",
     "Arquitetura de Computadores e Sistemas Operacionais/Fundamentos de Hardware e Software.md",
     "Arquitetura de Computadores e Sistemas Operacionais/Introdução aos Sistemas Operacionais.md",
