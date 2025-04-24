@@ -227,4 +227,51 @@ Seja x uma variável inteira, se &x = 0x100 (endereço de x), os quatro bytes de
 ![[ordenacao_byte_memoria.png]]![[big_little_endian.png]]
 ## # Representação e armazenamento no computador (Aula 5)
 ### Operações com bits
-![[Pasted image 20250422190250.png]]
+![[op_bits.png]]Um uso comum das operações com bits é na implementação de **máscaras** 
+Uma **máscara** é um **padrão de bits** que indica um conjunto selecionado de bits dentro de uma palavra
+
+- AND (`&`): "E" $0\&1 = 0$, $1\&1=1$
+- OR (`|`): "OU" $0|1=1$, $1|1=1$
+- NOT (`~`) "NEGAÇÂO" $\sim0=1$, $\sim1=0$
+- XOR (`^`) "COMPARAÇÂO" $0\wedge1=1$, $1\wedge1=0$
+### Operações Lógicas
+- $|| \rightarrow$ OR lógico 
+- $\&\& \rightarrow$ AND lógico
+- $!\rightarrow$ Complemento Lógico
+As operações lógicas tratam qualquer argumento diferente de ZERO como TRUE e o argumento ZERO como FALSE 
+Elas retornam 0x00 ou 0x01 apenas, indicando resultado FALSE ou TRUE, respectivamente
+
+### Operações de Deslocamento de bits em C
+#### Deslocamento à direita
+A expressão $x\gg K$ desloca K bits a direita
+Em geral, as máquinas suportam duas formas de deslocamento à direita: **lógico** e **aritmético**
+No deslocamento à direita **lógico**, zeros são inseridos ao se deslocar
+	ex., $10101111 \gg 4 = 00001010$
+No deslocamento à direita **aritmético**, o MSB (bit $X_n-1$) é copiado a cada deslocamento (<font color="#c00000">equivale a dividir por $2^K$, preservando o sinal do número</font>)
+	ex., $10101111 \gg 4 = 11111010$ 
+	$(-81/ 16 = -5 - 1/ 16 = -6)$ (arredondando)
+
+### Representação de Inteiros em C
+#### Inteiros Positivos
+A linguagem C define vários tipos de números inteiros com tamanhos variados: **char, short int, int, long int, long long int** 
+Além do tamanho, é possível indicar se o número é sempre positivo (unsigned) ou positivo/negativo (o default)
+#### Inteiros Negativos
+A representação mais comum para números negativos é complemento a 2 (C2)
+	O bit mais significativo da palavra tem peso negativo 
+		ex: $0001 = -0 * 2^3 + 0 * 2^2 + 0 * 2^1 + 1 * 2^0 = 1$
+		$0110 = -0* 2^3 + 1* 2^2 + 1*2^1 + 0 * 2^0 = 6$ 
+		$1010 = -1 * 2^3 + 0 * 2^2 + 1*2^1 + 0 * 2^0 = -6$
+		$1111 = -1*2^3 + 1* 2^2 + 1 * 2^1 + 1 * 2^0 = -1$
+	Observe que para qualquer valor inteiro x em C2 
+		$\sim x$ (complementação bit a bit) é equivalente a -x - 1
+
+### Ponto Flutuante
+Representa números reais racionais na forma $V = x.2^Y$ 
+Útil para representar números muito grandes (|V| $\gg$ 0), usando números normalizados, ou muito próximos de zero (|V| $\ll$ 1), usando números não normalizados 
+Funciona como uma aproximação para a aritmética real
+
+#### Número Binários Fracionários
+![[frac_bin.png]]![[frac_bin2.png]]
+#### Ponto Flutuando do IEEE
+
+## Aula 6 - Representação de programas em linguagem de montagem
