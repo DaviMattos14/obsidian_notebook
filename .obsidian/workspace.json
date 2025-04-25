@@ -53,7 +53,7 @@
             "state": {
               "type": "search",
               "state": {
-                "query": "tag:#include",
+                "query": "",
                 "matchingCase": false,
                 "explainSearch": false,
                 "collapseAll": false,
@@ -216,11 +216,17 @@
       "templates:Inserir modelo": false,
       "markdown-importer:Abrir importador Markdown": false,
       "command-palette:Abrir paleta de comandos": false,
-      "obsidian-git:Open Git source control": false
+      "obsidian-git:Open Git source control": false,
+      "obsidian-textgenerator-plugin:Generate Text!": false,
+      "obsidian-textgenerator-plugin:Text Generator: Templates Packages Manager": false,
+      "latex-ocr:LatexOCR": false
     }
   },
   "active": "f1b96cfb93a1f04a",
   "lastOpenFiles": [
+    "Pasted image 20250425171507.png",
+    "Pasted image 20250425171425.png",
+    "Computadores e Programação/Computadores e Programação.md",
     "Linguagens Formais/Livros/Linguagen_Formais-Hugo_Gualandi (16-04-2025).pdf",
     "Linguagens Formais/Linguagen_Formais-Hugo_Gualandi (16-04-2025).pdf",
     "Linguagen_Formais-Hugo_Gualandi (16-04-2025).pdf",
@@ -231,18 +237,14 @@
     "Banco de Dados I/Livros/Sistemas de Banco de Dados (Ramez Elmasri, Shamkant B. Navathe).pdf",
     "Banco de Dados I/Livros/Sistemas de Banco de Dados (Ramez Elmasri, Shamkant B. Navathe).pdf.crdownload",
     "Linguagens Formais/Livros/pdfcoffee.com_introduao-a-teoria-dos-automatos-linguagens-e-computaao-2ed-ed-by-hopcroft-ullman-and-motwani-pdf-free.pdf",
-    "Linguagens Formais/Livros/pdfcoffee.com_introduao-a-teoria-dos-automatos-linguagens-e-computaao-2ed-ed-by-hopcroft-ullman-and-motwani-pdf-free.pdf.crdownload",
     "Computadores e Programação/imagens/precisao_simples_ieee_nan.png",
     "Computadores e Programação/imagens/float_ieee.png",
-    "Computadores e Programação/Computadores e Programação.md",
     "Computadores e Programação/imagens/frac_bin2.png",
     "Computadores e Programação/imagens/frac_bin.png",
     "Computadores e Programação/imagens/op_bits.png",
     "Computadores e Programação/imagens/abstracao_so.png",
     "Computadores e Programação/imagens/so.png",
     "Computadores e Programação/imagens/hierarquia_memoria.png",
-    "Computadores e Programação/imagens/org_hardware.png",
-    "Computadores e Programação/imagens/big_little_endian.png",
     "Arquitetura de Computadores e Sistemas Operacionais/Resumo ArqCompSO.md",
     "Arquitetura de Computadores e Sistemas Operacionais/Fundamentos de Hardware e Software.md",
     "Arquitetura de Computadores e Sistemas Operacionais/Introdução aos Sistemas Operacionais.md",

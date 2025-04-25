@@ -1,5 +1,8 @@
 [
   "obsidian-git",
   "calendar",
-  "editing-toolbar"
+  "editing-toolbar",
+  "obsidian-icon-folder",
+  "quick-latex",
+  "latex-ocr"
 ]
