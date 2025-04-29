@@ -280,8 +280,6 @@ Funciona como uma aproximação para a aritmética real
 ##### Não normalizado, Infinito e Não é um Número (NaN)
 ![[precisao_simples_ieee_nan.png]]
 #### Precisão Dupla IEEE
-$$
-...
-$$
+![[precisao_dupla_ieee.png]]
 ## Aula 6 - Representação de programas em linguagem de montagem
 
