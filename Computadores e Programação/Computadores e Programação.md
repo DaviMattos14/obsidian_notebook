@@ -276,6 +276,7 @@ Funciona como uma aproximação para a aritmética real
 ![[float_ieee.png]]
 #### Precisão Simples IEEE
 ##### Normalizado
+![[precisao_simples_ieee.png]]
 ##### Não normalizado, Infinito e Não é um Número (NaN)
 ![[precisao_simples_ieee_nan.png]]
 #### Precisão Dupla IEEE
