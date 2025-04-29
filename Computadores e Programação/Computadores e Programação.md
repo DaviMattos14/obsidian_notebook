@@ -282,4 +282,10 @@ Funciona como uma aproximação para a aritmética real
 #### Precisão Dupla IEEE
 ![[precisao_dupla_ieee.png]]
 ## Aula 6 - Representação de programas em linguagem de montagem
+### Programas em linguagem de montagem 
 
+### Perspectiva histórica das arquiteturas Intel 
+
+### Codificação de programas 
+
+### Características da arquitetura x86
