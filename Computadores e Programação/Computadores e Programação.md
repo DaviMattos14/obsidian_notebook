@@ -360,6 +360,7 @@ As operações sobre a pilha FPU podem ser
 - binárias, com ST (0) e ST0); ou ST(0) e operando em memória
 
 ## Aula 7 - Formatos de operandos e instruções de movimentação de dados IA32
+
 ## Aula 8 - Operações lógicas e aritméticas IA32
 ## Aula 9 - Controle do fluxo de execução e instruções condicionais
 ## Aula 10 - Tradução de expressões condicionais e repetições para linguagem de montagem
