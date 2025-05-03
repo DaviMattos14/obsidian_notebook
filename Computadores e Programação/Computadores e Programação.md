@@ -283,9 +283,83 @@ Funciona como uma aproximação para a aritmética real
 ![[precisao_dupla_ieee.png]]
 ## Aula 6 - Representação de programas em linguagem de montagem
 ### Programas em linguagem de montagem 
-
+Ler código em linguagem de montagem gerado por um compilador envolve um **conjunto de habilidades distintas daquelas necessárias para escrever código** diretamente: 
+	é preciso compreender as transformações usadas pelos compiladores para converter construções da linguagem de alto nível em código de máquina 
+Técnicas de **otimização** usadas pelos compiladores podem rearranjar a ordem de execução do programa: 
+	eliminando computações desnecessárias, substituindo operações lentas, ou mesmo convertendo computações recursivas por sequências iterativas
 ### Perspectiva histórica das arquiteturas Intel 
 
 ### Codificação de programas 
+Dados dois programas, pl.c e p2.c, eles podem ser compilados fazendo: 
+```c
+gcc -m32 -01 -o p p1. C p2. C 
+```
+A opção `-O1` diz ao compilador para usar o **nível 1** de otimização
 
+O sistema de compilação transforma programas expressos no modelo de execução da linguagem de alto nível em instruções elementares que o processador executa 
+
+A habilidade de entender o código de montagem e sua relação com o código fonte é um passo essencial para compreender como os computadores executam os programas
+
+- As instruções IA32 podem ter de 1 a 15 bytes de tamanho 
+- As instruções são codificadas de tal forma que as operações mais comuns requerem um número menor de bytes comparado às demais 
+- O formato das instruções é projetado de tal forma que a partir de uma posição inicial há uma única codificação dos bytes em instrução de máquina 
+
+O disassembler determina o código em linguagem de montagem com base apenas na sequência de bytes do código de máquina e na arquitetura para a qual ele foi gerado (não depende da linguagem fonte do programa original)
+#### ATT versus Intel 
+- O código de montagem IA32 pode ser mostrado em diferentes formatos 
+- O formato ATT é o formato padrão das ferramentas gcc e objdump (e será usado ao longo do curso) 
+- O formato Intel é usado por outras ferramentas (ex., Microsoft), incluindo a própria documentação Intel 
+- Há várias diferenças entre os dois formatos 
+- Fazendo `gcc -01 -S -masm=intel ex11.c` forçamos o uso do formato Intel 
 ### Características da arquitetura x86
+#### Nomeclatura
+![[nomeclatura.png]]
+#### Sufixos nas Instruções de Montagem Formato ATT
+Tem que casar com o tamanho do operando destino
+![[sufixo_montagem.png]]
+
+Sufixos para instruções de ponto flutuante
+![[sufixo_float.png]]
+
+#### Registradores de propósito geral do 80386
+![[registradores.png]]
+
+Tinham finalidade específica nas arquiteturas anteriores de 16 bits (razão dos nomes), mas, com o endereçamento linear (flat addressing) de 4GB, o uso específico é enormemente reduzido e os **seis primeiros** podem ser considerados de uso geral, ainda que algumas instruções usem registradores fixos como fonte e destino 
+
+-  EAX - Acumulador, usado em operações aritméticas. 
+- ECX - Contador, usado em loops. 
+- EDX - Registrador de dados, usado em operações de entrada/saída e em multiplicações e divisões. É também uma extensão do Acumulador. 
+- EBX - Base, usado para apontar para dados no segmento DS (8086). 
+- ESI - Índice da fonte de dados a copiar (Source Index). Aponta para dados a serem copiados para DS:EDI (segmento DS, posição EDI). 
+- EDI - Indice do destino de dados a copiar (Destination Index). Aponta para o destino dos dados a serem copiados de DS: ESI. 
+- ESP - Apontador da Pilha (Stack Pointer). Aponta para o topo da pilha (endereço mais baixo dos elementos da pilha). 
+- EBP - Apontador da base do frame (registro de ativação). Acesso a argumentos de procedimentos passados pela pilha.
+
+#### Registrador de Flags
+Armazena códigos de condições setadas por operacões lógicas e aritméticas, que podem ser testados por instruções específicas 
+x86 não suporta acesso direto ao registrador das flags 
+Para modificar ou ler o eflags 
+	Necessário utilizar as instruções privilegiadas pushf (16 bits) ou pushaf (32 bits)
+
+#### Registradores de Segmentos
+- CS - Segmento do Código 
+- DS - Segmento de Dados 
+- ES - Segmento com dados extra 
+- FS - Segmento com mais dados 
+- GS - Segmento com ainda mais dados 
+- SS - Segmento da Pilha (Stack)
+
+#### Registradores para Operações de Ponto Flutuante 
+Para operações de ponto flutuante existe uma pilha especial em hardware (FPU stack) com 8 registradores, referenciados de ST(0) a ST(7), sendo ST(0) o topo da pilha 
+Os registradores possuem 80 bits, suportando operações de 
+- precisão simples (32 bits, sufixo s) 
+- precisão dupla (64 bits, sufixo l) 
+- precisão dupla estendida (80 bits, sufixo t) 
+As operações sobre a pilha FPU podem ser 
+- unárias, sobre ST (0) 
+- binárias, com ST (0) e ST0); ou ST(0) e operando em memória
+
+## Aula 7 - Formatos de operandos e instruções de movimentação de dados IA32
+## Aula 8 - Operações lógicas e aritméticas IA32
+## Aula 9 - Controle do fluxo de execução e instruções condicionais
+## Aula 10 - Tradução de expressões condicionais e repetições para linguagem de montagem
