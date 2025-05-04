@@ -396,6 +396,20 @@ $$
 260_{10}=104_{16} && 
 \end{matrix}
 $$
+
+### Modos de endereçamento
+- Absoluto: $\text{movl  } 17, \%\text{eax}$ 
+	- $R[\%\text{eax}] = \text{Mem } [17]$ (endereço absoluto 17 referenciado) 
+- Imediato: $\text{movl } \$17, \%\text{eax}$
+	- $R\%\text{eax} = 17$ (valor inteiro constante)
+- Indireto: $\text{movl } (\%\text{ecx}), \%\text{eax}$ 
+	- $R[\%\text{eax}] = \text{Mem }[R[\%\text{ecx}]]$ (conteúdo de %ecx é o endereço de memória onde está o valor a ser armazenado em %eax) 
+- Deslocamento: $\text{movl }8(\%\text{ebp}), \%\text{edx}$ 
+	- Operando = $\text{Mem}[R[E_s] + I] = \text{Mem}[R[\%\text{еbp}]+8]$
+- Indexado: $\text{movl }16(\%\text{ecx}, \%\text{eax},4), \%\text{edx}$
+	- Operando = $\text{Mem}[R[E_b] + s * R[E_i] + I] = \text{Mem}[R[\%\text{еcx}]+R[\%\text{еax}]*4+16]$
+
+
 ## Aula 8 - Operações lógicas e aritméticas IA32
 ## Aula 9 - Controle do fluxo de execução e instruções condicionais
 ## Aula 10 - Tradução de expressões condicionais e repetições para linguagem de montagem
