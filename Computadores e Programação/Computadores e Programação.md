@@ -409,7 +409,65 @@ $$
 - Indexado: $\text{movl }16(\%\text{ecx}, \%\text{eax},4), \%\text{edx}$
 	- Operando = $\text{Mem}[R[E_b] + s * R[E_i] + I] = \text{Mem}[R[\%\text{еcx}]+R[\%\text{еax}]*4+16]$
 
+### Instruções de Movimentação de Dados
+Instruções que copiam dados de uma localização para outra (ex., de um registrador para uma posição de memória)
+A generalidade dos formatos de operandos permite que uma mesma instrução básica execute diferentes tipos de movimentações de dados
+$$
+\begin{matrix} 
+\text{S = source (fonte)} && \text{D = destination (destino)}
+\end{matrix}
+$$
+#### Movimentação básica
+- **movb S,D**: S→D (move um byte) 
+- **movw S,D**: S→D (move uma palavra de 16 bits)
+- **movl S,D**: S→D (move uma palavra dupla de 32 bits) 
+- Destino D tem que ser compatível com o sufixo da instrução!
 
+#### Movimentação com extensão do sinal 
+- **movsbw S,D**: sinalEstendido(S)→D (de byte para palavra) 
+- **movsbl S,D**: sinalEstendido(S)→D (de byte para palavra dupla)
+- **movswl S,D**: sinalEstendido(S) →D (de palavra para palavra dupla) 
+Bit de sinal repetido nos bits à esquerda, fazendo com que o valor da representação em C2 se mantenha
+
+#### Movimentação com extensão de 0s 
+- **movzbw S,D**: zeroEstendido(S)D (de byte para palavra) 
+- **movzbl S,D**: zeroEstendido(S)→D (de byte para palavra dupla) 
+- **movzwl S,D**: zeroEstendido(S)→D (de palavra para palavra dupla) 
+Completa os bits à esquerda com 0
+
+#### Operando das instruções
+O operando fonte (S) designa um valor imediato (antecedido de $), ou armazenado em um registrador ou em memória 
+O operando destino (D) designa uma localização que é um registrador ou uma posição de memória 
+
+<font color="#c00000">Restrição com mov</font>: Uma posição de memória não pode ser copiada diretamente para outra posição de memória 
+	Precisa-se copiar da memória para um registrador e depois do registrador para a memória
+
+#### Pilha
+##### Operações de 32bit
+- **pushl S**: abre 4 posições na pilha, fazendo %esp$\leftarrow$%esp-4, e atualiza o novo topo com o valor S (4 bytes) (M$[\%\text{esp}]\leftarrow$S) 
+- **popl D**: copia 4 bytes do topo para D (D$\leftarrow$M\[%esp\]) e decrementa topo, liberando 4 bytes (%esp$\leftarrow$%esp+4)
+
+##### Equivalências
+$$
+\text{pushl \%ebp} \equiv \begin{cases}
+\text{subl \$4, \%esp} \\
+\text{movl \%ebp, (\%esp)}
+\end{cases}
+$$
+$$
+\text{popl \%ebp} \equiv \begin{cases}
+\text{movl (\%esp), \%ebp} \\
+\text{addl  \$4, \%esp}
+\end{cases}
+$$
+Segue regra LIFO (Last-in, first-out) ou "primeiro a entrar, último a sair"
+
+![[funcionamento_pilha.png]]
+
+### Variáveis e Ponteiros
+Ponteiros em C são endereços no código de montagem. 
+Desreferenciar (dereferencing) um ponteiro (pegar o valor apontado por ele envolve carregá-lo num registrador e usar esse registrador para referenciar um endereço de memória. 
+Variável local, como **x**, pode ser mantida em registrador (ao invés da memória), para acesso mais rápido.
 ## Aula 8 - Operações lógicas e aritméticas IA32
 ## Aula 9 - Controle do fluxo de execução e instruções condicionais
 ## Aula 10 - Tradução de expressões condicionais e repetições para linguagem de montagem
