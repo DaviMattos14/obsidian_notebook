@@ -11,17 +11,30 @@
             "id": "393852953b58b9c5",
             "type": "leaf",
             "state": {
+              "type": "pdf",
+              "state": {
+                "file": "Computação Científica e Análise de Dados/Livros/Cálculo_Numérico_Aspectos_Teóricos_e_Computacionais.pdf"
+              },
+              "icon": "lucide-file-text",
+              "title": "Cálculo_Numérico_Aspectos_Teóricos_e_Computacionais"
+            }
+          },
+          {
+            "id": "b1596ed8efe6c814",
+            "type": "leaf",
+            "state": {
               "type": "markdown",
               "state": {
-                "file": "Computadores e Programação/Computadores e Programação.md",
+                "file": "Computação Científica e Análise de Dados.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "Computadores e Programação"
+              "title": "Computação Científica e Análise de Dados"
             }
           }
-        ]
+        ],
+        "currentTab": 1
       }
     ],
     "direction": "vertical"
@@ -191,13 +204,13 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "Computadores e Programação/Computadores e Programação.md",
+                "file": "Computação Científica e Análise de Dados.md",
                 "followCursor": true,
                 "showSearch": false,
                 "searchQuery": ""
               },
               "icon": "lucide-list",
-              "title": "Sumário de Computadores e Programação"
+              "title": "Sumário de Computação Científica e Análise de Dados"
             }
           }
         ],
@@ -220,30 +233,31 @@
       "latex-ocr:LatexOCR": false
     }
   },
-  "active": "f1b96cfb93a1f04a",
+  "active": "b1596ed8efe6c814",
   "lastOpenFiles": [
+    "Computação Científica e Análise de Dados/PDFs/P1.pdf",
+    "Computação Científica e Análise de Dados/PDFs/P1.pdf.crdownload",
+    "Computação Científica e Análise de Dados/PDFs/pca.pdf",
+    "Computação Científica e Análise de Dados/PDFs/pca.pdf.crdownload",
+    "Computação Científica e Análise de Dados/Exercícios/CCAD - Lista 3.pdf",
+    "Computação Científica e Análise de Dados/Exercícios/CCAD - Lista 3.pdf.crdownload",
+    "Computação Científica e Análise de Dados/Exercícios/CCAD - Lista 5.pdf",
+    "Computação Científica e Análise de Dados/Exercícios/CCAD - Lista 5.pdf.crdownload",
+    "Computação Científica e Análise de Dados/Exercícios/CCAD - Provas Antigas .pdf",
+    "Computação Científica e Análise de Dados/Exercícios/CCAD - Lista 4.pdf",
+    "Computação Científica e Análise de Dados/Exercícios/CCAD - Lista 6.pdf",
+    "Computação Científica e Análise de Dados.md",
+    "Computadores e Programação/Computadores e Programação.md",
     "Computadores e Programação/imagens/funcionamento_pilha.png",
-    "Banco de Dados I/Exercícios/ExercicioAula6.brM3",
-    "Banco de Dados I/Exercícios/Não confirmado 406692.crdownload",
     "Computadores e Programação/imagens/registradores.png",
     "Computadores e Programação/imagens/sufixo_float.png",
     "Computadores e Programação/imagens/sufixo_montagem.png",
     "Computadores e Programação/imagens/nomeclatura.png",
     "Computadores e Programação/imagens/precisao_dupla_ieee.png",
     "Computadores e Programação/imagens/precisao_simples_ieee.png",
-    "Computadores e Programação/Computadores e Programação.md",
     "Pasted image 20250425172314.png",
     "Pasted image 20250425171507.png",
     "Pasted image 20250425171425.png",
-    "Linguagens Formais/Livros/Linguagen_Formais-Hugo_Gualandi (16-04-2025).pdf",
-    "Linguagens Formais/Linguagen_Formais-Hugo_Gualandi (16-04-2025).pdf",
-    "Linguagen_Formais-Hugo_Gualandi (16-04-2025).pdf",
-    "Banco de Dados I/Livros/Linguagen_Formais-Hugo_Gualandi (16-04-2025).pdf",
-    "Banco de Dados I/Livros/Linguagen_Formais-Hugo_Gualandi (16-04-2025).pdf.crdownload",
-    "Banco de Dados I/Livros/pdfcoffee.com_livro-projeto-de-banco-de-dados-carlos-alberto-heuser-pdf-free.pdf",
-    "Banco de Dados I/Livros/pdfcoffee.com_livro-projeto-de-banco-de-dados-carlos-alberto-heuser-pdf-free.pdf.crdownload",
-    "Banco de Dados I/Livros/Sistemas de Banco de Dados (Ramez Elmasri, Shamkant B. Navathe).pdf",
-    "Computadores e Programação/imagens/precisao_simples_ieee_nan.png",
     "Arquitetura de Computadores e Sistemas Operacionais/Resumo ArqCompSO.md",
     "Arquitetura de Computadores e Sistemas Operacionais/Fundamentos de Hardware e Software.md",
     "Arquitetura de Computadores e Sistemas Operacionais/Introdução aos Sistemas Operacionais.md",
