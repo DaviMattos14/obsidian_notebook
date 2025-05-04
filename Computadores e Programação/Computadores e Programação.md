@@ -388,6 +388,14 @@ As operações sobre a pilha FPU podem ser
 		- $s$ é o fator de escala (1, 2, 4 ou 8), relacionado ao tamanho do tipo dos objetos da estrutura
 	Todos os outros formatos são simplificações desse formato geral (com ausência de um ou mais elementos) 
 	O formato completo é usual para referenciar elementos de vetores ou estruturas de dados
+
+Exemplo:
+$$
+\begin{matrix}
+260(\%\text{ecx},\%\text{edx})= && 0\text{x}104+0\text{x}1+0\text{x}3 = 0\text{x}108 = 0\text{x}13\\ 
+260_{10}=104_{16} && 
+\end{matrix}
+$$
 ## Aula 8 - Operações lógicas e aritméticas IA32
 ## Aula 9 - Controle do fluxo de execução e instruções condicionais
 ## Aula 10 - Tradução de expressões condicionais e repetições para linguagem de montagem
