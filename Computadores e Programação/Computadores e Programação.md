@@ -360,7 +360,34 @@ As operações sobre a pilha FPU podem ser
 - binárias, com ST (0) e ST0); ou ST(0) e operando em memória
 
 ## Aula 7 - Formatos de operandos e instruções de movimentação de dados IA32
-
+### Operandos das Instruções IA32
+#### Valores de Entrada
+- constantes, 
+- conteúdo de um registrador, ou o conteúdo armazenado na memória 
+#### Localizações de destino 
+- registradores ou 
+- na memória
+### Formatos de operandos
+1. Imediato
+	Constantes numéricas no formato ATT são escritas com $ seguido de um valor numérico (decimal ou hexadecimal) 
+	- `movl $-20, %eax` :armazena -20 no registrador %eax 
+	- `movl $0x2F, %ebx` :armazena 0x2F no registador %ebx
+	Qualquer valor que possa ser representado em 32 bits pode ser usado como constante numérica
+2. Registrador
+	Registrador Denota o conteúdo de um dos registradores, ex.: 
+	- `movb $10, %ah_`
+	- `movw $10, %ax` 
+	- `movl $10, %eax` 
+	Veja que o sufixo das instruções e o tamanho do destino (1 byte, 2 bytes ou 4 bytes) têm que ser compatíveis
+3. Memória
+	Formato mais geral de referenciar memória: $I(E_b, E_i, s)$ 
+		Endereço de memória $= 1 + R[E_b] + R[E_i] * s$ 
+		- $I =$ deslocamento do tipo imediato (mas sem o $) 
+		- $R[E_b]$ representa o valor armazenado no registrador base $E_b$ 
+		- $R[E_i]$ representa o valor armazenado no registrador de índice $E_i$ 
+		- $s$ é o fator de escala (1, 2, 4 ou 8), relacionado ao tamanho do tipo dos objetos da estrutura
+	Todos os outros formatos são simplificações desse formato geral (com ausência de um ou mais elementos) 
+	O formato completo é usual para referenciar elementos de vetores ou estruturas de dados
 ## Aula 8 - Operações lógicas e aritméticas IA32
 ## Aula 9 - Controle do fluxo de execução e instruções condicionais
 ## Aula 10 - Tradução de expressões condicionais e repetições para linguagem de montagem
