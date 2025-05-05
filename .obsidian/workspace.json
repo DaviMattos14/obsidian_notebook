@@ -25,12 +25,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "Algebra Linear Algoritmica/Algebra Linear Algoritmica.md",
+                "file": "Computação Científica e Análise de Dados/Computação Científica e Análise de Dados.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "Algebra Linear Algoritmica"
+              "title": "Computação Científica e Análise de Dados"
             }
           }
         ],
@@ -204,13 +204,13 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "Algebra Linear Algoritmica/Algebra Linear Algoritmica.md",
+                "file": "Computação Científica e Análise de Dados/Computação Científica e Análise de Dados.md",
                 "followCursor": true,
                 "showSearch": false,
                 "searchQuery": ""
               },
               "icon": "lucide-list",
-              "title": "Sumário de Algebra Linear Algoritmica"
+              "title": "Sumário de Computação Científica e Análise de Dados"
             }
           }
         ],
@@ -233,10 +233,11 @@
       "latex-ocr:LatexOCR": false
     }
   },
-  "active": "b1596ed8efe6c814",
+  "active": "f1b96cfb93a1f04a",
   "lastOpenFiles": [
+    "Algebra Linear Algoritmica/Algebra Linear Algoritmica.md",
     "Algebra Linear Algoritmica/Gram-Schmidt.png",
-    "Computação Científica e Análise de Dados.md",
+    "Computação Científica e Análise de Dados/Computação Científica e Análise de Dados.md",
     "Computação Científica e Análise de Dados/PDFs/P1.pdf",
     "Computação Científica e Análise de Dados/PDFs/P1.pdf.crdownload",
     "Computação Científica e Análise de Dados/PDFs/pca.pdf",
@@ -257,13 +258,11 @@
     "Computadores e Programação/imagens/precisao_simples_ieee.png",
     "Pasted image 20250425172314.png",
     "Pasted image 20250425171507.png",
-    "Pasted image 20250425171425.png",
     "Arquitetura de Computadores e Sistemas Operacionais/Resumo ArqCompSO.md",
     "Arquitetura de Computadores e Sistemas Operacionais/Fundamentos de Hardware e Software.md",
     "Arquitetura de Computadores e Sistemas Operacionais/Introdução aos Sistemas Operacionais.md",
     "Arquitetura de Computadores e Sistemas Operacionais/Estrutura do Sistema Operacional.md",
     "Otimização/Otimização.md",
-    "Algebra Linear Algoritmica/Algebra Linear Algoritmica.md",
     "README.md",
     "Probabilidade e Estatistica/Introdução à Estatística.md",
     "Probabilidade e Estatistica/Resumo Prob.Est..md",
