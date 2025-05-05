@@ -25,12 +25,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "Computação Científica e Análise de Dados/Computação Científica e Análise de Dados.md",
+                "file": "Algebra Linear Algoritmica/Algebra Linear Algoritmica.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "Computação Científica e Análise de Dados"
+              "title": "Algebra Linear Algoritmica"
             }
           }
         ],
@@ -204,13 +204,13 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "Computação Científica e Análise de Dados/Computação Científica e Análise de Dados.md",
+                "file": "Algebra Linear Algoritmica/Algebra Linear Algoritmica.md",
                 "followCursor": true,
                 "showSearch": false,
                 "searchQuery": ""
               },
               "icon": "lucide-list",
-              "title": "Sumário de Computação Científica e Análise de Dados"
+              "title": "Sumário de Algebra Linear Algoritmica"
             }
           }
         ],
@@ -233,11 +233,12 @@
       "latex-ocr:LatexOCR": false
     }
   },
-  "active": "f1b96cfb93a1f04a",
+  "active": "b1596ed8efe6c814",
   "lastOpenFiles": [
+    "Algebra Linear Algoritmica/Livros/8522107440_sumario.pdf",
     "Algebra Linear Algoritmica/Algebra Linear Algoritmica.md",
-    "Algebra Linear Algoritmica/Gram-Schmidt.png",
     "Computação Científica e Análise de Dados/Computação Científica e Análise de Dados.md",
+    "Algebra Linear Algoritmica/Gram-Schmidt.png",
     "Computação Científica e Análise de Dados/PDFs/P1.pdf",
     "Computação Científica e Análise de Dados/PDFs/P1.pdf.crdownload",
     "Computação Científica e Análise de Dados/PDFs/pca.pdf",

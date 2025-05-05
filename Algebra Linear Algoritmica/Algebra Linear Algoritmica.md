@@ -346,7 +346,7 @@ $$
 Seja A uma matriz cujas as colunas são LI
 Queremos transformar essas colunas em vetores ortonormais, ou seja, transformar A em Q.
 tomar $e_1=q_1=\frac{u_1}{||u_1||}=\frac{v_1}{||v_1||}$
-Para $$\text{proj}_{u}(v)=\frac{<v,u>}{<u,u>}u=\frac{v^Tu}{u^Tu}u$$
+Para $$\text{proj}_{u}(v)=\frac{<v,u>}{<u,u>}u=\frac{v^Tu}{u^Tu}u=v^tu\frac{u}{||u||}$$
 Então,
 $$
 \begin{matrix}
