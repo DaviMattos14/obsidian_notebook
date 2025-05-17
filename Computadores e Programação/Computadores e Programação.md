@@ -326,14 +326,14 @@ Sufixos para instruções de ponto flutuante
 
 Tinham finalidade específica nas arquiteturas anteriores de 16 bits (razão dos nomes), mas, com o endereçamento linear (flat addressing) de 4GB, o uso específico é enormemente reduzido e os **seis primeiros** podem ser considerados de uso geral, ainda que algumas instruções usem registradores fixos como fonte e destino 
 
--  EAX - Acumulador, usado em operações aritméticas. 
-- ECX - Contador, usado em loops. 
-- EDX - Registrador de dados, usado em operações de entrada/saída e em multiplicações e divisões. É também uma extensão do Acumulador. 
-- EBX - Base, usado para apontar para dados no segmento DS (8086). 
-- ESI - Índice da fonte de dados a copiar (Source Index). Aponta para dados a serem copiados para DS:EDI (segmento DS, posição EDI). 
-- EDI - Indice do destino de dados a copiar (Destination Index). Aponta para o destino dos dados a serem copiados de DS: ESI. 
-- ESP - Apontador da Pilha (Stack Pointer). Aponta para o topo da pilha (endereço mais baixo dos elementos da pilha). 
-- EBP - Apontador da base do frame (registro de ativação). Acesso a argumentos de procedimentos passados pela pilha.
+- **EAX** - Acumulador, usado em operações aritméticas. 
+- **ECX** - Contador, usado em loops. 
+- **EDX** - Registrador de dados, usado em operações de entrada/saída e em multiplicações e divisões. É também uma extensão do Acumulador. 
+- **EBX** - Base, usado para apontar para dados no segmento DS (8086). 
+- **ESI** - Índice da fonte de dados a copiar (Source Index). Aponta para dados a serem copiados para DS:EDI (segmento DS, posição EDI). 
+- **EDI** - Indice do destino de dados a copiar (Destination Index). Aponta para o destino dos dados a serem copiados de DS: ESI. 
+- **ESP** - Apontador da Pilha (Stack Pointer). Aponta para o topo da pilha (endereço mais baixo dos elementos da pilha). 
+- **EBP** - Apontador da base do frame (registro de ativação). Acesso a argumentos de procedimentos passados pela pilha.
 
 #### Registrador de Flags
 Armazena códigos de condições setadas por operacões lógicas e aritméticas, que podem ser testados por instruções específicas 
@@ -469,5 +469,36 @@ Ponteiros em C são endereços no código de montagem.
 Desreferenciar (dereferencing) um ponteiro (pegar o valor apontado por ele envolve carregá-lo num registrador e usar esse registrador para referenciar um endereço de memória. 
 Variável local, como **x**, pode ser mantida em registrador (ao invés da memória), para acesso mais rápido.
 ## Aula 8 - Operações lógicas e aritméticas IA32
+### Operações aritméticas com inteiros
+As operações lógicas e aritméticas são divididas em quatro grupos: 
+- <u>Operações unárias</u>: um único operando é fonte e destino da operação 
+	O operador D pode ser memória ou registrador: 
+		• `inc D`: D+1→D (incremento de 1) 
+		• `dec D`: D-1→D (decremento de 1) 
+		• `neg D`: -D→D (negativo do número) 
+		• `not D`: ~D→D (complemento do número bit a bit)
+	Exemplo: `incl (%esp)` $\rightarrow$ incrementa o inteiro no topo da pilha
+- <u>Operações binárias</u>: o segundo operando é usado como fonte e destino da operação 
+	O operando S pode ser: imediato, registrador ou memória. 
+	O operando D pode ser: registrador ou memória 
+		• `add S, D`: D + S→D (adição) 
+		• `sub S, D`: D - S→D (subtração) 
+		• `imul S, D`: D * S→D (multiplicação, resultado em 32 bits) 
+		• `xor S, D`: D^S→D ("ou-exclusivo" lógico bit a bit) 
+		• `or S, D`: D | S→D ("ou" lógico bit a bit) 
+		• `and S, D`: D & S→D ("e" lógico bit a bit) 
+	Exemplo:  subl %eax, %edx [(%edx - %eax) → %edx] 
+	![[op_aritimetica.png]]
+	Não pode somar/subtrair memória com memória: addl (%eax), (%esp) - não é válido!
+- <u>Operações de deslocamento</u>: à esquerda ou à direita, lógico ou aritmético 
+	Nas operações de deslocamento de bits, a quantidade de bits deslocados é passada no primeiro argumento 
+	-  `sal k, D`: D < k→D (deslocamento aritmético à esquerda) 
+	-  `shi k, D`: D < k→D (deslocamento lógico à esquerda = sal) 
+	-  `sar k, D`: D > k→D (deslocamento aritmético à direita) 
+	-  `shr k, D`: D > k→D (deslocamento lógico à direita)
+- <u>Operação de endereço efetivo de carga</u>: copia um endereço de memória para um registrador
+	![[op_end.png]]• A instrução leal pode ser usada também para descrever operações aritméticas de forma compacta: ex., leal 7(%edx, %edx, 4), %eax (assumindo %edx = x, temos %eax = 5x + 7)
+	
 ## Aula 9 - Controle do fluxo de execução e instruções condicionais
+
 ## Aula 10 - Tradução de expressões condicionais e repetições para linguagem de montagem

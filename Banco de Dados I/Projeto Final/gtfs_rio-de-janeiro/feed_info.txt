@@ -1,0 +1,2 @@
+feed_publisher_name,feed_publisher_url,feed_lang,feed_start_date,feed_end_date,feed_version,feed_contact_email
+Secretaria Municipal de Transportes - SMTR,http://transportes.prefeitura.rio,pt,20240101,20251231,03Q0425,erick.araujo@prefeitura.rio

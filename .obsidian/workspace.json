@@ -4,37 +4,22 @@
     "type": "split",
     "children": [
       {
-        "id": "aa4e80d4a35e3c85",
+        "id": "b529ba04946d34ee",
         "type": "tabs",
         "children": [
-          {
-            "id": "393852953b58b9c5",
-            "type": "leaf",
-            "state": {
-              "type": "pdf",
-              "state": {
-                "file": "Computação Científica e Análise de Dados/Livros/Cálculo_Numérico_Aspectos_Teóricos_e_Computacionais.pdf"
-              },
-              "icon": "lucide-file-text",
-              "title": "Cálculo_Numérico_Aspectos_Teóricos_e_Computacionais"
-            }
-          },
           {
             "id": "b1596ed8efe6c814",
             "type": "leaf",
             "state": {
-              "type": "markdown",
+              "type": "pdf",
               "state": {
-                "file": "Algebra Linear Algoritmica/Algebra Linear Algoritmica.md",
-                "mode": "source",
-                "source": false
+                "file": "Computadores e Programação/Livros/Randal_E_Bryant,_David_R_O'Hallaron_Computer_Systems_A_Programmer's.pdf"
               },
-              "icon": "lucide-file",
-              "title": "Algebra Linear Algoritmica"
+              "icon": "lucide-file-text",
+              "title": "Randal_E_Bryant,_David_R_O'Hallaron_Computer_Systems_A_Programmer's"
             }
           }
-        ],
-        "currentTab": 1
+        ]
       }
     ],
     "direction": "vertical"
@@ -204,13 +189,13 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "Algebra Linear Algoritmica/Algebra Linear Algoritmica.md",
-                "followCursor": true,
+                "file": "Computadores e Programação/Livros/Randal_E_Bryant,_David_R_O'Hallaron_Computer_Systems_A_Programmer's.pdf",
+                "followCursor": false,
                 "showSearch": false,
                 "searchQuery": ""
               },
               "icon": "lucide-list",
-              "title": "Sumário de Algebra Linear Algoritmica"
+              "title": "Sumário de Randal_E_Bryant,_David_R_O'Hallaron_Computer_Systems_A_Programmer's"
             }
           }
         ],
@@ -235,10 +220,16 @@
   },
   "active": "b1596ed8efe6c814",
   "lastOpenFiles": [
+    "Computadores e Programação/Computadores e Programação.md",
+    "Computadores e Programação/imagens/op_end.png",
+    "Computadores e Programação/imagens/op_aritimetica.png",
+    "Computadores e Programação/Livros/Randal_E_Bryant,_David_R_O'Hallaron_Computer_Systems_A_Programmer's.pdf",
+    "README.md",
+    "Computação Científica e Análise de Dados/Livros/Cálculo_Numérico_Aspectos_Teóricos_e_Computacionais.pdf",
+    "Computação Científica e Análise de Dados/Computação Científica e Análise de Dados.md",
+    "Algebra Linear Algoritmica/Algebra Linear Algoritmica.md",
     "Banco de Dados I/Exercícios/Davi Mattos - Mapeamento Conceitual-Lógico.brM3",
     "Algebra Linear Algoritmica/Livros/8522107440_sumario.pdf",
-    "Algebra Linear Algoritmica/Algebra Linear Algoritmica.md",
-    "Computação Científica e Análise de Dados/Computação Científica e Análise de Dados.md",
     "Algebra Linear Algoritmica/Gram-Schmidt.png",
     "Computação Científica e Análise de Dados/PDFs/P1.pdf",
     "Computação Científica e Análise de Dados/PDFs/P1.pdf.crdownload",
@@ -246,10 +237,6 @@
     "Computação Científica e Análise de Dados/PDFs/pca.pdf.crdownload",
     "Computação Científica e Análise de Dados/Exercícios/CCAD - Lista 3.pdf",
     "Computação Científica e Análise de Dados/Exercícios/CCAD - Lista 3.pdf.crdownload",
-    "Computação Científica e Análise de Dados/Exercícios/CCAD - Lista 5.pdf",
-    "Computação Científica e Análise de Dados/Exercícios/CCAD - Lista 5.pdf.crdownload",
-    "Computação Científica e Análise de Dados/Exercícios/CCAD - Provas Antigas .pdf",
-    "Computadores e Programação/Computadores e Programação.md",
     "Computadores e Programação/imagens/funcionamento_pilha.png",
     "Computadores e Programação/imagens/registradores.png",
     "Computadores e Programação/imagens/sufixo_float.png",
@@ -257,14 +244,11 @@
     "Computadores e Programação/imagens/nomeclatura.png",
     "Computadores e Programação/imagens/precisao_dupla_ieee.png",
     "Computadores e Programação/imagens/precisao_simples_ieee.png",
-    "Pasted image 20250425172314.png",
-    "Pasted image 20250425171507.png",
     "Arquitetura de Computadores e Sistemas Operacionais/Resumo ArqCompSO.md",
     "Arquitetura de Computadores e Sistemas Operacionais/Fundamentos de Hardware e Software.md",
     "Arquitetura de Computadores e Sistemas Operacionais/Introdução aos Sistemas Operacionais.md",
     "Arquitetura de Computadores e Sistemas Operacionais/Estrutura do Sistema Operacional.md",
     "Otimização/Otimização.md",
-    "README.md",
     "Probabilidade e Estatistica/Introdução à Estatística.md",
     "Probabilidade e Estatistica/Resumo Prob.Est..md",
     "Arquitetura de Computadores e Sistemas Operacionais/Processadores.md",
