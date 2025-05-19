@@ -540,4 +540,32 @@ Overflow também ocorre quando trocamos de sinal o menor negativo inteiro, pois 
 ![[test_cmp.png]]
 ### Instruções SET
 ![[set.png]]
+### Instruções de Desvio (JUMP)
+Uma instrução de desvio pode fazer a execução desviar para uma nova posição do programa (rompendo a ordem sequencial de instruções listadas) 
+O endereço da instrução de destino (próxima instrução a ser executada) é normalmente indicado por um label 
+Ao gerar o código objeto, o montador determina os endereços dos labels e decodifica os endereços alvos das instruções de desvio
+![[jump.png]]
+### Instrução jmp
+A instrução jmp desvia incondicionalmente 
+Tipo de desvio 
+- Direto (via label), codificado como parte da instrução (ex., jmp FIM) 
+- Indireto (via registrador ou posição de memória), codificado com auxílio do operador "*" 
+	- jmp * %eax - usa o conteúdo do registrador como endereço de desvio • 
+	- jmp * (%eax) - usa o conteúdo da memória endereçada pelo registrador como endereço de desvio 
+As demais instruções de desvio são condicionais e podem usar apenas destino direto (via label)
+• je (ou jz): ZF (igual/zero) 
+• jne (ou jnz): ~ZF (diferente/não-zero) 
+• js: SF (negativo) • jns: ~SF (não negativo) 
+• jg (ou jnle): ~(SF^OF) & ~ZF (maior com sinal)ª 
+• jge (ou jnl): ~(SF^ OF) (maior ou igual com sinal) 
+• jl (ou jnge): SF^OF (menor com sinal) 
+• jle (ou jng): (SF^OF) | ZF (menor ou igual com sinal) 
+	ª^ é a operação ou-exclusivo (XOR)
+• ja (ou jnbe): ~CF & ~ZF (acima sem sinal ) 
+• jae (ou jnb): ~CF (acima ou igual sem sinal) 
+• jb (ou jnae): CF (abaixo sem sinal) 
+• jbe (ou jna): CF | ZF (abaixo ou igual sem sinal ) 
+
+Estas instruções operam sobre tipos UNSIGNED
+
 ## Aula 10 - Tradução de expressões condicionais e repetições para linguagem de montagem
