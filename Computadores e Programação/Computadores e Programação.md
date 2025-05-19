@@ -500,5 +500,17 @@ As operações lógicas e aritméticas são divididas em quatro grupos:
 	![[op_end.png]]• A instrução leal pode ser usada também para descrever operações aritméticas de forma compacta: ex., leal 7(%edx, %edx, 4), %eax (assumindo %edx = x, temos %eax = 5x + 7)
 	
 ## Aula 9 - Controle do fluxo de execução e instruções condicionais
+### Operações Aritméticas Especiais
+
+
+| Instrução | Efeito                                      | Descrição                          |
+| --------- | ------------------------------------------- | ---------------------------------- |
+| imull S   | %edx:%eax $\leftarrow$ S x %eax             | Mult. completa (64 bits) com sinal |
+| mull S    | %edx:%eax $\leftarrow$ S x %eax             | Mult. completa (64 bits) sem sinal |
+| cltd      | %edx:%eax $\leftarrow$ estende sinal(%eax)  | Estende 32 bits para 64 bits       |
+| idivl S   | %edx $\leftarrow$ %edx:%eax mod S (resto)   | Divisão com sinal                  |
+|           | %eax $\leftarrow$ %edx:%eax ÷ S (quociente) |                                    |
+| divl S    | %edx $\leftarrow$ %edx:%eax mod S (resto)   | Divisão sem sinal                  |
+|           | %eax $\leftarrow$ %edx:%eax ÷ S (quociente) |                                    |
 
 ## Aula 10 - Tradução de expressões condicionais e repetições para linguagem de montagem
