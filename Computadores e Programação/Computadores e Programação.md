@@ -567,5 +567,8 @@ As demais instruções de desvio são condicionais e podem usar apenas destino d
 • jbe (ou jna): CF | ZF (abaixo ou igual sem sinal ) 
 
 Estas instruções operam sobre tipos UNSIGNED
-
+### Codificação de Labels
+**Relativo ao PC**: codifica a diferença entre o endereço da instrução alvo e o endereço da instrução imediatamente após o JUMP (requer 1, 2 ou 4 bytes) 
+**Absoluto**: codifica o endereço alvo diretamente (requer 4 bytes)
+![[cod_montagem.png]]
 ## Aula 10 - Tradução de expressões condicionais e repetições para linguagem de montagem
