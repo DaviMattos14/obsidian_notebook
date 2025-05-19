@@ -502,7 +502,6 @@ As operações lógicas e aritméticas são divididas em quatro grupos:
 ## Aula 9 - Controle do fluxo de execução e instruções condicionais
 ### Operações Aritméticas Especiais
 
-
 | Instrução | Efeito                                      | Descrição                          |
 | --------- | ------------------------------------------- | ---------------------------------- |
 | imull S   | %edx:%eax $\leftarrow$ S x %eax             | Mult. completa (64 bits) com sinal |
@@ -512,5 +511,33 @@ As operações lógicas e aritméticas são divididas em quatro grupos:
 |           | %eax $\leftarrow$ %edx:%eax ÷ S (quociente) |                                    |
 | divl S    | %edx $\leftarrow$ %edx:%eax mod S (resto)   | Divisão sem sinal                  |
 |           | %eax $\leftarrow$ %edx:%eax ÷ S (quociente) |                                    |
+### Registradores de códigos de condição
+A CPU mantém registradores de código de condição, setados bit-a-bit, que armazenam atributos das últimas operações lógicas e aritméticas executadas
+Códigos de condição são setados como <font color="#c00000">efeito colateral de uma instrução</font> 
+### Construções Condicionais
+Construções condicionais (ex., while, for, if-else) requerem o teste de alguma condição relativa ao valor de variáveis do programa e podem causar um desvio na sequência de instruções 
+- Desvios incondicionais 
+São programados com a instrução jmp, desviando a execução para outra parte do programa 
+- Desvios condicionais 
+São baseados em códigos de condição (ou flags) setados nos registradores de códigos de condição
+### Códigos de condição
+Os códigos de condição mais comuns são: 
+1. CF (Carry Flag): a última operação gerou um bit extra, usado para detectar overflow (estouro) em operações sem sinal 
+2. ZF (Zero Flag): o resultado da última operação foi zero 
+3. SF (Sign Flag): o resultado da última operação foi negativo 
+4. OF (Overflow Flag): a última operação causou um overfow de operação com sinal
 
+Obs:
+A instrução leal não altera nenhum dos códigos de condição (já que seu uso é para cálculo de endereços de memória) 
+Nas operações de deslocamento, CF é setado com o último bit deslocado para fora e OF é setado em zero
+Nas operações lógicas, CF e OF são setados em zero 
+<font color="#c00000">Atenção</font>: instruções add e dec setam OF e ZF, mas deixam CF inalterado.
+### Overflow
+Nunca pode acontecer overflow quando somamos dois números de sinais opostos 
+Quando a soma de dois números do mesmo sinal dá um resultado de sinal oposto ocorre overflow 
+Overflow também ocorre quando trocamos de sinal o menor negativo inteiro, pois a magnitude resultante não tem representação inteira positiva em complemento a dois
+### Classe de instruções TEST e CMP
+![[test_cmp.png]]
+### Instruções SET
+![[set.png]]
 ## Aula 10 - Tradução de expressões condicionais e repetições para linguagem de montagem
