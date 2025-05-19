@@ -549,9 +549,9 @@ Ao gerar o código objeto, o montador determina os endereços dos labels e decod
 A instrução jmp desvia incondicionalmente 
 Tipo de desvio 
 - Direto (via label), codificado como parte da instrução (ex., jmp FIM) 
-- Indireto (via registrador ou posição de memória), codificado com auxílio do operador "*" 
-	- jmp * %eax - usa o conteúdo do registrador como endereço de desvio • 
-	- jmp * (%eax) - usa o conteúdo da memória endereçada pelo registrador como endereço de desvio 
+- Indireto (via registrador ou posição de memória), codificado com auxílio do operador "\*" 
+	- jmp \* %eax - usa o conteúdo do registrador como endereço de desvio  
+	- jmp \* (%eax) - usa o conteúdo da memória endereçada pelo registrador como endereço de desvio 
 As demais instruções de desvio são condicionais e podem usar apenas destino direto (via label)
 • je (ou jz): ZF (igual/zero) 
 • jne (ou jnz): ~ZF (diferente/não-zero) 
