@@ -4,19 +4,17 @@
     "type": "split",
     "children": [
       {
-        "id": "b529ba04946d34ee",
+        "id": "6e435dc1c53dd24c",
         "type": "tabs",
         "children": [
           {
-            "id": "b1596ed8efe6c814",
+            "id": "27ae9d2c05d7e7db",
             "type": "leaf",
             "state": {
-              "type": "pdf",
-              "state": {
-                "file": "Computadores e Programação/Livros/Randal_E_Bryant,_David_R_O'Hallaron_Computer_Systems_A_Programmer's.pdf"
-              },
-              "icon": "lucide-file-text",
-              "title": "Randal_E_Bryant,_David_R_O'Hallaron_Computer_Systems_A_Programmer's"
+              "type": "empty",
+              "state": {},
+              "icon": "lucide-file",
+              "title": "Nova aba"
             }
           }
         ]
@@ -189,13 +187,12 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "Computadores e Programação/Livros/Randal_E_Bryant,_David_R_O'Hallaron_Computer_Systems_A_Programmer's.pdf",
                 "followCursor": false,
                 "showSearch": false,
                 "searchQuery": ""
               },
               "icon": "lucide-list",
-              "title": "Sumário de Randal_E_Bryant,_David_R_O'Hallaron_Computer_Systems_A_Programmer's"
+              "title": "Sumário"
             }
           }
         ],
@@ -218,12 +215,12 @@
       "latex-ocr:LatexOCR": false
     }
   },
-  "active": "b1596ed8efe6c814",
+  "active": "27ae9d2c05d7e7db",
   "lastOpenFiles": [
+    "Computadores e Programação/Livros/Randal_E_Bryant,_David_R_O'Hallaron_Computer_Systems_A_Programmer's.pdf",
     "Computadores e Programação/Computadores e Programação.md",
     "Computadores e Programação/imagens/op_end.png",
     "Computadores e Programação/imagens/op_aritimetica.png",
-    "Computadores e Programação/Livros/Randal_E_Bryant,_David_R_O'Hallaron_Computer_Systems_A_Programmer's.pdf",
     "README.md",
     "Computação Científica e Análise de Dados/Livros/Cálculo_Numérico_Aspectos_Teóricos_e_Computacionais.pdf",
     "Computação Científica e Análise de Dados/Computação Científica e Análise de Dados.md",
