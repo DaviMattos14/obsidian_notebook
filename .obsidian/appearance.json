@@ -8,5 +8,6 @@
   "textFontFamily": "Calibri,Arial",
   "monospaceFontFamily": "Cascadia Mono",
   "interfaceFontFamily": "Gadugi,Candara",
-  "showRibbon": true
+  "showRibbon": true,
+  "baseFontSizeAction": false
 }
