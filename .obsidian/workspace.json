@@ -14,7 +14,7 @@
               "type": "markdown",
               "state": {
                 "file": "Computadores e Programação/Computadores e Programação.md",
-                "mode": "source",
+                "mode": "preview",
                 "source": false
               },
               "icon": "lucide-file",
@@ -220,7 +220,7 @@
       "latex-ocr:LatexOCR": false
     }
   },
-  "active": "f1b96cfb93a1f04a",
+  "active": "27ae9d2c05d7e7db",
   "lastOpenFiles": [
     "Computadores e Programação/imagens/jump.png",
     "Computadores e Programação/imagens/set.png",
