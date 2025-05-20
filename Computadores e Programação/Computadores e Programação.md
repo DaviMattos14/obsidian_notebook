@@ -383,11 +383,12 @@ As operações sobre a pilha FPU podem ser
 	Veja que o sufixo das instruções e o tamanho do destino (1 byte, 2 bytes ou 4 bytes) têm que ser compatíveis
 3. Memória
 	Formato mais geral de referenciar memória: $I(E_b, E_i, s)$ 
-		Endereço de memória $= 1 + R[E_b] + R[E_i] * s$ 
+		Endereço de memória $= I + R[E_b] + R[E_i] * s$ 
 		- $I =$ deslocamento do tipo imediato (mas sem o $) 
 		- $R[E_b]$ representa o valor armazenado no registrador base $E_b$ 
 		- $R[E_i]$ representa o valor armazenado no registrador de índice $E_i$ 
 		- $s$ é o fator de escala (1, 2, 4 ou 8), relacionado ao tamanho do tipo dos objetos da estrutura
+	![[acesso_mem.png]]
 	Todos os outros formatos são simplificações desse formato geral (com ausência de um ou mais elementos) 
 	O formato completo é usual para referenciar elementos de vetores ou estruturas de dados
 
@@ -400,7 +401,6 @@ $$
 $$
 
 ### Modos de endereçamento
-![[modo_endereçamento.png]]
 - Absoluto: $\text{movl  } 17, \%\text{eax}$ 
 	- $R[\%\text{eax}] = \text{Mem } [17]$ (endereço absoluto 17 referenciado) 
 - Imediato: $\text{movl } \$17, \%\text{eax}$
@@ -413,6 +413,7 @@ $$
 	- Operando = $\text{Mem}[R[E_b] + s * R[E_i] + I] = \text{Mem}[R[\%\text{еcx}]+R[\%\text{еax}]*4+16]$
 
 ### Instruções de Movimentação de Dados
+![[mov_data.png]]
 Instruções que copiam dados de uma localização para outra (ex., de um registrador para uma posição de memória)
 A generalidade dos formatos de operandos permite que uma mesma instrução básica execute diferentes tipos de movimentações de dados
 $$
@@ -420,31 +421,31 @@ $$
 \text{S = source (fonte)} && \text{D = destination (destino)}
 \end{matrix}
 $$
+Copiar um valor de um lugar para outro requer duas instruções, a primeira para carregar o valor na fonte no registrador, e a segunda para gravar esse valor do registrador no destino.
 #### Movimentação básica
 - **movb S,D**: S→D (move um byte) 
-- **movw S,D**: S→D (move uma palavra de 16 bits)
-- **movl S,D**: S→D (move uma palavra dupla de 32 bits) 
+	- Qualquer registrador de 32bits (`%eax - %ebp`)
+- **movw S,D**: S→D (move uma palavra de 16 bits $\rightarrow$ 2 Bytes)
+	- Qualquer registrador de 16bits (`%ax - %bp`)
+- **movl S,D**: S→D (move uma palavra dupla de 32 bits $\rightarrow$ 5 Bytes) 
+	- Qualquer registrador de bit único (`%ah - %bh` , `%al - %bl`))
 - Destino D tem que ser compatível com o sufixo da instrução!
-
 #### Movimentação com extensão do sinal 
 - **movsbw S,D**: sinalEstendido(S)→D (de byte para palavra) 
 - **movsbl S,D**: sinalEstendido(S)→D (de byte para palavra dupla)
 - **movswl S,D**: sinalEstendido(S) →D (de palavra para palavra dupla) 
 Bit de sinal repetido nos bits à esquerda, fazendo com que o valor da representação em C2 se mantenha
-
 #### Movimentação com extensão de 0s 
 - **movzbw S,D**: zeroEstendido(S)D (de byte para palavra) 
 - **movzbl S,D**: zeroEstendido(S)→D (de byte para palavra dupla) 
 - **movzwl S,D**: zeroEstendido(S)→D (de palavra para palavra dupla) 
 Completa os bits à esquerda com 0
-
 #### Operando das instruções
 O operando fonte (S) designa um valor imediato (antecedido de $), ou armazenado em um registrador ou em memória 
 O operando destino (D) designa uma localização que é um registrador ou uma posição de memória 
 
 <font color="#c00000">Restrição com mov</font>: Uma posição de memória não pode ser copiada diretamente para outra posição de memória 
 	Precisa-se copiar da memória para um registrador e depois do registrador para a memória
-
 #### Pilha
 ##### Operações de 32bit
 - **pushl S**: abre 4 posições na pilha, fazendo %esp$\leftarrow$%esp-4, e atualiza o novo topo com o valor S (4 bytes) (M$[\%\text{esp}]\leftarrow$S) 
@@ -463,7 +464,7 @@ $$
 \text{addl  \$4, \%esp}
 \end{cases}
 $$
-Segue regra LIFO (Last-in, first-out) ou "primeiro a entrar, último a sair"
+Segue regra LIFO (Last-in, first-out) ou "último a entrar, primeiro a sair"
 
 ![[funcionamento_pilha.png]]
 
