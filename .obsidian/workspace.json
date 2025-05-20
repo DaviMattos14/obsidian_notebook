@@ -27,12 +27,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "Computadores e Programação/Capítulos do Livro.md",
+                "file": "Computadores e Programação/Computadores e Programação.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "Capítulos do Livro"
+              "title": "Computadores e Programação"
             }
           }
         ],
@@ -206,13 +206,13 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "Computadores e Programação/Capítulos do Livro.md",
+                "file": "Computadores e Programação/Computadores e Programação.md",
                 "followCursor": false,
                 "showSearch": false,
                 "searchQuery": ""
               },
               "icon": "lucide-list",
-              "title": "Sumário de Capítulos do Livro"
+              "title": "Sumário de Computadores e Programação"
             }
           }
         ],
@@ -235,10 +235,10 @@
       "latex-ocr:LatexOCR": false
     }
   },
-  "active": "f1b96cfb93a1f04a",
+  "active": "0a7cd68519139324",
   "lastOpenFiles": [
-    "Computadores e Programação/Computadores e Programação.md",
     "Computadores e Programação/Capítulos do Livro.md",
+    "Computadores e Programação/Computadores e Programação.md",
     "Sem título",
     "Computadores e Programação/imagens/cod_montagem.png",
     "Computadores e Programação/imagens/jump.png",
