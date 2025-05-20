@@ -315,6 +315,8 @@ O disassembler determina o código em linguagem de montagem com base apenas na s
 #### Nomeclatura
 ![[nomeclatura.png]]
 #### Sufixos nas Instruções de Montagem Formato ATT
+
+![[assembly_sufix.png]]
 Tem que casar com o tamanho do operando destino
 ![[sufixo_montagem.png]]
 
