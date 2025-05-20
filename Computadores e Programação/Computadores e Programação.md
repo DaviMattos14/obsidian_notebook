@@ -424,11 +424,11 @@ $$
 Copiar um valor de um lugar para outro requer duas instruções, a primeira para carregar o valor na fonte no registrador, e a segunda para gravar esse valor do registrador no destino.
 #### Movimentação básica
 - **movb S,D**: S→D (move um byte) 
-	- Qualquer registrador de 32bits (`%eax - %ebp`)
+	- Qualquer registrador de bit único (`%ah - %bh` , `%al - %bl`))
 - **movw S,D**: S→D (move uma palavra de 16 bits $\rightarrow$ 2 Bytes)
 	- Qualquer registrador de 16bits (`%ax - %bp`)
 - **movl S,D**: S→D (move uma palavra dupla de 32 bits $\rightarrow$ 5 Bytes) 
-	- Qualquer registrador de bit único (`%ah - %bh` , `%al - %bl`))
+	- - Qualquer registrador de 32bits (`%eax - %ebp`)
 - Destino D tem que ser compatível com o sufixo da instrução!
 #### Movimentação com extensão do sinal 
 - **movsbw S,D**: sinalEstendido(S)→D (de byte para palavra) 
