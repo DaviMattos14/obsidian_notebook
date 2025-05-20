@@ -506,15 +506,16 @@ As operações lógicas e aritméticas são divididas em quatro grupos:
 	
 ## Aula 9 - Controle do fluxo de execução e instruções condicionais
 ### Operações Aritméticas Especiais
+![[op_aritmetica_espciais.png]]
 
 | Instrução | Efeito                                      | Descrição                          |
 | --------- | ------------------------------------------- | ---------------------------------- |
-| imull S   | %edx:%eax $\leftarrow$ S x %eax             | Mult. completa (64 bits) com sinal |
-| mull S    | %edx:%eax $\leftarrow$ S x %eax             | Mult. completa (64 bits) sem sinal |
-| cltd      | %edx:%eax $\leftarrow$ estende sinal(%eax)  | Estende 32 bits para 64 bits       |
-| idivl S   | %edx $\leftarrow$ %edx:%eax mod S (resto)   | Divisão com sinal                  |
+| `imull S` | %edx:%eax $\leftarrow$ S x %eax             | Mult. completa (64 bits) com sinal |
+| `mull S`  | %edx:%eax $\leftarrow$ S x %eax             | Mult. completa (64 bits) sem sinal |
+| `cltd`    | %edx:%eax $\leftarrow$ estende sinal(%eax)  | Estende 32 bits para 64 bits       |
+| `idivl S` | %edx $\leftarrow$ %edx:%eax mod S (resto)   | Divisão com sinal                  |
 |           | %eax $\leftarrow$ %edx:%eax ÷ S (quociente) |                                    |
-| divl S    | %edx $\leftarrow$ %edx:%eax mod S (resto)   | Divisão sem sinal                  |
+| `divl S`  | %edx $\leftarrow$ %edx:%eax mod S (resto)   | Divisão sem sinal                  |
 |           | %eax $\leftarrow$ %edx:%eax ÷ S (quociente) |                                    |
 ### Registradores de códigos de condição
 A CPU mantém registradores de código de condição, setados bit-a-bit, que armazenam atributos das últimas operações lógicas e aritméticas executadas
@@ -527,11 +528,10 @@ São programados com a instrução jmp, desviando a execução para outra parte 
 São baseados em códigos de condição (ou flags) setados nos registradores de códigos de condição
 ### Códigos de condição
 Os códigos de condição mais comuns são: 
-1. CF (Carry Flag): a última operação gerou um bit extra, usado para detectar overflow (estouro) em operações sem sinal 
-2. ZF (Zero Flag): o resultado da última operação foi zero 
-3. SF (Sign Flag): o resultado da última operação foi negativo 
-4. OF (Overflow Flag): a última operação causou um overfow de operação com sinal
-
+1. **CF** (Carry Flag): a última operação gerou um bit extra, usado para detectar overflow (estouro) em operações sem sinal 
+2. **ZF** (Zero Flag): o resultado da última operação foi zero 
+3. **SF** (Sign Flag): o resultado da última operação foi negativo 
+4. **OF** (Overflow Flag): a última operação causou um overfow de operação com sinal
 Obs:
 A instrução leal não altera nenhum dos códigos de condição (já que seu uso é para cálculo de endereços de memória) 
 Nas operações de deslocamento, CF é setado com o último bit deslocado para fora e OF é setado em zero
@@ -542,8 +542,10 @@ Nunca pode acontecer overflow quando somamos dois números de sinais opostos
 Quando a soma de dois números do mesmo sinal dá um resultado de sinal oposto ocorre overflow 
 Overflow também ocorre quando trocamos de sinal o menor negativo inteiro, pois a magnitude resultante não tem representação inteira positiva em complemento a dois
 ### Classe de instruções TEST e CMP
+![[cod_condicao.png]]
 ![[test_cmp.png]]
 ### Instruções SET
+![[instrucoes_set.png]]
 ![[set.png]]
 ### Instruções de Desvio (JUMP)
 Uma instrução de desvio pode fazer a execução desviar para uma nova posição do programa (rompendo a ordem sequencial de instruções listadas) 
@@ -551,6 +553,7 @@ O endereço da instrução de destino (próxima instrução a ser executada) é 
 Ao gerar o código objeto, o montador determina os endereços dos labels e decodifica os endereços alvos das instruções de desvio
 ![[jump.png]]
 ### Instrução jmp
+![[instrucao_jmp.png]]
 A instrução jmp desvia incondicionalmente 
 Tipo de desvio 
 - Direto (via label), codificado como parte da instrução (ex., jmp FIM) 
@@ -560,7 +563,8 @@ Tipo de desvio
 As demais instruções de desvio são condicionais e podem usar apenas destino direto (via label)
 • je (ou jz): ZF (igual/zero) 
 • jne (ou jnz): ~ZF (diferente/não-zero) 
-• js: SF (negativo) • jns: ~SF (não negativo) 
+• js: SF (negativo) 
+• jns: ~SF (não negativo) 
 • jg (ou jnle): ~(SF^OF) & ~ZF (maior com sinal)ª 
 • jge (ou jnl): ~(SF^ OF) (maior ou igual com sinal) 
 • jl (ou jnge): SF^OF (menor com sinal) 
