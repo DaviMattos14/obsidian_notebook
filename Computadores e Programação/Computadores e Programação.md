@@ -400,6 +400,7 @@ $$
 $$
 
 ### Modos de endereçamento
+![[modo_endereçamento.png]]
 - Absoluto: $\text{movl  } 17, \%\text{eax}$ 
 	- $R[\%\text{eax}] = \text{Mem } [17]$ (endereço absoluto 17 referenciado) 
 - Imediato: $\text{movl } \$17, \%\text{eax}$
