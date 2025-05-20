@@ -421,7 +421,7 @@ $$
 \text{S = source (fonte)} && \text{D = destination (destino)}
 \end{matrix}
 $$
-Copiar um valor de um lugar para outro requer duas instruções, a primeira para carregar o valor na fonte no registrador, e a segunda para gravar esse valor do registrador no destino.
+Copiar um valor de um lugar para outro requer duas instruções, a primeira para carregar o valor na fonte no registrador, e a segunda para gravar esse valor do registrador no destino de mesmo tipo (ex: `movw %eax -> %edx`, NÃO `movl %ax -> %ecx`).
 #### Movimentação básica
 - **movb S,D**: S→D (move um byte) 
 	- Qualquer registrador de bit único (`%ah - %bh` , `%al - %bl`))
