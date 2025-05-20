@@ -421,7 +421,7 @@ $$
 \text{S = source (fonte)} && \text{D = destination (destino)}
 \end{matrix}
 $$
-Copiar um valor de um lugar para outro requer duas instruções, a primeira para carregar o valor na fonte no registrador, e a segunda para gravar esse valor do registrador no destino de mesmo tipo (ex: `movw %eax -> %edx`, NÃO `movl %ax -> %ecx`).
+<font color="#c00000">Copiar um valor de um lugar para outro requer duas instruções, a primeira para carregar o valor na fonte no registrador, e a segunda para gravar esse valor do registrador no destino de mesmo tipo </font>
 #### Movimentação básica
 - **movb S,D**: S→D (move um byte) 
 	- Qualquer registrador de bit único (`%ah - %bh` , `%al - %bl`))
@@ -474,6 +474,7 @@ Desreferenciar (dereferencing) um ponteiro (pegar o valor apontado por ele envol
 Variável local, como **x**, pode ser mantida em registrador (ao invés da memória), para acesso mais rápido.
 ## Aula 8 - Operações lógicas e aritméticas IA32
 ### Operações aritméticas com inteiros
+![[aritmetica_logica_op.png]]
 As operações lógicas e aritméticas são divididas em quatro grupos: 
 - <u>Operações unárias</u>: um único operando é fonte e destino da operação 
 	O operador D pode ser memória ou registrador: 
