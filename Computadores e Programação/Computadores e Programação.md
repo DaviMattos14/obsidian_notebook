@@ -198,15 +198,11 @@ O valor total é a soma dos valores relativos
 #### <span style="background:#fff88f">Decimal</span> $\rightarrow$ <span style="background:#fff88f">Binário</span>
 
 ![[dec_bin.png]]
-#### Decimal $\rightarrow$ Octal
-![[dec_oct.png]]
 ####  <span style="background:#fff88f">Decimal</span> $\rightarrow$ <span style="background:#fff88f">Hexadecimal</span>
 ![[dec_hex.png]]
 #### Binário $\rightarrow$ Decimal
 ![[bin_dec1.png]]
 ![[bin_dec2.png]]
-#### Octal $\rightarrow$ Decimal
-<img src="oct_dec_1.png" width="330"/> <img src="oct_dec_2.png" width="330"/>
 #### Hexadecimal $\rightarrow$ Decimal
 ![[hex_dec1.png]]![[hex_dec2.png]]
 #### <span style="background:#fff88f">Binário, Hexadecimal</span> $\rightarrow$ <span style="background:#fff88f">Binário</span>
