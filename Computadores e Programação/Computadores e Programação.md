@@ -195,12 +195,12 @@ O valor total é a soma dos valores relativos
 ![[notacao_posicional.png]]
 
 ### Conversão entre bases
-#### Decimal $\rightarrow$ Binário
+#### <span style="background:#fff88f">Decimal</span> $\rightarrow$ <span style="background:#fff88f">Binário</span>
 
 ![[dec_bin.png]]
 #### Decimal $\rightarrow$ Octal
 ![[dec_oct.png]]
-#### Decimal $\rightarrow$ Hexadecimal
+####  <span style="background:#fff88f">Decimal</span> $\rightarrow$ <span style="background:#fff88f">Hexadecimal</span>
 ![[dec_hex.png]]
 #### Binário $\rightarrow$ Decimal
 ![[bin_dec1.png]]
@@ -209,20 +209,18 @@ O valor total é a soma dos valores relativos
 <img src="oct_dec_1.png" width="330"/> <img src="oct_dec_2.png" width="330"/>
 #### Hexadecimal $\rightarrow$ Decimal
 ![[hex_dec1.png]]![[hex_dec2.png]]
-#### Binário, Hexadecimal $\rightarrow$ Binário
+#### <span style="background:#fff88f">Binário, Hexadecimal</span> $\rightarrow$ <span style="background:#fff88f">Binário</span>
 ![[oct_bin.png]]![[hex_bin.png]]
-#### Binário $\rightarrow$ Octal, Hexadecimal
+#### <span style="background:#fff88f">Binário</span> $\rightarrow$ <span style="background:#fff88f">Octal, Hexadecimal</span>
 ![[bin_hex_octa.png]]
 ### Tamanho de Palavra e formatos de dados
 O tamanho da palavra em um computador indica o tamanho nominal de um número inteiro ou de um ponteiro de dado 
 Como um endereço virtual é codificado em uma palavra, então o tamanho máximo do espaço de endereçamento virtual para uma máquina com palavra de w bits é $2^w$ (endereços indo de 0 a $(2^w - 1)$) Ex: palavra = 32 bits, 232 bytes endereçáveis (4GBytes)
 Os computadores e compiladores suportam vários formatos de dados, usando diferentes formas de codificação (ex., inteiros, ponto-flutuante) e diferentes tamanhos (ex., 2, 4, 8 bytes)
-
 #### Endereçamento de um objeto
 Na quase totalidade das máquinas, um objeto com vários bytes é armazenado em uma sequência contígua de bytes 
 Dado pelo menor dos endereços dos bytes do objeto 
 Seja x uma variável inteira, se &x = 0x100 (endereço de x), os quatro bytes de x são armazenados nos bytes: 0x100, 0x101, 0x102, 0x103
-
 #### Ordenação dos Bytes na memória
 ![[ordenacao_byte_memoria.png]]![[big_little_endian.png]]
 ## # Representação e armazenamento no computador (Aula 5)
