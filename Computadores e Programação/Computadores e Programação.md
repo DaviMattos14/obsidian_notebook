@@ -587,4 +587,7 @@ Estas instruções operam sobre tipos UNSIGNED
 ### For
 ![[for1.png]]
 ![[for.png]]
+### CMOV
+Copia um valor para um registrador, dependendo de valores dos códigos de condição
+![[cmov.png]]
 ### Switch Case
