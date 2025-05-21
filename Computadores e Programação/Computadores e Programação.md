@@ -575,3 +575,16 @@ Estas instruções operam sobre tipos UNSIGNED
 **Absoluto**: codifica o endereço alvo diretamente (requer 4 bytes)
 ![[cod_montagem.png]]
 ## Aula 10 - Tradução de expressões condicionais e repetições para linguagem de montagem
+### IF-Else
+![[if_else1.png]]
+![[if_else.png]]
+### Do-While
+![[do_while1.png]]
+![[do_while.png]]
+### While
+![[while1.png]]
+![[while.png]]
+### For
+![[for1.png]]
+![[for.png]]
+### Switch Case
