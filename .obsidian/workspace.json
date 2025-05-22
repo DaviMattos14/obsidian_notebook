@@ -11,13 +11,11 @@
             "id": "27ae9d2c05d7e7db",
             "type": "leaf",
             "state": {
-              "type": "markdown",
+              "type": "pdf",
               "state": {
-                "file": "Computadores e Programação/Computadores e Programação.md",
-                "mode": "source",
-                "source": false
+                "file": "Computadores e Programação/PDFs/Computadores e Programação.pdf"
               },
-              "icon": "lucide-file",
+              "icon": "lucide-file-text",
               "title": "Computadores e Programação"
             }
           },
@@ -205,7 +203,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "Computadores e Programação/Computadores e Programação.md",
+                "file": "Computadores e Programação/PDFs/Computadores e Programação.pdf",
                 "followCursor": false,
                 "showSearch": false,
                 "searchQuery": ""
@@ -236,12 +234,12 @@
   },
   "active": "27ae9d2c05d7e7db",
   "lastOpenFiles": [
+    "Computadores e Programação/Computadores e Programação.md",
+    "Computadores e Programação/Capítulos do Livro.md",
     "Computadores e Programação/PDFs/Instruções assembly IA32.pdf",
     "Computadores e Programação/PDFs/Instruções assembly IA32.pdf.crdownload",
     "README.md",
-    "Computadores e Programação/Computadores e Programação.md",
     "Computadores e Programação/imagens/switch.png",
-    "Computadores e Programação/Capítulos do Livro.md",
     "Computadores e Programação/imagens/cmov.png",
     "Computadores e Programação/imagens/for1.png",
     "Computadores e Programação/imagens/if_else1.png",
@@ -261,7 +259,6 @@
     "Computação Científica e Análise de Dados/PDFs/P1.pdf",
     "Computação Científica e Análise de Dados/PDFs/P1.pdf.crdownload",
     "Computação Científica e Análise de Dados/PDFs/pca.pdf",
-    "Computação Científica e Análise de Dados/PDFs/pca.pdf.crdownload",
     "Arquitetura de Computadores e Sistemas Operacionais/Resumo ArqCompSO.md",
     "Arquitetura de Computadores e Sistemas Operacionais/Fundamentos de Hardware e Software.md",
     "Arquitetura de Computadores e Sistemas Operacionais/Introdução aos Sistemas Operacionais.md",
