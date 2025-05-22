@@ -8,7 +8,7 @@
         "type": "tabs",
         "children": [
           {
-            "id": "6205d81e37308f2d",
+            "id": "dc203b048b2b79e3",
             "type": "leaf",
             "state": {
               "type": "markdown",
@@ -220,20 +220,20 @@
       "latex-ocr:LatexOCR": false
     }
   },
-  "active": "6205d81e37308f2d",
+  "active": "dc203b048b2b79e3",
   "lastOpenFiles": [
-    "Banco de Dados I/imagens/entidade_forte.png",
-    "Banco de Dados I/imagens/fk.png",
-    "Banco de Dados I/imagens/modelo_relacional.png",
-    "Banco de Dados I/imagens/n_ario_binario.png",
-    "Pasted image 20250522185412.png",
+    "Banco de Dados I/PDFs/Banco de Dados I.pdf",
+    "Banco de Dados I/imagens/normalizar.png",
+    "Banco de Dados I/imagens/3fn_2.png",
+    "Banco de Dados I/imagens/3fn.png",
+    "Banco de Dados I/imagens/2fn_1.png",
+    "Banco de Dados I/imagens/2fn_2.png",
     "Banco de Dados I/Banco de Dados I.md",
-    "Banco de Dados I/imagens/especializacao1.png",
-    "Banco de Dados I/imagens/Modelo_ER.png",
-    "Banco de Dados I/imagens/especialização+parcial.png",
-    "Banco de Dados I/imagens/especialização_total.png",
-    "Banco de Dados I/imagens/generalização.png",
-    "Banco de Dados I/imagens/entidade_associativa.png",
+    "Banco de Dados I/imagens/1FN.png",
+    "Banco de Dados I/imagens/0FN.png",
+    "Pasted image 20250522194656.png",
+    "Banco de Dados I/imagens/normalização.png",
+    "Banco de Dados I/imagens/mph.png",
     "Banco de Dados I/PDFs/BD_3_Normalizacao.pdf",
     "Banco de Dados I/PDFs/BD_1_Modelo_Logico.pdf",
     "Banco de Dados I/PDFs/BD_2_Modelo_Fisico.pdf",

@@ -15,6 +15,7 @@ Independente de aspectos de implementação
 ##### Entidade Fraca
 Existem entidades que apenas existem em função de outras
 ![[entidade_fraca.png]]
+$\newpage$
 ##### Entidade Associativa
 ![[entidade_associativa.png]]
 #### Relacionamento
@@ -141,9 +142,371 @@ Aluno(Nome, CPF, Rua, Numero)
 	PK(CPF)
 ```
 ## Entidades Fracas
-
+![[entidade_fraca1.png]]
+1. Criar uma relação `Dependente()`
+2. Para todo Atributo Simples criar um atributo: `Dependente(Nome, idade)`
+3. Para atributos compostos, criar vários atributos simples
+4. Criar uma FK apontando para PK da Entidade Forte
+```SQL
+Dependente(Nome, Idade, SocioCPF)
+	FK(SocioCPF) ref Socio(CPF)
+```
+5. Criar uma PK composta pelo Atributo identificador e FK
+```SQL
+Dependente(Nome, Idade, SocioCPF)
+	FK(SocioCPF) ref Socio(CPF)
+	PK(Nome, SocioCPF)
+```
 ## Relacionamentos Binários 1:1
+![[rel11.png]]
+1. Criar uma FK na relação com participação total (*Todo departamento tem funcionário*)
+```
+Funcionário (Nome, CPF)
+	PK(CPF)
+Departamento (Nome, Local, GerenteCPF)
+	FK(GerenteCPF) ref Funcionário(CPF)
+	PK(Nome)
+```
 ## Relacionamentos Binários 1:N
+![[rb1n.png]]
+1. Criar uma FK na relação com cardinalidade N
+```SQL
+Funcionário (Nome, CPF, ProjetoNome)
+	PK(CPF)
+	FK(ProjetoNome) ref Projeto(Nome)
+Projeto (Nome)
+	PK(Nome)
+```
+2. Criar todos os atributos do relacionamento, se houver
+```SQL
+Funcionário (Nome, CPF, ProjetoNome, DataInicial)
+	PK(CPF)
+	FK(ProjetoNome) ref Projeto(Nome)
+Projeto (Nome)
+	PK(Nome)
+```
 ## Relacionamentos Binários N:N
+![[rbnn.png]]
+1. Criar um novo Relacionamento
+```SQL
+Autor (Nome)
+	PK(Nome)
+
+Livro (ISBN, Título)
+	PK(ISBN)
+
+Escreve ()
+```
+2. Criar FK das duas relações
+```SQL
+Autor (Nome)
+	PK(Nome)
+
+Livro (ISBN, Título)
+	PK(ISBN)
+
+Escreve (AutorNome, LivroISBN)
+	FK(AutorNome) ref Autor(Nome)
+	FK(LivroISBN) ref Livro(ISBN)
+```
+3. Criar a PK (FK1 + FK2)
+```SQL
+Autor (Nome)
+	PK(Nome)
+
+Livro (ISBN, Título)
+	PK(ISBN)
+
+Escreve (AutorNome, LivroISBN)
+	FK(AutorNome) ref Autor(Nome)
+	FK(LivroISBN) ref Livro(ISBN)
+	PK(AutorNome, LivroISBN)
+```
 ## Atributos Multivalorados
+![[am.png]]
+1. Criar uma nova relação: `Telefone ()`
+2. Criar Atributo(s) Simples: `Telefone (Telefone)` 
+3. Cria FK para a relação original
+```
+Aluno(CPF, Nome, Endereço)
+	PK(CPF)
+
+Telefone(Telefone, AlunoCPF)
+	FK(AlunoCPF) ref Aluno(CPK)
+```
+4. Criar PK (FK + Atributos)
+```
+Aluno(CPF, Nome, Endereço)
+	PK(CPF)
+
+Telefone(Telefone, AlunoCPF)
+	FK(AlunoCPF) ref Aluno(CPF)
+	PK(Telefone, AlunoCPF)
+```
 ## Relacionamentos N-ários, N>2
+![[rn.png]]
+1. Criar uma nova relação `Trabalha ()`
+2. Criar Atributo(s) simples 
+3. Criar FK para todas as relações
+```
+Funcionário (CPF, Nome) 
+	PK(CPF)
+
+Cargo (Nome) 
+	PK(Nome)
+
+Projeto (Código, Descrição) 
+	PK(Código)
+
+Trabalha (FCPF, CNome, PCódigo)
+	FK(FCPF) ref Funcionário(CPF)
+	FK(CNome) ref Cargo(Nome)
+	FK(PCódigo) ref Projeto(Código)
+```
+4. Criar PK com todas as relações que não sejam 1
+```
+Funcionário (CPF, Nome) 
+	PK(CPF)
+
+Cargo (Nome) 
+	PK(Nome)
+
+Projeto (Código, Descrição) 
+	PK(Código)
+
+Trabalha (FCPF, CNome, PCódigo)
+	FK(FCPF) ref Funcionário(CPF)
+	FK(CNome) ref Cargo(Nome)
+	FK(PCódigo) ref Projeto(Código)
+	PK(FCPF, PCódigo)
+```
+## Mapeamento de Heranças
+![[mph.png]]
+### Partição Única
+```
+Veículo (Placa, Combustível, Eixos, TipoVeículo*)
+	PK(Placa)
+```
+### Particionamento Vertical
+```
+Veículo (Placa) 
+	PK(Placa)
+
+Carro (Combustível, VeículoPlaca)
+	FK(VeículoPlaca) ref Veículo(Placa)
+	PK(VeículoPlaca)
+
+Caminhão (Eixos, VeículoPlaca)
+	FK(VeículoPlaca) ref Veículo(Placa)
+	PK(VeículoPlaca)
+```
+## Particionamento Horizontal
+```
+Carro (Combustível, Placa)
+	PK(Placa)
+
+Caminhão (Eixos, Placa)
+	PK(Placa)
+```
+# Modelo Físico
+## SQL - Struct Query Language
+### Tipos de Dados
+Numérico (principais):
+	• integer/int, float, real, numeric(p,n)
+Cadeia de caracteres:
+	• char(n), varchar(n), text
+Dados binários:
+	• blob
+Data/tempo:
+	• date, datetime, timestamp, time, year
+Booleano:
+	• bool, boolean, tinyint(1)
+### Criando Banco de Dados
+```SQL
+create database nome_db
+--ou
+create schema nome_db
+```
+### Criando Tabela
+```SQL
+create table r (A1 D1, A2 D2, ..., An Dn,
+(integrity-constraint1),
+...,
+(integrity-constraintk));
+```
+$r$ é o nome da relação
+Cada $A_i$ é um nome de atributo no esquema da relação $r$
+$D_i$ é o tipo de dados dos valores no domínio do atributo $A_i$
+Exemplo:
+```SQL
+create table Departamento (Nome_Depto varchar(50), ID_Depto numeric(5,0) );
+```
+### Restrições de Integridade (RIs)
+
+```SQL
+-- Não Nulo
+not null
+-- Atributo(s) forma(m) uma chave candidata
+unique(A1,...,An)
+-- PK
+primary key (A1, ..., An)
+-- FK
+foreign key (Am, ..., An) references r
+```
+Exemplo:
+```SQL
+create table Departamento (
+	Nome_Depto varchar(50) not null,
+	ID_Depto numeric(5,0),-------
+	primary key (ID_Depto) ); -------
+
+create table Professor (
+	ID_Professor numeric(5,0),-------
+	Nome varchar(50) not null,
+	CPF char(11), -------
+	Salario numeric(8,2),
+	ID_Depto numeric(5,0),
+	unique (CPF), -------
+	primary key (ID_Professor), -------
+	constraint fk_depto_prof foreign key (ID_Depto) references Departamento(ID_Depto) );
+	-- foreign key (ID_Depto) references Departamento(ID_Depto) );
+```
+
+### Drop table
+```SQL
+drop table r
+```
+
+### Alterar Tabela
+```SQL
+alter table r add A D
+-- Onde A é o nome do atributo a ser adicionado na relação r e D é o domínio de A
+-- Todas as tuplas na relação são associados valores nulos como valor do novo atributo
+alter table r drop A
+-- Onde A é o nome do atributo da relação r a ser removido
+-- Remoção de atributos não é suportado por muitos SGBDs
+```
+Exemplo
+```SQL
+create table Departamento (
+	Nome_Depto varchar(50),
+	ID_Depto numeric(5,0) );
+
+alter table Departamento add Data_criacao date;
+
+alter table Departamento add primary key (ID_Depto);
+
+alter table Departamento drop primary key;
+```
+
+```SQL
+create table Professor (
+		ID_Professor numeric(5,0),
+		Nome varchar(50) not null,
+		CPF char(11),
+		Salario numeric(8,2),
+		ID_Depto numeric(5,0),
+		unique (CPF),
+		primary key (ID_Professor));
+
+alter table Professor add constraint fk_depto_prof foreign key (ID_Depto) references Departamento(ID_Depto);
+
+alter table Professor drop foreign key fk_depto_prof; 
+```
+### Restrições de atributos e domínios
+```SQL
+not null
+default <valor>
+check <condição>
+```
+Exemplo
+```SQL
+ID_Depto int not null
+check (ID_Depto>0 and ID_Depto<=99999)
+
+semestre varchar(6) default 'Summer' check (semestre in ('Fall', 'Winter','Spring', 'Summer'));
+
+create domain D_NUM as integer
+check (D_NUM > 0 and D_NUM < 21);
+ID_Depto D_NUM not null;
+```
+### Restrições de integridade referencial
+```SQL
+-- Remoção
+on delete
+cascade (propagação)
+set null (substituição por nulos)
+set default (substituição por um valor default)
+-- Opção default: bloqueio (restrict)
+
+-- As mesmas opções se aplicam à cláusula 
+on update (alteração)
+```
+### Select
+```SQL
+select A1, A2, ..., An
+from r1, r2, ..., rm
+where P
+
+-- Ai representa um atributo
+-- ri representa uma relação
+-- P é um predicado
+
+select * from r
+-- * denota todos os atributos 
+-- r representa uma relação
+
+```
+### Modificações do banco de dados
+```SQL
+insert -- inserir
+
+insert into Departamento 
+values ('Departamento de Informática', 21);
+
+insert into Professor (Nome, CPF, ID_Professor)
+values ('Costa', 33333333333, 3);
+
+--
+update -- alterar
+
+update Professor
+set Salario=10000, ID_Depto=21
+where ID_Professor=3;
+
+update Professor
+set Salario=Salario*1.1
+where ID_Depto in (select ID_Depto from Departamento
+where Nome_Depto='Departamento de Informática');
+
+--
+delete -- remover
+
+delete from Professor;
+
+delete from Professor where ID_Professor=3;
+
+delete from Professor where ID_Depto in
+(select ID_Depto from Departamento
+where Nome_Depto='Departamento de Informática');
+```
+
+## Normalização
+
+![[normalização.png]]
+### 0FN ou ÑN
+Uma relação está na 0FN se ela apresentar algum atributo não atômico
+![[0FN.png]]
+### 1FN
+Uma relação está na 1FN se todos os seus atributos forem atômicos
+![[1FN.png]]
+### 2FN
+Uma relação está na 2FN se ela estiver na 1FN e se ela **não** apresentar dependências funcionais (DFs) parciais da chave
+	Parcial = "de uma parte"
+![[2fn_1.png]]
+![[2fn_2.png]]
+### 3FN
+Uma relação está na 3FN se ela estiver na 2FN e se ela **não** apresentar dependências funcionais (DFs) transitivas da chave
+![[3fn.png]]![[3fn_2.png]]
+### Resumo 
+![[normalizar.png]]
