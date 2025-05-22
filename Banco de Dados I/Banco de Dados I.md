@@ -15,7 +15,6 @@ Independente de aspectos de implementação
 ##### Entidade Fraca
 Existem entidades que apenas existem em função de outras
 ![[entidade_fraca.png]]
-$\newpage$
 ##### Entidade Associativa
 ![[entidade_associativa.png]]
 #### Relacionamento
