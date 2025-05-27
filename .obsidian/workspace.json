@@ -27,7 +27,7 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "Banco de Dados I/Exercícios/Exercício 7 - Estudo de Caso de Uso.md",
+                "file": "Banco de Dados I/Exercícios/Exercício 7 - Estudo de Caso/Exercício 7 - Estudo de Caso de Uso.md",
                 "mode": "source",
                 "source": false
               },
@@ -206,7 +206,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "Banco de Dados I/Exercícios/Exercício 7 - Estudo de Caso de Uso.md",
+                "file": "Banco de Dados I/Exercícios/Exercício 7 - Estudo de Caso/Exercício 7 - Estudo de Caso de Uso.md",
                 "followCursor": false,
                 "showSearch": false,
                 "searchQuery": ""
@@ -236,11 +236,18 @@
   },
   "active": "542f58420bdad8e0",
   "lastOpenFiles": [
+    "Banco de Dados I/Exercícios/Exercício 7 - Estudo de Caso/[Físico]Exercicio7_Estudo_de_Caso.sql",
+    "Banco de Dados I/Exercícios/Exercício 7 - Estudo de Caso/[Conceitual]Estudo_de_Caso.brM3",
+    "Banco de Dados I/Exercícios/Exercício 7 - Estudo de Caso/[Logico]Estudo_de_Caso.brM3",
+    "Banco de Dados I/Exercícios/Exercício 7 - Estudo de Caso/[Logico]Estudo_de_Caso.png",
+    "Banco de Dados I/Exercícios/Exercício 7 - Estudo de Caso/[Conceitual]Estudo_de_Caso.png",
+    "Banco de Dados I/Exercícios/Exercício 7 - Estudo de Caso",
+    "Banco de Dados I/Exercícios/Nova Pasta",
     "Computação Científica e Análise de Dados/Exercícios/lista_1.ipynb",
     "Computação Científica e Análise de Dados/Exercícios/lista1_cocada",
     "Computação Científica e Análise de Dados/Exercícios/lista1.jl",
     "Banco de Dados I/Banco de Dados I.md",
-    "Banco de Dados I/Exercícios/Exercício 7 - Estudo de Caso de Uso.md",
+    "Banco de Dados I/Exercícios/Exercício 7 - Estudo de Caso/Exercício 7 - Estudo de Caso de Uso.md",
     "README.md",
     "Banco de Dados I/PDFs/Banco de Dados I.pdf",
     "Banco de Dados I/imagens/normalizar.png",
@@ -251,16 +258,9 @@
     "Banco de Dados I/imagens/1FN.png",
     "Banco de Dados I/imagens/0FN.png",
     "Pasted image 20250522194656.png",
-    "Banco de Dados I/imagens/normalização.png",
-    "Banco de Dados I/imagens/mph.png",
     "Banco de Dados I/PDFs/BD_3_Normalizacao.pdf",
     "Banco de Dados I/PDFs/BD_1_Modelo_Logico.pdf",
-    "Banco de Dados I/PDFs/BD_2_Modelo_Fisico.pdf",
-    "Banco de Dados I/PDFs/BD_4_Implementacao.pdf",
-    "Banco de Dados I/PDFs/drive-download-20250522T203356Z-1-001.zip",
-    "Banco de Dados I/PDFs/Não confirmado 306321.crdownload",
     "Computadores e Programação/Capítulos do Livro.md",
-    "Computadores e Programação/PDFs/Computadores e Programação.pdf",
     "Computadores e Programação/Computadores e Programação.md",
     "Computação Científica e Análise de Dados/Computação Científica e Análise de Dados.md",
     "Algebra Linear Algoritmica/Algebra Linear Algoritmica.md",
