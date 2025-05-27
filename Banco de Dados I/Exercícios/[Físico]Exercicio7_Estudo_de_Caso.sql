@@ -75,11 +75,3 @@ ALTER TABLE Avaliacao ADD CONSTRAINT FK_Avaliacao_2
     REFERENCES Usuario (apelido)
 ;
 
-SHOW TABLES;
-DESCRIBE ator_atriz;
-DESCRIBE atuacao;
-DESCRIBE avaliacao;
-DESCRIBE filme;
-DESCRIBE genero;
-DESCRIBE generodofilme;
-DESCRIBE usuario;
