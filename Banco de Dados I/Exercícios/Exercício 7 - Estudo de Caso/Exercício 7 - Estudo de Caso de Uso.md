@@ -3,8 +3,10 @@
 
 ## Modelo Conceitual
 ![[[Conceitual]Estudo_de_Caso.png]]
+___
 ## Modelo Lógico
 ![[[Logico]Estudo_de_Caso.png]]
+___
 ## Modelo Físico
 ```SQL
 CREATE TABLE Filme (
@@ -84,25 +86,21 @@ ALTER TABLE Avaliacao ADD CONSTRAINT FK_Avaliacao_2
     REFERENCES Usuario (apelido)
 ;
 ```
+___
 ## Banco de Dados
 
-`SHOW TABLES;`
+```
+SHOW TABLES;
+```
 
-| Tables_in_test |
-| -------------- |
-| Ator_Atriz     |
-| Atuacao        |
-| Avaliacao      |
-| Filme          |
-| Genero         |
-| GeneroDoFilme  |
-| Usuario        |
+![[show_tables.png]]
 
 ---
 **Query #2**
-
-    
+   
     DESCRIBE Ator_Atriz;
+   
+![[describe_ator.png]]
 
 | Field          | Type         | Null | Key | Default | Extra |
 | -------------- | ------------ | ---- | --- | ------- | ----- |
@@ -114,8 +112,9 @@ ALTER TABLE Avaliacao ADD CONSTRAINT FK_Avaliacao_2
 ---
 **Query #3**
 
-    
     DESCRIBE Atuacao;
+
+![[describe_atuacao.png]]
 
 | Field                | Type         | Null | Key | Default | Extra |
 | -------------------- | ------------ | ---- | --- | ------- | ----- |
@@ -125,9 +124,10 @@ ALTER TABLE Avaliacao ADD CONSTRAINT FK_Avaliacao_2
 
 ---
 **Query #4**
-
-    
+  
     DESCRIBE Avaliacao;
+
+![[describe_avaliacao.png]]
 
 | Field              | Type          | Null | Key | Default | Extra |
 | ------------------ | ------------- | ---- | --- | ------- | ----- |
@@ -140,8 +140,9 @@ ALTER TABLE Avaliacao ADD CONSTRAINT FK_Avaliacao_2
 ---
 **Query #5**
 
-    
     DESCRIBE Filme;
+
+![[describe_filme.png]]
 
 | Field         | Type         | Null | Key | Default | Extra |
 | ------------- | ------------ | ---- | --- | ------- | ----- |
@@ -151,9 +152,10 @@ ALTER TABLE Avaliacao ADD CONSTRAINT FK_Avaliacao_2
 
 ---
 **Query #6**
-
-    
+  
     DESCRIBE Genero;
+
+![[describe_genero.png]]
 
 | Field      | Type         | Null | Key | Default | Extra |
 | ---------- | ------------ | ---- | --- | ------- | ----- |
@@ -163,8 +165,9 @@ ALTER TABLE Avaliacao ADD CONSTRAINT FK_Avaliacao_2
 ---
 **Query #7**
 
-    
     DESCRIBE GeneroDoFilme;
+
+![[describe_generofilme.png]]
 
 | Field              | Type    | Null | Key | Default | Extra |
 | ------------------ | ------- | ---- | --- | ------- | ----- |
@@ -173,9 +176,10 @@ ALTER TABLE Avaliacao ADD CONSTRAINT FK_Avaliacao_2
 
 ---
 **Query #8**
-
-    
+  
     DESCRIBE Usuario;
+
+![[describe_usuario.png]]
 
 | Field   | Type         | Null | Key | Default | Extra |
 | ------- | ------------ | ---- | --- | ------- | ----- |
@@ -184,5 +188,3 @@ ALTER TABLE Avaliacao ADD CONSTRAINT FK_Avaliacao_2
 | senha   | varchar(255) | YES  |     |         |       |
 
 ---
-
-[View on DB Fiddle](https://www.db-fiddle.com/)
