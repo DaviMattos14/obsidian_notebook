@@ -35,8 +35,7 @@
               "title": "Sem título"
             }
           }
-        ],
-        "currentTab": 1
+        ]
       }
     ],
     "direction": "vertical"
@@ -196,8 +195,8 @@
             "state": {
               "type": "calendar",
               "state": {},
-              "icon": "calendar-with-checkmark",
-              "title": "Calendar"
+              "icon": "lucide-file",
+              "title": "Plugin desativado"
             }
           },
           {
@@ -206,13 +205,13 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "Sem título.md",
+                "file": "Banco de Dados I/Banco de Dados I.md",
                 "followCursor": false,
                 "showSearch": false,
                 "searchQuery": ""
               },
               "icon": "lucide-list",
-              "title": "Sumário de Sem título"
+              "title": "Sumário de Banco de Dados I"
             }
           }
         ],
@@ -231,14 +230,13 @@
       "templates:Inserir modelo": false,
       "markdown-importer:Abrir importador Markdown": false,
       "command-palette:Abrir paleta de comandos": false,
-      "obsidian-git:Open Git source control": false,
-      "latex-ocr:LatexOCR": false
+      "obsidian-git:Open Git source control": false
     }
   },
-  "active": "c96e5455c3e36e69",
+  "active": "dc203b048b2b79e3",
   "lastOpenFiles": [
-    "Banco de Dados I/Banco de Dados I.md",
     "Sem título.md",
+    "Banco de Dados I/Banco de Dados I.md",
     "Banco de Dados I/PDFs/Banco de Dados I.pdf",
     "Banco de Dados I/imagens/normalizar.png",
     "Banco de Dados I/imagens/3fn_2.png",
