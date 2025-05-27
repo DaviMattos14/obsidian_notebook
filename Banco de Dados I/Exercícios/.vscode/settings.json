@@ -10,7 +10,7 @@
             "port": 3306,
             "driver": "MySQL",
             "name": "localhost",
-            "database": "bd_exercicio",
+            "database": "filmes",
             "username": "root",
             "password": "1310223a8",
             "connectionTimeout": 30
