@@ -1,2 +1,1 @@
-using IJulia
-notebook()
+println("Hello World")
