@@ -509,3 +509,30 @@ Uma relação está na 3FN se ela estiver na 2FN e se ela **não** apresentar de
 ![[3fn.png]]![[3fn_2.png]]
 ### Resumo 
 ![[normalizar.png]]
+# Álgebra Relacional
+
+## Operações Básicas
+### Seleção $\sigma$
+Seleciona a partir da relação de entrada R, tuplas (linhas) que satisfazem a um determinado predicado:
+$$
+\sigma_{predicado}(R)
+$$
+Predicados permitem expressar comparações do tipo: ${=,<, ≤,>, ≥, ≠}$
+Pode-se relacionar comparações com operadores lógicos (and, or, not): ${∧,∨, ¬}$
+$$
+\begin{matrix}
+\sigma_{\text{ID\_Depto=17}}(Professor) \\ \sigma_{\text{ID\_Depto=21 ∧ Salario>9000}(Professor)}
+\end{matrix}
+$$
+### Projeção $\Pi$
+Copia as colunas das relações de entrada R
+$$
+\Pi_{\text{col1,col2,col3}}(Tabela)
+$$
+Exemplo?
+$$
+\Pi_\text{Nome, Salario}(Professor)
+$$
+### Produto Cartesiano $\times$
+Concatena
+### Renomeação $\rho$

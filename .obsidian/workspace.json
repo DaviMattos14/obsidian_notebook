@@ -13,12 +13,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "Banco de Dados I/Exercícios/Exercício 7 - Estudo de Caso/Exercício 7 - Estudo Caso de Uso.md",
+                "file": "Banco de Dados I/Banco de Dados I.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "Exercício 7 - Estudo Caso de Uso"
+              "title": "Banco de Dados I"
             }
           }
         ]
@@ -191,13 +191,13 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "Banco de Dados I/Exercícios/Exercício 7 - Estudo de Caso/Exercício 7 - Estudo Caso de Uso.md",
+                "file": "Banco de Dados I/Banco de Dados I.md",
                 "followCursor": false,
                 "showSearch": false,
                 "searchQuery": ""
               },
               "icon": "lucide-list",
-              "title": "Sumário de Exercício 7 - Estudo Caso de Uso"
+              "title": "Sumário de Banco de Dados I"
             }
           }
         ],
@@ -222,8 +222,8 @@
   },
   "active": "537937ddff59031d",
   "lastOpenFiles": [
-    "conflict-files-obsidian-git.md",
     "Banco de Dados I/Exercícios/Exercício 7 - Estudo de Caso/Exercício 7 - Estudo Caso de Uso.md",
+    "conflict-files-obsidian-git.md",
     "Computação Científica e Análise de Dados/Computação Científica e Análise de Dados.md",
     "Banco de Dados I/Banco de Dados I.md",
     "Otimização/Otimização.md",
