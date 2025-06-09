@@ -558,3 +558,6 @@ $$
 	$$
 	onde \<condi\> é uma expressão A θ B, sendo A um atributo de $R_1$ , B um atributo de $R2$ e θ um dos operadores de comparação {=,<, ≤,>, ≥, ≠}
 ### Renomeação $\rho$
+![[renomeação.png]]![[renomeação2.png]]
+### Atribuição $\leftarrow$ / $=$
+![[atribuicao.png]]
