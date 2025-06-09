@@ -529,10 +529,16 @@ Copia as colunas das relações de entrada R
 $$
 \Pi_{\text{col1,col2,col3}}(Tabela)
 $$
-Exemplo?
+Exemplo:
 $$
 \Pi_\text{Nome, Salario}(Professor)
 $$
 ### Produto Cartesiano $\times$
-Concatena
+Concatena cada tupla de $R_1$ com todas as tuplas de $R_2$
+$$
+R_{1}\times R_2
+$$
+(Cada elemento de $R_1$ será associado a todos os elementos de $R_2$)
+Exemplo:
+![[produto_cartesiano.png]]
 ### Renomeação $\rho$
