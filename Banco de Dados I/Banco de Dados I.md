@@ -541,10 +541,20 @@ $$
 (Cada elemento de $R_1$ será associado a todos os elementos de $R_2$)
 Exemplo:
 ![[produto_cartesiano.png]]
-### junção Natural $\bowtie$
+### Junção Natural $\bowtie$
 Junção forçando a igualdade naqueles atributos que são comuns a $R_1$ e $R_2$ (mesmo 
 nome e domínio nas duas relações)
 $$
 R_{1}\bowtie R_2
 $$
+### Junção Theta $\bowtie_{\theta}$
+Operação binária que combina o produto cartesiano e a seleção em uma única operação
+$$
+R_{1}\bowtie_{\theta}R_{2} = \sigma_{\theta}(R_{1}\times R_2)
+$$
+A condição de junção é geralmente da forma
+$$
+<cond_1> ∧ <cond_2> ∧ ... ∧ <cond_n>
+	$$
+	onde \<condi\> é uma expressão A θ B, sendo A um atributo de $R_1$ , B um atributo de $R2$ e θ um dos operadores de comparação {=,<, ≤,>, ≥, ≠}
 ### Renomeação $\rho$
