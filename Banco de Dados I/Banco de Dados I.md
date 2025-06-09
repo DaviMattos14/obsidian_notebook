@@ -541,4 +541,10 @@ $$
 (Cada elemento de $R_1$ será associado a todos os elementos de $R_2$)
 Exemplo:
 ![[produto_cartesiano.png]]
+### junção Natural $\bowtie$
+Junção forçando a igualdade naqueles atributos que são comuns a $R_1$ e $R_2$ (mesmo 
+nome e domínio nas duas relações)
+$$
+R_{1}\bowtie R_2
+$$
 ### Renomeação $\rho$
