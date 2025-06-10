@@ -1,0 +1,96 @@
+CREATE TABLE Consorcio (
+    id_consorcio INTEGER PRIMARY KEY,
+    nome_consorcio VARCHAR(255) UNIQUE,
+    site VARCHAR(255)
+);
+
+CREATE TABLE Escala (
+    id_escala VARCHAR(255) PRIMARY KEY,
+    sab_dom TINYINT(1),
+    seg_sex TINYINT(1)
+);
+
+CREATE TABLE Tarifa (
+    id_tarifa VARCHAR(255) PRIMARY KEY,
+    valor FLOAT
+);
+
+CREATE TABLE Linha (
+    id_linha VARCHAR(255) PRIMARY KEY,
+    numero_linha VARCHAR(255),
+    nome_linha VARCHAR(255),
+    descricao VARCHAR(255),
+    tipo VARCHAR(255),
+    fk_Consorcio_id_consorcio INTEGER,
+    fk_Tarifa_id_tarifa VARCHAR(255)
+);
+
+CREATE TABLE Viagem (
+    id_viagem VARCHAR(255) PRIMARY KEY,
+    nome_destino VARCHAR(255),
+    sentido TINYINT(1),
+    fk_Linha_id_linha VARCHAR(255),
+    fk_Escala_id_escala VARCHAR(255),
+    hora_fim TIME,
+    hora_inicio TIME
+);
+
+CREATE TABLE Pontos_de_Onibus (
+    id_ponto VARCHAR(255) PRIMARY KEY,
+    nome_ponto VARCHAR(255),
+    ponto_mais_proximo VARCHAR(255),
+    cod_plataforma VARCHAR(255)
+);
+
+CREATE TABLE Pontos_de_parada (
+    fk_Viagem_id_viagem VARCHAR(255),
+    fk_Pontos_de_Onibus_id_ponto VARCHAR(255),
+    sequencia INTEGER,
+    PRIMARY KEY (fk_Viagem_id_viagem, fk_Pontos_de_Onibus_id_ponto)
+);
+
+CREATE TABLE Tarifa_Consorcio (
+    fk_Consorcio_id_consorcio INTEGER,
+    fk_Tarifa_id_tarifa VARCHAR(255),
+    PRIMARY KEY (fk_Consorcio_id_consorcio, fk_Tarifa_id_tarifa)
+);
+ 
+ALTER TABLE Linha ADD CONSTRAINT FK_Linha_2
+    FOREIGN KEY (fk_Consorcio_id_consorcio)
+    REFERENCES Consorcio (id_consorcio)
+    ON DELETE RESTRICT;
+ 
+ALTER TABLE Linha ADD CONSTRAINT FK_Linha_3
+    FOREIGN KEY (fk_Tarifa_id_tarifa)
+    REFERENCES Tarifa (id_tarifa)
+    ON DELETE RESTRICT;
+ 
+ALTER TABLE Viagem ADD CONSTRAINT FK_Viagem_2
+    FOREIGN KEY (fk_Linha_id_linha)
+    REFERENCES Linha (id_linha)
+    ON DELETE RESTRICT;
+ 
+ALTER TABLE Viagem ADD CONSTRAINT FK_Viagem_3
+    FOREIGN KEY (fk_Escala_id_escala)
+    REFERENCES Escala (id_escala)
+    ON DELETE RESTRICT;
+ 
+ALTER TABLE Pontos_de_parada ADD CONSTRAINT FK_Pontos_de_parada_1
+    FOREIGN KEY (fk_Viagem_id_viagem)
+    REFERENCES Viagem (id_viagem)
+    ON DELETE RESTRICT;
+ 
+ALTER TABLE Pontos_de_parada ADD CONSTRAINT FK_Pontos_de_parada_2
+    FOREIGN KEY (fk_Pontos_de_Onibus_id_ponto)
+    REFERENCES Pontos_de_Onibus (id_ponto)
+    ON DELETE RESTRICT;
+ 
+ALTER TABLE Tarifa_Consorcio ADD CONSTRAINT FK_Tarifa_Consorcio_1
+    FOREIGN KEY (fk_Consorcio_id_consorcio)
+    REFERENCES Consorcio (id_consorcio)
+    ON DELETE RESTRICT;
+ 
+ALTER TABLE Tarifa_Consorcio ADD CONSTRAINT FK_Tarifa_Consorcio_2
+    FOREIGN KEY (fk_Tarifa_id_tarifa)
+    REFERENCES Tarifa (id_tarifa)
+    ON DELETE RESTRICT;
