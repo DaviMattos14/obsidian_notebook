@@ -16,4 +16,15 @@
 
 πProjeto.Projnome, Projeto.Dnum, Trabalha_em.Fcpf (
 		Projeto ⨝ Projnumero = Pnr Trabalha_em)
+
+nome_cpf = π Pnome, Minicial, Unome, Cpf (Funcionario)
+
+proj_cpf = π Projeto.Projnome, Trabalha_em.Fcpf (
+		Projeto ⨝ Projnumero = Pnr Trabalha_em
+)
+
+prodX = πFcpf(σProjnome='ProdutoX'(proj_cpf))
+prodY = πFcpf(σProjnome='ProdutoY'(proj_cpf))
+prodZ = πFcpf(σProjnome='ProdutoZ'(proj_cpf))
+
 # Exercício 3
