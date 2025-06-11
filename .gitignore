@@ -11,7 +11,7 @@
 .obsidian/workspace-mobile.json
 
 #Removendo arquivos grandes
-/Banco de Dados I/Projeto Final/gtfs_rio-de-janeiro/
+gtfs_rio-de-janeiro/
 
 # Add below lines to exclude OS settings and caches
 .trash/
