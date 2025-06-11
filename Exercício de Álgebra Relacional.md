@@ -2,6 +2,12 @@
 
 # Exercício 1
 
+π Funcionario.Pnome, Funcionario.Minicial ,Funcionario.Unome(
+	σ Funcionario.Dnr ≠ supervisor.Dnr ∨
+		Funcionario.Cpf_Supervisor = supervisor.Cpf(
+		Funcionario ⨯ ρsupervisor(Funcionario)
+	)
+)
 
 # Exercício 2
 
