@@ -14,17 +14,21 @@
 ```
 # Exercício 2
 
-πProjeto.Projnome, Projeto.Dnum, Trabalha_em.Fcpf (
+```
+projetos=   πProjeto.Projnome, Trabalha_em.Fcpf (
 		Projeto ⨝ Projnumero = Pnr Trabalha_em)
 
 nome_cpf = π Pnome, Minicial, Unome, Cpf (Funcionario)
 
-proj_cpf = π Projeto.Projnome, Trabalha_em.Fcpf (
-		Projeto ⨝ Projnumero = Pnr Trabalha_em
-)
+Proj_Nome = πPnome,Minicial,Unome,Projnome(projetos ⨝ nome_cpf.Cpf = projetos.Fcpf nome_cpf)
 
-prodX = πFcpf(σProjnome='ProdutoX'(proj_cpf))
-prodY = πFcpf(σProjnome='ProdutoY'(proj_cpf))
-prodZ = πFcpf(σProjnome='ProdutoZ'(proj_cpf))
+prodX = πPnome,Minicial,Unome(σProjnome='ProdutoX'(Proj_Nome))
+prodY = πPnome,Minicial,Unome(σProjnome='ProdutoY'(Proj_Nome))
+prodZ = πPnome,Minicial,Unome(σProjnome='ProdutoZ'(Proj_Nome))
+info = πPnome,Minicial,Unome(σProjnome='Informatizacao'(Proj_Nome))
+reorg = πPnome,Minicial,Unome(σProjnome='Reorganizacao'(Proj_Nome))
 
+((prodX ∩ prodY)-prodZ)∪(info-reorg)
+
+```
 # Exercício 3
