@@ -14,5 +14,6 @@
 ```
 # Exercício 2
 
-
+πProjeto.Projnome, Projeto.Dnum, Trabalha_em.Fcpf (
+		Projeto ⨝ Projnumero = Pnr Trabalha_em)
 # Exercício 3
