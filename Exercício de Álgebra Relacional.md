@@ -32,3 +32,6 @@ reorg = πPnome,Minicial,Unome(σProjnome='Reorganizacao'(Proj_Nome))
 
 ```
 # Exercício 3
+avg_salarios =  γ Dnr; avg(Salario)→Media (Funcionario)
+Depto5 = πMedia(σ Dnr = 5 (avg_salarios))
+πDnr(σMedia ≥ Depto5 (avg_salarios))
