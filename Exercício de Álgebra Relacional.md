@@ -32,6 +32,18 @@ reorg = πPnome,Minicial,Unome(σProjnome='Reorganizacao'(Proj_Nome))
 
 ```
 # Exercício 3
-avg_salarios =  γ Dnr; avg(Salario)→Media (Funcionario)
-Depto5 = πMedia(σ Dnr = 5 (avg_salarios))
-πDnr(σMedia ≥ Depto5 (avg_salarios))
+```
+-- Primeira Etapa: Achar o valor da média de salário do departamento 5
+γ Dnr; avg(Salario)→Media (σ Dnr = 5 (Funcionario))
+
+
+-- Segunda Etapa: 
+media_salarios = γ Dnr; avg(Salario)→Media (Funcionario)
+
+πDnome(σMedia > 33250 (
+	media_salarios ⨝ Dnr = Dnumero Departamento
+	)
+)
+```
+
+
