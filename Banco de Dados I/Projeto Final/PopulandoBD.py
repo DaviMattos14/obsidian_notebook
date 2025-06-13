@@ -1,60 +1,56 @@
 import pandas as pd
-import mysql.connector
-from mysql.connector import Error
 import datetime as data
+from sqlalchemy import create_engine, text
+from sqlalchemy.exc import SQLAlchemyError
 
 def connect_mysql():
     """
-    Função para conectar ao banco de dados MySQL e executar uma consulta de teste.
+    Função para conectar ao banco de dados MySQL usando SQLAlchemy.
     """
-    connection = None  
+    engine = None
     try:
-        connection = mysql.connector.connect(
-            host='localhost',       
-            user='Admin',     
-            password='1310223a8',
-            database='filmes'    
-        )
-        if connection.is_connected():
-            print("Conexão com o MySQL bem-sucedida!")
-    except Error as e:
-        print(f"Erro ao conectar com o MySQL: {e}")
-    return connection
+        usuario = 'Admin'
+        senha = '1310223a8'
+        host = 'localhost'
+        porta = '3306'
+        banco = 'gtfs_rj'
 
-def execute_query(connection, query):
+        # Criação da engine de conexão
+        engine = create_engine(f'mysql+pymysql://{usuario}:{senha}@{host}:{porta}/{banco}')
+        
+        # Testar a conexão abrindo uma conexão real
+        with engine.connect() as conn:
+            print("Conexão com o MySQL via SQLAlchemy bem-sucedida!")
+
+    except SQLAlchemyError as e:
+        print(f"Erro ao conectar com o MySQL via SQLAlchemy: {e}")
+    
+    return engine
+
+def execute_query(engine, query: str):
     """
-    Função para executar uma query (INSERT, ALTER TABLE) no banco de dados MySQL.
+    Executa uma query de escrita (INSERT, UPDATE, DELETE, DDL) usando SQLAlchemy.
     """
-    cursor = connection.cursor()
     try:
-        cursor.execute(query)
-        connection.commit()
-        print("Query successful")
-    except Error as err:
-        print(f"Error: '{err}'")
+        with engine.begin() as conn:  # begin() faz commit automático
+            conn.execute(text(query))
+            print("Query executada com sucesso!")
+    except SQLAlchemyError as e:
+        print(f"Erro ao executar a query: {e}")
 
-def read_query(connection, query):
+def read_query(engine, query):
     """
-    Função para ler uma query (SELECT) no banco de dados MySQL.
+    Função para executar uma query SELECT usando SQLAlchemy e retornar um DataFrame.
     """
-    cursor = connection.cursor()
-    result = None
     try:
-        cursor.execute(query)
-        result = cursor.fetchall()
-        return result
-    except Error as err:
-        print(f"Error: '{err}'")
+        # Lê a query diretamente como DataFrame
+        df = pd.read_sql(query, con=engine)
+        return df
+    except SQLAlchemyError as err:
+        print(f"Erro ao executar a query: {err}")
+        return None
 
-"""
 connect = connect_mysql()
-data = data.datetime(1964,6,15)
-query = f"""
-(1, "Kid Bengala", "H", '1964-06-15')
-"""
-execute_query(connect, query)
-connect.close()
-"""
 
 consorcio = r"D:\REPOSITÓRIOS\obsidian_notebook\Banco de Dados I\Projeto Final\gtfs_rio-de-janeiro\agency.txt"
 escala = r"D:\REPOSITÓRIOS\obsidian_notebook\Banco de Dados I\Projeto Final\gtfs_rio-de-janeiro\calendar.txt"
@@ -71,6 +67,11 @@ Consorcio
 """
 r_consorcio = pd.read_csv(consorcio, sep=",")
 df_consorcio = r_consorcio[["agency_id", "agency_name", "agency_url"]]
+df_consorcio = df_consorcio.rename(columns={
+    "agency_id":"id_consorcio", 
+    "agency_name":"nome_consorcio", 
+    "agency_url": "site"
+})
 
 """
 Escala
@@ -78,6 +79,12 @@ Escala
 r_escala= pd.read_csv(escala, sep=",")
 df_escala =r_escala[["service_id","monday","sunday"]]
 df_escala.loc[1, 'sunday'] = 1
+
+df_escala = df_escala.rename(columns={
+    "service_id" : "id_escala",
+    "monday" : "seg_sex",
+    "sunday" : "sab_dom"
+})
 
 """
 Linhas
@@ -96,7 +103,7 @@ df_linha = pd.merge(
 df_linha = df_linha.drop('fare_id_antiga', axis=1)
 df_linha = df_linha.rename(columns={'fare_id_nova': 'fare_id'})
 
-df_itineraries = pd.read_csv('D:\REPOSITÓRIOS\obsidian_notebook\Banco de Dados I\Projeto Final\gtfs_rio-de-janeiro\itinerario.csv', sep=",")
+df_itineraries = pd.read_csv(r'D:\REPOSITÓRIOS\obsidian_notebook\Banco de Dados I\Projeto Final\gtfs_rio-de-janeiro\itinerario.csv', sep=",")
 df_itineraries['servico'] = df_itineraries['servico'].astype(str)
 route_type_map = df_itineraries[['servico', 'tipo_rota']].drop_duplicates().set_index('servico')
 
@@ -110,29 +117,56 @@ df_merged = pd.merge(
 )
 df_merged['route_type'] = df_merged['tipo_rota'].fillna(df_merged['route_type'])
 df_linha = df_merged.drop(columns=['tipo_rota'])
+df_linha =df_linha.rename(columns={
+    'route_id' :"id_linha", 
+    'route_short_name':"numero_linha", 
+    'route_long_name':"nome_linha",
+    'route_desc':"descricao",
+    'route_type':"tipo",
+    'agency_id':"fk_Consorcio_id_consorcio", 
+    'fare_id':"fk_Tarifa_id_tarifa"
+})
 
 """
 Pontos de Ônibus
 """
 df_pontos_BUS = pd.read_csv(pontos_de_onibus, sep=",")
 df_pontos_BUS = df_pontos_BUS[["stop_id","stop_name","parent_station","platform_code"]]
+df_pontos_BUS = df_pontos_BUS.rename(columns={
+    "stop_id":"id_ponto",
+    "stop_name":"nome_ponto",
+    "parent_station":"ponto_mais_proximo",
+    "platform_code":"cod_plataforma"
+})
 
 """
 Pontos de Parada na Viagem
 """
 df_Ponto_Parada = pd.read_csv(pontos_de_parada, sep=",")
 df_Ponto_Parada = df_Ponto_Parada[["trip_id","stop_id","stop_sequence"]]
-
+df_Ponto_Parada= df_Ponto_Parada.rename(columns={
+    "trip_id":"fk_Viagem_id_viagem",
+    "stop_id":"fk_Pontos_de_Onibus_id_ponto",
+    "stop_sequence":"sequencia"
+})
 """
 Tarifa
 """
 df_tarifa = pd.read_csv(tarifa, sep=",")
 df_tarifa1 = df_tarifa[["fare_id","price"]]
+df_tarifa1 = df_tarifa1.rename(columns={
+    "fare_id":"id_tarifa",
+    "price":"valor"
+})
 
 """
 Tarifa Consorcio
 """
 df_tarifa_consorcio = df_tarifa[["agency_id","fare_id"]]
+df_tarifa_consorcio = df_tarifa_consorcio.rename(columns={
+    "agency_id":"fk_Consorcio_id_consorcio",
+    "fare_id":"fk_Tarifa_id_tarifa"
+})
 
 """
 Viagens
@@ -172,5 +206,96 @@ def formatar_para_hhmmss(td):
 # Aplica a função de formatação às colunas de tempo
 df_viagem['start_time'] = df_viagem['start_time'].apply(formatar_para_hhmmss)
 df_viagem['end_time'] = df_viagem['end_time'].apply(formatar_para_hhmmss)
+df_viagem = df_viagem.rename(columns={
+    'trip_id':"id_viagem",
+    'trip_headsign':"nome_destino",
+    'direction_id':"sentido",
+    'route_id':"fk_Linha_id_linha",
+    'service_id':"fk_Escala_id_escala",
+    'start_time':"hora_inicio", 
+    'end_time':"hora_fim"
+})
 
-print(df_viagem.head(20))
+tabelas_para_limpar = [
+    "pontos_de_parada",
+    "viagem",
+    "linha",
+    "tarifa_consorcio",
+    "tarifa",
+    "consorcio",
+    "escala",
+    "pontos_de_onibus"
+]
+with connect.begin() as conn:  # begin() garante commit automático
+    for tabela in tabelas_para_limpar:
+        conn.execute(text(f'DELETE FROM {tabela};'))
+
+print("\nIniciando inserção de novos dados...")
+
+df_consorcio.to_sql(
+    name="consorcio",
+    con=connect,
+    if_exists="append",
+    index=False
+)
+print("OK 1")
+df_escala.to_sql(
+    name="escala",
+    con=connect,
+    if_exists="append",
+    index=False
+)
+print("OK 2")
+
+df_pontos_BUS.to_sql(
+    name="pontos_de_onibus",
+    con=connect,
+    if_exists="append",
+    index=False
+)
+print("OK 3")
+
+df_tarifa1.to_sql(
+    name="tarifa",
+    con=connect,
+    if_exists="append",
+    index=False
+)
+print("OK 4 ")
+
+df_linha.to_sql(
+    name="linha",
+    con=connect,
+    if_exists="append",
+    index=False
+)
+print("OK 5")
+
+df_viagem.to_sql(
+    name="viagem",
+    con=connect,
+    if_exists="append",
+    index=False
+)
+print("OK 6 ")
+
+df_Ponto_Parada = df_Ponto_Parada.drop_duplicates(subset=["fk_Viagem_id_viagem", "fk_Pontos_de_Onibus_id_ponto"])
+df_Ponto_Parada.to_sql(
+    name="pontos_de_parada",
+    con=connect,
+    if_exists="append",
+    index=False
+)
+
+print("OK 7")
+
+
+df_tarifa_consorcio.to_sql(
+    name="tarifa_consorcio",
+    con=connect,
+    if_exists="append",
+    index=False
+)
+print("OK 8")
+
+connect.dispose()
