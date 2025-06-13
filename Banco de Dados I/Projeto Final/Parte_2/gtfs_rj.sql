@@ -1,7 +1,7 @@
 CREATE TABLE Consorcio (
     id_consorcio INTEGER PRIMARY KEY,
     nome_consorcio VARCHAR(255) UNIQUE,
-    site VARCHAR(255)
+    site_consorcio VARCHAR(255)
 );
 
 CREATE TABLE Escala (
@@ -12,7 +12,7 @@ CREATE TABLE Escala (
 
 CREATE TABLE Tarifa (
     id_tarifa VARCHAR(255) PRIMARY KEY,
-    valor FLOAT
+    valor DECIMAL(10,2)
 );
 
 CREATE TABLE Linha (

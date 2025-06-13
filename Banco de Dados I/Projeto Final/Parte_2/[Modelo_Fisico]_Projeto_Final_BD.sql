@@ -1,57 +1,59 @@
+/* [Modelo_Lógico]_Projeto_Final_BD: */
+
 CREATE TABLE Consorcio (
     id_consorcio INTEGER PRIMARY KEY,
-    nome_consorcio VARCHAR(255) UNIQUE,
-    site VARCHAR(255)
+    nome_consorcio VARCHAR UNIQUE,
+    site VARCHAR
 );
 
 CREATE TABLE Escala (
-    id_escala VARCHAR(255) PRIMARY KEY,
-    sab_dom TINYINT(1),
-    seg_sex TINYINT(1)
+    id_escala VARCHAR PRIMARY KEY,
+    sab_dom BOOLEAN,
+    seg_sex BOOLEAN
 );
 
 CREATE TABLE Tarifa (
-    id_tarifa VARCHAR(255) PRIMARY KEY,
-    valor FLOAT
+    id_tarifa VARCHAR PRIMARY KEY,
+    valor DECIMAL
 );
 
 CREATE TABLE Linha (
-    id_linha VARCHAR(255) PRIMARY KEY,
-    numero_linha VARCHAR(255),
-    nome_linha VARCHAR(255),
-    descricao VARCHAR(255),
-    tipo VARCHAR(255),
+    id_linha VARCHAR PRIMARY KEY,
+    numero_linha VARCHAR,
+    nome_linha VARCHAR,
+    descricao VARCHAR,
+    tipo VARCHAR,
     fk_Consorcio_id_consorcio INTEGER,
-    fk_Tarifa_id_tarifa VARCHAR(255)
+    fk_Tarifa_id_tarifa VARCHAR
 );
 
 CREATE TABLE Viagem (
-    id_viagem VARCHAR(255) PRIMARY KEY,
-    nome_destino VARCHAR(255),
-    sentido TINYINT(1),
-    fk_Linha_id_linha VARCHAR(255),
-    fk_Escala_id_escala VARCHAR(255),
+    id_viagem VARCHAR PRIMARY KEY,
+    nome_destino VARCHAR,
+    sentido BOOLEAN,
+    fk_Linha_id_linha VARCHAR,
+    fk_Escala_id_escala VARCHAR,
     hora_fim TIME,
     hora_inicio TIME
 );
 
 CREATE TABLE Pontos_de_Onibus (
-    id_ponto VARCHAR(255) PRIMARY KEY,
-    nome_ponto VARCHAR(255),
-    ponto_mais_proximo VARCHAR(255),
-    cod_plataforma VARCHAR(255)
+    id_ponto VARCHAR PRIMARY KEY,
+    nome_ponto VARCHAR,
+    ponto_mais_proximo VARCHAR,
+    cod_plataforma VARCHAR
 );
 
 CREATE TABLE Pontos_de_parada (
-    fk_Viagem_id_viagem VARCHAR(255),
-    fk_Pontos_de_Onibus_id_ponto VARCHAR(255),
+    fk_Viagem_id_viagem VARCHAR,
+    fk_Pontos_de_Onibus_id_ponto VARCHAR,
     sequencia INTEGER,
     PRIMARY KEY (fk_Viagem_id_viagem, fk_Pontos_de_Onibus_id_ponto)
 );
 
 CREATE TABLE Tarifa_Consorcio (
     fk_Consorcio_id_consorcio INTEGER,
-    fk_Tarifa_id_tarifa VARCHAR(255),
+    fk_Tarifa_id_tarifa VARCHAR,
     PRIMARY KEY (fk_Consorcio_id_consorcio, fk_Tarifa_id_tarifa)
 );
  
