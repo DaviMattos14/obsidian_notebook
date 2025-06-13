@@ -123,8 +123,8 @@ df_linha =df_linha.rename(columns={
     'route_long_name':"nome_linha",
     'route_desc':"descricao",
     'route_type':"tipo",
-    'agency_id':"fk_Consorcio_id_consorcio", 
-    'fare_id':"fk_Tarifa_id_tarifa"
+    'agency_id':"fk_id_consorcio", 
+    'fare_id':"fk_id_tarifa"
 })
 
 """
@@ -145,8 +145,8 @@ Pontos de Parada na Viagem
 df_Ponto_Parada = pd.read_csv(pontos_de_parada, sep=",")
 df_Ponto_Parada = df_Ponto_Parada[["trip_id","stop_id","stop_sequence"]]
 df_Ponto_Parada= df_Ponto_Parada.rename(columns={
-    "trip_id":"fk_Viagem_id_viagem",
-    "stop_id":"fk_Pontos_de_Onibus_id_ponto",
+    "trip_id":"fk_id_viagem",
+    "stop_id":"fk_id_ponto",
     "stop_sequence":"sequencia"
 })
 """
@@ -164,8 +164,8 @@ Tarifa Consorcio
 """
 df_tarifa_consorcio = df_tarifa[["agency_id","fare_id"]]
 df_tarifa_consorcio = df_tarifa_consorcio.rename(columns={
-    "agency_id":"fk_Consorcio_id_consorcio",
-    "fare_id":"fk_Tarifa_id_tarifa"
+    "agency_id":"fk_id_consorcio",
+    "fare_id":"fk_id_tarifa"
 })
 
 """
@@ -210,8 +210,8 @@ df_viagem = df_viagem.rename(columns={
     'trip_id':"id_viagem",
     'trip_headsign':"nome_destino",
     'direction_id':"sentido",
-    'route_id':"fk_Linha_id_linha",
-    'service_id':"fk_Escala_id_escala",
+    'route_id':"fk_id_linha",
+    'service_id':"fk_id_escala",
     'start_time':"hora_inicio", 
     'end_time':"hora_fim"
 })
@@ -226,6 +226,7 @@ tabelas_para_limpar = [
     "escala",
     "pontos_de_onibus"
 ]
+
 with connect.begin() as conn:  # begin() garante commit automático
     for tabela in tabelas_para_limpar:
         conn.execute(text(f'DELETE FROM {tabela};'))
@@ -279,7 +280,7 @@ df_viagem.to_sql(
 )
 print("OK 6 ")
 
-df_Ponto_Parada = df_Ponto_Parada.drop_duplicates(subset=["fk_Viagem_id_viagem", "fk_Pontos_de_Onibus_id_ponto"])
+df_Ponto_Parada = df_Ponto_Parada.drop_duplicates(subset=["fk_id_viagem", "fk_id_ponto"])
 df_Ponto_Parada.to_sql(
     name="pontos_de_parada",
     con=connect,
