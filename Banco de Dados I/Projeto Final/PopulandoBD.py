@@ -183,29 +183,21 @@ df_viagem = pd.merge(
     how='left'     # 'left' mantém todos os dados de df_trips
 )
 
-df_viagem['start_time'] = pd.to_timedelta(df_viagem['start_time'], errors='coerce')
-df_viagem['end_time'] = pd.to_timedelta(df_viagem['end_time'], errors='coerce')
+# Converte para timedelta
+df_viagem['start_time'] = pd.to_timedelta(df_viagem['start_time'])
+df_viagem['end_time'] = pd.to_timedelta(df_viagem['end_time'])
 
-def formatar_para_hhmmss(td):
-    """
-    Formata um objeto timedelta para uma string no formato HH:MM:SS.
-    Lida corretamente com durações maiores que 24 horas.
-    """
-    if pd.isnull(td):
-        return None  # Retorna None se o valor for NaT (Not a Time)
-    
-    # Calcula o total de segundos e, a partir dele, as horas, minutos e segundos
-    total_seconds = int(td.total_seconds())
-    horas = total_seconds // 3600
-    minutos = (total_seconds % 3600) // 60
-    segundos = total_seconds % 60
-    
-    # Retorna a string formatada com preenchimento de zero
-    return f"{horas:02d}:{minutos:02d}:{segundos:02d}"
+# Formata como HH:MM, aplicando % 24 nas horas
 
-# Aplica a função de formatação às colunas de tempo
-df_viagem['start_time'] = df_viagem['start_time'].apply(formatar_para_hhmmss)
-df_viagem['end_time'] = df_viagem['end_time'].apply(formatar_para_hhmmss)
+df_viagem['start_time'] = df_viagem['start_time'].apply(
+    lambda x: f"{x.components.hours % 24:02d}:{x.components.minutes:02d}"
+    if pd.notna(x) else "00:00"
+)
+df_viagem['end_time'] = df_viagem['end_time'].apply(
+    lambda x: f"{x.components.hours % 24:02d}:{x.components.minutes:02d}"
+    if pd.notna(x) else "00:00"
+)
+
 df_viagem = df_viagem.rename(columns={
     'trip_id':"id_viagem",
     'trip_headsign':"nome_destino",
@@ -215,6 +207,7 @@ df_viagem = df_viagem.rename(columns={
     'start_time':"hora_inicio", 
     'end_time':"hora_fim"
 })
+
 
 tabelas_para_limpar = [
     "pontos_de_parada",
@@ -229,7 +222,7 @@ tabelas_para_limpar = [
 
 with connect.begin() as conn:  # begin() garante commit automático
     for tabela in tabelas_para_limpar:
-        conn.execute(text(f'DELETE FROM {tabela};'))
+        conn.execute(text(f'DROP TABLE {tabela};'))
 
 print("\nIniciando inserção de novos dados...")
 

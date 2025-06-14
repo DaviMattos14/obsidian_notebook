@@ -1,13 +1,16 @@
+CREATE DATABASE gtfs_rj;
+USE gtfs_rj;
+
 CREATE TABLE Consorcio (
     id_consorcio INTEGER PRIMARY KEY,
     nome_consorcio VARCHAR(255) UNIQUE,
-    site_consorcio VARCHAR(255)
+    site VARCHAR(255)
 );
 
 CREATE TABLE Escala (
     id_escala VARCHAR(255) PRIMARY KEY,
-    sab_dom TINYINT(1),
-    seg_sex TINYINT(1)
+    seg_sex TINYINT(1),
+    sab_dom TINYINT(1)
 );
 
 CREATE TABLE Tarifa (
@@ -31,8 +34,8 @@ CREATE TABLE Viagem (
     sentido TINYINT(1),
     fk_id_linha VARCHAR(255),
     fk_id_escala VARCHAR(255),
-    hora_fim TIME,
-    hora_inicio TIME
+    hora_inicio TIME,
+    hora_fim TIME
 );
 
 CREATE TABLE Pontos_de_Onibus (
