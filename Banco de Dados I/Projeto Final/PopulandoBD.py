@@ -52,15 +52,18 @@ def read_query(engine, query):
 
 connect = connect_mysql()
 
-consorcio = r"D:\REPOSITÓRIOS\obsidian_notebook\Banco de Dados I\Projeto Final\gtfs_rio-de-janeiro\agency.txt"
-escala = r"D:\REPOSITÓRIOS\obsidian_notebook\Banco de Dados I\Projeto Final\gtfs_rio-de-janeiro\calendar.txt"
-linha = r"D:\REPOSITÓRIOS\obsidian_notebook\Banco de Dados I\Projeto Final\gtfs_rio-de-janeiro\routes.txt"
-pontos_de_onibus = r"D:\REPOSITÓRIOS\obsidian_notebook\Banco de Dados I\Projeto Final\gtfs_rio-de-janeiro\stops.txt"
-pontos_de_parada = r"D:\REPOSITÓRIOS\obsidian_notebook\Banco de Dados I\Projeto Final\gtfs_rio-de-janeiro\stop_times.txt"
-tarifa = r"D:\REPOSITÓRIOS\obsidian_notebook\Banco de Dados I\Projeto Final\gtfs_rio-de-janeiro\fare_attributes.txt"
-tarifa_linha = r"D:\REPOSITÓRIOS\obsidian_notebook\Banco de Dados I\Projeto Final\gtfs_rio-de-janeiro\fare_rules.txt"
-viagem = r"D:\REPOSITÓRIOS\obsidian_notebook\Banco de Dados I\Projeto Final\gtfs_rio-de-janeiro\trips.txt"
-pontos = r"D:\REPOSITÓRIOS\obsidian_notebook\Banco de Dados I\Projeto Final\gtfs_rio-de-janeiro\stops.txt"
+"""
+Tem que executar este arquivo em *\ProjetoFinal>
+"""
+consorcio = "gtfs_rio-de-janeiro/agency.txt"
+escala = "gtfs_rio-de-janeiro/calendar.txt"
+linha = r"gtfs_rio-de-janeiro/routes.txt"
+pontos_de_onibus = r"gtfs_rio-de-janeiro/stops.txt"
+pontos_de_parada = r"gtfs_rio-de-janeiro/stop_times.txt"
+tarifa = r"gtfs_rio-de-janeiro/fare_attributes.txt"
+tarifa_linha = r"gtfs_rio-de-janeiro/fare_rules.txt"
+viagem = r"gtfs_rio-de-janeiro/trips.txt"
+pontos = r"gtfs_rio-de-janeiro/stops.txt"
 
 """
 Consorcio
@@ -103,7 +106,7 @@ df_linha = pd.merge(
 df_linha = df_linha.drop('fare_id_antiga', axis=1)
 df_linha = df_linha.rename(columns={'fare_id_nova': 'fare_id'})
 
-df_itineraries = pd.read_csv(r'D:\REPOSITÓRIOS\obsidian_notebook\Banco de Dados I\Projeto Final\gtfs_rio-de-janeiro\itinerario.csv', sep=",")
+df_itineraries = pd.read_csv(r'gtfs_rio-de-janeiro/itinerario.csv', sep=",")
 df_itineraries['servico'] = df_itineraries['servico'].astype(str)
 route_type_map = df_itineraries[['servico', 'tipo_rota']].drop_duplicates().set_index('servico')
 
@@ -173,7 +176,7 @@ Viagens
 """
 df_viagem = pd.read_csv(viagem,sep=",")
 df_viagem = df_viagem[["trip_id","trip_headsign","direction_id","route_id","service_id"]]
-df_frequencia = pd.read_csv(r'D:\REPOSITÓRIOS\obsidian_notebook\Banco de Dados I\Projeto Final\gtfs_rio-de-janeiro\frequencies.txt',sep=",")
+df_frequencia = pd.read_csv(r'gtfs_rio-de-janeiro/frequencies.txt',sep=",")
 df_frequencia = df_frequencia[['trip_id', 'start_time', 'end_time']]
 
 df_viagem = pd.merge(
