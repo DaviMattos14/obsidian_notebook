@@ -9,7 +9,7 @@ def connect_mysql():
     """
     engine = None
     try:
-        usuario = 'Admin'
+        usuario = 'Admin' # Usar os dados do seu banco
         senha = '1310223a8'
         host = 'localhost'
         porta = '3306'
@@ -235,14 +235,14 @@ df_consorcio.to_sql(
     if_exists="append",
     index=False
 )
-print("OK 1")
+print("OK 1/8")
 df_escala.to_sql(
     name="escala",
     con=connect,
     if_exists="append",
     index=False
 )
-print("OK 2")
+print("OK 2/8")
 
 df_pontos_BUS.to_sql(
     name="pontos_de_onibus",
@@ -250,7 +250,7 @@ df_pontos_BUS.to_sql(
     if_exists="append",
     index=False
 )
-print("OK 3")
+print("OK 3/8")
 
 df_tarifa1.to_sql(
     name="tarifa",
@@ -258,7 +258,7 @@ df_tarifa1.to_sql(
     if_exists="append",
     index=False
 )
-print("OK 4 ")
+print("OK 4/8 ")
 
 df_linha.to_sql(
     name="linha",
@@ -266,7 +266,7 @@ df_linha.to_sql(
     if_exists="append",
     index=False
 )
-print("OK 5")
+print("OK 5/8")
 
 df_viagem.to_sql(
     name="viagem",
@@ -274,7 +274,7 @@ df_viagem.to_sql(
     if_exists="append",
     index=False
 )
-print("OK 6 ")
+print("OK 6/8 ")
 
 df_Ponto_Parada = df_Ponto_Parada.drop_duplicates(subset=["fk_id_viagem", "fk_id_ponto"])
 df_Ponto_Parada.to_sql(
@@ -284,7 +284,7 @@ df_Ponto_Parada.to_sql(
     index=False
 )
 
-print("OK 7")
+print("OK 7/8")
 
 
 df_tarifa_consorcio.to_sql(
@@ -293,6 +293,6 @@ df_tarifa_consorcio.to_sql(
     if_exists="append",
     index=False
 )
-print("OK 8")
+print("OK 8/8")
 
 connect.dispose()
