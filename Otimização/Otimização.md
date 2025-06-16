@@ -103,3 +103,5 @@ a região viável é o conjunto de todas as soluções viáveis.
 **Solução Ótima**:
 Uma solução ótima ié uma solução viável onde onde a função objetivo atinge valor máximo(
 PPL maximização) ou mínimo (PPL minimização)
+
+# Dualidade
