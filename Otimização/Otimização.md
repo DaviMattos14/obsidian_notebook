@@ -130,4 +130,20 @@ Geometricamente buscamos o hiperplano que intercepta o conjunto das soluções v
 ## Convexidade
 ![[convexidade.png]]
 Portanto, um conjunto C é convexo ,se todo segmento de reta que une dois de seus elementos pontos está inteiramente contido em C.
+
+Um ponto x de um conjunto convexo C é dito ser um ponto
+extremo de C se ele não pode ser expresso como uma combinação convexa de
+outros pontos distintos de C.
+
+A região de contato ( interseção) entre o hiperplano ótimo da função objetivo
+e o politopo da região viável é ou um ponto extremo ou uma face do politopo.
+
+![[Pasted image 20250616195304.png]]
+TEOREMA 5: Otimalidade do Ponto Extremo 
+Se um problema de programação linear tem exatamente uma solução ótima, então esta solução deve ser um ponto extremo do conjunto viável
+Lema
+Se o PPL tem mais que uma solução ótima, ele tem infinitas soluções
+ótimas. Além disso, o conjunto das soluções ótimas é convexo
 # Dualidade
+Passamos a ter dois problemas o Primal (P) e o Dual (D)
+Exemplo:
