@@ -104,4 +104,8 @@ a região viável é o conjunto de todas as soluções viáveis.
 Uma solução ótima ié uma solução viável onde onde a função objetivo atinge valor máximo(
 PPL maximização) ou mínimo (PPL minimização)
 
+# Geometria do PPL
+## Soluções de um PPL
+### Solução Única
+
 # Dualidade
