@@ -106,6 +106,28 @@ PPL maximização) ou mínimo (PPL minimização)
 
 # Geometria do PPL
 ## Soluções de um PPL
-### Solução Única
+### 1. Solução Única
+![[solucao_unica.png]]
+### 2. Solução Alternativa
+![[solucao_alternativa.png]]
+### 3. Solução Ilimitada
+![[solucao_ilimitada.png]]
+### 4. Problema Inviável
+![[problema_inviavel.png]]
+## Geometria de uma restrição( PPL forma canônica )
+- Definição 1:
+O conjunto ${x ∈ IR^n| a^T x ≤ b}$ é denominado semiespaço fechado
+- Definição 2: 
+Um conjunto S ⊂ $IR^n$ é dito limitado se existe uma constante K tal que o valor absoluto de cada componente de todo elemento de S e ́ menor ou igual a K .
+- Definição 3: 
+Um politopo é um conjunto que pode ser expresso como a interseção de um número finito de semiespaços fechados
+- Definição 4:
+Um poliedro é politopo limitado, não vazio.
+- Definição 5: 
+Seja a um vetor não-nulo em $IR^n$ e seja b um escalar. O conjunto ${x ∈ IR^n | a^T x = b}$ é  chamado de hiperplano.
 
+Geometricamente buscamos o hiperplano que intercepta o conjunto das soluções viáveis para o qual k é máximo ( caso de problema de maximização) ou k é mínimo ( problema de minimização)
+## Convexidade
+![[convexidade.png]]
+Portanto, um conjunto C é convexo ,se todo segmento de reta que une dois de seus elementos pontos está inteiramente contido em C.
 # Dualidade
