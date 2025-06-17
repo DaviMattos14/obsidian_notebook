@@ -235,3 +235,4 @@ $$
 ![[Pasted image 20250616222026.png]]
 ## Certificado de Otimalidade (Teorema da Folga Complementar)
 ![[Pasted image 20250616231707.png]]
+# Método Dual Simplex
