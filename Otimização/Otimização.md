@@ -233,11 +233,12 @@ $$
 ![[Pasted image 20250616215805.png]]
 ![[Pasted image 20250616215827.png]]
 ![[Pasted image 20250616222026.png]]
+
+### Primal (P) = Max / Dual (D) = Min
 $$
 \begin{array}{|l|}
 \hline
 \textbf{Primal (P)} \\
-\hline 
 \text{Maximize} \\ \hline
 \underline{\textit{Variáveis}} \\ \hline
 \geq 0 \\
@@ -254,8 +255,7 @@ $$
 \begin{array}{|l|}
 \hline
 \textbf{Dual (D)} \\
-\hline 
-\text{Maximize} \\ \hline
+\text{Minimize} \\ \hline
 \underline{\textit{Restrições}} \\ \hline
 \geq C_j \\
 \leq C_j \\
@@ -268,6 +268,41 @@ $$
 \hline
 \end{array}
 $$
+### Primal (P) = Min / Dual (D) = Min
+$$
+\begin{array}{|l|}
+\hline
+\textbf{Dual (D)} \\
+\text{Maximize} \\ \hline
+\underline{\textit{Variáveis}} \\ \hline
+\geq 0 \\
+\leq 0 \\
+\text{Irrestrita} \\
+\hline
+\underline{\textit{Restrições}} \\ \hline 
+\leq b_i \\
+\geq b_i \\
+= b_i \\
+\hline
+\end{array}
+\longleftarrow
+\begin{array}{|l|}
+\hline
+\textbf{Primal (P)} \\
+\text{Minimize} \\ \hline
+\underline{\textit{Restrições}} \\ \hline
+\geq C_j \\
+\leq C_j \\
+=C_j \\
+\hline
+\underline{\textit{Variáveis}} \\ \hline 
+\geq 0 \\
+\leq 0 \\
+\text{Irrestrita} \\
+\hline
+\end{array}
+$$
+
 ## Certificado de Otimalidade (Teorema da Folga Complementar)
 ![[Pasted image 20250616231707.png]]
 # Método Dual Simplex
