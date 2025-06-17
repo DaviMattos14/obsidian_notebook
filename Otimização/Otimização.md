@@ -146,4 +146,44 @@ Se o PPL tem mais que uma solução ótima, ele tem infinitas soluções
 ótimas. Além disso, o conjunto das soluções ótimas é convexo
 # Dualidade
 Passamos a ter dois problemas o Primal (P) e o Dual (D)
-Exemplo:
+Exemplo
+Primal
+$$
+\text{(P)}
+\begin{matrix}
+&&\text{max }z=4x_ {1} +  x_ {2} + 5x_ {3} + 3x_ {4} && \\
+\text{sujeito a } &&x_1​−x_2​−x_3​+3x_4​⩽1 \\
+ &&5x_1+x_2+3x_3+8x_4⩽55 \\
+ &&−x_1+2x_2+3x_3−5x_4⩽3 \\ 
+&&x_1,x_2,x_3,x_4 \ge 0 
+\end{matrix}
+$$
+Dual
+
+$$
+\text{(D)}
+\begin{matrix}
+&&\text{min }w=1y_{1} +  55y_ {2} + 3y_{3}&& \\
+\text{sujeito a } &&y_1​+5y_2​−y_3​​\ge4 \\
+ &&-y_1+y_2+y2_3\ge1 \\
+ &&−y_1+3y_2+3y_3\ge5 \\
+ && 3y_1+8y_2-5y_3\ge 3 \\  
+&&y_1,y_2,y_3 \ge 0 
+\end{matrix}
+$$
+DEFINIÇÃO: O dual do problema (P) (_Problema PRIMAL_) é definido como
+sendo o problema (D) (_Problema DUAL_)
+$$
+\begin{array}{rl}
+\text{(P)} \quad & \text{maximize } z = \sum_{j=1}^n c_j x_j \\
+\text{sujeito a} \quad & \sum_{j=1}^n a_{ij} x_j \leq b_i \quad (i = 1, \dots, m) \\
+& x_j \geq 0 \quad (j = 1, \dots, n)
+\end{array}
+$$
+$$
+\begin{array}{rlrl}
+\text{(D)} \quad & \text{minimize } w = \sum_{i=1}^m b_i y_i \\
+\text{sujeito a }\quad &\sum_{i=1}^m a_{ij} y_i \geq c_j \quad (j=1,\dots,n) \\
+ & y_i \geq 0 \quad (i=1,\dots,m)
+\end{array}
+$$
