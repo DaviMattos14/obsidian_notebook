@@ -187,3 +187,46 @@ $$
  & y_i \geq 0 \quad (i=1,\dots,m)
 \end{array}
 $$
+**Teorema de Dualidade Fraca**: 
+Se x é uma solução viável de um problema primal e y é uma solução viável do problema dual correspondente, então
+$$
+\sum^{n}_{j=1}c_jx_j\le\sum\limits^{m}_{j=1}b_iy_i
+$$
+**Teorema da Dualidade Forte**:
+Se um problema de programação linear tem uma solução ótima, seu dual também tem e os custos ótimos de ambos os problemas são iguais.
+$$
+\sum^{n}_{j=1}c_jx_j^{*}\le\sum\limits^{m}_{j=1}b_iy_i^{*}
+$$
+## Relação entre Primal e Dual
+Dado o problema dual:
+$$
+\begin{array}{rlrl}
+\text{(D)} \quad & \text{minimize } w = \sum_{i=1}^m b_i y_i \\
+\text{sujeito a }\quad &\sum_{i=1}^m a_{ij} y_i \geq c_j \quad (j=1,\dots,n) \\
+ & y_i \geq 0 \quad (i=1,\dots,m)
+\end{array}
+$$
+Podemos escrever com:
+$$
+\begin{array}{rlrl}
+\text{(D)} \quad & \text{maximize } -w = \sum_{i=1}^m (-b_i) y_i \\
+\text{sujeito a }\quad &\sum_{i=1}^m (-a_{ij}) y_i \leq -c_j \quad (j=1,\dots,n) \\
+ & y_i \geq 0 \quad (i=1,\dots,m)
+\end{array}
+$$
+Analogamente...
+$$
+\begin{array}{rl}
+\text{(P)} \quad & \text{maximize } z = \sum_{j=1}^n (-c_j) x_j \\
+\text{sujeito a} \quad & \sum_{j=1}^n (-a_{ij}) x_j \geq -b_i \quad (i = 1, \dots, m) \\
+& x_j \geq 0 \quad (j = 1, \dots, n)
+\end{array}
+$$
+O dual deste problema, resulta no primal
+$$
+\begin{array}{rl}
+\text{(P)} \quad & \text{maximize } z = \sum_{j=1}^n c_j x_j \\
+\text{sujeito a} \quad & \sum_{j=1}^n a_{ij} x_j \leq b_i \quad (i = 1, \dots, m) \\
+& x_j \geq 0 \quad (j = 1, \dots, n)
+\end{array}
+$$
