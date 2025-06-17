@@ -256,12 +256,12 @@ $$
 \textbf{Dual (D)} \\
 \hline 
 \text{Maximize} \\ \hline
-\underline{\textit{Variáveis}} \\ \hline
+\underline{\textit{Restrições}} \\ \hline
 \geq C_j \\
 \leq C_j \\
 =C_j \\
 \hline
-\underline{\textit{Restrições}} \\ \hline 
+\underline{\textit{Variáveis}} \\ \hline 
 \geq 0 \\
 \leq 0 \\
 \text{Irrestrita} \\
