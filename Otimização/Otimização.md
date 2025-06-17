@@ -230,3 +230,5 @@ $$
 & x_j \geq 0 \quad (j = 1, \dots, n)
 \end{array}
 $$
+![[Pasted image 20250616215805.png]]
+![[Pasted image 20250616215827.png]]
