@@ -233,3 +233,5 @@ $$
 ![[Pasted image 20250616215805.png]]
 ![[Pasted image 20250616215827.png]]
 ![[Pasted image 20250616222026.png]]
+## Certificado de Otimalidade
+![[Pasted image 20250616231707.png]]
