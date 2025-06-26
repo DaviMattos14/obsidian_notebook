@@ -305,4 +305,55 @@ $$
 
 ## Certificado de Otimalidade (Teorema da Folga Complementar)
 ![[Pasted image 20250616231707.png]]
+1.  Testar se a solução é viável, ou seja, aplicar $x_{1,2,...}^{*}$ nas restrições 
+2. Escrever o Dual
+3. Zerar as colunas as quais no primal a solução $x_{i}^{*}=0$ 
+4. Zerar as linhas as quais  $a_{ij}x_{i}^{*} < b$ , ou seja, ao testar a viabilidade, há a presença de uma folga ($2<3$ e não $3=3$) 
+5. Resolver o sistema
+6. Testar a solução dual, principalmente nas linhas que foram zerar.
+7. Certificar a otimalidade ou não.
 # Método Dual Simplex
+Dado um PPL
+$$
+\begin{matrix}
+\text{min (ou max) } z = c^tx \\
+\text{sujeito a}\\
+\hspace{3cm} Ax=b\\
+\hspace{3cm}x \in \mathbb{Z}^n
+\end{matrix}
+$$
+Onde o PPL é um primal inviável, vamos tentar achar um dual viável, para isso temos que achar uma base $Ax \leq b$, ou seja, (1) adicionar variáveis de folga
+Exemplo:
+$$
+
+\begin{matrix}
+&&\text{max }z=-2x_ {1} -3  x_ {2}&& \\
+\text{sujeito a } &&2x_1​−3x_2​\leq30 \\
+ && x_1+2x_2\geq10 \\ 
+&&x_1,x_2 \ge 0 
+\end{matrix}
+$$
+Transformamos a restrição R2 em:
+$$
+\begin{matrix}
+&&\text{max }z=-2x_ {1} -3  x_ {2}&& \\
+\text{sujeito a } &&2x_1​−3x_2+x_{3​}=30 \\
+ && -x_1-2x_2+x_4=-10 \\ 
+&&x_1,x_2 \ge 0 
+\end{matrix}
+
+$$
+(2) Definir quem sai da base $\text{Min}\{b_i\}$ (Quem tiver o menor valor de $b$)
+(3) Definir quem entra na base $\text{Max}\{\frac{Z}{\text{Restrição de Min\{b\}}}\}$ (Pegamos os coeficientes da função objetiva e dividimos pelos coeficientes da variável que sai da base, a variável que tiver o maior coeficiente entrará na base)
+(4) Continua o algoritmo dual simplex e retornar para (2)
+
+# Problema de Programação Linear Inteira
+## Método Branch and Bound
+Primeiro relaxamos a restrição inteira e tentamos achar uma solução ótima
+![[Pasted image 20250625223855.png]]
+![[Pasted image 20250625223846.png]]
+
+![[Pasted image 20250625223959.png]]
+![[Pasted image 20250625224009.png]]
+![[Pasted image 20250625224021.png]]
+![[Pasted image 20250625224045.png]]![[Pasted image 20250625224105.png]]
