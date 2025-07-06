@@ -614,3 +614,12 @@ int switch_eg(int x, int n) {
 ```
 #### Switch em assembly
 ![[switch.png]]
+# Aula 11 - Implementação de subrotinas na arquitetura IA32
+# Aula 12 - Subrotinas recursivas e manipulação de vetores na arquitetura IA32
+# Aula 13 - Implementação de estruturas de dados heterogêneas
+# Aula 14 - Combinando código assembly com programas C
+# Aula 15 - Referências a Memória fora dos limites e estouro de buffer
+# Aula 16 - Fluxo de controle com exceções
+# Aula 17: Programas em execução
+# Aula 20 : Ligação e carga de programas
+# Aula 21 - Ligação estática
