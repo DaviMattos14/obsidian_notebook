@@ -705,6 +705,73 @@ O livro também menciona a instrução `leave` nesta seção. Ela é usada para 
 Após a instrução
 
 `leave`, o topo da pilha conterá exatamente o endereço de retorno, pronto para a instrução `ret`.
+
+## **Registradores "Caller-Save" (Salvos pela Função Chamadora)**
+
+- **Registradores:** `%eax`, `%ecx`, `%edx`.
+    
+- **A Regra:** A função `callee` (a que é chamada) pode usar esses registradores livremente, sem se preocupar em salvar o valor que estava neles. Ela pode sobrescrevê-los à vontade.
+    
+- **A Responsabilidade:** Se a função `caller` (a que chama) se importa com o valor de um desses registradores, é **responsabilidade dela** salvar esse valor (geralmente na sua própria área na pilha) _antes_ de fazer a chamada para outra função.
+    
+- **Analogia:** Pense nestes registradores como "rascunhos" em um quadro branco compartilhado. Se você vai pedir para um colega usar o quadro, você assume que ele vai apagar a área de rascunho. Se havia algo importante lá, você precisa copiar para o seu caderno antes.
+    
+
+**2. Registradores "Callee-Save" (Salvos pela Função Chamada)**
+
+- **Registradores:** `%ebx`, `%esi`, `%edi`.
+    
+- **A Regra:** A função `caller` pode chamar a `callee` esperando que os valores nesses registradores permaneçam intactos após o retorno da `callee`.
+    
+- **A Responsabilidade:** Se a função `callee` precisar usar um desses registradores, é **responsabilidade dela** primeiro salvar o valor original na sua própria área na pilha, usar o registrador, e depois restaurar o valor original _antes_ de retornar para a `caller`.
+    
+- **Analogia:** Pense nestes como "quadros de status de projeto" no mesmo quadro branco. A regra do escritório é: se você precisar usar um desses quadros, primeiro tire uma foto dele (salve na pilha), faça seu trabalho, e depois restaure o conteúdo original a partir da foto antes de sair. Assim, quem te pediu ajuda pode confiar que o status do projeto não foi alterado.
+
+**Registradores Especiais** Os registradores `%ebp` (frame pointer) e `%esp` (stack pointer) também são considerados _callee-save_, pois a função `callee` deve restaurá-los ao seu estado original antes de retornar.
+
+![[Pasted image 20250706235604.png]]
+**Passo 1: A função `caller` se prepara para chamar `swap_add`**
+
+1. **Cria seu Stack Frame:** A `caller` cria seu próprio frame na pilha para suas variáveis locais (`arg1` e `arg2`).
+    
+2. **Prepara os Argumentos:** Ela precisa passar os _endereços_ de `arg1` e `arg2` para `swap_add`. Para isso, ela usa a instrução `leal` para calcular os endereços e depois os empurra (`pushl`) na pilha. Os argumentos são colocados na pilha em ordem inversa (primeiro o endereço de `arg2`, depois o de `arg1`).
+    
+3. **Faz a Chamada:** A `caller` executa a instrução `call swap_add`. Isso automaticamente empurra o endereço de retorno para a pilha e pula para o código de `swap_add`.
+    
+Neste ponto, a pilha está assim:
+![[Pasted image 20250706235700.png]]
+**Passo 2: A função `swap_add` é executada**
+
+4. **Setup (Configuração do Frame):**
+    
+    - Salva o `%ebp` antigo da `caller` na pilha (`pushl %ebp`).
+        
+    - Define seu próprio frame (`movl %esp, %ebp`).
+        
+    - Percebe que vai usar o registrador `%ebx`. Como `%ebx` é _callee-save_, ela **salva o valor antigo de `%ebx` na pilha** (`pushl %ebx`) para poder restaurá-lo mais tarde. Isso segue a convenção da seção 3.7.3.
+        
+5. **Corpo da Função:**
+    
+    - Acessa seus argumentos. Agora, os ponteiros `xp` e `yp` estão em `%ebp+8` e `%ebp+12`, respectivamente, pois estão no frame da `caller`.
+        
+    - Executa a lógica de troca (swap) e soma, usando os registradores `%eax`, `%ecx`, `%edx` e `%ebx` para os valores temporários.
+        
+    - Coloca o resultado da soma (`x + y`) no registrador `%eax`, pois, por convenção, é o registrador usado para retornar valores inteiros.
+        
+6. **Finish (Finalização):**
+    
+    - Restaura o valor original de `%ebx` que ela tinha salvo (`popl %ebx`).
+        
+    - Restaura o ponteiro de base da `caller` (`popl %ebp`).
+        
+    - Retorna com a instrução `ret`, que pega o endereço de retorno do topo da pilha e pula para lá.
+        
+
+**Passo 3: A função `caller` continua**
+
+- A execução continua na instrução logo após o `call`. O valor de retorno de `swap_add` (a soma) está agora disponível em `%eax`.
+    
+- A `caller` usa esse valor para seus cálculos finais, limpa sua própria pilha e retorna.
 # Aula 12 - Subrotinas recursivas e manipulação de vetores na arquitetura IA32
 # Aula 13 - Implementação de estruturas de dados heterogêneas
 # Aula 14 - Combinando código assembly com programas C
