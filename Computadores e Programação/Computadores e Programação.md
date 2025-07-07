@@ -915,6 +915,16 @@ Uma `union` é uma forma de permitir que um único objeto de dados seja referenc
 - **Cuidado com a Ordem dos Bytes:** Como os campos compartilham memória, a forma como os dados são interpretados pode depender da ordem dos bytes da máquina (little-endian vs. big-endian), especialmente se os campos tiverem tamanhos diferentes.
 # Aula 14 - Combinando código assembly com programas C
 
+## Compondo código C e código de montagem
+Escrever funções separadas em código assembly e ligar com código C
+- Respeitar as convenções para passagem de argumento e uso de registradores seguidas pelo compilador C
+Embutir código de montagem num programa em C, enxertando-o diretamente no código gerado pelo GCC 
+- Usa a diretiva especial provida pelo GCC chamada `asm` (“inline assembly”)
+![[Pasted image 20250707184130.png]]
+A diretiva `asm` é específica para GCC e incompatível com outros compiladores
+
+ 
+
 # Aula 15 - Referências a Memória fora dos limites e estouro de buffer
 # Aula 16 - Fluxo de controle com exceções
 # Aula 17: Programas em execução
