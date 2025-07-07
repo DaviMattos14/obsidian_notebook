@@ -618,6 +618,9 @@ O compilador usa uma técnica chamada **Tabela de Salto** (Jump Table), um **arr
 - Por exemplo, se os casos são 100, 101, 102, o compilador pode fazer `indice = n - 100`.
 O programa então pega o endereço que está na posição `tabela[indice]` e **salta (Jumps)** diretamente para o bloco de código correto, sem precisar fazer nenhuma comparação.
 ![[switch.png]]
+
+- Tabela de salto
+![[Pasted image 20250706230909.png]]![[Pasted image 20250706230916.png]]
 # Aula 11 - Implementação de subrotinas na arquitetura IA32
 # Aula 12 - Subrotinas recursivas e manipulação de vetores na arquitetura IA32
 # Aula 13 - Implementação de estruturas de dados heterogêneas
