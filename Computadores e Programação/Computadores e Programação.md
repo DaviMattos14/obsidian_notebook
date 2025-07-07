@@ -915,18 +915,352 @@ Uma `union` é uma forma de permitir que um único objeto de dados seja referenc
 - **Cuidado com a Ordem dos Bytes:** Como os campos compartilham memória, a forma como os dados são interpretados pode depender da ordem dos bytes da máquina (little-endian vs. big-endian), especialmente se os campos tiverem tamanhos diferentes.
 # Aula 14 - Combinando código assembly com programas C
 
-## Compondo código C e código de montagem
-Escrever funções separadas em código assembly e ligar com código C
+Embora os compiladores C sejam muito bons em gerar código eficiente, há situações em que o programador precisa de controle em nível de máquina, algo que a linguagem C não oferece diretamente. Isso pode ser necessário para acessar registradores específicos, usar instruções que o compilador não gera ou escrever código de sistema de baixo nível.
+
+Existem duas abordagens para integrar código de montagem (Assembly) com C
+### Escrever funções separadas em código assembly e ligar com código C
 - Respeitar as convenções para passagem de argumento e uso de registradores seguidas pelo compilador C
-Embutir código de montagem num programa em C, enxertando-o diretamente no código gerado pelo GCC 
+![[Pasted image 20250707193606.png]]
+**Principais Regras a Seguir:**
+
+- **Convenção de Registradores:** A função Assembly deve preservar os valores dos registradores _callee-save_ (`%ebx`, `%esi`, `%edi`). Antes de usá-los, ela precisa salvar seus valores na pilha e restaurá-los antes de retornar. Os registradores
+    
+    _caller-save_ (`%eax`, `%ecx`, `%edx`) podem ser modificados livremente.
+    
+- **Transferência de Argumentos:** A função Assembly acessa seus argumentos na pilha. Os argumentos são encontrados em deslocamentos positivos a partir do ponteiro de base (
+    
+    `%ebp`), começando em `%ebp+8`.
+    
+- **Retornando um Valor:** O valor de retorno da função (se for um inteiro ou um ponteiro) deve ser colocado no registrador `%eax` antes da instrução `ret`.
+    
+- **Gerenciamento da Pilha (_Stack_):** A função deve criar seu próprio _stack frame_ no início (setup) e desalocá-lo antes de retornar (finish), garantindo que a pilha volte ao seu estado original.
+### Embutir código de montagem num programa em C, enxertando-o diretamente no código gerado pelo GCC 
 - Usa a diretiva especial provida pelo GCC chamada `asm` (“inline assembly”)
 ![[Pasted image 20250707184130.png]]
 A diretiva `asm` é específica para GCC e incompatível com outros compiladores
 
- 
+ A forma básica é: `asm("instruções de montagem");`
 
+No entanto, a forma estendida é mais útil, pois permite interagir com variáveis C:
+
+`asm("instruções" : "operandos de saída" : "operandos de entrada" : "registradores afetados");`
+
+**Componentes Principais:**
+- **Instruções de Montagem:** Uma string contendo uma ou mais instruções Assembly. Registradores são referenciados com
+    
+    `%%` em vez de `%` (ex: `%%eax`). Os operandos que se conectam com as variáveis C são representados por placeholders como
+    
+    `%0`, `%1`, etc..
+    
+- **Operandos de Saída:** Lista as variáveis C que receberão os resultados da computação em Assembly. É preciso especificar uma "restrição" que informa ao compilador como o valor será fornecido (ex: em um registrador, na memória).
+    
+- **Operandos de Entrada:** Lista as expressões ou variáveis C que servirão de entrada para o código Assembly, também com restrições.
+    
+- **Registradores Afetados (_Clobbers_):** Informa ao compilador quais registradores foram modificados pelo código Assembly embutido. Isso é crucial para que o compilador não assuma que o valor de um registrador foi preservado quando na verdade não foi. A string
+    
+    `"memory"` pode ser usada para informar que a memória foi alterada, forçando o compilador a salvar e restaurar valores se necessário.
+    
+### **Vantagens e Desvantagens:**
+
+- **Vantagem:** O compilador gerencia a maior parte do trabalho pesado, como salvar/restaurar registradores e alocar variáveis C para registradores ou memória. O programador pode se concentrar no pequeno trecho de código em nível de máquina que é realmente necessário.
+    
+- **Desvantagem:** A sintaxe é complexa e propensa a erros. O documento alerta que é fácil cometer erros que só se manifestam em tempo de execução, sendo muito difíceis de depurar.
 # Aula 15 - Referências a Memória fora dos limites e estouro de buffer
+Esta seção do livro (iniciando na página 256) explica uma das vulnerabilidades de segurança mais perigosas e comuns em programas C. A causa fundamental reside na combinação de duas características da linguagem e do sistema:
+
+1. A linguagem C
+    
+    **não realiza verificação de limites** (bounds checking) em acessos a vetores (arrays).
+    
+2. O estado de controle do programa, como o endereço de retorno e os valores salvos de registradores, é armazenado na mesma
+    
+    **pilha (stack)** que as variáveis locais, incluindo os vetores.
+    
+
+Essa combinação torna os programas vulneráveis a um ataque conhecido como **estouro de buffer (buffer overflow)**.
+
+#### O Mecanismo do Estouro de Buffer
+
+Um estouro de buffer ocorre quando o programa escreve dados em um vetor (o buffer) na pilha, mas os dados de entrada são maiores do que o espaço alocado para o buffer. Como não há verificação de limites, os bytes extras sobrescrevem as áreas adjacentes da pilha.
+
+O livro ilustra isso com uma função
+
+`echo` que usa a função de biblioteca `gets` para ler uma entrada do usuário e armazená-la em um buffer local. A função
+
+`gets` é extremamente perigosa porque continua lendo da entrada até encontrar um caractere de nova linha (`\n`), sem se importar com o tamanho do buffer de destino.
+
+![[Pasted image 20250707194717.png]]
+A figura mostra a organização da pilha para a função `echo`. Podemos ver que o buffer `buf` está localizado na pilha logo abaixo do estado salvo (registradores salvos e o endereço de retorno). Se um usuário digitar uma string maior que o buffer, os dados excedentes irão sobrescrever sequencialmente:
+
+1. **Registradores salvos:** Os valores de registradores _callee-save_ (como `%ebp` e `%ebx`) que foram salvos no início da função serão corrompidos.
+    
+2. **Endereço de Retorno:** Se a string for longa o suficiente, ela sobrescreverá o endereço de retorno que a instrução `call` salvou na pilha.
+![[Pasted image 20250707194844.png]]
+#### A Consequência: Execução de Código Malicioso
+
+O maior perigo ocorre quando o endereço de retorno é corrompido. Quando a função tentar retornar usando a instrução
+
+`ret`, em vez de pular de volta para a função chamadora, ela pulará para o endereço corrompido que foi inserido pelo atacante.
+
+Isso abre a porta para ataques graves. Um atacante pode criar uma string de entrada que contém:
+
+- **Código de Exploração (_Exploit Code_):** Uma sequência de bytes que corresponde a instruções de máquina maliciosas.
+    
+- **Um Endereço de Retorno Falso:** Um endereço que aponta para o início do código de exploração, que agora está na pilha.
+    
+
+Quando a função vulnerável retorna, o processador executa o código do atacante em vez de continuar a execução normal do programa. Esse código pode, por exemplo, iniciar um
+
+_shell_ (interpretador de comandos), dando ao atacante controle total sobre o sistema. O famoso "Internet Worm" de 1988 usou um ataque de estouro de buffer no daemon `finger` para se espalhar.
+
+**Outras Funções Perigosas:** O livro alerta que outras funções da biblioteca C padrão, como `strcpy`, `strcat` e `sprintf`, também são perigosas porque podem causar estouros de buffer ao não verificarem o tamanho do buffer de destino.
 # Aula 16 - Fluxo de controle com exceções
+O **Fluxo de Controle com Exceções (ECF)** é o mecanismo fundamental que os sistemas operacionais utilizam para reagir a eventos do sistema (como erros de divisão por zero ou chegada de um pacote de rede) e para implementar funcionalidades essenciais como system calls e multitarefa.
+
+#### Tratamento de Exceções
+
+O processo de lidar com uma exceção envolve uma cooperação próxima entre o hardware e o software do sistema operacional:
+
+1. **Evento e Número da Exceção:** Quando um evento ocorre, o processador lhe atribui um número de exceção único, que identifica o tipo do evento.
+    
+2. **Tabela de Exceções:** Na inicialização do sistema, o sistema operacional cria uma tabela de pulo (jump table) chamada **tabela de exceções**. 
+    
+    Cada entrada `k` desta tabela contém o endereço da rotina que tratará a exceção de número `k`.
+    
+3. **Transferência de Controle:** O processador usa o número da exceção como um índice para encontrar o endereço do **handler de exceção** apropriado na tabela de exceções e transfere o controle para ele. Essa transferência é semelhante a uma chamada de procedimento, mas com diferenças importantes:
+    
+    - O endereço de retorno (da instrução atual ou da próxima) é colocado na pilha.
+        
+    - O processador também salva na pilha parte do seu estado (como o registrador de flags).
+        
+    - A execução muda do **modo usuário** para o **modo kernel**, permitindo que o handler de exceção tenha acesso privilegiado aos recursos do sistema.
+   ![[Pasted image 20250707200036.png]]     
+Após o handler terminar seu processamento, ele pode:
+
+- Retornar o controle para a instrução que causou a exceção (
+    
+    `Icurr`).
+    
+- Retornar o controle para a próxima instrução (
+    
+    `Inext`).
+    
+- Abortar o programa.
+    
+
+#### Classificação de Exceções
+
+As exceções são classificadas em quatro tipos principais, conforme detalhado no slide "Classificação de Exceções":
+
+- **Interrupção (_Interrupt_):**
+    
+    - **Causa:** Um sinal de um dispositivo de I/O externo ao processador (ex: chegada de um pacote de rede, clique do mouse).
+        
+    - **Sincronia:** É **assíncrona**, pois não está relacionada à execução de uma instrução específica.
+        
+    - **Retorno:** Sempre retorna para a _próxima_ instrução do fluxo interrompido.
+        
+- **Trap:**
+    
+    - **Causa:** É um evento **intencional** resultante da execução de uma instrução, como uma _system call_ (chamada de sistema).
+        
+    - **Sincronia:** É **síncrona**.
+        
+    - **Retorno:** Sempre retorna para a _próxima_ instrução.
+        
+- **Falha (_Fault_):**
+    
+    - **Causa:** Um erro potencialmente recuperável (ex: falta de página na memória, ou _page fault_).
+        
+    - **Sincronia:** É **síncrona**.
+        
+    - **Retorno:** Pode retornar para a instrução _atual_ para reexecutá-la (se o erro foi corrigido) ou pode abortar o programa.
+        
+- **Abort:**
+    
+    - **Causa:** Um erro fatal e irrecuperável, geralmente de hardware (ex: erro de paridade na memória).
+        
+    - **Sincronia:** É **síncrona**.
+        
+    - **Retorno:** **Nunca** retorna para o programa que causou o erro; o programa é finalizado.
+        
+
+#### Exceções nos Sistemas Linux/IA32
+
+O slide "Exceções nos Sistemas Linux/IA32" fornece exemplos concretos dessas classes:
+
+- **Falhas e Aborts:**
+    
+    - **Erro de Divisão (Exceção 0):** Ocorre ao dividir por zero. É uma falha.
+        
+    - **Falha de Proteção Geral (Exceção 13):** Ocorre por uma referência de memória inválida, como escrever em uma seção de código somente leitura. É comumente reportada como "Segmentation fault".
+        
+    - **Falha de Página (_Page Fault_, Exceção 14):** Uma falha recuperável que é fundamental para a memória virtual.
+        
+    - **Verificação de Máquina (_Machine Check_, Exceção 18):** Um abort causado por um erro de hardware fatal.
+        
+- **Chamadas de Sistema (_System Calls_):**
+    
+    - No Linux/IA32, as
+        
+        _system calls_ são implementadas como um **trap** através da instrução `int $0x80`, que dispara a exceção de número 128 (0x80). Isso fornece uma interface controlada entre os programas do usuário e o kernel do sistema operacional.
 # Aula 17: Programas em execução
+### Programas em Execução
+
+Um **processo** é a abstração que o sistema operacional fornece para um programa em execução. Ele consiste no código do programa, dados, pilha, registradores, contador de programa (PC) e outras informações de estado do sistema, o que é chamado de
+
+**contexto** do processo.
+
+O processo fornece ao programa duas abstrações fundamentais: um fluxo de controle independente e um espaço de endereçamento privado.
+
+#### Fluxo de Controle Lógico
+
+- Um processo tem a ilusão de que possui o uso exclusivo da CPU.
+    
+- A sequência de valores do contador de programa (PC) que correspondem às instruções do programa é chamada de
+    
+    **fluxo de controle lógico**.
+    
+- Na realidade, vários processos rodam concorrentemente, com seus fluxos de controle sendo intercalados pelo sistema operacional. Esse processo é chamado de
+    
+    **multitarefa** (_multitasking_) e é implementado através de um mecanismo chamado **troca de contexto**.
+    
+- **Fluxos Concorrentes:** São fluxos que se sobrepõem no tempo. Se eles executam em diferentes núcleos (cores) de processador, são chamados de
+    
+    **fluxos paralelos**.
+    
+
+#### Espaço de Endereçamento Privado
+
+- Um processo também tem a ilusão de que possui o uso exclusivo da memória do sistema.
+    
+- Cada processo possui seu próprio
+    
+    **espaço de endereçamento virtual privado**, o que significa que um processo não pode ler ou escrever na memória de outro processo sem permissão explícita.
+    
+- A estrutura desse espaço de endereçamento é consistente entre os processos, geralmente com uma área para o código do programa, dados, heap e pilha do usuário, além de uma área reservada para o kernel do sistema operacional.
+    
+#### Modo Usuário e Modo Kernel
+
+Para garantir que um processo não interfira com outros ou com o próprio sistema operacional, os processadores usam um
+
+**bit de modo**.
+
+- **Modo Kernel (ou Supervisor):** Quando o bit de modo está ativado, o processo está rodando em modo kernel. Nesse modo, ele pode executar qualquer instrução da máquina e acessar qualquer endereço de memória.
+    
+- **Modo Usuário:** Quando o bit de modo está desativado, o processo está em modo usuário e tem acesso restrito. Ele não pode executar instruções privilegiadas (como parar o processador) nem acessar diretamente a área de memória do kernel.
+    
+- A única forma de um processo passar do modo usuário para o modo kernel é através de uma
+    
+    **exceção**, como uma interrupção, falha ou trap (chamada de sistema).
+    
+
+#### Trocas de Contexto
+
+- A troca de contexto é o mecanismo do kernel que permite a multitarefa. O
+    
+    **contexto** é toda a informação de estado que o kernel precisa para reiniciar um processo que foi interrompido (preempted).
+    
+- Uma **troca de contexto** envolve:
+    
+    1. Salvar o contexto do processo atual.
+        
+    2. Restaurar o contexto salvo de um processo anteriormente interrompido.
+        
+    3. Passar o controle para esse novo processo restaurado.
+        
+- Essa troca é realizada pelo
+    
+    **agendador (_scheduler_)** do kernel e pode ocorrer quando um processo faz uma chamada de sistema que bloqueia (como `read`) ou quando ocorre uma interrupção de tempo (_timer interrupt_).
+    
+
+#### Criando e Terminando Processos no Linux
+
+O Unix fornece chamadas de sistema para controlar processos.
+
+- **Estados de um Processo:** Um processo pode estar em um de três estados:
+    
+    - **Executando (_Running_):** Está na CPU ou aguardando para ser executado.
+        
+    - **Parado (_Stopped_):** Sua execução foi suspensa e não será agendado para rodar até receber um sinal `SIGCONT`.
+        
+    - **Terminado (_Terminated_):** O processo parou permanentemente.
+        
+- **Função `exit`:** Um processo termina sua execução chamando a função `exit`.
+    
+- **Função `fork`:** Um processo pai cria um novo processo filho chamando a função `fork`.
+    
+    - `fork` é chamada uma vez, mas retorna duas vezes: no pai, retorna o PID do filho; no filho, retorna 0.
+        
+    - O filho recebe uma cópia idêntica, porém
+        
+        **separada**, do espaço de endereçamento virtual do pai, mas herda os descritores de arquivos abertos.
+        
+- **Reaproveitamento (_Reaping_) e Zumbis:** Quando um processo termina, ele não é removido completamente do sistema até que seja "reaproveitado" (_reaped_) por seu processo pai. Um processo terminado mas ainda não reaproveitado é chamado de
+    
+    **zumbi** (_zombie_).
+    
+- **Função `waitpid`:** O pai espera pelo término de seus filhos usando a função `waitpid`. Isso permite que o pai obtenha o status de saída do filho e que o kernel remova o processo zumbi do sistema.
 # Aula 20 : Ligação e carga de programas
+#### Ligação (Linking) e Carga (Loading)
+
+**Ligação (Linking)** é o processo de coletar e combinar várias partes de código e dados (provenientes de diferentes arquivos objeto) em um único arquivo que pode ser executado. Este arquivo único é chamado de
+
+**arquivo objeto executável**.
+
+A principal vantagem da ligação é que ela permite a **compilação separada**. Em vez de escrever um programa inteiro em um único arquivo gigante, podemos dividi-lo em módulos menores e mais fáceis de gerenciar. Quando alteramos um módulo, apenas ele precisa ser recompilado antes de ser "re-ligado" ao restante do programa.
+
+O processo de ligação pode ocorrer em diferentes momentos:
+
+- **Em tempo de compilação:** Ligação estática, que é o foco principal.
+    
+- **Em tempo de carga:** Quando o programa é carregado na memória.
+    
+- **Em tempo de execução:** Ligação dinâmica, usada por bibliotecas compartilhadas.
+    
+
+**Carga (Loading)** é o processo que vem depois da ligação estática. Quando você executa um programa no shell, o
+
+**carregador (_loader_)** do sistema operacional copia o código e os dados do arquivo executável para a memória e, em seguida, transfere o controle do processador para o programa para que ele comece a ser executado. O slide "Carregando Arquivos Objeto Executáveis" mostra como o programa é organizado na memória virtual do Linux, com seções para código (
+
+`.text`), dados (`.data`, `.bss`), heap, bibliotecas compartilhadas e a pilha (_stack_).
+
+#### Arquivos Objeto
+
+O processo de ligação trabalha com três tipos de
+
+**arquivos objeto**:
+
+1. **Arquivo Objeto Relocável:**
+    
+    - Contém código e dados em um formato que pode ser combinado com outros arquivos relocáveis.
+        
+    - É o resultado da compilação de um arquivo de código-fonte (ex: `.c` -> `.o`).
+        
+2. **Arquivo Objeto Executável:**
+    
+    - Contém código e dados em um formato que pode ser carregado diretamente na memória para execução.
+        
+    - É o resultado final do processo de ligação.
+        
+3. **Arquivo Objeto Compartilhado (_Shared Object_):**
+    
+    - Um tipo especial de arquivo relocável que é carregado na memória e ligado dinamicamente, seja em tempo de carga ou em tempo de execução. São as famosas bibliotecas compartilhadas (ex: `.so` no Linux, `.dll` no Windows).
+        
+
+O slide "Formato de um Arquivo Objeto Relocável ELF" mostra a estrutura de um arquivo `.o` típico em sistemas Unix/Linux. Ele é composto por várias seções, incluindo:
+
+- **Cabeçalho ELF:** Contém metadados sobre o arquivo (tipo de máquina, tamanho, etc.).
+    
+- **.text:** O código de máquina compilado do programa.
+    
+- **.rodata:** Dados somente leitura, como strings de formatação para `printf`.
+    
+- **.data:** Variáveis globais e estáticas que são inicializadas.
+    
+- **.bss:** Variáveis globais e estáticas que **não** são inicializadas. Esta seção é um placeholder e não ocupa espaço no arquivo objeto, economizando espaço em disco.
+    
+- **.symtab:** A **tabela de símbolos**, que guarda informações sobre funções e variáveis globais que o módulo define e referencia.
+    
+- **.rel.text** e **.rel.data:** As **entradas de realocação**. Elas contêm informações que dizem ao linker como modificar as referências a símbolos globais e funções externas quando o arquivo for ligado a outros.
 # Aula 21 - Ligação estática
