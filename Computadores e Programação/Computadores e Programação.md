@@ -622,6 +622,89 @@ O programa então pega o endereço que está na posição `tabela[indice]` e **s
 - Tabela de salto
 ![[Pasted image 20250706230909.png]]![[Pasted image 20250706230916.png]]
 # Aula 11 - Implementação de subrotinas na arquitetura IA32
+
+Uma chamada de subrotina requer:
+- Passagem de valores (parâmetros de entrada e de saída /retorno)
+- transferência de controle (desvio da execução para outra parte do programa)
+- alocação /desalocação de espaço de memória para as variáveis locais
+Para que os procedimentos funcionem corretamente (uma função `A` chama uma função `B`, que chama `C`, e depois todas retornam na ordem inversa), o programa precisa de um mecanismo para gerenciar o estado de cada chamada de função. Cada função precisa de seu próprio espaço de memória para:
+
+- Armazenar argumentos que não couberam nos registradores.
+- Guardar variáveis locais.
+- Salvar o endereço de retorno (para onde o programa deve voltar quando a função terminar).
+
+A porção da pilha alocada para uma chamada particular de subrotina é chamada de **stack frame** (ou registro de ativação)
+
+A estrutura de dados que gerencia tudo isso é a **pilha em tempo de execução** (geralmente chamada apenas de **stack**). Ela é uma região de memória que funciona no princípio **LIFO (Last-In, First-Out)**, ou "o último a entrar é o primeiro a sair".
+ 
+**Analogia Clássica:** Pense em uma pilha de pratos. Você só pode colocar um prato novo no **topo** da pilha. E quando vai tirar um prato, você só pode pegar o que está no **topo**. Você não consegue tirar um prato do meio da pilha sem antes remover todos os que estão acima dele. A pilha do computador funciona da mesma forma.
+## **Conceitos-Chave**
+![[Pasted image 20250706232723.png]]
+**1. Direção de Crescimento da Pilha (Stack Growth)**
+- Este é um dos pontos mais importantes e contraintuitivos. Na arquitetura x86-64 (usada em praticamente todos os computadores modernos), a pilha **cresce para baixo**.
+- Isso significa que, à medida que novos dados são adicionados à pilha, ela se expande em direção a **endereços de memória mais baixos**. 
+-  Isso confunde muita gente. Em vez de a pilha crescer para endereços de memória maiores (como 0x100, 0x104, 0x108...), ela cresce para **endereços menores** (como 0x108, 0x104, 0x100...).
+    
+- **"Adicionar"** algo na pilha (`push`) significa **diminuir** o endereço do topo.
+    
+- **"Remover"** algo da pilha (`pop`) significa **aumentar** o endereço do topo.
+
+**2. Os Ponteiros da Pilha: `%esp` e `%ebp`**
+O processador usa dois registradores especiais para gerenciar a pilha. Entender a diferença entre eles é a chave:
+
+- `%esp` (Stack Pointer - Ponteiro da Pilha): **Sempre aponta para o topo exato da pilha**. É um ponteiro dinâmico, que muda de valor constantemente toda vez que colocamos (`push`) ou tiramos (`pop`) algo da pilha, ou quando alocamos espaço para variáveis locais. É a "ponta viva" da pilha.
+    
+- `%ebp` (Base Pointer / Frame Pointer - Ponteiro de Base): **Serve como uma referência fixa** para a "área de trabalho" (o stack frame) da função que está _executando no momento_. Enquanto `%esp` se move, `%ebp` fica parado durante a execução de uma função. Isso torna muito mais fácil para o computador encontrar os argumentos e as variáveis locais da função, pois eles estarão sempre a uma distância fixa de `%ebp`.
+
+## A Instrução `call`
+
+A instrução `call` tem como alvo o endereço da função que está sendo chamada. O livro explica que o efeito da instrução `call` é duplo:
+
+- **Empurrar o endereço de retorno na pilha:** O processador calcula o endereço da instrução que vem _imediatamente depois_ da própria instrução `call` e empurra esse endereço de 64 bits na pilha.
+    
+- **Pular para o início da função chamada:** O contador de programa (PC) é alterado para o endereço da primeira instrução da função que está sendo chamada.
+    
+
+![[Pasted image 20250706234410.png]]
+
+- **Antes da chamada (a):** O programa está prestes a executar a instrução `call` no endereço `0x080483dc`. A próxima instrução está em `0x080483e1`.
+    
+- **Depois da chamada (b):** A instrução `call` empurra o endereço de retorno `0x080483e1` na pilha e, em seguida, pula para o início da função `sum` no endereço `0x08048394`.
+    
+
+O livro também menciona que a instrução `call` pode ter duas formas:
+
+- **Direta:** `call Label` - Onde o alvo é um rótulo (o nome da função). O endereço do alvo é codificado de forma relativa ao endereço da instrução seguinte (PC-relative).
+    
+- **Indireta:** `call *Operando` - Onde o alvo é lido de um registrador ou de uma posição de memória. É assim que ponteiros para funções em C são implementados.
+    
+## A Instrução `ret`
+
+A instrução `ret` é mais simples. Sua função é retornar o controle para a função que fez a chamada. Para isso, ela:
+
+- **Desempilha o endereço de retorno:** A instrução `ret` remove ("pop") o endereço que está no topo da pilha.
+    
+- **Pula para esse endereço:** Ela altera o contador de programa (PC) para o endereço que acabou de ser removido da pilha.
+    
+
+Na **Figura (c)**, mostra a instrução `ret` da função `sum` sendo executada:
+
+- Ela remove o endereço
+    
+    `0x080483e1` do topo da pilha e pula para lá, fazendo com que a execução da função `main` continue exatamente do ponto onde parou.
+    
+
+## A Instrução `leave` (Auxiliar)
+
+O livro também menciona a instrução `leave` nesta seção. Ela é usada para preparar a pilha para o retorno. É um atalho para as duas seguintes operações:
+
+1. `movl %ebp, %esp` : Libera todo o espaço do stack frame atual, fazendo o ponteiro da pilha (`%esp`) apontar para a base (`%ebp`).
+    
+2. `popl %ebp` : Restaura o `%ebp` da função chamadora, que estava salvo na pilha.
+
+Após a instrução
+
+`leave`, o topo da pilha conterá exatamente o endereço de retorno, pronto para a instrução `ret`.
 # Aula 12 - Subrotinas recursivas e manipulação de vetores na arquitetura IA32
 # Aula 13 - Implementação de estruturas de dados heterogêneas
 # Aula 14 - Combinando código assembly com programas C
