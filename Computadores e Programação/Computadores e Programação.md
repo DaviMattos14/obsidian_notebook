@@ -914,6 +914,7 @@ Uma `union` é uma forma de permitir que um único objeto de dados seja referenc
         
 - **Cuidado com a Ordem dos Bytes:** Como os campos compartilham memória, a forma como os dados são interpretados pode depender da ordem dos bytes da máquina (little-endian vs. big-endian), especialmente se os campos tiverem tamanhos diferentes.
 # Aula 14 - Combinando código assembly com programas C
+
 # Aula 15 - Referências a Memória fora dos limites e estouro de buffer
 # Aula 16 - Fluxo de controle com exceções
 # Aula 17: Programas em execução
