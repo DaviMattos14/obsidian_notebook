@@ -861,6 +861,10 @@ Onde
         
     - **Otimizações:** Apesar disso, o compilador ainda pode otimizar laços que percorrem esses vetores, de forma semelhante ao que faz com vetores de tamanho fixo, mas os cálculos podem envolver o uso de mais registradores ou até mesmo o "derramamento de registradores" (_register spilling_), onde um valor (como a dimensão `n`) precisa ser lido da pilha a cada iteração se não houver registradores suficientes.
 # Aula 13 - Implementação de estruturas de dados heterogêneas
+
+### Implementação de Estruturas de Dados Heterogêneas
+
+A linguagem C oferece duas maneiras de agrupar dados de tipos diferentes: `struct` (estruturas) e `union` (uniões). A forma como o compilador as traduz para o código de máquina é bastante diferente.
 # Aula 14 - Combinando código assembly com programas C
 # Aula 15 - Referências a Memória fora dos limites e estouro de buffer
 # Aula 16 - Fluxo de controle com exceções
