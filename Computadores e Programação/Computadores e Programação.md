@@ -773,6 +773,93 @@ Neste ponto, a pilha está assim:
     
 - A `caller` usa esse valor para seus cálculos finais, limpa sua própria pilha e retorna.
 # Aula 12 - Subrotinas recursivas e manipulação de vetores na arquitetura IA32
+### Sub-rotinas Recursivas (Seção 3.7.5)
+
+Uma função que chama a si mesma é tratada da mesma forma que qualquer outra chamada de função. A disciplina de pilha que gerencia os
+
+_stack frames_ funciona perfeitamente para a recursão.
+
+- **Frames de Pilha Separados:** Cada chamada recursiva recebe seu próprio _stack frame_ na pilha. Isso garante que as variáveis locais de uma chamada não interfiram com as de outra. Por exemplo, em uma função fatorial recursiva `rfact(n)`, a variável `n` de uma chamada é independente da variável `n` de outra chamada.
+    ![[Pasted image 20250707162047.png]]
+- **Estado Salvo:** Antes de fazer a chamada recursiva, o estado atual é salvo. O endereço de retorno é empurrado para a pilha, como em qualquer chamada. Se for necessário preservar o valor de um registrador (como o argumento `n`) para ser usado após o retorno da chamada recursiva, ele deve ser salvo, seja na pilha ou em um registrador _callee-save_ (como o `%ebx`, conforme mostrado no exemplo do livro).
+
+- **Retorno:** Quando a condição de base é atingida (ex: `n <= 1`), a função retorna um valor. A instrução `ret` pega o endereço de retorno do topo da pilha, e a execução volta para a chamada anterior. O valor de retorno (geralmente em `%eax`) é então usado pela função chamadora para continuar seu cálculo (por exemplo, `n * rfact(n-1)`).
+
+Em resumo, a pilha gerencia o estado de cada chamada de forma isolada, permitindo que a recursão funcione corretamente sem que as chamadas interfiram umas com as outras
+
+### Manipulação de Vetores (Seções 3.8.1 a 3.8.5)
+
+### Princípios Básicos de Vetores (Arrays)
+
+- **Alocação Contígua:** Quando você declara um vetor em C, como `T A[N];`, o compilador aloca um bloco **contínuo** de memória para ele. Este bloco tem um tamanho total de
+    `N * L` bytes, onde `L` é o tamanho em bytes do tipo de dado `T` (por exemplo, `L=4` para um `int`).
+    
+- **Identificador do Vetor como Ponteiro:** O nome do vetor, `A` neste caso, funciona como um ponteiro para o primeiro elemento do vetor. O valor deste ponteiro é o endereço de memória onde o primeiro byte do vetor está armazenado.
+    
+- **Acesso aos Elementos:** Para acessar um elemento específico, como `A[i]`, o computador calcula seu endereço usando a seguinte fórmula: `endereço_de_A + L * i`. Isso significa que para encontrar o i-ésimo elemento, o programa começa no endereço base do vetor e avança
+    
+    `L * i` bytes.
+    
+- **Eficiência no Nível de Máquina:** A arquitetura IA32 (e x86-64) possui modos de endereçamento de memória que tornam esse cálculo muito eficiente. A seção destaca a instrução de "endereçamento indexado com escala". Por exemplo, a instrução
+    
+    `movl (%edx,%ecx,4),%eax` realiza o cálculo completo `endereço_base + i * 4` e busca o valor da memória, tudo em uma única operação.
+    
+    - `%edx` conteria o endereço base do vetor.
+        
+    - `%ecx` conteria o índice `i`.
+        
+    - `4` é o fator de escala (o tamanho de um `int`), que corresponde ao `L` na fórmula.
+#### Aritmética com Ponteiros (Seção 3.8.2)
+
+A linguagem C permite realizar operações aritméticas com ponteiros, o que está intimamente ligado ao acesso a vetores.
+
+- **Ponteiros e Vetores:** O nome de um vetor em C pode ser tratado como um ponteiro para seu primeiro elemento. A expressão
+    
+    `A[i]` é idêntica a `*(A+i)`.
+    
+- **Escalonamento:** A principal característica da aritmética de ponteiros é o escalonamento. Se
+    
+    `p` é um ponteiro para um tipo de dado `T` que ocupa `L` bytes, a expressão `p+i` calcula o endereço `xp + L * i`, onde `xp` é o endereço inicial do ponteiro. Isso garante que
+    
+    `p+i` aponte para o i-ésimo elemento do tipo `T` a partir de `p`.
+    
+- **Tradução para Assembly:** O compilador traduz essas operações em instruções de máquina. Para calcular o _endereço_ de um elemento (como em `&A[i]`), ele frequentemente usa a instrução `leal`. Para acessar o
+    
+    _valor_ de um elemento (como em `A[i]`), ele primeiro calcula o endereço e depois usa uma instrução de movimento de dados, como `movl`.
+
+#### Vetores Aninhados (Vetores Multidimensionais) (Seção 3.8.3)
+
+Vetores aninhados, como
+
+`int A[5][3]`, são armazenados na memória de forma contígua em uma ordem conhecida como **"row-major order"** (ordem por linha). Isso significa que todos os elementos da linha 0 são armazenados primeiro, seguidos por todos os elementos da linha 1, e assim por diante.
+
+Para acessar o elemento
+
+`D[i][j]` de um vetor declarado como `T D[R][C]`, o compilador gera código para calcular seu endereço de memória com a seguinte fórmula:
+
+`&D[i][j] = 0xD + L * (C * i + j)`
+
+Onde
+
+`0xD` é o endereço inicial do vetor, `L` é o tamanho do tipo de dado `T`, `R` é o número de linhas e `C` é o número de colunas. O compilador otimiza o cálculo
+
+`(C * i + j)` usando instruções de deslocamento (shift) e soma em vez de uma multiplicação, que é mais lenta.
+
+#### Vetores de Tamanho Fixo vs. Variável (Seções 3.8.4 e 3.8.5)
+
+- **Vetores de Tamanho Fixo:** Quando as dimensões de um vetor são constantes conhecidas em tempo de compilação (ex: `#define N 16`), o compilador pode realizar otimizações significativas. Ele pode, por exemplo, gerar código de laço altamente eficiente que calcula os endereços usando apenas deslocamentos e somas, evitando multiplicações. No exemplo de multiplicação de matrizes do livro (
+    
+    `fix_prod_ele`), o compilador otimiza o acesso criando ponteiros para o início das linhas e colunas relevantes e simplesmente os incrementa com um passo fixo a cada iteração, resultando em um código de laço interno muito rápido.
+    
+- **Vetores de Tamanho Variável:** Este recurso, introduzido no padrão ISO C99, permite que as dimensões de um vetor sejam determinadas em tempo de execução. Por exemplo,
+    
+    `int A[n][n]`, onde `n` é um parâmetro de uma função.
+    
+    - **Cálculo de Endereço:** Para acessar elementos desses vetores, o compilador não pode mais usar apenas deslocamentos, pois a dimensão (o número de colunas) não é uma constante. Ele precisa gerar uma
+        
+        **instrução de multiplicação** (`imull`) para calcular o deslocamento da linha (ex: `n * i`). Isso pode tornar o acesso um pouco mais lento em comparação com vetores de tamanho fixo.
+        
+    - **Otimizações:** Apesar disso, o compilador ainda pode otimizar laços que percorrem esses vetores, de forma semelhante ao que faz com vetores de tamanho fixo, mas os cálculos podem envolver o uso de mais registradores ou até mesmo o "derramamento de registradores" (_register spilling_), onde um valor (como a dimensão `n`) precisa ser lido da pilha a cada iteração se não houver registradores suficientes.
 # Aula 13 - Implementação de estruturas de dados heterogêneas
 # Aula 14 - Combinando código assembly com programas C
 # Aula 15 - Referências a Memória fora dos limites e estouro de buffer
