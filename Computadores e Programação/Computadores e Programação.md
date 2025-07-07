@@ -865,6 +865,54 @@ Onde
 ### Implementação de Estruturas de Dados Heterogêneas
 
 A linguagem C oferece duas maneiras de agrupar dados de tipos diferentes: `struct` (estruturas) e `union` (uniões). A forma como o compilador as traduz para o código de máquina é bastante diferente.
+
+Com certeza. Aqui está um resumo sobre a implementação de estruturas de dados heterogêneas (`structs` e `unions`), com base nas seções 3.9.1, 3.9.2 e 3.9.3 do livro que você forneceu.
+### Implementação de Estruturas de Dados Heterogêneas
+
+A linguagem C oferece duas maneiras de agrupar dados de tipos diferentes: `struct` (estruturas) e `union` (uniões). A forma como o compilador as traduz para o código de máquina é bastante diferente.
+
+#### Structs (Estruturas) - Seção 3.9.1
+
+Uma `struct` agrupa múltiplos objetos, possivelmente de tipos diferentes, em uma única unidade.
+
+- **Alocação de Memória:** Todos os campos de uma `struct` são armazenados em uma região **contígua** de memória. Um ponteiro para uma
+    
+    `struct` aponta para o endereço do seu primeiro byte.
+    
+- **Acesso aos Campos:** O compilador calcula o deslocamento (offset) em bytes de cada campo a partir do início da estrutura. Para acessar um campo, como
+    
+    `r->i`, o código de máquina simplesmente soma o endereço base da estrutura (contido no ponteiro `r`) com o deslocamento do campo `i`. Esse cálculo de deslocamento é feito em tempo de compilação; o código de máquina final não sabe os nomes dos campos, apenas seus deslocamentos.
+    
+- **Alinhamento de Dados (Seção 3.9.3):** Para melhorar a performance, muitos sistemas exigem que os dados estejam "alinhados". Por exemplo, em um sistema Linux IA32, um
+    
+    `int` (4 bytes) deve estar em um endereço de memória que seja múltiplo de 4. Para garantir isso, o compilador pode precisar:
+    
+    - **Inserir Espaçamento Interno:** Adicionar "buracos" ou preenchimento (_padding_) entre os campos para garantir que cada campo comece em um endereço alinhado. Por exemplo, após um
+        
+        `char` (1 byte), o compilador pode inserir 3 bytes de preenchimento antes do próximo `int`.
+        
+    - **Inserir Espaçamento no Final:** Adicionar preenchimento no final da estrutura para garantir que, em um vetor de estruturas, cada elemento do vetor comece em um endereço alinhado.
+        
+
+Devido a esse alinhamento, o tamanho total de uma `struct` pode ser maior do que a simples soma dos tamanhos de seus campos.
+
+#### Unions (Uniões) - Seção 3.9.2
+
+Uma `union` é uma forma de permitir que um único objeto de dados seja referenciado usando múltiplos tipos diferentes.
+
+- **Alocação de Memória:** Diferente de uma `struct`, todos os campos de uma `union` **compartilham o mesmo bloco de memória**. Eles começam no mesmo endereço.
+    
+- **Tamanho da Union:** O tamanho total de uma `union` é determinado pelo tamanho do seu **maior campo**.
+    
+- **Casos de Uso:**
+    
+    1. **Economia de Memória:** São úteis quando se sabe que dois ou mais campos são mutuamente exclusivos (nunca serão usados ao mesmo tempo). Assim, eles podem compartilhar o mesmo espaço. O livro dá um exemplo de um nó de árvore binária que é ou um nó interno (com ponteiros para filhos) ou um nó folha (com dados), mas nunca ambos.
+        
+    2. **Acessar Padrões de Bits:** `Unions` são uma maneira de contornar o sistema de tipos do C para acessar a representação em bits de um tipo de dado como se fosse outro. Por exemplo, você pode armazenar um valor como
+        
+        `float` e depois ler seus bits como um `unsigned int` para ver sua representação IEEE 754.
+        
+- **Cuidado com a Ordem dos Bytes:** Como os campos compartilham memória, a forma como os dados são interpretados pode depender da ordem dos bytes da máquina (little-endian vs. big-endian), especialmente se os campos tiverem tamanhos diferentes.
 # Aula 14 - Combinando código assembly com programas C
 # Aula 15 - Referências a Memória fora dos limites e estouro de buffer
 # Aula 16 - Fluxo de controle com exceções
