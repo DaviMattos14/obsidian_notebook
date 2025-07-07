@@ -613,6 +613,10 @@ int switch_eg(int x, int n) {
 }
 ```
 #### Switch em assembly
+O compilador usa uma técnica chamada **Tabela de Salto** (Jump Table), um **array de endereços de memória**. Cada elemento do array "aponta" para o início do bloco de código de um `case` específico.
+- Quando o código do `switch` é executado, ele não compara o valor de `n` com cada `case`. Em vez disso, ele usa o valor de `n` para **calcular um índice** para acessar essa tabela.
+- Por exemplo, se os casos são 100, 101, 102, o compilador pode fazer `indice = n - 100`.
+O programa então pega o endereço que está na posição `tabela[indice]` e **salta (Jumps)** diretamente para o bloco de código correto, sem precisar fazer nenhuma comparação.
 ![[switch.png]]
 # Aula 11 - Implementação de subrotinas na arquitetura IA32
 # Aula 12 - Subrotinas recursivas e manipulação de vetores na arquitetura IA32
