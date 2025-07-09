@@ -863,8 +863,6 @@ Onde
 ### Implementação de Estruturas de Dados Heterogêneas
 
 A linguagem C oferece duas maneiras de agrupar dados de tipos diferentes: `struct` (estruturas) e `union` (uniões). A forma como o compilador as traduz para o código de máquina é bastante diferente.
-
-Com certeza. Aqui está um resumo sobre a implementação de estruturas de dados heterogêneas (`structs` e `unions`), com base nas seções 3.9.1, 3.9.2 e 3.9.3 do livro que você forneceu.
 ### Implementação de Estruturas de Dados Heterogêneas
 
 A linguagem C oferece duas maneiras de agrupar dados de tipos diferentes: `struct` (estruturas) e `union` (uniões). A forma como o compilador as traduz para o código de máquina é bastante diferente.
