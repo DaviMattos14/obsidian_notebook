@@ -775,9 +775,7 @@ Neste ponto, a pilha está assim:
 # Aula 12 - Subrotinas recursivas e manipulação de vetores na arquitetura IA32
 ### Sub-rotinas Recursivas (Seção 3.7.5)
 
-Uma função que chama a si mesma é tratada da mesma forma que qualquer outra chamada de função. A disciplina de pilha que gerencia os
-
-_stack frames_ funciona perfeitamente para a recursão.
+Uma função que chama a si mesma é tratada da mesma forma que qualquer outra chamada de função. A disciplina de pilha que gerencia os _stack frames_ funciona perfeitamente para a recursão.
 
 - **Frames de Pilha Separados:** Cada chamada recursiva recebe seu próprio _stack frame_ na pilha. Isso garante que as variáveis locais de uma chamada não interfiram com as de outra. Por exemplo, em uma função fatorial recursiva `rfact(n)`, a variável `n` de uma chamada é independente da variável `n` de outra chamada.
     ![[Pasted image 20250707162047.png]]
