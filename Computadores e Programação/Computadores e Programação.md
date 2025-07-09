@@ -826,6 +826,7 @@ A linguagem C permite realizar operações aritméticas com ponteiros, o que est
     
     _valor_ de um elemento (como em `A[i]`), ele primeiro calcula o endereço e depois usa uma instrução de movimento de dados, como `movl`.
 
+![[Pasted image 20250709150313.png]]
 #### Vetores Aninhados (Vetores Multidimensionais) (Seção 3.8.3)
 
 Vetores aninhados, como
