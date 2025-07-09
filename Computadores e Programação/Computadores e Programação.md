@@ -501,7 +501,7 @@ As operações lógicas e aritméticas são divididas em quatro grupos:
 ## Aula 9 - Controle do fluxo de execução e instruções condicionais
 ### Operações Aritméticas Especiais
 ![[op_aritmetica_espciais.png]]
-
+	
 | Instrução | Efeito                                      | Descrição                          |
 | --------- | ------------------------------------------- | ---------------------------------- |
 | `imull S` | %edx:%eax $\leftarrow$ S x %eax             | Mult. completa (64 bits) com sinal |
