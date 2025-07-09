@@ -249,6 +249,7 @@ No deslocamento à direita **aritmético**, o MSB (bit $X_n-1$) é copiado a cad
 #### Inteiros Positivos
 A linguagem C define vários tipos de números inteiros com tamanhos variados: **char, short int, int, long int, long long int** 
 Além do tamanho, é possível indicar se o número é sempre positivo (unsigned) ou positivo/negativo (o default)
+![[Pasted image 20250709145346.png]]
 #### Inteiros Negativos
 A representação mais comum para números negativos é complemento a 2 (C2)
 	O bit mais significativo da palavra tem peso negativo 
