@@ -1,0 +1,21 @@
+Para executar o programa deve-se primeiro acessar o local em que ele se encontra pelo CMD ou PowerShell
+Utilizando o comando "cd PATH" 
+
+Exemplo: "cd D:\REPOSITÓRIOS\obsidian_notebook\Linguagens Formais\Trabalho\"
+
+Caso o arquivo esteja em outro disco diferente de 'C:\' 
+Primeiro devesse acessar o disco onde está o arquivo, antes de acessar o local
+Exemplo: 1. "D:"
+         2. "cd D:\REPOSITÓRIOS\obsidian_notebook\Linguagens Formais\Trabalho\"
+
+Em seguida executar o seguinte comando:
+    NO PowerShell: 
+        Get-Content arquivo_de_entrada.txt | python test_re.py "[expressão regular]"
+    NO CMD:
+        python test_re.py "[espressão regular]" < arquivo_de_entrada.txt 
+
+Exemplo:
+    PowerShell:
+        Get-Content test.txt | python test_re.py "ab*a|d"
+    CMD:
+        python test_re.py "ab*a|d" < test.txt
