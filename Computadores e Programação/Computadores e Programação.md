@@ -951,7 +951,7 @@ No entanto, a forma estendida é mais útil, pois permite interagir com variáve
 ```
 Exemplo:
 ```c
-/** * @brief Soma dois inteiros usando assembly embutido IA-32.
+# Soma dois inteiros usando assembly embutido IA-32.
 int soma_asm(int a, int b) {
     int resultado;
 
