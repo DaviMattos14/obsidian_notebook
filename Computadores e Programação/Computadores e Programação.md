@@ -569,7 +569,7 @@ As demais instruções de desvio são condicionais e podem usar apenas destino d
 • ja (ou jnbe): ~CF & ~ZF (acima sem sinal ) 
 • jae (ou jnb): ~CF (acima ou igual sem sinal) 
 • jb (ou jnae): CF (abaixo sem sinal) 
-• jbe (ou jna): CF | ZF (abaixo ou igual sem sinal ) 
+• jbe (ou jna): CF | ZF (abaixo ou igual sem sinal ) q3
 
 Estas instruções operam sobre tipos UNSIGNED
 ### Codificação de Labels
