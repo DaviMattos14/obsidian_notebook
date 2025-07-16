@@ -25,3 +25,20 @@
 3.4
 ![[Pasted image 20250716191426.png]]
 ![[Pasted image 20250716191438.png]]
+3.5
+![[Pasted image 20250716192014.png]]
+![[Pasted image 20250716192026.png]]
+![[Pasted image 20250716192042.png]]
+![[Pasted image 20250716192054.png]]
+3.6
+![[Pasted image 20250716192144.png]]
+![[Pasted image 20250716192228.png]]
+3.7
+![[Pasted image 20250716192349.png]]
+![[Pasted image 20250716192529.png]]
+3.8
+![[Pasted image 20250716192611.png]]![[Pasted image 20250716192654.png]]
+3.9
+![[Pasted image 20250716192720.png]]
+![[Pasted image 20250716192730.png]]
+3.10
