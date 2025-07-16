@@ -942,8 +942,34 @@ A diretiva `asm` é específica para GCC e incompatível com outros compiladores
 
 No entanto, a forma estendida é mais útil, pois permite interagir com variáveis C:
 
-`asm("instruções" : "operandos de saída" : "operandos de entrada" : "registradores afetados");`
+```
+```asm(
+		"instruções" 
+		: "operandos de saída" 
+		: "operandos de entrada" 
+		: "registradores afetados");`
+```
+Exemplo:
+```c
+/** * @brief Soma dois inteiros usando assembly embutido IA-32.
+int soma_asm(int a, int b) {
+    int resultado;
 
+    // Início do bloco de Assembly Embutido
+    asm (
+        "movl %1, %0;\n\t"   // 1. Move o primeiro operando de entrada (%1) para o de saída (%0)
+        "addl %2, %0;"    // 2. Soma o segundo operando de entrada (%2) ao de saída (%0)
+        
+        : "=r" (resultado)  // 3. Operando de Saída (write-only)
+        : "r" (a), "r" (b)  // 4. Operandos de Entrada (read-only)
+        : "cc"              // 5. "Clobbers": informa ao compilador que as flags (cc) foram modificadas
+    );
+    // Fim do bloco de Assembly
+
+    return resultado;
+}
+
+```
 **Componentes Principais:**
 - **Instruções de Montagem:** Uma string contendo uma ou mais instruções Assembly. Registradores são referenciados com
     

@@ -73,3 +73,31 @@
 3.32
 ![[Pasted image 20250716195820.png]]
 ![[Pasted image 20250716195833.png]]
+3.34
+![[Pasted image 20250716201417.png]]
+![[Pasted image 20250716201426.png]]
+![[Pasted image 20250716201437.png]]
+3.35
+![[Pasted image 20250716201720.png]]
+![[Pasted image 20250716201734.png]]
+3.36
+![[Pasted image 20250716201828.png]]
+![[Pasted image 20250716201842.png]]
+3.37
+![[Pasted image 20250716201912.png]]
+![[Pasted image 20250716201925.png]]
+3.39
+![[Pasted image 20250716202015.png]]
+![[Pasted image 20250716202029.png]]
+![[Pasted image 20250716202048.png]]
+3.40
+![[Pasted image 20250716202139.png]]
+![[Pasted image 20250716202202.png]]
+![[Pasted image 20250716202217.png]]
+
+3.41
+![[Pasted image 20250716202256.png]]![[Pasted image 20250716202318.png]]
+
+3.42
+![[Pasted image 20250716202410.png]]
+![[Pasted image 20250716202435.png]]
