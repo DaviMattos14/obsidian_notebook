@@ -241,7 +241,7 @@ A expressão $x\gg K$ desloca K bits a direita
 Em geral, as máquinas suportam duas formas de deslocamento à direita: **lógico** e **aritmético**
 No deslocamento à direita **lógico**, zeros são inseridos ao se deslocar
 	ex., $10101111 \gg 4 = 00001010$
-No deslocamento à direita **aritmético**, o MSB (bit $X_n-1$) é copiado a cada deslocamento (<font color="#c00000">equivale a dividir por $2^K$, preservando o sinal do número</font>)
+No deslocamento à direita **aritmético**, o MSB (bit $X_n-1$) é copiado a cada deslocamento _equivale a dividir por $2^K$, preservando o sinal do número_)
 	ex., $10101111 \gg 4 = 11111010$ 
 	$(-81/ 16 = -5 - 1/ 16 = -6)$ (arredondando)
 
@@ -250,6 +250,7 @@ No deslocamento à direita **aritmético**, o MSB (bit $X_n-1$) é copiado a cad
 A linguagem C define vários tipos de números inteiros com tamanhos variados: **char, short int, int, long int, long long int** 
 Além do tamanho, é possível indicar se o número é sempre positivo (unsigned) ou positivo/negativo (o default)
 ![[Pasted image 20250709145346.png]]
+**LEVAREMOS EM CONTA SOMENTE O 32-BIT**
 #### Inteiros Negativos
 A representação mais comum para números negativos é complemento a 2 (C2)
 	O bit mais significativo da palavra tem peso negativo 
