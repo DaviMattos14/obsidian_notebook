@@ -34,7 +34,7 @@ int main(int argc, char *argv[])
         }
     }
 
-    // ??????????
+    // Espera todas as thread terminarem
     for(short int i=0; i<nthreads;i++ ){
         if(pthread_join(tids[i],NULL)){
             printf("Error!");
