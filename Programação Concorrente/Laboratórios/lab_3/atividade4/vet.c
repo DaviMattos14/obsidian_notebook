@@ -1,6 +1,8 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <time.h>
+#define MAX 100
+//#define IMPRIMIR_VETORES
 
 int main(int argc, char *argv[]) {
     if (argc < 3) {
@@ -9,6 +11,7 @@ int main(int argc, char *argv[]) {
     }
 
     long int dim = atol(argv[1]);
+
     // Alocando memoria
     float *vetorA = (float *)malloc(dim * sizeof(float));
     float *vetorB = (float *)malloc(dim * sizeof(float));
@@ -19,8 +22,8 @@ int main(int argc, char *argv[]) {
 
     srand(time(NULL));
     for (long int i = 0; i < dim; i++) {
-        vetorA[i] = (float)rand() / (float)RAND_MAX; // Valor aleatório para A
-        vetorB[i] = (float)rand() / (float)RAND_MAX; // Valor aleatório para B
+        vetorA[i] = ((float)rand() / RAND_MAX) * (2 * MAX) - MAX; // Valor aleatório para A
+        vetorB[i] = ((float)rand() / RAND_MAX) * (2 * MAX) - MAX; // Valor aleatório para B
     }
 
     float prod_interno = 0.0f;
@@ -28,6 +31,8 @@ int main(int argc, char *argv[]) {
         prod_interno += vetorA[i] * vetorB[i]; // C[i] = A[i] * B[i]
     }
     printf("Dimensao: %ld\n", dim);
+
+    #ifdef IMPRIMIR_VETORES
     printf("Vetor A: [ ");
     for(int i = 0; i<dim;i++){
         if(i>0) printf(", ");
@@ -40,28 +45,34 @@ int main(int argc, char *argv[]) {
         printf("%f",vetorB[i]);
         if(i+1 == dim) printf(" ]\n");
     }
+    #endif
     printf("Produto Interno: %f\n", prod_interno);
 
     FILE *arquivo = fopen(argv[2], "wb"); // Abrindo arquivo
     if (!arquivo) {
-        fprintf(stderr,"Erro ao abrir o arquivo para escrita.\n");
+        fprintf(stderr,"Erro ao abrir o arquivo.\n");
         return 3;
     }
 
+    size_t ret;
     
-    fwrite(&dim, sizeof(long int), 1, arquivo); // Dimensão
+    ret = fwrite(&dim, sizeof(long int), 1, arquivo); // Dimensão
     
-    fwrite(vetorA, sizeof(float), dim, arquivo); // Vetor A
+    ret = fwrite(vetorA, sizeof(float), dim, arquivo); // Vetor A
     
-    fwrite(vetorB, sizeof(float), dim, arquivo); // Vetor B
-    
-    fwrite(&prod_interno, sizeof(float), 1, arquivo); // Produto Interno
+    ret = fwrite(vetorB, sizeof(float), dim, arquivo); // Vetor B
+    if(ret < dim) {
+      fprintf(stderr, "Erro de escrita no  arquivo\n");
+      return 4;
+   }
+
+    ret = fwrite(&prod_interno, sizeof(float), 1, arquivo); // Produto Interno
 
     fclose(arquivo);
     free(vetorA);
     free(vetorB);
 
-    printf("Sucesso\n");
+    printf("Sucesso!\n");
 
     return 0;
 }
