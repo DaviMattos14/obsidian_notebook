@@ -29,12 +29,12 @@ for( long int i=0; i<nthreads; i++){
 ### Encerramento de Threads
 A função encerra o thread de chamada e cria o valor *retval* disponível para qualquer junção bem-sucedida
 ```C
-void pthread exit (void *retval);
+void pthread_exit (void *retval);
 ```
 ### Espera pelo encerramento das threads
 A função suspende a execução da thread chamada até que a execução das threads termine, em caso de sucesso ela retornará 0.
 ```C
-int pthread join (pthread t thread, void **retval);
+int pthread_join (pthread t thread, void **retval);
 ```
 
 Exemplo de uso:
@@ -309,7 +309,66 @@ int main(int argc, char *argv[]) {
 ```
 
 ## Retorno de dados pelas threads
+Na função a qual definimos a tarefa a ser executadas pelas threads, ao encerrar a thread no fim da tarefas com `pthread_exit()`, podemos passar um parâmetro que será o valor a se retornado. Com isso na função `main()` precisamos receber este valor. Quando queremos retornar mais de um valor da thread, devemos utilizar uma estrutura `struct`
 
+```c
+#include <pthread.h>
+
+//cria a estrutura de dados de retorno da thread
+typedef struct {
+   int idThread;
+   int aux;
+} t_Ret;
+
+//funcao executada pelas threads
+void* task(void* arg){
+	t_Ret *ret; //estrutura de retorno
+	
+	//aloca memoria para a estrutura de retorno
+	ret = malloc(sizeof(t_Ret));
+	
+	/*EXECUÇÃO DE TAREFA*/
+	
+	// Armazena os resultados
+	ret->idThread = args->idThread;
+	ret->aux = args->idThread * 2;
+	
+	free(arg); //libera a memoria que foi alocada na main
+	pthread_exit((void*) ret);
+}
+
+int main(int argc, char* argv[]){
+	// criar a alocar as variáveis
+	
+	t_Ret  *retorno; //receberá o retorno das threads (nao eh necessario alocar, virá alocada)	
+	
+	//criar as threads
+	
+	//espera todas as threads terminarem e recebe os valores retornados
+   for (int i=0; i<nthreads; i++) {
+     if (pthread_join(tid_sistema[i], (void**) &retorno)) {
+         printf("--ERRO: pthread_join() da thread %d\n", i);
+     }
+     printf("Thread %d retornou %d \n", retorno->idThread, retorno->aux);
+     free(retorno); //libera memoria alocada na thread
+   }
+	
+	return 0;
+}
+```
+
+Se quisermos, por exemplo, acumular os retornos das threads, ou seja, somar todos os valores de um vetor, basta mexer na estrutura do `for`
+```c
+  //espera todas as threads terminarem e calcula a soma total das threads
+  soma_par_global=0;
+  for(int i=0; i<nthreads; i++) {
+     if (pthread_join(tid_sistema[i], (void *) &soma_retorno_threads)) {
+        printf("--ERRO: pthread_join()\n"); exit(-1);
+     }
+     soma_par_global += *soma_retorno_threads;
+     free(soma_retorno_threads);
+  }
+```
 # Capítulo 3 - Comunicação entre threads por memória compartilhada
 
 # Capítulo 4 - Sincronização por condição
