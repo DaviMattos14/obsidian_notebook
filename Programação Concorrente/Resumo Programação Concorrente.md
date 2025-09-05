@@ -517,3 +517,72 @@ Permitem que as threads esperem (bloqueando-se) até que sejam sinalizadas (avis
 - BROADCAST(condvar): desbloqueia todas as threads na fila da variável de condição.
 
 Uma **variável de condição** é sempre usada em conjunto com uma variável de lock. A thread usa o bloco de lock para checar a condição lógica da aplicação e decidir por WAIT ou SIGNAL O lock é implicitamente liberado quando a thread é bloqueada e é implicitamente devolvido quando a thread retoma a execução do ponto de bloqueio. 
+![[Pasted image 20250905172209.png]]
+### Uso em C
+A biblioteca Pthreads define um tipo especial chamado `pthread_cond_t` com as seguintes rotinas:
+
+`pthread_cond_wait (condvar, mutex)`: bloqueia a thread na condição (condvar) (deve ser chamada com mutex locado para a thread e depois de finalizado deve desalocar mutex);
+
+`pthread_cond_signal (condvar)`: desbloqueia uma thread esperando pela condição (condvar);
+
+`pthread_cond_broadcast (condvar)`: usado no lugar de SIGNAL quando todas as threads na fila da condição podem ser desbloqueadas;
+
+`pthread_cond_init (condvar, attr)`: inicializa a variável;
+
+`pthread_cond_destroy (condvar)`: libera a variável.
+
+## Sincronização por Barreira
+Um tipo particular de sincronização por condição apareceem problemas que requerem que todos os fluxos de execução (ou um grupo deles) sincronizem suas ações em determinados pontos da execução do algoritmo. Essa sincronização é chamada de **sincronização por barreira** porque funciona exatamente como uma “barreira” (ou bloqueio coletivo) que faz com que todos os fluxos de execução aguardem pelos demais até que todos tenham chegado a esse ponto (ou passo) do algoritmo.
+
+### Uso em C
+```c
+/* Variaveis globais inicializadas na main */
+pthread_mutex_t mutex;
+pthread_cond_t cond;
+//funcao barreira
+void barreira(int nthreads) {
+	static int bloqueadas = 0;
+	pthread_mutex_lock(&mutex); //inicio secao critica
+	
+	if (bloqueadas == (nthreads-1)) {
+		//ultima thread a chegar na barreira
+		bloqueadas=0;
+		pthread_cond_broadcast(&cond);
+	} else {
+		bloqueadas++;
+		pthread_cond_wait(&cond, &mutex);
+	}
+	pthread_mutex_unlock(&mutex); //fim secao critica
+}
+
+void *task (void *t) {
+  int id = *(int*)t, i;
+  int boba1, boba2;
+
+  for (i=0; i < 4; i++) {
+    printf("Thread %d: passo=%d\n", my_id, i);
+
+    //sincronizacao condicional
+    barreira(NTHREADS);
+
+    /* simula uma computacao qualquer para consumir tempo... */
+    boba1=100; boba2=-100; while (boba2 < boba1) boba2++;
+  }
+  pthread_exit(NULL);
+}
+
+int main(){
+
+  /* Inicilaiza o mutex (lock de exclusao mutua) e a variavel de condicao */
+	pthread_mutex_init(&mutex, NULL);
+	pthread_cond_init (&cond, NULL);
+
+	/*fluxo principal*/
+	
+	pthread_mutex_destroy(&mutex);
+	pthread_cond_destroy(&cond);
+	
+	return 0;
+}
+```
+
