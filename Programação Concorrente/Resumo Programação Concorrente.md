@@ -370,5 +370,51 @@ Se quisermos, por exemplo, acumular os retornos das threads, ou seja, somar todo
   }
 ```
 # Capítulo 3 - Comunicação entre threads por memória compartilhada
+Quando uma thread precisa trocar/compartilhar uma informação com outra thread, ela o faz alterando o valor de uma variável comum para as duas threads, ou seja, uma variável que está armazenada em um endereço de memória que as duas threads compartilham (conhecem e podem acessar).
+
+## Seção críticas e ações atômicas
+Normalmente esperamos que a execução das expressões aritméticas ou sentenças de atribuição da linguagem de programação sejam feitas de forma **atômica**, i.e., que uma vez iniciada a ação por uma thread ela seja executada por completo antes que outra thread opere sobre a mesma variável. Entretanto, durante a execução das sentenças ou expressões da linguagem de alto nível por threads distintas, pode ocorrer entrelaçamentos das instruções de máquina correspondentes, dando possibilidade de ocorrência de resultados inesperados.
+
+Esse tipo de erro, gerado pela execução concorrente dos fluxos de execução que acessam uma mesma área de memória e ao menos uma das operações é de escrita, é chamado **corrida de dados**.
+
+Toda referência a uma variável que pode ser acessada/modificada por outra thread é uma **referência crítica**. Para impedir a ocorrência de resultados indesejáveis para uma determinada computação, os trechos de código que contêm referências críticas **devem ser executados de forma atômica**. Esses trechos de código são denominados de **seção crítica do código**.
+
+## Seções de entrada e saída da seção crítica
+
+Mecanismos de sincronização de códigos permitem **transformar uma seção crítica em**
+**uma ação atômica** usando dois outros trechos de código especiais chamados **seção de entrada e seção de saída**. Essas duas seções adicionais de código tem por finalidade “cercar” a entrada e saída da seção crítica, garantindo que os requisitos de execução atômica sejam atendidos. O pseudocódigo abaixo ilustra essa estratégia:
+
+```
+while(true) {
+executa fora da seção crítica (...)
+requisita a entrada na seção crítica //seção de entrada
+executa a seção crítica (...) //seção crítica
+sai da seção crítica //seção de saída
+}
+```
+
+## Sincronização por exclusão mútua
+Visa garantir que **os trechos de código em cada thread que acessam objetos compartilhados não sejam executados ao mesmo tempo**, ou que uma vez iniciados sejam executados até o fim sem que outra thread inicie a execução do trecho equivalente. Essa restrição é necessária para lidar com a possibilidade de inconsistência dos valores das variáveis compartilhadas.
+
+A solução para a **exclusão mútua** é definida agrupando *sequências contínuas de ações atômicas de hardware* em seções críticas de software. As **seções críticas** (trechos de código que acessam objetos compartilhados) devem ser transformadas em ações atômicas, de forma que a sua execução não possa ocorrer concorrentemente com outra seção crítica que referencia a mesma variável.
+
+### sincronização por espera ocupada
+A sincronização por espera ocupada faz com que a thread fique continuamente testando o valor de uma determinada variável até que esse valor lhe permita executar a sua seção crítica com exclusividade. Para implementar esse mecanismo de sincronização é necessário dispor de instruções de máquina que permitam ler e escrever em localizações da memória de forma atômica.
+O principal problema da solução por espera ocupada é que ela gasta ciclos de CPU enquanto espera autorização para seguir com o seu fluxo de execução normal. A “espera ocupada” só faz sentido nos seguintes casos:
+	• não há nada melhor para a CPU fazer enquanto espera;
+	• o tempo de espera é menor que o tempo requerido para a troca de contexto entre
+threads.
+
+### sincronização por escalonamento (`lock`)
+Sendo a alternativa mais usual, um `lock` **possui uma thread proprietária** e esta relação de posse determina características particulares das operações sobre locks:
+	Uma thread requisita a posse de um lock L executando a operação `L.lock()`;
+	Uma thread que executa a operação `L.lock()` torna-se a proprietária do lock se nenhuma outra thread já possui o lock, caso contrário a thread é bloqueada;
+	Um thread libera sua posse sobre o lock executando a operação `L.unlock` (se a thread não possui o lock a operação retorna com erro);
+	Uma thread que já possua o lock L e executa `L.lock()` novamente não é bloqueada (apenas se o lock for recursivo), mas deve executar `L.unlock()` o mesmo número de vezes que executou `L.lock()` antes que outra thread possa ganhar a posse de L;
+
+O uso de locks para implementar exclusão mútua se dá da seguinte forma: a operação `L.lock()` implementa a entrada na seção crítica e a operação `L.unlock()` implementa a saída da seção crítica,
+
+## Uso em C
+A biblioteca Pthreads oferece o mecanismo de sincronização por locks através de variáveis especiais do tipo `pthread_mutex_t.` Por definição, Pthreads implementa locks não-recursivos (uma thread não deve tentar alocar novamente um lock que já possui). Para tornar o lock recursivo é preciso mudar suas propriedades básicas.
 
 # Capítulo 4 - Sincronização por condição
