@@ -415,6 +415,105 @@ Sendo a alternativa mais usual, um `lock` **possui uma thread proprietária** e 
 O uso de locks para implementar exclusão mútua se dá da seguinte forma: a operação `L.lock()` implementa a entrada na seção crítica e a operação `L.unlock()` implementa a saída da seção crítica,
 
 ## Uso em C
-A biblioteca Pthreads oferece o mecanismo de sincronização por locks através de variáveis especiais do tipo `pthread_mutex_t.` Por definição, Pthreads implementa locks não-recursivos (uma thread não deve tentar alocar novamente um lock que já possui). Para tornar o lock recursivo é preciso mudar suas propriedades básicas.
+A biblioteca Pthreads oferece o mecanismo de sincronização por locks através de variáveis especiais do tipo `pthread_mutex_t`. Por definição, Pthreads implementa locks não-recursivos (uma thread não deve tentar alocar novamente um lock que já possui). Para tornar o lock recursivo é preciso mudar suas propriedades básicas.
+### `pthread_mutex_t`
+```c
+pthread_mutex_t mutex = PTHREAD_MUTEX_INITIALIZER;
 
+// a função inicializa o mutex referenciado por mutex com atributos especificados por attr
+int pthread_mutex_init(pthread_mutex_t *mutex,const pthread_mutexattr_t *attr);
+
+// a função destrói o objeto mutex referenciado por _mutex_
+int pthread_mutex_destroy(pthread_mutex_t *mutex);
+```
+
+### `lock`
+```c
+// O objeto mutex referenciado por mutex é bloqueado
+int pthread_mutex_lock(pthread_mutex_t *mutex);
+
+// é idêntico a pthread_mutex_lock() exceto que se o objeto mutex referenciado por mutex está atualmente bloqueado (por qualquer thread, incluindo o thread atual), a chamada retorna imediatamente
+int pthread_mutex_trylock(pthread_mutex_t *mutex);
+
+// O objeto mutex referenciado por mutex é desbloqueado
+int pthread_mutex_unlock(pthread_mutex_t *mutex);
+```
+
+### Código completo
+```c
+#include <stdio.h>
+#include <stdlib.h> 
+#include <pthread.h>
+
+long int soma = 0; //variavel compartilhada entre as threads
+pthread_mutex_t mutex; //variavel de lock para exclusao mutua
+
+//funcao executada pelas threads
+void *Tarefa (void *arg) {
+  long int id = (long int) arg;
+  printf("Thread : %ld esta executando...\n", id);
+
+  for (int i=0; i<100000; i++) {
+     //--entrada na SC
+     pthread_mutex_lock(&mutex);
+     //--SC (seção critica)
+     soma++; //incrementa a variavel compartilhada 
+     //--saida da SC
+     pthread_mutex_unlock(&mutex);
+  }
+  printf("Thread : %ld terminou!\n", id);
+  pthread_exit(NULL);
+}
+
+//fluxo principal
+int main(int argc, char *argv[]) {
+   pthread_t *tid; //identificadores das threads no sistema
+   int nthreads; //qtde de threads (passada linha de comando)
+
+   //--le e avalia os parametros de entrada
+   if(argc<2) {
+      printf("Digite: %s <numero de threads>\n", argv[0]);
+      return 1;
+   }
+   nthreads = atoi(argv[1]);
+
+   //--aloca as estruturas
+   tid = (pthread_t*) malloc(sizeof(pthread_t)*nthreads);
+   if(tid==NULL) {puts("ERRO--malloc"); return 2;}
+
+   //--inicilaiza o mutex (lock de exclusao mutua)
+   pthread_mutex_init(&mutex, NULL);
+
+   //--cria as threads
+   for(long int t=0; t<nthreads; t++) {
+     if (pthread_create(&tid[t], NULL, ExecutaTarefa, (void *)t)) {
+       printf("--ERRO: pthread_create()\n"); exit(-1);
+     }
+   }
+
+   //--espera todas as threads terminarem
+   for (int t=0; t<nthreads; t++) {
+     if (pthread_join(tid[t], NULL)) {
+         printf("--ERRO: pthread_join() \n"); exit(-1); 
+     } 
+   } 
+
+   //--finaliza o mutex
+   pthread_mutex_destroy(&mutex);
+   
+   printf("Valor de 'soma' = %ld\n", soma);
+
+   return 0;
+}
+```
 # Capítulo 4 - Sincronização por condição
+Visa garantir que **uma thread seja retardada enquanto uma determinada condição lógica da aplicação não for satisfeita**. A solução para a sincronização por condição é implementada **bloqueando a execução de uma thread até que o estado da aplicação seja correto para a sua execução**. Em resumo, para coordenar a execução de um algoritmo concorrente é necessário que os fluxos de execução troquem informações entre si sobre seus estados de execução e possam suspender ou retomar suas execuções dependendo do estado de execução dos demais fluxos ou do estado global da aplicação.
+
+## Variáveis de Condição
+Permitem que as threads esperem (bloqueando-se) até que sejam sinalizadas (avisadas) por outra thread que a condição lógica foi atendida. Associado a essas variáveis de condição, temos normalmente três operações principais:
+
+- **WAIT(condvar)**: bloqueia a thread na fila da variável de condição;
+- SIGNAL(condvar): desbloqueia uma thread na fila da variável de condição;
+- BROADCAST(condvar): desbloqueia todas as threads na fila da variável de condição.
+
+Uma **variável de condição** é sempre usada em conjunto com uma variável de lock. A thread usa o bloco de lock para checar a condição lógica da aplicação e decidir por WAIT ou SIGNAL O lock é implicitamente liberado quando a thread é bloqueada e é implicitamente devolvido quando a thread retoma a execução do ponto de bloqueio. 
