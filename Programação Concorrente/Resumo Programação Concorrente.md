@@ -532,7 +532,7 @@ A biblioteca Pthreads define um tipo especial chamado `pthread_cond_t` com as se
 `pthread_cond_destroy (condvar)`: libera a variável.
 
 ## Sincronização por Barreira
-Um tipo particular de sincronização por condição apareceem problemas que requerem que todos os fluxos de execução (ou um grupo deles) sincronizem suas ações em determinados pontos da execução do algoritmo. Essa sincronização é chamada de **sincronização por barreira** porque funciona exatamente como uma “barreira” (ou bloqueio coletivo) que faz com que todos os fluxos de execução aguardem pelos demais até que todos tenham chegado a esse ponto (ou passo) do algoritmo.
+Um tipo particular de sincronização por condição aparecem problemas que requerem que todos os fluxos de execução (ou um grupo deles) sincronizem suas ações em determinados pontos da execução do algoritmo. Essa sincronização é chamada de **sincronização por barreira** porque funciona exatamente como uma “barreira” (ou bloqueio coletivo) que faz com que todos os fluxos de execução aguardem pelos demais até que todos tenham chegado a esse ponto (ou passo) do algoritmo.
 
 ### Uso em C
 ```c
