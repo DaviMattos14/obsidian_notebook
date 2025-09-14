@@ -8,7 +8,7 @@ Programa auxiliar para gerar um vetor de floats
 
 #define MAX 1000 //valor maximo de um elemento do vetor
 //descomentar o define abaixo caso deseje imprimir uma versao do vetor gerado no formato texto
-//#define LOG 
+#define LOG 
 
 int main(int argc, char*argv[]) {
    float *vetor; //vetor que será gerada
