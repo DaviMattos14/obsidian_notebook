@@ -8,7 +8,7 @@
 #include <pthread.h> 
 #include "timer.h"
 
-//#define VERSOES
+#define VERSOES
 
 //variaveis globais
 //vetor de elementos
