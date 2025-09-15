@@ -586,3 +586,168 @@ int main(){
 }
 ```
 
+# Capítulo 5 - Semana 6 - Padrões Produtror/Consumidor e Leitores/Escritores 
+
+## Padrão Produtor/Consumidor
+
+- Os produtores <font color="#ff0000">produzem/geram</font> novos elementos
+- Os consumidores <font color="#ff0000">consomem/processam</font> esses elementos
+- O canal de comunicação (área de dados) oferece operações de inserção e remoção de elementos
+	**Produtores** depositam/inserem os elementos gerados na área de dados
+	**Consumidores** retiram/removem os elementos que devem ser processados da área de dados
+
+### Condições do problema produtor/consumidor
+1. Os produtores não podem inserir novos elementos quando a área de dados já está cheia 
+2. Os consumidores não podem retirar elementos quando a área de dados já está vazia 
+3. Os elementos devem ser retirados na mesma ordem em que foram inseridos 
+4. Os elementos inseridos não podem ser perdidos (sobreescritos por novos elementos) 
+5. Um elemento só pode ser retirado uma única vez
+
+### Implementação
+#### Produtor
+```C
+void * produtor(void * arg) {
+	tElemento elemento;
+	while(REPETE) {
+		elemento = produzElemento();
+		Insere(elemento); //pode bloquear!
+	}
+	pthread_exit(NULL);
+}
+```
+#### Consumidor
+```C
+void * consumidor(void * arg) {
+	tElemento elemento;
+	while(REPETE) {
+		elemento = Retira(); //pode bloquear!
+		processaElemento(elemento);
+	}
+	pthread_exit(NULL);
+}
+```
+#### Operações
+```C
+void Insere (tElemento elem) {
+	pthread_mutex_lock(&mutex);
+	while(contador == N) {
+		pthread_cond_wait(&cond_prod, &mutex);
+	}
+	contador++;
+	Canal[posInsere] = elem;
+	posInsere = (posInsere + 1) % N;
+	pthread_mutex_unlock(&mutex);
+	pthread_cond_signal(&cond_cons);
+}
+
+
+//---------------------------------------------------------------------------//
+
+
+tElemento Retira (void) {
+	tElemento elem;
+	pthread_mutex_lock(&mutex);
+	while(contador == 0) {
+		pthread_cond_wait(&cond_cons, &mutex);
+	}
+	contador--;
+	elem = Canal[posRemove];
+	posRemove = (posRemove + 1) % N;
+	pthread_mutex_unlock(&mutex);
+	pthread_cond_signal(&cond_prod);
+	return elem;
+}
+```
+#### Variáveis Globais
+```C
+#define N 5 //tamanho do canal
+//variaveis do problema
+int Canal[N];
+int contador=0, posInsere=0, posRemove=0;
+//variaveis para sincronizacao
+pthread_mutex_t mutex;
+pthread_cond_t cond_cons, cond_prod;
+```
+
+## Leitores / Escritores
+
+Uma área de dados (ex., arquivo, bloco da memória, tabela de uma banco de dados) é compartilhada entre diferentes threads que executam duas operações: 
+	**leitura**: lêem o conteúdo da área de dados 
+	**escrita**: escrevem conteúdo na área de dados
+
+### Condições
+1. os leitores podem ler simultaneamente uma região de dados compartilhada 
+2. apenas um escritor pode escrever a cada instante em uma região de dados compartilhada 
+3. se um escritor está escrevendo, nenhum leitor pode ler a mesma região de dados compartilhada
+### Implementação
+```C
+void *leitor (void *arg) {
+	while(1) {
+		EntraLeitura();
+		//le algo...
+		SaiLeitura();
+		//faz outra coisa...
+	}
+}
+void *escritor (void *arg) {
+	while(1) {
+		EntraEscrita();
+		//escreve algo...
+		SaiEscrita();
+		//faz outra coisa...
+	}
+}
+
+int leit=0, escr=0; //globais
+void EntraLeitura() {
+	pthread_mutex_lock(&mutex);
+	while(escr > 0) {
+		pthread_cond_wait(&cond_leit, &mutex);
+	}
+	leit++;
+	pthread_mutex_unlock(&mutex);
+}
+void SaiLeitura() {
+	pthread_mutex_lock(&mutex);
+	leit--;
+	if(leit==0) pthread_cond_signal(&cond_escr);
+	pthread_mutex_unlock(&mutex);
+}
+
+
+int leit=0, escr=0; //globais
+void EntraEscrita () {
+	pthread_mutex_lock(&mutex);
+	while((leit>0) || (escr>0)) {
+		pthread_cond_wait(&cond_escr, &mutex);
+	}
+	escr++;
+	pthread_mutex_unlock(&mutex);
+}
+void SaiEscrita () {
+	pthread_mutex_lock(&mutex);
+	escr--;
+	pthread_cond_signal(&cond_escr);
+	pthread_cond_broadcast(&cond_leit);
+	pthread_mutex_unlock(&mutex);
+}
+
+int leitores=0; + variaveis sincroniza ̧c~ao
+void AntesLeitura () {
+	lock(&mutex); leitores++; unlock(&mutex);
+}
+void DepoisLeitura () {
+	lock(&mutex); leitores--;
+	if(leitores==0)
+		pthread_cond_signal(&cond_escr);
+	unlock(&mutex);
+}
+void Escreve(void * args) {
+	lock(&mutex);
+	while(leitores>0)
+		pthread_cond_wait(&cond_escr, &mutex);
+	//realiza a escrita de args (...)
+	pthread_cond_signal(&cond_escr); unlock(&mutex);
+}
+
+```
