@@ -398,6 +398,8 @@ Visa garantir que **os trechos de código em cada thread que acessam objetos com
 
 A solução para a **exclusão mútua** é definida agrupando *sequências contínuas de ações atômicas de hardware* em seções críticas de software. As **seções críticas** (trechos de código que acessam objetos compartilhados) devem ser transformadas em ações atômicas, de forma que a sua execução não possa ocorrer concorrentemente com outra seção crítica que referencia a mesma variável.
 
+- **Seção Crítica**: É o trecho de código que acessa o recurso compartilhado e que, para evitar erros, deve ser executado de forma atômica.
+- **Solução: Locks (Mutex)**: A exclusão mútua é garantida usando locks (ou mutexes, do tipo `pthread_mutex_t` em Pthreads). A thread "tranca" o lock antes de entrar na seção crítica com `L.lock()` e o "destranca" ao sair com `L.unlock()`. Se uma thread tenta trancar um lock que já está em uso, ela é bloqueada até que o lock seja liberado.
 ### sincronização por espera ocupada
 A sincronização por espera ocupada faz com que a thread fique continuamente testando o valor de uma determinada variável até que esse valor lhe permita executar a sua seção crítica com exclusividade. Para implementar esse mecanismo de sincronização é necessário dispor de instruções de máquina que permitam ler e escrever em localizações da memória de forma atômica.
 O principal problema da solução por espera ocupada é que ela gasta ciclos de CPU enquanto espera autorização para seguir com o seu fluxo de execução normal. A “espera ocupada” só faz sentido nos seguintes casos:
