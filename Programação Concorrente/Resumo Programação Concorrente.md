@@ -673,9 +673,7 @@ pthread_cond_t cond_cons, cond_prod;
 
 ### Resumo
 - **Cenário**: Threads "produtoras" geram itens e os inserem em um buffer (canal) compartilhado, enquanto threads "consumidoras" os retiram para processamento.
-    
 - **Condições de Sincronização**: Um produtor não pode inserir em um buffer cheio e um consumidor não pode retirar de um buffer vazio.
-    
 - **Implementação**: Usa-se um mutex para proteger o acesso ao buffer e duas variáveis de condição: `cond_prod` para sinalizar que o buffer não está mais cheio (acordando um produtor) e `cond_cons` para sinalizar que o buffer não está mais vazio (acordando um consumidor).
 ## Leitores / Escritores
 
