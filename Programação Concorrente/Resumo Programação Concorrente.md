@@ -587,7 +587,10 @@ int main(){
 	return 0;
 }
 ```
-
+### Resumo
+- **Cenário**: É um tipo de sincronização por condição onde todas as threads de um grupo devem esperar em um ponto específico do algoritmo até que a última thread chegue.
+- **Implementação**: A última thread a chegar na barreira usa `pthread_cond_broadcast` para desbloquear todas as outras threads que estavam esperando em um `pthread_cond_wait`.
+- **Uso**: Comum em métodos iterativos, como o de Jacobi, onde cada passo do cálculo precisa ser concluído por todas as threads antes que a próxima iteração possa começar
 # Capítulo 5 - Semana 6 - Padrões Produtror/Consumidor e Leitores/Escritores 
 
 ## Padrão Produtor/Consumidor
@@ -757,3 +760,7 @@ void Escreve(void * args) {
 }
 
 ```
+
+### Resumo
+- **Cenário**: Múltiplas threads acessam uma área de dados compartilhada. Algumas apenas leem (leitoras) e outras modificam (escritoras).
+- **Condições de Sincronização**: Múltiplos leitores podem acessar os dados simultaneamente. No entanto, um escritor precisa de acesso exclusivo; quando ele está escrevendo, nenhum outro escritor ou leitor pode acessar os dados.
