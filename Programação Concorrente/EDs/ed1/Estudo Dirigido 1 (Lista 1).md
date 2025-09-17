@@ -160,11 +160,11 @@ Adiconamos uma variavel estado = 0 e junto com ela implementar pthread_cond. Enq
 
 # Questão 5
 -4 : Não Alcançável
--3 : Não Alcançável
--2 : T1(1) -> T1(2) -> T1(3) -> T1(4) -> T2(2) -> T1(5) 
+-3 : T3(1) -> T3(2) -> T3 Pausa ->T1(1) Sobrescreve -> T1(2) / T2(2) Sobrescreve -> T1(3) -> T3(3) 
+-2 : T2(1)/T1(1) T1 Sobrescreve -> T1(2) -> T1(3) -> T1(4) -> T2(2) -> T1(5) 
 -1 : T1(1) -> T1(2) -> T1(3) -> T1(4) -> T1(5)
 0 : T3(1) -> T3(2) -> T1(1) -> T1(2) -> T1(3) -> T3(3)
 1 : T3(1) -> T3(2) -> T3(3)
 2 : T3(1) -> T3(2) -> T2(1) -> T3(3)
-3 : Não Alcançável
+3 : T3(1) -> T3(2) -> T1(2) -> T2(1) -> T3(3)
 4 : Não Alcançável
