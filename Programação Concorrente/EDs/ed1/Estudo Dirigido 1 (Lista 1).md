@@ -186,3 +186,8 @@ Não alcançável.
 
 ## b)
 Sim, as três threads acessam uma a mesma variável, todas realizam as mesmas operações (incremento e decremento), e há risco de sobrescrita pois não nenhum definição de ordem de execução deixando a cargo do sistema.
+
+# Questão 7
+Sim, o problema está na leitura da variável meuSaldo, pois pode ocorrer violação de atomicidade e ordem, fazendo com o que uma thread ao passar da condição if, antes que possa executar retira(val), o valor de saldo é atualizado, fazendo com que um novo decremento seja feito no novo valor.
+
+# Questão 8
