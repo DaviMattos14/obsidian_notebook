@@ -116,25 +116,37 @@ void* task(void* args){
     int fatia = arg->tam / arg->nthreds;
     int inicio = arg->id * fatia;
     int fim = (arg->id == (arg->nthreds-1))? arg->tam : inicio + fatia;
-
-    pthread_mutex_lock(&mutex);
+    int min_local = min;
+    int max_local = max;
     for(int i = inicio; i < fim; i++){
         //printf("thread %ld -> %d\n", arg->id, vetor[i]);
-        if(vetor[i] < min) min = vetor[i];
-        if(vetor[i] > max) max = vetor[i];
+        if(vetor[i] < min_local) min_local = vetor[i];
+        if(vetor[i] > max_local) max_local = vetor[i];
     }
+    pthread_mutex_lock(&mutex);
+    if(min_local < min) min = min_local;
+    if(max_local > max) max = max_local; 
     pthread_mutex_unlock(&mutex);
+
 }
 ```
 # Questão 3
 ## a)
-Seção crítica é uma área do código onde é compartilhada entre as threads, mas que devem ser executadas de forma atômica.
+Seção crítica é uma área do código onde é compartilhada entre as threads, mas que devem ser executadas de forma atômica, ou seja, não pode ser executada por mais de uma thread simultaneamente para evitar inconsistências
 ## b)
 Corrida de dados é quando um mais de um fluxo de execução se entrelaça na hora da escrita, ou seja, mais de uma thread acessam a mesma posição da memória ao mesmo tempo.
+ocorre quando há dois ou mais acessos concorrentes a uma mesma posição de memória, e pelo menos um desses acessos é de escrita.
 ## c)
-Violação de atomicidade é quando uma função que deveria ser executada uma por thread é executada por mais de uma ao mesmo tempo causando interrupção de uma das threadas
+A violação de atomicidade ocorre quando uma sequência de operações que deveria ser executada como um bloco único e indivisível é interrompida por outra thread.
 ## d)
+Violação de ordem se dá quando duas execuções distintas ocorrem de ordens invertidas, ou seja, quando a ordem de precedência não respeitada. 
 ## e)
+Visa garantir que **os trechos de código em cada thread que acessam objetos compartilhados não sejam executados ao mesmo tempo**, ou que uma vez iniciados, são executados até o fim sem que outra thread inicie a execução do trecho equivalente.
 ## f)
+Garante o bloqueios de uma ou mais threads até um sinal de liberação seja mandado .
+Visa garantir que **uma thread seja retardada enquanto uma determinada condição lógica da aplicação não for satisfeita**
 ## g)
+Para evitar os problema que surgem com a programação concorrente, tais como, corrida de dados e violação de atomicidade e ordem.
 ## h)
+É criado variáveis em comum que é compartilhada entre as threads, tal trecho de código onde há esse compartilhamento é chamado de seção crítica. E visando evitar problemas como corrida de dados, queremos que a ações executadas na seção crítica sejam atômicas, ou seja, uma por vez, e isso é feito através do pthread_mutex.
+# Questão 4

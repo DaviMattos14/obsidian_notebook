@@ -22,14 +22,18 @@ void* task(void* args){
     int fatia = arg->tam / arg->nthreds;
     int inicio = arg->id * fatia;
     int fim = (arg->id == (arg->nthreds-1))? arg->tam : inicio + fatia;
-
-    pthread_mutex_lock(&mutex);
+    int min_local = min;
+    int max_local = max;
     for(int i = inicio; i < fim; i++){
         //printf("thread %ld -> %d\n", arg->id, vetor[i]);
-        if(vetor[i] < min) min = vetor[i];
-        if(vetor[i] > max) max = vetor[i];
+        if(vetor[i] < min_local) min_local = vetor[i];
+        if(vetor[i] > max_local) max_local = vetor[i];
     }
+    pthread_mutex_lock(&mutex);
+    if(min_local < min) min = min_local;
+    if(max_local > max) max = max_local; 
     pthread_mutex_unlock(&mutex);
+
 }
 
 
