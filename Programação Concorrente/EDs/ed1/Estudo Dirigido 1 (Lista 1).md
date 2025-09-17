@@ -150,3 +150,21 @@ Para evitar os problema que surgem com a programação concorrente, tais como, c
 ## h)
 É criado variáveis em comum que é compartilhada entre as threads, tal trecho de código onde há esse compartilhamento é chamado de seção crítica. E visando evitar problemas como corrida de dados, queremos que a ações executadas na seção crítica sejam atômicas, ou seja, uma por vez, e isso é feito através do pthread_mutex.
 # Questão 4
+## a) 
+a thread 1 é iniciada, S1 é executado, então a thread 1 é pausada, então a thread 2 é iniciada, S3 é executado, thread 2 termina, thread 1 é despausada S2 é executado e a thread 1 termina.
+S1 -> S3 -> S2
+## b) 
+Adicionar pthread_mutex nas seções S1 e S2
+## c)
+Adiconamos uma variavel estado = 0 e junto com ela implementar pthread_cond. Enquanto a variavel estador for igual a 0, a thread 2 é bloqueada. Uma vez que a thread 1 terminar de inicializar mThread, mudamos a variavel estado para 1 e desbloqueamos a thread 2.
+
+# Questão 5
+-4 : 
+-3 :
+-2 : T3 -> T2 -> T1
+-1 : 
+0 : T1 -> T2 -> T3
+1 : T1(1) -> T1(2)
+2 : T2 -> T3 -> T2
+3 : 
+4 :
