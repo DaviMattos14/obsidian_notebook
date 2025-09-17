@@ -159,12 +159,12 @@ Adicionar pthread_mutex nas seções S1 e S2
 Adiconamos uma variavel estado = 0 e junto com ela implementar pthread_cond. Enquanto a variavel estador for igual a 0, a thread 2 é bloqueada. Uma vez que a thread 1 terminar de inicializar mThread, mudamos a variavel estado para 1 e desbloqueamos a thread 2.
 
 # Questão 5
--4 : 
--3 :
--2 : T3 -> T2 -> T1
+-4 : Não Alcançável
+-3 : Não Alcançável
+-2 : T1(1) -> T1(2) -> T1(3) -> T1(4) -> T2(2) -> T1(5) 
 -1 : T1(1) -> T1(2) -> T1(3) -> T1(4) -> T1(5)
-0 : 
+0 : T3(1) -> T3(2) -> T1(1) -> T1(2) -> T1(3) -> T3(3)
 1 : T3(1) -> T3(2) -> T3(3)
-2 : 
-3 : 
-4 :
+2 : T3(1) -> T3(2) -> T2(1) -> T3(3)
+3 : Não Alcançável
+4 : Não Alcançável
