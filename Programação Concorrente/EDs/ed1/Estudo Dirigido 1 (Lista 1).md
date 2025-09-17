@@ -168,3 +168,21 @@ Adiconamos uma variavel estado = 0 e junto com ela implementar pthread_cond. Enq
 2 : T3(1) -> T3(2) -> T2(1) -> T3(3)
 3 : T3(1) -> T3(2) -> T1(2) -> T2(1) -> T3(3)
 4 : Não Alcançável
+
+# Questão 6
+
+## a) 
+x=0
+Uma execução sem interrupções de T1 ou T2
+
+x=-1
+Todas as threads começam a executar, T3 começa a executar a linha 2 e pausa, T1 ou T2 executam até a linha 6 e pausa, T3 então termina de executar a linha 2 e sobrescreve, T1 ou T2 executam a linha 7.
+
+x=2
+Todas as threads começam a executar, T3 ganha prioridade e executa a linha 2 e é pausada, T1 tem prioridade e executa até a linha 5 e é pausada, T2 executa até a linha 4 e é pausada, T1 retorna e executa a linha 6 e é pausada, T2 retorna junto com T3 e a linha 3 de T3 sobrescreve a linha 5 de T2, T3 termina, T2 vai para o proximo loop, executa a linha 4 e é pausada, T1 retorna e imprime.
+
+x=4
+Não alcançável.
+
+## b)
+Sim, as três threads acessam uma a mesma variável, todas realizam as mesmas operações (incremento e decremento), e há risco de sobrescrita pois não nenhum definição de ordem de execução deixando a cargo do sistema.
