@@ -162,9 +162,9 @@ Adiconamos uma variavel estado = 0 e junto com ela implementar pthread_cond. Enq
 -4 : 
 -3 :
 -2 : T3 -> T2 -> T1
--1 : 
-0 : T1 -> T2 -> T3
-1 : T1(1) -> T1(2)
-2 : T2 -> T3 -> T2
+-1 : T1(1) -> T1(2) -> T1(3) -> T1(4) -> T1(5)
+0 : 
+1 : T3(1) -> T3(2) -> T3(3)
+2 : 
 3 : 
 4 :
