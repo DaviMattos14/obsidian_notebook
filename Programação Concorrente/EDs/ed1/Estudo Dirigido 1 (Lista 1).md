@@ -274,3 +274,5 @@ Cada thread termina sua execução quando seu próximo salto for excedente ao ta
 não, caso o tamanho do vetor não seja divisivel pelo numero de threads, a divisão de elementos é desigual.
 ## d)
 Impede que haja violação de ordem, forçando as thread percorrem da esquerda para direita no vetor.
+# Questão 10
+## a)
