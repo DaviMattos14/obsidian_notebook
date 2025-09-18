@@ -276,3 +276,35 @@ não, caso o tamanho do vetor não seja divisivel pelo numero de threads, a divi
 Impede que haja violação de ordem, forçando as thread percorrem da esquerda para direita no vetor.
 # Questão 10
 ## a)
+na tarefa da thread A, a thread não espera a thread B imprimir o valor de X e continua incrementando, causando corrida de dados.
+## b)
+adicionando uma variável para o estado e fazendo a thread A ser bloqueada.
+## c)
+```C
+int x = 0, estado = 0;
+pthread_mutex_t x_mutex;
+pthread_cond_t x_cond, condA;
+void *A (void *tid) {
+    for (int i = 0; i < 100; i++)
+    {
+	    pthread_mutex_lock(&x_mutex);
+        while(estado > 0) pthread_cond_wait(&condA,&x_mutex);
+        x++;
+        if (x == 50)
+        {
+            estado = 1;
+            pthread_cond_signal(&x_cond);
+        }
+        pthread_mutex_unlock(&x_mutex);
+    } 
+}
+void *B (void *tid) {
+    pthread_mutex_lock(&x_mutex);
+    while(estado < 1) pthread_cond_wait(&x_cond, &x_mutex);
+    printf("X=%d\n", x);
+    estado = 0;
+    pthread_cond_signal(&condA);
+    pthread_mutex_unlock(&x_mutex);
+}
+
+```
