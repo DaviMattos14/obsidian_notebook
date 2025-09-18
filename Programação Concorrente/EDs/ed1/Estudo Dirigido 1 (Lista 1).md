@@ -269,4 +269,8 @@ int main(void){
 ## a)
 Cada thread ficou responsável por k elementos, realizando saltos no vetor.
 ## b)
-Cada thread termina sua execução quando seu próximo salto for excedente 
+Cada thread termina sua execução quando seu próximo salto for excedente ao tamanho do vetor
+## c) 
+não, caso o tamanho do vetor não seja divisivel pelo numero de threads, a divisão de elementos é desigual.
+## d)
+Impede que haja violação de ordem, forçando as thread percorrem da esquerda para direita no vetor.
