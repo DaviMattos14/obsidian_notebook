@@ -266,3 +266,7 @@ int main(void){
 ```
 
 # Questão 9
+## a)
+Cada thread ficou responsável por k elementos, realizando saltos no vetor.
+## b)
+Cada thread termina sua execução quando seu próximo salto for excedente 
