@@ -1,3 +1,19 @@
+# Regra da Cadeia
+$$
+\frac{d }{dx}[f(g(x))]=f'(g(x))\cdot g'(x)
+$$
+Exemplo:
+$$
+\begin{matrix}
+h(x)=\underbrace{\sin}_{f(x)}(\underbrace{x^{2}+2}_{g(x)})
+\longrightarrow
+\begin{cases}
+\begin{array}{rcl}
+f'(x)=\cos \\ g'(x)=2x  \end{array} 
+\end{cases} \\
+h'(x) = \underbrace{\cos}_{f'(x)}{(\underbrace{x^2+2}_{g(x)})}\cdot\underbrace{2x}_{g'(x)}
+\end{matrix}
+$$
 # Equações Diferenciais Ordinárias (EDO)
 
 $$
