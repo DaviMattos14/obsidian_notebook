@@ -15,6 +15,19 @@ h'(x) = \underbrace{\cos}_{f'(x)}{(\underbrace{x^2+2}_{g(x)})}\cdot\underbrace{2
 \end{matrix}
 $$
 # Equações Diferenciais Ordinárias (EDO)
+## Equações Separáveis
+$$
+\frac{dy}{dx} = g(x)f(y), \text{  f(y)}\neq 0
+$$
+### Solução
+$$\begin{matrix}
+\frac{dy}{dx} = \frac{\overbrace{2x}^{g(x)}}{\underbrace{1+2y}_{f(y)}} \therefore (1+2y)\text{ dy} = 2x\text{ dx} \\ 
+\int (1+2y)\text{ dy} = \int 2x\text{ dx} \\ 
+y+y^{2}= x^{2}+ c
+\end{matrix}
+$$
+## EDO (1ª Ordem)
+## EDO (2ª Ordem)
 
 $$
 f(x)
@@ -51,7 +64,7 @@ $$
 \begin{split}
 \int(x-3)^{12} \text{ dx}
 \longrightarrow
-\int(\underbrace{x-3}_{u})^{12} \underbrace{\text{ dx}}_{\text{ du}} 
+\int \overbrace{(\underbrace{x-3}_{u})^{12}}^{f} \underbrace{\text{ dx}}_{\text{ du}} 
 \longrightarrow
 \begin{cases}
 \begin{array}{rcl}
@@ -61,5 +74,3 @@ u=x-3 \\ du=1  \end{array}
 = \int u^{12}\text{ du} = \frac{u^{13}}{13} \cdot 1 +C =\frac{(x-3)^{13}}{13}+C 
 \end{split}
 $$
-
-
