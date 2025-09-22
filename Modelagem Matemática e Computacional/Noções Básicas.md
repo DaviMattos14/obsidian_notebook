@@ -1,4 +1,5 @@
 # Equações Diferenciais Ordinárias (EDO)
+
 $$
 f(x)
 $$
