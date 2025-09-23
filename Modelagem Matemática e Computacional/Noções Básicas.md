@@ -15,6 +15,9 @@ h'(x) = \underbrace{\cos}_{f'(x)}{(\underbrace{x^2+2}_{g(x)})}\cdot\underbrace{2
 \end{matrix}
 $$
 # Equações Diferenciais Ordinárias (EDO)
+$$
+\frac{dy}{dx} = xy(x) \leftrightarrow f'(x)=xf(x) \leftrightarrow y'=xy
+$$
 ## Equações Separáveis
 $$
 \frac{dy}{dx} = g(x)f(y), \text{  f(y)}\neq 0
@@ -27,6 +30,34 @@ y+y^{2}= x^{2}+ c
 \end{matrix}
 $$
 ## EDO (1ª Ordem)
+$$
+\frac{dy}{dx} + P(x)y = Q(x) \text{ , P e Q são funções ou constantes }
+$$
+### Solução
+Exemplo: $x^2y'+xy=1$
+1. Dividir ambos os lados pelo coeficiente de $y'$
+	$$
+	\frac{x^2y'}{x^2} + \frac{xy}{x^{2}} = \frac{1}{x^{2}} \therefore y' + \frac{1}{x}y=\frac{1}{x^2}
+$$
+2. Achar o fator integrante $P(x)$ e calcular $I(x)=e^{\int P(x) \text{ dx}}$ 
+	$$
+	\begin{matrix}
+	 P(x) = \frac{1}{x}\rightarrow I(x)=e^{\int \frac{1}{x}}=e^{\ln x}=x
+	\end{matrix}
+$$
+3. Multiplicar ambos os lados pelo fator integrante
+	$$
+	x \cdot y' + x\cdot \frac{1}{x}y=\frac{1}{x^{2}\cdot}x \therefore xy'+y=\frac{1}{x}
+$$
+4. Usar a regra do produto: $(f(x)\cdot g(x))'=f'(x)g(x)+f(x)g'(x)$
+	$$
+	xy'+1\cdot y = (xy)' \therefore (xy)'=\frac{1}{x}
+$$
+5. Integrar de ambos os lados
+	$$
+	\int (xy)'=\int \frac{1}{x} \therefore xy=\ln x + c
+$$
+6. Resolver o P.V.I. (Se houver)
 ## EDO (2ª Ordem)
 
 $$
