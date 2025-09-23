@@ -61,10 +61,19 @@ $$
 ## EDO (2ª Ordem)
 
 $$
-P(x)\frac{d^2y}{dx^2} + Q(x)\frac{dy}{dx} +R(x)y= Q(x)
+P(x)\frac{d^2y}{dx^2} + Q(x)\frac{dy}{dx} +R(x)y= G(x)
 $$
 Para $P(x),Q(x),R(x),Q(x)$ sendo funções ou constantes
-
+### Caso Homogêneo - $G(x)=0$
+$$
+P(x)\frac{d^2y}{dx^2} + Q(x)\frac{dy}{dx} +R(x)y=0\therefore Ay''+By'+Cy=0
+$$
+#### Solução
+1. Primeiro pegamos a equação auxiliar $Ay''+By'+Cy=0$
+2. Achamos as suas raízes $\frac{-b\pm \sqrt{b^2-4ac}}{2a}$
+3. Solucionamos caso a caso
+	1. $\Delta >0$  : 	$y=C_1e^{r_1x}+C_2e^{r_2x}$
+	2. $\Delta <0$  :	$y=e^{\alpha x}(C_1\cos{\beta x}+C_2\sin{\beta x})$
 # Integral por partes
 $$
 \int u \hspace{0.2cm}dv = uv - \int v \hspace{0.2cm}du
