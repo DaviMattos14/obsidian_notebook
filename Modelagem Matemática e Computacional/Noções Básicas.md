@@ -61,8 +61,10 @@ $$
 ## EDO (2ª Ordem)
 
 $$
-f(x)
+P(x)\frac{d^2y}{dx^2} + Q(x)\frac{dy}{dx} +R(x)y= Q(x)
 $$
+Para $P(x),Q(x),R(x),Q(x)$ sendo funções ou constantes
+
 # Integral por partes
 $$
 \int u \hspace{0.2cm}dv = uv - \int v \hspace{0.2cm}du
