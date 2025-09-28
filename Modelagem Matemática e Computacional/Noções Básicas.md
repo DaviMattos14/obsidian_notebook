@@ -1,8 +1,24 @@
+# Regra do Produto
+$$
+\frac{d}{dx}[f(x)g(x)]=f(x)\frac{d}{dx}[g(x)] + g(x)\frac{d}{dx}[f(x)] \longleftrightarrow (f\cdot g)'=f'\cdot g+f\cdot g'
+$$
+Exemplo: $h(x)=xe^x$
+$$
+\begin{matrix}
+h'(x)=\frac{d}{dx}(xe^{x)}\longrightarrow \begin{cases} f(x)=x && f'(x)= 1\\
+g(x)=e^{x}&& g'(x)=e^x 
+\end{cases} \\ 
+h'(x) = x\frac{d}{dx}(e^x)+e^x\frac{d}{dx}(x) \\ 
+h'(x)=xe^x+e^x\cdot 1=e^x(x+1) \\ 
+h'(x)=(x+1)e^x
+\end{matrix}
+$$
+
 # Regra da Cadeia
 $$
 \frac{d }{dx}[f(g(x))]=f'(g(x))\cdot g'(x)
 $$
-Exemplo:
+Exemplo: 
 $$
 \begin{matrix}
 h(x)=\underbrace{\sin}_{f(x)}(\underbrace{x^{2}+2}_{g(x)})
