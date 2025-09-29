@@ -290,12 +290,12 @@ Dado um vértice inicial, é desejável encontrar todos os vértices alcançáve
 
 ```
 DFS(G)
-1 for each vertice u in G.V
-2     u.cor = WHITE
+1 for vertice u in G.V
+2     u.cor = branco
 3     u.π = NIL
-4 time = 0
-5 for each vertex u in G.V
-6     if u.color == WHITE
+4 tempo = 0
+5 for vertice u in G.V
+6     if u.cor == branco
 7         DFS-VISIT(G, u)
 ```
 
@@ -303,15 +303,15 @@ DFS(G)
 
 ```
 DFS-VISIT(G, u)
-1 time = time + 1                // white vertex u has just been discovered
-2 u.d = time
-3 u.color = GRAY
-4 for each vertex v in G.Adj[u]  // explore each edge (u, v)
-5     if v.color == WHITE
+1 tempo = tempo + 1 // white vertex u has just been discovered
+2 u.d = tempo
+3 u.cor = cinza
+4 for vertice v in G.Adj[u]  // explore each edge (u, v)
+5     if v.cor == branco
 6         v.π = u
 7         DFS-VISIT(G, v)
-8 time = time + 1
-9 u.f = time
-10 u.color = BLACK                // blacken u; it is finished
+8 tempo = tempo + 1
+9 u.f = tempo
+10 u.color = preto                // blacken u; it is finished
 ```
 ![[Pasted image 20250929200106.png]]
