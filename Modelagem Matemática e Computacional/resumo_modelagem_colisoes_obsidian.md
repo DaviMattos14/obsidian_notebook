@@ -6,19 +6,17 @@
 
 - **Posição** em função do tempo: \(r(t)\)  
 - **Velocidade vetorial:**  
-$$
-ec v(t)=rac{dec r}{dt}
+$$v(t)=\frac{\text{d } \overrightarrow{r}}{dt}
 $$  
 - **Aceleração vetorial:**  
-$$
-ec a(t)=rac{dec v}{dt}=rac{d^2ec r}{dt^2}
+$$a(t)=\frac{d\vec{v}}{dt}=\frac{\text{d}^2\vec{r}}{dt^2}
 $$  
 
 **Noções úteis:**  
 - A componente **tangencial** da aceleração é ligada à variação da rapidez.  
 - A componente **normal (centrípeta)** é ligada à mudança de direção:  
 $$
-a_n = rac{v^2}{R}
+a_n = \frac{v^2}{R}
 $$
 
 ---
@@ -27,7 +25,7 @@ $$
 
 - Velocidade angular:  
 $$
-\omega=rac{d	heta}{dt}
+\omega=\frac{d\theta}{dt}
 $$
 - Relação com velocidade escalar:  
 $$
@@ -35,11 +33,11 @@ v=\omega r
 $$
 - Aceleração centrípeta:  
 $$
-a_c=rac{v^2}{r}=\omega^2 r
+a_c=\frac{v^2}{r}=\omega^2 r
 $$
 - Período e frequência:  
 $$
-T=rac{2\pi}{\omega}, \quad f=rac{1}{T}
+T=\frac{2\pi}{\omega}, \quad f=\frac{1}{T}
 $$
 
 ---
@@ -48,14 +46,14 @@ $$
 
 - Exemplo:  
 $$
-rac{dr}{d	heta} = rrac{v-u\cos	heta}{u\sin	heta}
+\frac{dr}{d\theta} = r\frac{v-u\cos\theta}{u\sin\theta}
 $$
 
 **Métodos recorrentes:**  
-- **Separação de variáveis:** \(rac{dy}{dx}=g(x)h(y)\)  
-- **Integração:** \(\int rac{dy}{y} = \ln y\)  
+- **Separação de variáveis:** $(\frac{dy}{dx}=g(x)h(y))$
+- **Integração:** $(\int\frac{dy}{y} = \ln y)$  
 - **Identidades trigonométricas:**  
-  \(\sin^2	heta=1-\cos^2	heta,\quad \cot	heta=rac{\cos	heta}{\sin	heta}\)
+  $(\sin^2	\theta=1-\cos^2	\theta,\quad \cot	\theta=\frac{\cos	\theta}{\sin	\theta})$
 
 ---
 
@@ -67,7 +65,7 @@ m\ddot x+kx=0
 $$
 - Frequência angular:  
 $$
-\omega=\sqrt{	frac{k}{m}}
+\omega=\sqrt{	\frac{k}{m}}
 $$
 - Solução geral:  
 $$
@@ -75,10 +73,10 @@ x(t)=A\cos(\omega t)+B\sin(\omega t)
 $$
 - Período:  
 $$
-T=rac{2\pi}{\omega}
+T=\frac{2\pi}{ \Omega}
 $$
 
-**Extensão:** duas molas em paralelo: \(k_{eq}=k_1+k_2\)
+**Extensão:** duas molas em paralelo: $(k_{eq}=k_1+k_2)$
 
 ---
 
@@ -86,27 +84,27 @@ $$
 
 - Equilíbrio de forças:  
 $$
-T\cos	heta=mg,\quad T\sin	heta=rac{mv^2}{r}
+T\cos	\theta=mg,\quad T\sin	\theta=\frac{mv^2}{r}
 $$
-- Raio da trajetória: \(r=\ell \sin	heta\)  
+- Raio da trajetória: $(r=\ell \sin	\theta)$  
 - Velocidade escalar:  
 $$
-v=\sqrt{rac{g\ell\sin^2	heta}{\cos	heta}}
+v=\sqrt{\frac{g\ell\sin^2	\theta}{\cos	\theta}}
 $$
 - Velocidade angular:  
 $$
-\omega=\sqrt{rac{g}{\ell\cos	heta}}
+\omega=\sqrt{\frac{g}{\ell\cos	\theta}}
 $$
 - Período de rotação:  
 $$
-T=2\pi\sqrt{rac{\ell\cos	heta}{g}}
+T=2\pi\sqrt{\frac{\ell\cos	\theta}{g}}
 $$
 
 ---
 
 ## 🔹 6. Forças em Sistemas Rotacionais
 
-Exemplo: conta deslizando numa curva girando com \(\omega\).
+Exemplo: conta deslizando numa curva girando com \($\omega$\).
 
 - Força centrífuga:  
 $$
@@ -114,15 +112,15 @@ F_{cf}=m\omega^2 x
 $$
 - Projeções tangenciais:  
 $$
-F_{cf,tang}=m\omega^2 x\cos	heta, \quad F_{peso,tang}=-mg\sin	heta
+F_{cf,tang}=m\omega^2 x\cos	\theta, \quad F_{peso,tang}=-mg\sin	\theta
 $$
 - Condição de equilíbrio:  
 $$
-f'(x)=	an	heta=rac{\omega^2 x}{g}
+f'(x)=tan\theta=\frac{\omega^2 x}{g}
 $$
 - Curva resultante: parábola  
 $$
-y=rac{\omega^2}{2g}x^2
+y=\frac{\omega^2}{2g}x^2
 $$
 
 ---
@@ -131,7 +129,7 @@ $$
 
 - **Cinética:**  
 $$
-K=	frac12 mv^2
+K=	\frac12 mv^2
 $$
 - **Potencial gravitacional:**  
 $$
@@ -143,12 +141,12 @@ W= \Delta K
 $$
 - **Conservação (sem dissipação):**  
 $$
-E=K+U=	ext{constante}
+E=K+U=	\text{constante}
 $$
 
 **Aplicações típicas:**  
-- Velocidade em função da altura: \(v=\sqrt{2g(h-h')}\)  
-- Condição para não perder contato (normal=0): \(v^2=gR\)
+- Velocidade em função da altura: $(v=\sqrt{2g(h-h')})$  
+- Condição para não perder contato (normal=0): $(v^2=gR)$
 
 ---
 
@@ -156,29 +154,29 @@ $$
 
 ### (a) Choques elásticos
 $$
-w_1 = rac{(m_1-m_2)v_1+2m_2v_2}{m_1+m_2}, \quad
-w_2 = rac{(m_2-m_1)v_2+2m_1v_1}{m_1+m_2}
+w_1 =\frac{(m_1-m_2)v_1+2m_2v_2}{m_1+m_2}, \quad
+w_2 =\frac{(m_2-m_1)v_2+2m_1v_1}{m_1+m_2}
 $$
 
 Caso especial (\(m_2\) parado):  
 $$
-w_2=rac{2m_1}{m_1+m_2}v_1
+w_2=\frac{2m_1}{m_1+m_2}v_1
 $$
 
 ### (b) Choques inelásticos
 Velocidade comum:  
 $$
-V=rac{m_1 v_1+m_2 v_2}{m_1+m_2}
+V=\frac{m_1 v_1+m_2 v_2}{m_1+m_2}
 $$
 
 Energia perdida:  
 $$
-\Delta K=rac{m_1m_2}{2(m_1+m_2)}(v_1-v_2)^2
+\Delta K=\frac{m_1m_2}{2(m_1+m_2)}(v_1-v_2)^2
 $$
 
 ### (c) Coeficiente de restituição
 $$
-e=rac{v_{rel,após}}{v_{rel,antes}}
+e=\frac{v_{rel,após}}{v_{rel,antes}}
 $$
 
 Exemplo: bola que quica  
@@ -196,3 +194,9 @@ $$
 - Identidades trigonométricas  
 - Progressões geométricas  
 - Indução matemática
+- **Conservação de energia** (potencial ↔ cinética).
+- **Conservação do momento linear** em colisões.
+- **Separação de variáveis** em EDOs simples.
+- **Identidades trigonométricas** (sin²+cos²=1, tan=sin/cos).
+- **Progressões geométricas** (para somas de saltos, tempos, alturas).
+-  **Indução matemática** (para generalizar fórmulas como $(h_n=e^{2n}h)$.
