@@ -5,15 +5,19 @@ Seja $u$ e $v$ vértices de G. Uma aresta é direcionada se seu par de subconjun
 
 Com isso grafos podem ser **direcionados** e **não direcionados**
 ## Grafo Direcionado
-Uma aresta direcionada $e=(u,v)$ estende-se do vértice $u$ para o vértice $v$ ($u \longrightarrow v$), com $e$ sendo uma aresta de *entrada* de v e uma aresta de *saída* de u.
+
+Uma aresta direcionada $e=(u,v)$ estende-se do vértice $u$ para o vértice $v$ ($u \longrightarrow v$), com $e$ sendo uma aresta de *entrada* de v e uma aresta de *saída* de u.
+
 $$
 \begin{matrix}
-G_{1}= (V_1,E_1) & V_1=\{0,1,2,3,4\} & E_1=\{(0,1),(1,2),(2,0),(3,4)\}
+G_{1}= (V_1,E_1) & V_1=\{0,1,2,3,4\} & E_1=\{(0,1),(1,2),(2,0),(3,4)\}
 \end{matrix}
-$$![[Pasted image 20250929152057.png]]
-Outros exemplos de representação:
+$$
+![[Pasted image 20250929152057.png]]
+Outros exemplos de representação:
 ![[grafo_direcionado.png]]
 ## Grafo Não Direcionado
+
 Em um grafo não direcionado, toda aresta é de entrada e de saída.
 $$
 \begin{matrix}
@@ -22,11 +26,13 @@ G_{2}= (V_2,E_2) & V_2=\{0,1,2,3,4\} & E_2=\{\{0,1\}\{0,3\},\{0,4\},\{2,3\}\}
 $$
 ![[Pasted image 20250929152234.png]]Outros exemplos:
 ![[Pasted image 20250929152322.png]]
-Há outra representação de grafos, **Grafo Valorado**, onde cada aresta possui um **peso**
-
+Há outra representação de grafos:
+- **Grafo Valorado**, onde cada aresta possui um **peso**
+- **Grafo Completo**, onde todos vértices são vizinhos, todos $n$ vértices tem $n-1$ arestas
 **Vizinhança**: Um vértice $u$ é dito *vizinho* de $v$ se tiver uma aresta $E$ ligando os vértices.
 ($u \longrightarrow v$)
 ## Representação computacional
+
 Há duas formas padrão de se representar um grafo $G=(V,E)$
 - listas de adjacências
 - matriz de adjacências
@@ -42,3 +48,20 @@ Ambos funcionam para grafos direcionados e não direcionados.
 - Pode ser adaptado para grafos **ponderados** (valorados), armazenando o peso junto ao vértice vizinho.
 **Desvantagem:** para verificar se uma aresta $(u, v)$ existe, é preciso percorrer a lista de $u$.
 ### Matriz de Adjacências
+
+**Estrutura**: uma matriz $|V| \times |V|$ onde $$a_{ij}=\begin{cases} 1 & \text{se } (i, j) \in E \\ 0 & \text{caso contrário} \end{cases}$$
+- Ocupa sempre $\Theta(V^2)$ de memória, independentemente do número de arestas.
+- A busca de uma aresta é imediata, $O(1)$.
+- Para grafos não dirigidos, a matriz é simétrica.
+
+Também pode representar grafos ponderados armazenando o peso em vez de apenas 0 ou 1.
+
+Pode ser otimizada armazenando apenas metade da matriz (parte superior da diagonal
+
+Para grafos pequenos, é mais simples que listas de adjacência e pode usar apenas 1 bit por posição em grafos não ponderados.
+### Atributos de vértices e arestas
+
+- Algoritmos costumam manter atributos (ex.: cor, distância, pai).
+- Esses atributos podem ser armazenados em arrays auxiliares ou junto às estruturas.
+- A forma de implementação varia conforme a linguagem de programação e necessidades do algoritmo.
+# Algoritmo
