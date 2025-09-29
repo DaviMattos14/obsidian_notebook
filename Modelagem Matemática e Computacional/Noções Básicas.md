@@ -132,3 +132,69 @@ u=x-3 \\ du=1  \end{array}
 = \int u^{12}\text{ du} = \frac{u^{13}}{13} \cdot 1 +C =\frac{(x-3)^{13}}{13}+C 
 \end{split}
 $$
+
+### 1. Cinemática e Cálculo
+* **Posição, Velocidade e Aceleração**: A velocidade é a primeira derivada da posição, e a aceleração é a segunda.
+    * Vetor Velocidade: $\vec{v}(t) = \dot{\vec{r}}(t) = \frac{d\vec{r}}{dt}$ 
+    * Vetor Aceleração: $\vec{a}(t) = \ddot{\vec{r}}(t) = \frac{d\vec{v}}{dt}$ 
+* **Regra da Cadeia**: Essencial para derivar funções compostas, como $\cos(kt)$. [cite: 2, 4]
+    * $\frac{d}{dt}[f(g(t))] = f'(g(t)) \cdot g'(t)$
+* **Derivação Implícita**: Usada quando `x` e `y` são funções do tempo e estão relacionados por uma equação de trajetória. Derivamos ambos os lados da equação em relação a `t`.
+* **Norma de um Vetor**: Usada para encontrar a velocidade escalar a partir do vetor velocidade.
+    * Para $\vec{v} = (v_x, v_y)$, a norma é $||\vec{v}||= \sqrt{v_x^2 + v_y^2}$[cite: 217, 218].
+**Noções úteis:**
+- A componente **tangencial** da aceleração é ligada à variação da rapidez.
+- A componente **normal (centrípeta)** é ligada à mudança de direção:
+    $$$a_n = \frac{v^2}{R}$$
+### 2. Dinâmica (Forças)
+* **Segunda Lei de Newton**: A base para encontrar a equação de um movimento a partir das forças.
+    * $F_{resultante} = ma = m\ddot{r}$ 
+* **Forças Comuns**:
+    * **Peso**: $\vec{P} = mg$, aponta verticalmente para baixo.
+    * **Força Normal (N)**: Perpendicular à superfície de contato, equilibra a componente perpendicular do peso.
+    * **Força de Atrito ($F_a$)**: Oposta ao movimento, $F_a = \mu N$. [cite: 912]
+    * **Força Centrípeta ($F_c$)**: Força resultante que aponta para o centro e mantém o corpo em movimento circular. Sua magnitude é $F_c = \frac{mv^2}{r} = m\omega^2r$. 
+
+### 3. Leis de Conservação
+* **Conservação de Energia Mecânica**: Usada quando não há atrito ou outras forças dissipativas. A energia total (cinética + potencial) permanece constante.
+    * Energia Cinética: $K = \frac{1}{2}mv^2$ 
+    * Energia Potencial Gravitacional: $U_g = mgh$ 
+    * Princípio: $K_{inicial} + U_{inicial} = K_{final} + U_{final}$ 
+* **Conservação de Momento Linear**: Chave para resolver **todas** as colisões em sistemas isolados.
+    * Momento Linear: $p = mv$
+    * Princípio: $P_{total, inicial} = P_{total, final}$ 
+
+---
+
+## Resumo dos Exercícios Resolvidos
+
+### Capítulo 4 - Momento Linear
+
+#### **Exercício 1 (p. 74): Colisão Elástica em Sequência**
+* **Tópicos**: Colisão Elástica, Conservação de Momento.
+* **Fórmulas**:
+    * Inversão de velocidade (choque com parede): $v_f = -v_i$.
+    * Velocidade final da partícula 2 (alvo parado): $\overline{w}_2 = \frac{2m_1\overline{v}_1}{m_1 + m_2}$.
+* **Pontos de Atenção**: Manter a consistência dos sinais das velocidades e mapear corretamente as variáveis do problema para as da fórmula.
+
+#### **Exercício 2 (p. 74): Bola Quicando**
+* **Tópicos**: Conservação de Energia, Coeficiente de Restituição, Prova por Indução.
+* **Fórmulas**: $mgh = \frac{1}{2}mv^2$, $w = ev$, $h_{n} = e^{2n}h$.
+* **Pontos de Atenção**: O coeficiente de restituição `e` conecta a velocidade *antes* do choque (`v`) com a velocidade *depois* (`w`). A prova por indução foi uma forma rigorosa de confirmar o padrão físico.
+
+### Capítulo 5 - Energia
+
+#### **Exercício 2 (p. 86): Carrinho na Rampa com Loop**
+* **Tópicos**: Conservação de Energia, Força Centrípeta, Movimento Circular.
+* **Fórmulas**: $E_i = E_f$, $F_c = \frac{mv^2}{R}$, $v_{min} = \sqrt{gR}$.
+* **Pontos de Atenção**: A condição para a velocidade mínima no topo do loop é quando a Força Normal ($N$) se torna zero[cite: 1291, 1293]. A solução exige a combinação da análise de forças (para a condição no topo) com a conservação de energia (para relacionar com a altura inicial).
+
+#### **Exercício 3 (p. 86): Colisão Perfeitamente Inelástica**
+* **Tópicos**: Colisão Inelástica, Conservação de Momento, Perda de Energia.
+* **Fórmulas**: $P_{antes} = P_{depois}$, $K = \frac{1}{2}mv^2$.
+* **Pontos de Atenção**: A característica principal é que os objetos se juntam e passam a ter uma única velocidade final. A energia cinética **não** é conservada. 
+
+#### **Exercício 4 (p. 87): Cadeia de Colisões**
+* **Tópicos**: Colisão Elástica, Padrões, Conservação de Energia.
+* **Fórmulas**: $w_{j+1} = \frac{2m_j v_j}{m_j+m_{j+1}}$, $h_n = \frac{v_n^2}{2g}$.
+* **Pontos de Atenção**: O segredo para resolver problemas em cadeia é resolver para o primeiro caso, depois para o segundo, e então **observar o padrão** para generalizar para o n-ésimo caso.
