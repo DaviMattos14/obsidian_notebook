@@ -252,6 +252,9 @@ BFS(G, s)   // G = (V, E), s = vértice de origem
     - **Induzido**: contém todas as arestas entre os vértices de $V'$.
     - **Não induzido**: contém apenas algumas dessas arestas.
 ## Subgrafo predecessor
+- Subgrafo formado a partir das relações de **predecessores** em uma busca (DFS ou BFS).
+- Quando executamos DFS ou BFS, cada vértice visitado guarda um **pai** (predecessor).
+- Conectando cada vértice ao seu predecessor, obtemos um **subgrafo em forma de árvore ou floresta**, chamado **árvore de busca** ou **subgrafo predecessor**.
 # 5. Busca em Profundidade (DFS - Depth-First Search)
 
 Dado um vértice inicial, é desejável encontrar todos os vértices alcançáveis a partir dele. Existem muitos algoritmos para fazer isso, sendo o mais simples a busca em profundidade. Como o nome indica, o DFS enumera os caminhos mais profundos, apenas retrocedendo quando atinge um beco sem saída ou uma seção já explorada do grafo. O DFS por si só é bastante simples, então introduzimos algumas melhorias ao algoritmo básico.
