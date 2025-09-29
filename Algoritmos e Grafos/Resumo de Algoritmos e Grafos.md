@@ -40,5 +40,5 @@ Ambos funcionam para grafos direcionados e não direcionados.
 - Se o grafo é não direcionados: o tamanho total é $2|E|$, porque cada aresta $(u, v)$ aparece em ambas as listas.
 **Espaço necessário**: $\Theta(V + E)$.
 - Pode ser adaptado para grafos **ponderados** (valorados), armazenando o peso junto ao vértice vizinho.
-- **Desvantagem:** para verificar se uma aresta $(u, v)$ existe, é preciso percorrer a lista de $u$.
+**Desvantagem:** para verificar se uma aresta $(u, v)$ existe, é preciso percorrer a lista de $u$.
 ### Matriz de Adjacências
