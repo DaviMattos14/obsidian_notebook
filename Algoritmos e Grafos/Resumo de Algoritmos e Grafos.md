@@ -255,6 +255,11 @@ BFS(G, s)   // G = (V, E), s = vértice de origem
 - Subgrafo formado a partir das relações de **predecessores** em uma busca (DFS ou BFS).
 - Quando executamos DFS ou BFS, cada vértice visitado guarda um **pai** (predecessor).
 - Conectando cada vértice ao seu predecessor, obtemos um **subgrafo em forma de árvore ou floresta**, chamado **árvore de busca** ou **subgrafo predecessor**.
+
+Durante a busca, para cada vértice `v` que é descoberto a partir de um vértice `u`, `u` se torna o predecessor de `v`. O subgrafo predecessor é o grafo G' = (V', E') formado por todos os vértices alcançados durante a busca e pelas arestas 
+`(u, v)` onde `u` é o predecessor de `v`. 
+Este subgrafo forma uma árvore (ou uma floresta de árvores) que representa os caminhos descobertos a partir do vértice de origem. 
+Por exemplo, na busca por caminhos mais curtos, o subgrafo predecessor forma uma **árvore de caminhos mais curtos**
 # 5. Busca em Profundidade (DFS - Depth-First Search)
 
 Dado um vértice inicial, é desejável encontrar todos os vértices alcançáveis a partir dele. Existem muitos algoritmos para fazer isso, sendo o mais simples a busca em profundidade. Como o nome indica, o DFS enumera os caminhos mais profundos, apenas retrocedendo quando atinge um beco sem saída ou uma seção já explorada do grafo. O DFS por si só é bastante simples, então introduzimos algumas melhorias ao algoritmo básico.
