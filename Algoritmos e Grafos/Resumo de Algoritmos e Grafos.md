@@ -194,11 +194,65 @@ REMOVE-ARESTA-LISTA(G, u, v, direcionado)
 - Explora vértices por **camadas**: primeiro os a distância $k$, depois $k+1$.
 - Garante cálculo de **menores distâncias** em grafos não ponderados.
 - Constrói conjuntos $L_i$​: vértices a distância $i$ da fonte.
-- **Complexidade**: $O(n+m)$.
+- **Complexidade**: $O(V+E)$.
 - **Propriedade**: BFS é correto porque cada aresta adiciona apenas vértices na camada seguinte.
 
+Dado um grafo `G = (V, E)` e um vértice de origem `s`, a busca em largura explora sistematicamente as arestas de `G` para "descobrir" todos os vértices alcançáveis a partir de `s`.
 
-# Busca em Profundidade (DFS - Depth-First Search)
+**Como funciona**: O algoritmo avança em "ondas" a partir da origem `s`. Primeiro, visita todos os vizinhos de `s` (vértices a uma distância de 1 aresta). Em seguida, visita os vizinhos desses vizinhos (vértices a uma distância de 2 arestas), e assim por diante, até que todos os vértices alcançáveis tenham sido visitados.
+
+**Caminho mais curto**: Uma propriedade crucial da busca em largura é que ela calcula a distância do caminho mais curto (em termos de número de arestas) de `s` para cada vértice alcançável.
+
+**Árvore de busca em largura**: Durante a busca, o algoritmo constrói uma "árvore de busca em largura" com raiz em `s`, que contém todos os vértices alcançáveis. Para qualquer vértice `v` alcançável a partir de `s`, o caminho simples na árvore de `s` para `v` corresponde a um caminho mais curto no grafo original.
+
+**Estrutura de dados**: Para gerenciar a fronteira de vértices descobertos, o algoritmo utiliza uma fila (queue) no estilo FIFO (primeiro a entrar, primeiro a sair).
+
+**Coloração de Vértices**: Para acompanhar o progresso, cada vértice é colorido de branco, cinza ou preto.
+- **Branco**: Vértice ainda não descoberto.
+- **Cinza**: Vértice descoberto, mas seus vizinhos ainda não foram todos explorados. Os vértices cinzas formam a fronteira na fila.
+- **Preto**: Vértice "finalizado", ou seja, todos os seus vizinhos já foram descobertos
+## Algoritmo
+```
+BFS(G, s)   // G = (V, E), s = vértice de origem
+    para cada v ∈ V[G] faça
+        cor[v] ← branco         // não visitado
+        d[v] ← ∞                // distância da origem
+        p[v] ← NIL              // pai/predecessor
+    cor[s] ← cinza
+    d[s] ← 0
+    p[s] ← NIL
+
+    Q ← fila vazia
+    ENQUEUE(Q, s)
+
+    enquanto Q não estiver vazia faça
+        u ← DEQUEUE(Q)
+        para cada v ∈ Adj[u] faça
+            se cor[v] = branco então
+                cor[v] ← cinza
+                d[v] ← d[u] + 1
+                p[v] ← u
+                ENQUEUE(Q, v)
+        cor[u] ← preto
+
+```
+![[Pasted image 20250929192405.png]]
+# 4. Subgrafos
+## Árvores
+- Grafo **não direcionado**, **conexo** (existe caminho entre quaisquer dois vértices) e **sem ciclos**.
+- Propriedades principais:
+    - Se tem $n$ vértices, possui exatamente $n-1$ arestas.
+    - Há um **único caminho simples** entre quaisquer dois vértices.
+## Floresta
+- Conjunto de **árvores disjuntas** (um grafo acíclico, mas não necessariamente conexo).
+- Cada componente conexo de uma floresta é uma árvore.
+## Subgrafo
+- Grafo formado a partir de outro grafo $G = (V, E)$, escolhendo um subconjunto de vértices $V' \subseteq V$ e um subconjunto de arestas $E' \subseteq E$ que conectam apenas vértices em $V'$.
+- Pode ser:
+    - **Induzido**: contém todas as arestas entre os vértices de $V'$.
+    - **Não induzido**: contém apenas algumas dessas arestas.
+## Subgrafo predecessor
+# 5. Busca em Profundidade (DFS - Depth-First Search)
 
 Dado um vértice inicial, é desejável encontrar todos os vértices alcançáveis a partir dele. Existem muitos algoritmos para fazer isso, sendo o mais simples a busca em profundidade. Como o nome indica, o DFS enumera os caminhos mais profundos, apenas retrocedendo quando atinge um beco sem saída ou uma seção já explorada do grafo. O DFS por si só é bastante simples, então introduzimos algumas melhorias ao algoritmo básico.
 
