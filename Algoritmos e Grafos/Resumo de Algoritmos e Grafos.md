@@ -267,4 +267,51 @@ Dado um vértice inicial, é desejável encontrar todos os vértices alcançáve
 - Para evitar loops, o DFS mantém um atributo de "cor" para cada vértice. Vértices não visitados são brancos por padrão. Vértices que foram visitados, mas para os quais ainda se pode retroceder, são coloridos de cinza. Vértices que estão completamente processados são coloridos de preto. O algoritmo pode então evitar loops pulando vértices que não são brancos.
 - Em vez de apenas marcar vértices visitados, o algoritmo também mantém o controle da árvore gerada pela travessia em profundidade. Ele faz isso marcando o "pai" de cada vértice visitado, ou seja, o vértice que o DFS visitou imediatamente antes de visitar o filho.    
 - O DFS aumentado também marca dois carimbos de tempo auto-incrementais, d e f, para indicar quando um nó foi descoberto pela primeira vez e quando foi finalizado.
+
+**Estratégia**: A DFS explora o mais "profundamente" possível ao longo de cada ramo antes de retroceder (backtracking). Ela vai o mais longe que pode por um caminho, e só volta quando não há mais vértices brancos (não descobertos) para explorar a partir do vértice atual.
+
+**Estrutura Recursiva**: A DFS é naturalmente recursiva. A busca a partir de um vértice `u` é suspensa quando um novo vértice `v` é descoberto, iniciando uma nova busca a partir de `v`. A busca a partir de `u` só recomeça depois que todos os vértices alcançáveis a partir de `v` forem explorados.
+
+**Cores e Timestamps**: Assim como a BFS, a DFS usa cores para rastrear vértices. Além disso, ela atribui dois "timestamps" a cada vértice:
+- **Timestamp de Descoberta (d)**: Registra quando um vértice se torna cinza.
+- **Timestamp de Finalização (f)**: Registra quando um vértice se torna preto.
+
+**Classificação de Arestas**: Com base nesses timestamps e cores, a DFS classifica as arestas em quatro tipos, o que revela informações importantes sobre a estrutura do grafo:
+    - **Arestas de Árvore**: Arestas que levam a um vértice branco não descoberto. Elas formam a "floresta de busca em profundidade".
+    - **Arestas de Retorno (Back edges)**: Arestas que conectam um vértice a um de seus ancestrais na árvore de busca (indicam a presença de ciclos).
+    - **Arestas de Avanço (Forward edges)**: Arestas que conectam um vértice a um de seus descendentes (que não seja um filho direto).
+    - **Arestas de Cruzamento (Cross edges)**: Todas as outras arestas.
+        
+**Complexidade de Tempo**: O tempo de execução é **Θ(V + E)**
+
 ## Algoritmo
+
+**Procedimento principal:**
+
+```
+DFS(G)
+1 for each vertice u in G.V
+2     u.cor = WHITE
+3     u.π = NIL
+4 time = 0
+5 for each vertex u in G.V
+6     if u.color == WHITE
+7         DFS-VISIT(G, u)
+```
+
+**Procedimento auxiliar:**
+
+```
+DFS-VISIT(G, u)
+1 time = time + 1                // white vertex u has just been discovered
+2 u.d = time
+3 u.color = GRAY
+4 for each vertex v in G.Adj[u]  // explore each edge (u, v)
+5     if v.color == WHITE
+6         v.π = u
+7         DFS-VISIT(G, v)
+8 time = time + 1
+9 u.f = time
+10 u.color = BLACK                // blacken u; it is finished
+```
+![[Pasted image 20250929200106.png]]
