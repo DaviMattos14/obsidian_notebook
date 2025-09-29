@@ -29,8 +29,17 @@ $$
 Há outra representação de grafos:
 - **Grafo Valorado**, onde cada aresta possui um **peso**
 - **Grafo Completo**, onde todos vértices são vizinhos, todos $n$ vértices tem $n-1$ arestas
-**Vizinhança**: Um vértice $u$ é dito *vizinho* de $v$ se tiver uma aresta $E$ ligando os vértices.
+## Vizinhança
+Um vértice $u$ é dito *vizinho* de $v$ se tiver uma aresta $E$ ligando os vértices.
 ($u \longrightarrow v$)
+
+## Caminho
+Um caminho de tamanho $k$ do vértice $u$ ao vértice $v$ é uma sequência de vértices $(v_0,v_1,\dots,v_n)$ onde para cada par ordenado $(v_{i-1},v_{i})$ existe uma aresta, onde $k=$ número de arestas (ou $\#V -1$)
+**Grafo fortemente conectado**: Para cada vértice há um caminho para cada outro vértice
+## Ciclo
+Em um grafo direcionado dado um caminho $(v_0,v_1,\dots,v_k)$, ele forma um ciclo se, somente se, $v_{0}= v_k$.
+Em um grafo não direcionado, o caminho forma um ciclo, se $v_{0}= v_k$ , tem pelo menos uma aresta $(\#V > 0)$ que conecta um par ordenado, e todos os vértices e arestas no trajeto (exceto o inicial/final) são **distintos**.
+
 ## Representação computacional
 
 Há duas formas padrão de se representar um grafo $G=(V,E)$
@@ -64,4 +73,135 @@ Para grafos pequenos, é mais simples que listas de adjacência e pod
 - Algoritmos costumam manter atributos (ex.: cor, distância, pai).
 - Esses atributos podem ser armazenados em arrays auxiliares ou junto às estruturas.
 - A forma de implementação varia conforme a linguagem de programação e necessidades do algoritmo.
-# Algoritmo
+# 2. Algoritmos básicos
+## Busca
+- Matriz de Adjacências
+#Vértice Verifica se um vértice existe no grafo
+```
+busca_vertice(grafo G, int id)
+    if 1 <= id <= G.n:
+        return i    // índice do vértice (ou objeto associado)
+    else:
+        return NIL
+```
+
+#Aresta Verifica se existe uma aresta entre o vértice `u` e o vértice `v`
+```
+busca_aresta(grafo G, vertice u, vertice v)
+    retornar (A[u][v] == 1)
+```
+
+- Lista de Adjacências
+#Vértice
+```
+FUNÇÃO busca_vertices(Grafo G, Vértice u) 
+	RETORNAR G.Adj[u]
+```
+
+#Aresta 
+```
+busca-aresta(Grafo G, vertice u, vertice v)
+    para cada x em Adj[u]:
+        se x == v:
+            retornar VERDADEIRO
+    retornar FALSO
+
+```
+## Inserir
+
+- Matriz de Adjacências
+#Vértice 
+expandir a matriz para dimensão $(|V|+1) \times (|V|+1)$ e inicializar nova linha/coluna com 0
+```
+//Vertice
+inserir_vertice(grafo G, vertice v)
+    expandir matriz A
+    para todo i:
+        A[v][i] ← 0
+        A[i][v] ← 0
+```
+#Aresta 
+```
+insere_aresta(grafo G, vertice u, vertice v, bool direcionado)
+    A[u][v] ← 1
+    if not direcionado:
+        A[v][u] ← 1
+
+```
+- Lista de Adjacências
+#Vértice 
+criar nova lista vazia `Adj[v]`.
+```
+INSERE-VERTICE(grafo G, vertice v)
+    Adj[v] ← lista vazia
+```
+#Aresta 
+**Grafo dirigido:** adiciona $v$ na lista de $u$.
+**Grafo não dirigido:** adiciona $v$ na lista de $u$ **e** $u$ na lista de $v$.
+```
+FUNÇÃO ADICIONAR_ARESTA(Grafo G, Vértice u, Vértice v, é_direcionado) 
+	// Adiciona v à lista de adjacência de u 
+	G.Adj[u].adicionar(v) 
+	
+	SE não é_direcionado ENTÃO 
+			// Se o grafo não for direcionado, a aresta é recíproca
+			G.Adj[v].adicionar(u) 
+	FIM-SE 
+FIM-FUNÇÃO
+```
+
+## Remover
+- Matriz de Adjacências
+remover linha e coluna correspondentes a `v`.
+#Vértice 
+```
+REMOVE-VERTICE-MATRIZ(G, v)
+    remover linha v e coluna v da matriz A
+
+```
+
+#Aresta 
+```
+REMOVE-ARESTA-MATRIZ(G, u, v, direcionado)
+    A[u][v] ← 0
+    if not direcionado:
+        A[v][u] ← 0
+
+```
+
+- Lista de Adjacências
+remover a lista `Adj[v]` e apagar todas as ocorrências de `v` em outras listas.
+#Vértice 
+```
+REMOVE-VERTICE-LISTA(G, v)
+    para cada u em V:
+        remover v de Adj[u]
+    remover lista Adj[v]
+
+```
+
+#Aresta 
+```
+REMOVE-ARESTA-LISTA(G, u, v, direcionado)
+    remover v de Adj[u]
+    if not direcionado:
+        remover u de Adj[v]
+
+```
+
+# 3. Busca em Largura (BFS - Breadth-First Search)
+
+- Explora vértices por **camadas**: primeiro os a distância $k$, depois $k+1$.
+- Garante cálculo de **menores distâncias** em grafos não ponderados.
+- Constrói conjuntos $L_i$​: vértices a distância $i$ da fonte.
+- **Complexidade**: $O(n+m)$.
+- **Propriedade**: BFS é correto porque cada aresta adiciona apenas vértices na camada seguinte.
+
+
+# Busca em Profundidade (DFS - Depth-First Search)
+
+Dado um vértice inicial, é desejável encontrar todos os vértices alcançáveis a partir dele. Existem muitos algoritmos para fazer isso, sendo o mais simples a busca em profundidade. Como o nome indica, o DFS enumera os caminhos mais profundos, apenas retrocedendo quando atinge um beco sem saída ou uma seção já explorada do grafo. O DFS por si só é bastante simples, então introduzimos algumas melhorias ao algoritmo básico.
+
+- Para evitar loops, o DFS mantém um atributo de "cor" para cada vértice. Vértices não visitados são brancos por padrão. Vértices que foram visitados, mas para os quais ainda se pode retroceder, são coloridos de cinza. Vértices que estão completamente processados são coloridos de preto. O algoritmo pode então evitar loops pulando vértices que não são brancos.
+- Em vez de apenas marcar vértices visitados, o algoritmo também mantém o controle da árvore gerada pela travessia em profundidade. Ele faz isso marcando o "pai" de cada vértice visitado, ou seja, o vértice que o DFS visitou imediatamente antes de visitar o filho.    
+- O DFS aumentado também marca dois carimbos de tempo auto-incrementais, d e f, para indicar quando um nó foi descoberto pela primeira vez e quando foi finalizado.
