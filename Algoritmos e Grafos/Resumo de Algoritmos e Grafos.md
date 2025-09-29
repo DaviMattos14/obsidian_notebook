@@ -267,3 +267,4 @@ Dado um vértice inicial, é desejável encontrar todos os vértices alcançáve
 - Para evitar loops, o DFS mantém um atributo de "cor" para cada vértice. Vértices não visitados são brancos por padrão. Vértices que foram visitados, mas para os quais ainda se pode retroceder, são coloridos de cinza. Vértices que estão completamente processados são coloridos de preto. O algoritmo pode então evitar loops pulando vértices que não são brancos.
 - Em vez de apenas marcar vértices visitados, o algoritmo também mantém o controle da árvore gerada pela travessia em profundidade. Ele faz isso marcando o "pai" de cada vértice visitado, ou seja, o vértice que o DFS visitou imediatamente antes de visitar o filho.    
 - O DFS aumentado também marca dois carimbos de tempo auto-incrementais, d e f, para indicar quando um nó foi descoberto pela primeira vez e quando foi finalizado.
+## Algoritmo
