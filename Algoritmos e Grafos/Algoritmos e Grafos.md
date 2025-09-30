@@ -386,7 +386,11 @@ Exemplos: caminho mínimo, árvore geradora mínima, problema da mochila, TSP.
 
 O método guloso é uma estratégia para resolver problemas de otimização que constrói uma solução passo a passo. A cada passo, o algoritmo faz uma escolha que parece ser a melhor naquele momento — uma escolha localmente ótima — na esperança de que ela leve a uma solução globalmente ótima
 
-- **Ideia**: **construir a solução de forma incremental**, escolhendo localmente a melhor opção em cada passo.
+As principais características de um algoritmo guloso são:
+- **Propriedade da escolha gulosa**: Uma solução globalmente ótima pode ser alcançada fazendo escolhas localmente ótimas. Diferente da programação dinâmica, uma escolha gulosa pode ser feita sem considerar as soluções de subproblemas futuros.
+- **Subestrutura ótima**: Um problema exibe subestrutura ótima se uma solução ótima para o problema contém soluções ótimas para os subproblemas
+
+**Ideia**: Construir a solução de forma incremental, escolhendo localmente a melhor opção em cada passo.
 
 **Estrutura**:
 1. Construir a solução **passo a passo**.
@@ -400,3 +404,22 @@ O método guloso é uma estratégia para resolver problemas de otimização que 
 - **Guloso adaptativo** (função de escolha depende das escolhas anteriores).
 - **Semi-guloso** (introduz aleatoriedade para escapar de soluções ruins).
 
+### Algoritmo
+```pseudocode
+ALGORITMO-GULOSO(E, F, f)
+    // E: conjunto base
+    // F: conjunto de soluções viáveis
+    // f: função objetivo
+    // S: solução viável
+
+    S ← ∅                       // solução parcial
+    f(S) ← 0
+    F ← {i ∈ E : S ∪ {i} é viável}
+    enquanto F ≠ ∅ faça
+	    i* ← argmin{ci : i ∈ F};
+	    S ← S ∪ {i*};
+	    f(S) ← f(S) + ci*;
+	    F ← {i ∈ F \ {i*} : S ∪ {i} não é inviável};
+	retorne S, f(S);
+	    
+```
