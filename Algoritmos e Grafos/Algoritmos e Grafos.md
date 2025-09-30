@@ -497,6 +497,50 @@ Tanto **Prim** quanto **Kruskal** são instâncias desse algoritmo:
 
 ## Algoritmo Kruskal
 
+**Ideia:** construir a MST adicionando as arestas em ordem de peso crescente, sem formar ciclos
 
+**Estratégia**: O algoritmo examina as arestas em ordem crescente de peso. A cada passo, ele adiciona a próxima aresta de menor peso que não forma um ciclo com as arestas já selecionadas.
+
+**Passos:**   
+1. Ordenar todas as arestas de $E$ por peso crescente.
+2. Inicializar uma floresta com cada vértice isolado.
+3. Para cada aresta $(u,v)$, em ordem:
+	- Se $u$ e $v$ estão em componentes diferentes → adicionar a aresta.
+    - Caso contrário, descartar (pois formaria ciclo).
+4. Repetir até obter $|V|-1$ arestas.
+
+**Estrutura auxiliar:** Union-Find (Disjoint Set Union – DSU) para verificar componentes.
+
+**Complexidade:**
+- Ordenação: $O(E \log E)$.
+- Union-Find quase constante por operação ($\alpha(V)$).
+- Total: $O(E \log V)$.
+
+**Vantagem:** simples, eficiente em grafos **esparsos**.
+
+```
+
+```
 ## Algoritmo Prim
 
+**Ideia:** crescer a MST a partir de um vértice, sempre escolhendo a aresta de menor peso que conecta a árvore a um novo vértice
+
+
+
+**Passos:**
+1. Escolher vértice inicial $s$.
+2. Inicializar conjunto $A = \emptyset$.
+3. Usar uma **fila de prioridade** para manter arestas de menor peso que conectam a árvore a vértices ainda fora dela.
+4. Repetir até incluir todos os vértices:
+	 - Escolher a aresta $(u,v)$ de menor peso que conecta um vértice dentro da árvore a um fora dela.
+	- Adicionar (u,v)(u,v)(u,v) a AAA.
+
+**Complexidade:**    
+- Com min-heap binário: $O(E \log V)$.
+- Com Fibonacci heap: $O(E + V \log V)$.
+
+**Vantagem:** eficiente em grafos **densos**
+
+```
+
+```
