@@ -495,6 +495,8 @@ Tanto **Prim** quanto **Kruskal** são instâncias desse algoritmo:
 - **Prim:** mantém uma árvore única; escolhe a aresta leve que conecta a árvore a um novo vértice.
 - **Kruskal:** mantém uma floresta; escolhe a menor aresta que conecta componentes distintos.
 
-## Kruskal
+## Algoritmo Kruskal
 
-## Prim
+
+## Algoritmo Prim
+
