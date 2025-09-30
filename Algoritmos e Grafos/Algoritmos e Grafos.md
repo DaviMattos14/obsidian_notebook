@@ -456,3 +456,8 @@ Intuição: é uma forma de “conectar todos os vértices” com o **mínimo de
 **Aplicações:** projeto de redes (energia, computadores, estradas), compressão de dados, agrupamento em aprendizado de máquina.
 - É um problema clássico resolvido de forma eficiente por algoritmos gulosos (ex.: **Prim** e **Kruskal**).
 
+## Algoritmo Genérico
+
+1. Inicialize um conjunto de arestas `A` como vazio.
+2. Enquanto `A` não formar uma árvore geradora, encontre e adicione uma aresta "segura" para `A`. Uma aresta é segura se, ao ser adicionada a `A`, o novo conjunto `A'` ainda for um subconjunto de alguma MST.
+3. Retorne `A`.
