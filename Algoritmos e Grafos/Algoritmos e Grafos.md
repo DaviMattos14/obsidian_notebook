@@ -1,6 +1,6 @@
 # 1. Representação de Grafos
 
-Um grafo $G=(V,E)$ é um objeto matemático composto por um conjunto de vértices ($V$), também chamados de nós, e por um conjunto de arestas ($E$), onde cada aresta em $E$ é um subconjunto de dois elementos de vértices $V$. 
+Um grafo $G=(V,E)$ é um objeto matemático composto por um conjunto de vértices ($V$), também chamados de nós, e por um conjunto de arestas ($E$), onde cada aresta em $E$ é um subconjunto de dois elementos de vértices $V$, ou seja, um par ordenado. 
 Seja $u$ e $v$ vértices de G. Uma aresta é direcionada se seu par de subconjuntos for ordenado, por exemplo, $(u, v)$, e não direcionada se seu par de subconjuntos for não ordenado, por exemplo, $\{u, v\}$ ou, alternativamente, tanto $(u, v)$ quanto $(v, u)$
 
 Com isso grafos podem ser **direcionados** e **não direcionados**
@@ -34,7 +34,7 @@ Um vértice $u$ é dito *vizinho* de $v$ se tiver uma aresta $E$ ligando os vér
 ($u \longrightarrow v$)
 
 ## Caminho
-Um caminho de tamanho $k$ do vértice $u$ ao vértice $v$ é uma sequência de vértices $(v_0,v_1,\dots,v_n)$ onde para cada par ordenado $(v_{i-1},v_{i})$ existe uma aresta, onde $k=$ número de arestas (ou $\#V -1$)
+Um caminho de tamanho $k$ do vértice $u$ ao vértice $v$ é uma sequência de vértices $(v_0,v_1,\dots,v_n)$ onde para cada par ordenado $(v_{i-1},v_{i})$ existe uma aresta, onde $k=$ número de arestas (ou $\text{Nº de vértices}-1$)
 **Grafo fortemente conectado**: Para cada vértice há um caminho para cada outro vértice
 ## Ciclo
 Em um grafo direcionado dado um caminho $(v_0,v_1,\dots,v_k)$, ele forma um ciclo se, somente se, $v_{0}= v_k$.
@@ -98,8 +98,11 @@ busca_aresta(grafo G, vertice u, vertice v)
 
 #Vértice
 ```
-FUNÇÃO busca_vertices(Grafo G, Vértice u) 
-	RETORNAR G.Adj[u]
+BUSCA-VERTICE-LISTA(G, id)
+    se id ∈ V[G] então
+        retornar id
+    senão
+        retornar NIL
 ```
 
 #Aresta 
@@ -268,7 +271,6 @@ Este subgrafo forma uma árvore (ou uma floresta de árvores) que representa os 
 Por exemplo, na busca por caminhos mais curtos, o subgrafo predecessor forma uma **árvore de caminhos mais curtos**
 # 5. Busca em Profundidade (DFS - Depth-First Search)
 
-
 **Estratégia**: A DFS explora o mais "profundamente" possível ao longo de cada ramo antes de retroceder (backtracking). Ela vai o mais longe que pode por um caminho, e só volta quando não há mais vértices brancos (não descobertos) para explorar a partir do vértice atual.
 
 A execução constrói uma árvore de profundidade, podendo gerar uma floresta caso o grafo seja desconexo
@@ -282,19 +284,16 @@ Para evitar loops, o DFS mantém um atributo de "cor" para cada vértice.
 - **Preto**: totalmente explorado
 
 Além disso, ela atribui dois "timestamps" a cada vértice:
-- **Timestamp de Descoberta (d)**: Registra quando um vértice se torna cinza.
-- **Timestamp de Finalização (f)**: Registra quando um vértice se torna preto.
+- **Timestamp de Descoberta ($d$)**: Registra quando um vértice se torna cinza.
+- **Timestamp de Finalização ($f$)**: Registra quando um vértice se torna preto.
 
 Em vez de apenas marcar vértices visitados, o algoritmo também mantém o controle da árvore gerada pela travessia em profundidade. Ele faz isso marcando o "pai" de cada vértice visitado, ou seja, o vértice que o DFS visitou imediatamente antes de visitar o filho.    
 O DFS aumentado também marca dois carimbos de tempo auto-incrementais, d e f, para indicar quando um nó foi descoberto pela primeira vez e quando foi finalizado.
   
-        
-**Complexidade de Tempo**: O tempo de execução é **Θ(V + E)**
-
+**Complexidade de Tempo**: Como cada aresta é explorada **no máximo uma vez**, o tempo de execução é **Θ(V + E)**.
 ## Algoritmo
 
 **Procedimento principal:**
-
 ```
 DFS(G)
     para cada vértice u ∈ V[G] faça
@@ -308,7 +307,6 @@ DFS(G)
 ```
 
 **Procedimento auxiliar:**
-
 ```
 DFS-VISIT(G, u)
     cor[u] ← cinza
@@ -323,7 +321,6 @@ DFS-VISIT(G, u)
     f[u] ← tempo
 ```
 ![[Pasted image 20250929200106.png]]
-
 # 6. Aplicações da Busca em Profundidade (DFS)
 
 ## **Classificação de Arestas**: 
@@ -332,13 +329,11 @@ Com base nesses timestamps e cores, a DFS classifica as arestas em quatro tipos,
 - **Arestas de Retorno (Back edges)**: Arestas que conectam um vértice a um de seus ancestrais na árvore de busca (indicam a presença de ciclos).
 - **Arestas de Avanço (Forward edges)**: Arestas que conectam um vértice a um de seus descendentes (que não seja um filho direto).
 - **Arestas de Cruzamento (Cross edges)**: Todas as outras arestas.
-
-
 ## Ordenação Topológica
 
 Aplicável apenas em **grafos direcionados acíclicos** (DAGs).
 
-Um ordenamento topológico é uma listagem linear dos vértices tal que, para toda aresta \((u,v)\), \(u\) aparece antes de \(v\).
+Um ordenamento topológico é uma listagem linear dos vértices tal que, para toda aresta $(u,v)$, ($u$) aparece antes de ($v$).
 
 **Usos**:
 - Planejamento de tarefas com dependências.
@@ -348,39 +343,60 @@ Um ordenamento topológico é uma listagem linear dos vértices tal que, para to
 **Algoritmo** (via DFS):
 
 1. Executa-se DFS no grafo.
-2. Cada vértice recebe um tempo de término \(f[v]\).
-3. A ordenação topológica é a lista dos vértices em ordem decrescente de \(f[v]\).
+2. Cada vértice recebe um tempo de término \($f[v]$\).
+3. A ordenação topológica é a lista dos vértices em ordem decrescente de \($f[v]$\).
 
-**Complexidade**: \(O(V+E)\).
+**Complexidade**: \($O(V+E)$\).
 
 **Observação**: só é possível se o grafo **não tiver ciclos**.
-
 ## Componentes Conectados
 Para **grafos não direcionados** um componente conectado de um grafo G é um conjunto máximo de vértices no qual qualquer par de vértices está ligado por algum caminho.
-
 ## Componentes Fortemente Conectados (CFC ou SCC)
 
 **Em grafo direcionado**:
-É um subconjunto máximo de vértices \(S \subseteq V\) tal que, para quaisquer \(u, v \in S\), existe um caminho de `u` até `v` e de `v` até `u` (Ambas as direções).
+É um subconjunto máximo de vértices \($S \subseteq V$\) tal que, para quaisquer \($u, v \in S$\), existe um caminho de `u` até `v` e de `v` até `u` (Ambas as direções).
 
 **Propriedades**:
-
 - Todo grafo direcionado pode ser decomposto em SCCs disjuntos.
-
 - A relação de pertencimento a um **SCC é uma relação de equivalência** (reflexiva, simétrica, transitiva).
-
 - O conjunto dos SCCs forma um **grafo condensado, que é sempre um DAG**.
 
 **Algoritmo de Kosaraju** (baseado em DFS):
 
 1. Executa DFS no grafo original e guarda os tempos de término.
-
 2. Inverter todas as arestas (grafo transposto).
-
 3. Executar DFS novamente, explorando vértices em ordem decrescente de tempos de término da 1ª fase.
-
 4. Cada árvore da segunda DFS corresponde a um SCC.
 
-**Complexidade**: \(O(V+E)\).
-
+**Complexidade**: \($O(V+E)$\).
 # 7. Problemas de Otimização
+
+Um problema de otimização é aquele em que, entre muitas soluções possíveis ($S$), o objetivo é encontrar uma solução "ótima"$(S^*)$, seja minimizando ou maximizando um valor específico
+## Problema de otimização combinatória
+- **Conjunto base (ground set)** $E = \{1, 2, \dots, n\}$.    
+- **Conjunto de soluções viáveis**: $F \subseteq 2^E$.
+- **Função objetivo** $f: 2^E \to \mathbb{R}$.
+Para **minimização**, busca-se $S^* \in F$ tal que:
+$$
+f(S^*) \leq f(S), \quad \forall S \in F
+$$
+Exemplos: caminho mínimo, árvore geradora mínima, problema da mochila, TSP.
+- Há versões do problema: **otimização, avaliação e decisão**, sendo esta última fundamental na análise de complexidade
+## Método Guloso (Greedy Method)
+
+O método guloso é uma estratégia para resolver problemas de otimização que constrói uma solução passo a passo. A cada passo, o algoritmo faz uma escolha que parece ser a melhor naquele momento — uma escolha localmente ótima — na esperança de que ela leve a uma solução globalmente ótima
+
+- **Ideia**: **construir a solução de forma incremental**, escolhendo localmente a melhor opção em cada passo.
+
+**Estrutura**:
+1. Construir a solução **passo a passo**.
+2. Em cada passo, escolher um **elemento viável** que pareça o melhor segundo uma **função de escolha gulosa**.
+3. Repetir até formar uma solução completa.
+- Vantagens: simples e rápido.
+- Limitação: não garante solução ótima em todos os problemas.
+
+**Variantes**:    
+- **Guloso simples** (usa custos fixos, ex.: Kruskal).
+- **Guloso adaptativo** (função de escolha depende das escolhas anteriores).
+- **Semi-guloso** (introduz aleatoriedade para escapar de soluções ruins).
+
