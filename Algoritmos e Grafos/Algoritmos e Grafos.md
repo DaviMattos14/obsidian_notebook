@@ -482,4 +482,16 @@ A parte crucial do algoritmo genérico é encontrar uma aresta segura. Para isso
 
 > Se $(u, v)$ é uma aresta leve que cruza um corte que respeita $A$, então $(u, v)$ é **segura** para $A$
 
+**Intuição da prova:**
+- Seja $T$ uma MST que contém $A$.
+- Adicionar $(u, v)$ cria um ciclo.
+- Esse ciclo tem outra aresta $(x, y)$ que também cruza o corte.
+- Como $(u, v)$ é a mais leve, $w(u, v) \leq w(x, y)$.
+- Substituindo $(x, y)$ por $(u, v)$, obtemos outra MST que contém $A \cup \{(u, v)\}$.
+
+Por consequência o algoritmo genérico **sempre escolhe arestas seguras** → garante correção
+
+Tanto **Prim** quanto **Kruskal** são instâncias desse algoritmo:
+- **Prim:** mantém uma árvore única; escolhe a aresta leve que conecta a árvore a um novo vértice.
+- **Kruskal:** mantém uma floresta; escolhe a menor aresta que conecta componentes distintos.
 
