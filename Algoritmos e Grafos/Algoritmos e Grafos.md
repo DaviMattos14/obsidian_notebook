@@ -425,5 +425,34 @@ ALGORITMO-GULOSO(E, F, f)
 
 ## Problema da árvore geradora mínima
 
+Este é um exemplo clássico de um problema que pode ser resolvido eficientemente com um método guloso
 
-# 8. Árvore Geradora Mínima
+**Definição**: 
+Dado um grafo conectado $G = (V,E)$, não direcionado e com pesos $w(e)$ nas arestas, o objetivo é encontrar um **subconjunto** de arestas que **conecte todos os vértices** (uma árvore geradora $T\subseteq E$) e cujo **peso total** (a soma dos pesos das arestas) seja o **menor possível**.
+
+**Propriedades**:
+- A MST sempre tem $|V| - 1$ arestas.
+- $w(u,v) =$ distância
+- Substituir uma aresta cara por uma mais barata que mantenha a conectividade sempre melhora a solução.
+
+**Complexidade**: $O(E\log V)$
+
+### Árvore Geradora
+Uma **árvore geradora** (spanning tree) de um grafo `G = (V, E)` que é conectado e não direcionado, é um subgrafo $T = (V,E')$ que é uma árvore e conecta todos os vértices em `V`. 
+
+Em outras palavras, uma árvore geradora deve satisfazer duas condições principais:
+1. **Conectividade**: Ela deve incluir todos os vértices do grafo original $G$.
+2. **Acíclica**: Não pode conter ciclos e ser conexa, ou seja, **ser uma árvore**.
+3. Possuir exatamente $|V|-1$ arestas.
+
+Intuição: é uma forma de “conectar todos os vértices” com o **mínimo de arestas possível**, sem deixar o grafo desconexo e sem redundâncias (ciclos).
+# 8. Árvore Geradora Mínima (MST)
+
+**Definição:** dado um grafo não direcionado e conexo $G = (V, E)$ com pesos $w(e)$, uma **árvore geradora mínima** é um subconjunto de arestas $T \subseteq E$ que:
+- conecta todos os vértices,
+- forma uma árvore ($|V|-1$ arestas, sem ciclos),
+- tem peso total mínimo $w(T) = \sum_{e \in T} w(e)$.
+
+**Aplicações:** projeto de redes (energia, computadores, estradas), compressão de dados, agrupamento em aprendizado de máquina.
+- É um problema clássico resolvido de forma eficiente por algoritmos gulosos (ex.: **Prim** e **Kruskal**).
+
