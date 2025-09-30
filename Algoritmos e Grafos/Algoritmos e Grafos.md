@@ -451,13 +451,35 @@ Intuição: é uma forma de “conectar todos os vértices” com o **mínimo de
 **Definição:** dado um grafo não direcionado e conexo $G = (V, E)$ com pesos $w(e)$, uma **árvore geradora mínima** é um subconjunto de arestas $T \subseteq E$ que:
 - conecta todos os vértices,
 - forma uma árvore ($|V|-1$ arestas, sem ciclos),
-- tem peso total mínimo $w(T) = \sum_{e \in T} w(e)$.
+- tem peso total mínimo $w(T) = \sum_{e \in T} w(e)$. (Minimiza o custo)
 
 **Aplicações:** projeto de redes (energia, computadores, estradas), compressão de dados, agrupamento em aprendizado de máquina.
 - É um problema clássico resolvido de forma eficiente por algoritmos gulosos (ex.: **Prim** e **Kruskal**).
-
 ## Algoritmo Genérico
 
 1. Inicialize um conjunto de arestas `A` como vazio.
-2. Enquanto `A` não formar uma árvore geradora, encontre e adicione uma aresta "segura" para `A`. Uma aresta é segura se, ao ser adicionada a `A`, o novo conjunto `A'` ainda for um subconjunto de alguma MST.
+2. Enquanto `A` não formar uma árvore geradora, encontre e adicione uma aresta "segura" para `A`. 
+	Uma aresta é segura se, ao ser adicionada a `A`, o novo conjunto `A'` ainda for um subconjunto de alguma MST.
 3. Retorne `A`.
+
+```
+GENERIC-MST(G)
+    A ← ∅
+    enquanto A não forma uma árvore geradora faça
+        encontre uma aresta (u, v) que seja segura para A
+        A ← A ∪ {(u, v)}
+    retornar A
+```
+## Aresta Segura
+
+A parte crucial do algoritmo genérico é encontrar uma aresta segura. Para isso, o conceito de **corte** é introduzido
+### Cortes e Arestas Leves
+- Um **corte** de $G$ é uma partição dos vértices em dois conjuntos disjuntos $(S, V-S)$.
+- Uma aresta **cruza o corte** se conecta um vértice de $S$ a um de $V-S$.
+- Diz-se que o corte **respeita** $A$ se nenhuma aresta de $A$ cruza o corte.
+- A **aresta leve** de um corte é a de **menor peso** entre as que cruzam o corte.
+### Teorema da Aresta Segura
+
+> Se $(u, v)$ é uma aresta leve que cruza um corte que respeita $A$, então $(u, v)$ é **segura** para $A$
+
+
