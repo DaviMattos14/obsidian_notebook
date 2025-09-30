@@ -420,6 +420,10 @@ ALGORITMO-GULOSO(E, F, f)
 	    S ← S ∪ {i*};
 	    f(S) ← f(S) + ci*;
 	    F ← {i ∈ F \ {i*} : S ∪ {i} não é inviável};
-	retorne S, f(S);
-	    
+	retorne S, f(S); 
 ```
+
+## Problema da árvore geradora mínima
+
+
+# 8. Árvore Geradora Mínima
