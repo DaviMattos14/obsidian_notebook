@@ -6,12 +6,10 @@ Seja $u$ e $v$ vértices de G. Uma aresta é direcionada se seu par de subconjun
 Com isso grafos podem ser **direcionados** e **não direcionados**
 ## Grafo Direcionado
 
-Uma aresta direcionada $e=(u,v)$ estende-se do vértice $u$ para o vértice $v$ ($u \longrightarrow v$), com $e$ sendo uma aresta de *entrada* de v e uma aresta de *saída* de u.
+Uma aresta direcionada $e=(u,v)$ estende-se do vértice $u$ para o vértice $v$ ($u \longrightarrow v$), com $e$ sendo uma aresta de *entrada* de v e uma aresta de *saída* de u.
 
 $$
-\begin{matrix}
 G_{1}= (V_1,E_1) & V_1=\{0,1,2,3,4\} & E_1=\{(0,1),(1,2),(2,0),(3,4)\}
-\end{matrix}
 $$
 ![[Pasted image 20250929152057.png]]
 Outros exemplos de representação:
@@ -58,7 +56,14 @@ Ambos funcionam para grafos direcionados e não direcionados.
 **Desvantagem:** para verificar se uma aresta $(u, v)$ existe, é preciso percorrer a lista de $u$.
 ### Matriz de Adjacências
 
-**Estrutura**: uma matriz $|V| \times |V|$ onde $$a_{ij}=\begin{cases} 1 & \text{se } (i, j) \in E \\ 0 & \text{caso contrário} \end{cases}$$
+**Estrutura**: uma matriz $|V| \times |V|$, onde 
+$$
+a_{ij} = 
+\begin{cases}
+1 &\text{, se }(i,j)\in E \\
+0 & \text{, c.c.}
+\end{cases} 
+$$
 - Ocupa sempre $\Theta(V^2)$ de memória, independentemente do número de arestas.
 - A busca de uma aresta é imediata, $O(1)$.
 - Para grafos não dirigidos, a matriz é simétrica.
@@ -211,6 +216,7 @@ Dado um grafo `G = (V, E)` e um vértice de origem `s`, a busca em largura explo
 **Como funciona**: O algoritmo avança em "ondas" a partir da origem `s`. Primeiro, visita todos os vizinhos de `s` (vértices a uma distância de 1 aresta). Em seguida, visita os vizinhos desses vizinhos (vértices a uma distância de 2 arestas), e assim por diante, até que todos os vértices alcançáveis tenham sido visitados.
 
 **Caminho mais curto**: Uma propriedade crucial da busca em largura é que ela calcula a distância do caminho mais curto (em termos de número de arestas) de `s` para cada vértice alcançável.
+BFS também serve de base para algoritmos de **caminho mínimo em grafos não ponderados**
 
 **Árvore de busca em largura**: Durante a busca, o algoritmo constrói uma "árvore de busca em largura" com raiz em `s`, que contém todos os vértices alcançáveis. Para qualquer vértice `v` alcançável a partir de `s`, o caminho simples na árvore de `s` para `v` corresponde a um caminho mais curto no grafo original.
 
@@ -289,7 +295,9 @@ Além disso, ela atribui dois "timestamps" a cada vértice:
 
 Em vez de apenas marcar vértices visitados, o algoritmo também mantém o controle da árvore gerada pela travessia em profundidade. Ele faz isso marcando o "pai" de cada vértice visitado, ou seja, o vértice que o DFS visitou imediatamente antes de visitar o filho.    
 O DFS aumentado também marca dois carimbos de tempo auto-incrementais, d e f, para indicar quando um nó foi descoberto pela primeira vez e quando foi finalizado.
-  
+
+DFS serve de base para **ordenamento topológico** e **componentes fortemente conectados**.
+
 **Complexidade de Tempo**: Como cada aresta é explorada **no máximo uma vez**, o tempo de execução é **Θ(V + E)**.
 ## Algoritmo
 
@@ -497,7 +505,7 @@ Tanto **Prim** quanto **Kruskal** são instâncias desse algoritmo:
 
 ## Algoritmo Kruskal
 
-**Ideia:** construir a MST adicionando as arestas em ordem de peso crescente, sem formar ciclos
+**Ideia:** construir a MST adicionando as arestas em ordem de peso crescente (ir adicionado arestas de menor peso), sem formar ciclos
 
 **Estratégia**: O algoritmo examina as arestas em ordem crescente de peso. A cada passo, ele adiciona a próxima aresta de menor peso que não forma um ciclo com as arestas já selecionadas.
 
@@ -519,13 +527,22 @@ Tanto **Prim** quanto **Kruskal** são instâncias desse algoritmo:
 **Vantagem:** simples, eficiente em grafos **esparsos**.
 
 ```
-
+KRUSKAL-MST(G, w)
+    A ← ∅
+    para cada v ∈ V[G] faça
+        MAKE-SET(v)
+    ordenar as arestas E[G] em ordem crescente de peso
+    para cada aresta (u, v) ∈ E[G], na ordem crescente faça
+        se FIND-SET(u) ≠ FIND-SET(v) então
+            A ← A ∪ {(u, v)}
+            UNION(u, v)
+    retornar A
 ```
 ## Algoritmo Prim
 
 **Ideia:** crescer a MST a partir de um vértice, sempre escolhendo a aresta de menor peso que conecta a árvore a um novo vértice
 
-
+**Estratégia**: O algoritmo mantém um único conjunto de vértices que já fazem parte da MST. A cada passo, ele encontra a aresta de menor peso (a aresta "leve") que conecta um vértice dentro da árvore a um vértice fora da árvore e a adiciona à MST.
 
 **Passos:**
 1. Escolher vértice inicial $s$.
@@ -542,5 +559,61 @@ Tanto **Prim** quanto **Kruskal** são instâncias desse algoritmo:
 **Vantagem:** eficiente em grafos **densos**
 
 ```
+PRIM-MST(G, w, r)
+    para cada u ∈ V[G] faça
+        chave[u] ← ∞
+        π[u] ← NIL
+    chave[r] ← 0
 
+    Q ← V[G]     // Q é uma fila de prioridade mínima
+
+    enquanto Q ≠ ∅ faça
+        u ← EXTRACT-MIN(Q)
+        para cada v ∈ Adj[u] faça
+            se v ∈ Q e w(u, v) < chave[v] então
+                π[v] ← u
+                chave[v] ← w(u, v)
 ```
+
+`chave[v]`: custo mínimo conhecido para conectar `v` à árvore parcial.
+`π[v]`: predecessor de `v` na MST.
+`EXTRACT-MIN(Q)`: remove da fila o vértice com menor `chave`.
+# 9. Complexidade do Algoritmo de Prim
+
+A complexidade de tempo do algoritmo de Prim depende crucialmente da implementação da fila de prioridade, que é usada para armazenar os vértices que ainda não estão na árvore.
+
+1. **Matriz de adjacência + busca linear**
+    - Para cada extração e atualização: $O(V)$.
+    - Complexidade total: $O(V^2)$.
+    - Bom para grafos **densos** ($E \approx V^2$).
+        
+2. **Min-Heap binário**
+    - Cada `EXTRACT-MIN`: $O(\log V)$), repetido $V$ vezes.
+    - Cada atualização (`DECREASE-KEY`): $O(\log V)$, feito até $E$ vezes.
+    - Complexidade total: $O(E \log V)$.
+        
+3. **Heap de Fibonacci**
+    - `EXTRACT-MIN`: $O(\log V)$.
+    - `DECREASE-KEY`: $O(1)$ amortizado.
+    - Complexidade total: $O(E + V \log V)$.
+    - Melhor escolha em grafos **muito densos**.
+## Kruskal vs. Prim
+
+Ambos têm desempenho semelhante em grafos médios, a escolha depende do tipo de grafo (esparso ou denso)
+
+| Aspecto                     | **Kruskal**                                                      | **Prim**                                                                              |
+| --------------------------- | ---------------------------------------------------------------- | ------------------------------------------------------------------------------------- |
+| Estratégia                  | Ordena arestas globais e escolhe em ordem crescente (Union-Find) | Cresce uma única árvore a partir de um vértice inicial                                |
+| Estrutura de dados          | Union-Find (disjoint set)                                        | Fila de prioridade (heap)                                                             |
+| Complexidade                | $O(E \log V)$                                                    | $O(E \log V)$ (heap binário) - $O(E + V \log V)$ (heap Fibonacci) - $O(V^2)$ (matriz) |
+| Melhor para                 | **Grafos esparsos** (poucas arestas)                             | **Grafos densos** (muitas arestas)                                                    |
+| Natureza da construção      | Floresta → conecta componentes                                   | Uma árvore única que cresce passo a passo                                             |
+| Facilidade de implementação | Mais simples                                                     | Mais complexo (manipulação de heap)                                                   |
+
+|Característica|Algoritmo de Kruskal|Algoritmo de Prim|
+|---|---|---|
+|**Estratégia**|Constrói a MST como uma floresta, unindo árvores componentes ao adicionar a aresta de menor peso que não forma um ciclo.|Constrói a MST a partir de um único vértice, expandindo a árvore ao adicionar a aresta mais barata que conecta um vértice da árvore a um vértice fora dela.|
+|**Foco**|Foca nas arestas do grafo inteiro, processando-as em ordem de peso.|Foca nos vértices, crescendo uma única árvore a partir de uma raiz arbitrária.|
+|**Complexidade**|**O(E log E)**, dominada pela ordenação das arestas.|**O(E log V)** com heap binário ou **O(E + V log V)** com heap de Fibonacci.|
+|**Quando Usar**|Geralmente mais rápido para **grafos esparsos** (onde o número de arestas E é significativamente menor que V²), pois `log E` é próximo a `log V`.|Geralmente mais rápido para **grafos densos** (onde E está próximo de V²), especialmente com a implementação de heap de Fibonacci, pois sua complexidade se aproxima de O(E).|
+|**Estrutura de Dados**|Utiliza a estrutura de dados de **conjuntos disjuntos (disjoint-set)** para detectar ciclos eficientemente.|Utiliza uma **fila de prioridade** para encontrar eficientemente a aresta mais leve que cruza o corte entre a árvore e o resto do grafo.|
