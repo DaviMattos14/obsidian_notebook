@@ -7,9 +7,8 @@ Com isso grafos podem ser **direcionados** e **não direcionados**
 ## Grafo Direcionado
 
 Uma aresta direcionada $e=(u,v)$ estende-se do vértice $u$ para o vértice $v$ ($u \longrightarrow v$), com $e$ sendo uma aresta de *entrada* de v e uma aresta de *saída* de u.
-
 $$
-G_{1}= (V_1,E_1) & V_1=\{0,1,2,3,4\} & E_1=\{(0,1),(1,2),(2,0),(3,4)\}
+G_{1}=(V_1,E_{1)}\quad V_1=\{0,1,2,3,4\} \quad E_1={(0,1),(1,2),(2,0),(3,4)}
 $$
 ![[Pasted image 20250929152057.png]]
 Outros exemplos de representação:
