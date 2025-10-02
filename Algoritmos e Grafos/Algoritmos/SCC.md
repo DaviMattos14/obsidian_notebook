@@ -2,27 +2,33 @@
 
 ## 1. Descrição
 Uma **Componente Fortemente Conexa (CFC / SCC)** em um grafo direcionado \(G=(V,E)\) é um subconjunto máximo
-de vértices \(C \subseteq V\) tal que, para quaisquer \(u,v \in C\), existe um caminho de \(u\) até \(v\) **e**
+de vértices \(C $\subseteq$ V\) tal que, para quaisquer \(u,v $\in$ C\), existe um caminho de \(u\) até \(v\) **e**
 de \(v\) até \(u\). Em outras palavras: todos os vértices do componente se alcançam mutuamente.
 
 CFCs são úteis para detectar grupos fechados em redes direcionadas, ciclos robustos e “influencers” que formam
 núcleos recíprocos.
 
 ## 2. Grafo de exemplo
-Considere o grafo direcionado com vértices {A, B, C, D, E, F} e arestas:
-- A → B, B → C, C → A    (triângulo A-B-C)
-- B → D
-- D → E, E → F, F → D    (triângulo D-E-F)
-
-Neste grafo temos duas CFCs: {A, B, C} e {D, E, F}.
+Considere o grafo direcionado com vértices {0, 1, 2, 3, 4, 5} e arestas:
+- 0 → 1, 1 → 2, 2 → 0    (triângulo 0-1-2)
+- 1 → 3
+- 3 → 4, 4 → 5, 5 → 3    (triângulo 3-4-5)
+![[Pasted image 20251001220846.png]]
+Neste grafo temos duas CFCs: {0, 1, 2} e {4, 5, 6}.
 
 ## 3. Algoritmo 1 — Kosaraju (duas passagens de DFS)
 ### Ideia
 1. Execute uma DFS em G e armazene os tempos de finalização (`f[u]`) de cada vértice.  
-2. Construa o grafo transposto \(G^T\) (inverta todas as arestas).  
-3. Ordene os vértices em ordem decrescente de `f[u]` e, nessa ordem, execute DFS em \(G^T\).  
-4. Cada árvore gerada na segunda fase é uma CFC.
+![[Pasted image 20251001221135.png]]
+[0 → (1 / 12), 1 → (2 / 11), 2→ (3 / 4) 3 → (5 / 10), 4 → ( 6 / 9), 5 → (7 / 8)]
 
+2. Construa o grafo transposto \(G^T\) (inverta todas as arestas).  
+![[Pasted image 20251001221549.png]]
+3. Ordene os vértices em ordem decrescente de `f[u]` e, nessa ordem, execute DFS em \(G^T\).  
+Ordem dos vértices: [ 0, 1, 3, 4, 5, 2]
+
+4. Cada árvore gerada na segunda fase é uma CFC.
+![[Pasted image 20251001221637.png]]
 ### Execução passo a passo (exemplo)
 1. DFS em G (suponha ordem alfabética de exploração): pode produzir tempos de término, por exemplo:
    - f[A]=6, f[B]=5, f[C]=4, f[D]=3, f[E]=2, f[F]=1  (valores ilustrativos: A tem maior f)

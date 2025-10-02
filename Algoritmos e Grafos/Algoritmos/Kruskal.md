@@ -4,14 +4,15 @@
 O **algoritmo de Kruskal** encontra a Árvore Geradora Mínima (MST) adicionando arestas em ordem de peso crescente, sem formar ciclos.
 
 ## 2. Grafo de exemplo
-Vértices: {A, B, C, D}  
+Vértices: {0, 1, 2, 3}  
 Arestas com pesos:  
-- A-B (1), B-C (2), C-D (3), A-D (4), B-D (5)
-
+- 0-1 (3), 0-2 (4), 1-3 (4), 1-2 (2), 3-2 (2)
+![[Pasted image 20251001215250.png]]
 ## 3. Execução passo a passo
-- Ordenar arestas: (A-B=1), (B-C=2), (C-D=3), (A-D=4), (B-D=5).  
-- Adiciona A-B, B-C, C-D → conecta todos os vértices.  
-- MST formada com peso total = 6.
+- Ordenar arestas: (1-2=2), (2-3=2), (0-1=3), (0-2=4), (1-3=4).  
+- Adiciona (1-2), (2-3), (0-1) → conecta todos os vértices.  
+![[Pasted image 20251001220324.png]]
+- MST formada com peso total = 7.
 
 ## 4. Pseudocódigo
 ```pseudocode
