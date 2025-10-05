@@ -71,7 +71,7 @@ ou, mais geralmente,
 $$
 E\!\left[\sum_{i=1}^{n} X_i\right] = \sum_{i=1}^{n} E[X_i]
 $$
-# Variáveis Aleatórias Discretas
+# 2. Variáveis Aleatórias Discretas
 ## Modelo Bernoulli
 > Sucesso ou Fracasso
 
@@ -161,3 +161,44 @@ $$
     $$
   F(x) = \int_{-\infty}^{x} \frac{1}{\sqrt{2\pi\sigma^2}} e^{-\frac{(t - \mu)^2}{2\sigma^2}}\, dt  
 $$(sem forma fechada; usa tabelas ou funções computacionais).
+# 3. Relação Poisson $\times$ Exponencial (Processo de Poisson)
+
+A **distribuição de Poisson** e a **distribuição Exponencial** estão intimamente ligadas — elas descrevem **dois lados do mesmo processo estocástico**, o **Processo de Poisson**.
+
+## Processo de Poisson
+
+Modela o número de ocorrências de um evento em um intervalo de tempo:  
+$$
+P(N(t) = k) = \frac{e^{-\lambda t} (\lambda t)^k}{k!}  
+$$
+onde \( $\lambda$ \) é a **taxa média de eventos por unidade de tempo**.
+
+👉 Assim, \( $N(t)$ \) segue **distribuição de Poisson**.
+## Tempo entre eventos → Exponencial
+
+O **tempo entre dois eventos consecutivos**, chamado de _tempo de interchegada_, segue uma **distribuição Exponencial**:  
+$$
+f_T(t) = \lambda e^{-\lambda t}, \quad t \ge 0  
+
+$$
+com média \( $E[T] = 1/\lambda$ \).
+
+Portanto:
+- Poisson → **quantos eventos ocorrem em um tempo fixo**.
+- Exponencial → **quanto tempo até o próximo evento**.
+## Relação formal
+
+Se os tempos entre eventos \( $T_1, T_2, \dots$ \) são independentes e Exponenciais ($\lambda$ ),  
+então o número total de eventos até o tempo \( t \):  
+$$
+N(t) = \max{ n : T_1 + T_2 + \cdots + T_n \le t }  
+
+$$
+segue uma **distribuição de Poisson( $\lambda t$ )**.
+
+E reciprocamente, se ( $N(t)$ ) é um processo de Poisson, então os tempos entre eventos são **Exponenciais( $\lambda$ )**.
+
+| Aspecto                         | Distribuição       | Interpretação               |
+| ------------------------------- | ------------------ | --------------------------- |
+| Número de eventos em tempo fixo | **Poisson(λt)**    | Contagem de ocorrências     |
+| Tempo entre eventos             | **Exponencial(λ)** | Intervalo entre ocorrências |
