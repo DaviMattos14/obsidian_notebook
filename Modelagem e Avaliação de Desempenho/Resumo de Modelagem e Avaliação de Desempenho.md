@@ -202,3 +202,4 @@ E reciprocamente, se ( $N(t)$ ) é um processo de Poisson, então os tempos entr
 | ------------------------------- | ------------------ | --------------------------- |
 | Número de eventos em tempo fixo | **Poisson(λt)**    | Contagem de ocorrências     |
 | Tempo entre eventos             | **Exponencial(λ)** | Intervalo entre ocorrências |
+# 4. Geração de Amostras Aleatórias
