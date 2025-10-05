@@ -137,6 +137,18 @@ $$
 
 $E[X] = Var(x) = \lambda$
 
+## Exponencial
+
+- **Descrição:** Tempo até o primeiro evento (processo de Poisson).
+
+- **PDF:**
+$$
+f(x) = \lambda e^{-\lambda x}, \quad x \ge 0
+$$    
+- **CDF:**
+    $$
+  F(x) = 1 - e^{-\lambda x}  
+$$
 ## Uniforme Contínua
 
 > **Descrição:** Todos os valores em $[a,b]$ igualmente prováveis.
@@ -173,7 +185,7 @@ P(N(t) = k) = \frac{e^{-\lambda t} (\lambda t)^k}{k!}
 $$
 onde \( $\lambda$ \) é a **taxa média de eventos por unidade de tempo**.
 
-👉 Assim, \( $N(t)$ \) segue **distribuição de Poisson**.
+Assim, \( $N(t)$ \) segue **distribuição de Poisson**.
 ## Tempo entre eventos → Exponencial
 
 O **tempo entre dois eventos consecutivos**, chamado de _tempo de interchegada_, segue uma **distribuição Exponencial**:  
@@ -203,3 +215,109 @@ E reciprocamente, se ( $N(t)$ ) é um processo de Poisson, então os tempos entr
 | Número de eventos em tempo fixo | **Poisson(λt)**    | Contagem de ocorrências     |
 | Tempo entre eventos             | **Exponencial(λ)** | Intervalo entre ocorrências |
 # 4. Geração de Amostras Aleatórias
+
+**Motivo**: Poder simular/observar fenômenos aleatórios
+
+**Premissa**: Temos um gerador de números uniformemente distribuídos entre 0 e 1: $]0,1[$
+
+## Métodos principais
+### Método da Transformada Inversa
+
+- **Ideia:** usar a função de distribuição acumulada (CDF) \( F(x) \) da variável desejada.
+    
+- **Passos:**
+    1. Gere \( $U \sim \text{Uniforme}(0,1)$ \);
+    2. Calcule \( $X = F^{-1}(U)$ \).
+- **Justificativa:** se \( $U$ \) é uniforme em $[0,1]$, então \( $X = F^{-1}(U)$ \) tem CDF \( $F(x)$ \).
+- **Vantagens:** simples, exato.
+- **Limitações:** exige que \( $F^{-1}$ \) tenha forma analítica fácil.
+- **Exemplo:**  
+    Exponencial( $\lambda$ ): ( $X = -\frac{1}{\lambda}\ln(1-U)$ ).
+### Método da Aceitação–Rejeição
+
+- **Ideia:** gerar amostras de uma distribuição difícil usando outra mais simples.
+    
+- **Passos:**
+    1. Escolha uma distribuição fácil \( $g(x)$ \) e uma constante \( $c$ \) tal que \( $f(x) \le c,g(x)$ \) para todo \( $x$ \);
+    2. Gere \( $X \sim g(x)$ \) e \( $U \sim U(0,1)$ \);
+    3. Aceite \( $X$ \) se \( $U \le \frac{f(X)}{c,g(X)}$ \), senão rejeite e repita.
+
+- **Vantagens:** útil quando \( $F^{-1}$ \) é complexa.
+- **Limitações:** pode ser ineficiente se \( $c$ \) for grande (muitas rejeições).
+
+### Método do Vetor (ou Método de Composição)
+
+- **Ideia:** gerar amostras quando a distribuição é composta ou mistura de várias partes.
+    
+- **Passos:**
+    1. Escolha qual componente gerar (segundo probabilidades associadas);
+    2. Gere a amostra da distribuição correspondente.
+
+- **Exemplo:**  
+    Se \( X \) vem de uma mistura de duas exponenciais:  
+$$
+    f(x) = p f_1(x) + (1-p) f_2(x)
+    $$
+    então:
+    - Gere \( $U \sim U(0,1)$ \);
+    - Se \( $U < p$ \), gere \( $X \sim f_1$ \); caso contrário, \( $X \sim f_2$ \).
+
+- **Aplicação:** simulação de **sistemas com múltiplos regimes** ou **processos compostos**.
+
+| Método               | Quando usar              | Exemplo típico              |
+| -------------------- | ------------------------ | --------------------------- |
+| Transformada Inversa | CDF invertível           | Exponencial, Uniforme       |
+| Aceitação–Rejeição   | CDF complexa             | Normal, Gamma               |
+| Vetor (Composição)   | Mistura de distribuições | Modelos híbridos, workloads |
+
+# 5. Modelo Híbrido de Amostragem
+
+O **método híbrido de amostragem** combina **dois ou mais métodos de geração de amostras aleatórias** (como transformada inversa, aceitação–rejeição e composição) para aproveitar as vantagens de cada um e contornar suas limitações.
+
+---
+## Ideia principal
+
+Nem todas as distribuições têm uma forma simples para \( $F^{-1}(x)$ \) (inversa da CDF) ou uma função de densidade \( $f(x)$ \) que facilite o uso de um único método.  
+O método híbrido busca **dividir o domínio ou estrutura da distribuição** e **usar o melhor método em cada parte**.
+## Como funciona
+
+1. **Identificação das regiões ou componentes:**
+    - Partes da distribuição onde \( $F^{-1}$ \) é simples → usa-se **Transformada Inversa**.
+    - Partes mais complexas → aplica-se **Aceitação–Rejeição** ou **Composição**.
+2. **Combinação dos resultados:**
+    - As amostras geradas de cada parte são reunidas para formar um conjunto completo que segue a distribuição alvo.
+## Vantagens
+
+- Maior **eficiência** e **flexibilidade** que os métodos isolados.
+- Permite tratar **distribuições complexas ou mistas** (contínuas e discretas, truncadas, ou multimodais).
+- Reduz o número de rejeições e o custo computacional.
+## Exemplo típico
+
+Para gerar amostras **Normais**, o método híbrido pode:
+- Usar **Transformada Inversa** para a parte central da distribuição (onde \( $F^{-1}$ \) é bem comportada);
+- Usar **Aceitação–Rejeição** para as caudas (onde \( $F^{-1}$ \) diverge).
+# 6. Filas
+![[Pasted image 20251005012909.png]]
+**Servidor**: Qualquer recurso onde filas de tarefas possam se formar
+
+## Parâmetros do Sistemas
+- Topologia da Rede
+- Política (ordem de atendimento) da fila
+- Average Arrival Rate: $\lambda$ 
+	- Taxa média de chegada por u.t.
+- Mean interarrivel time: $1/\lambda$
+- Size ($s$): Tamanho do job
+	- Tempo de serviço que o job demanda para ser concluído
+- Mean Service Time: $E[S]=1/\mu$
+- Average Size Rate ($\mu$): Taxa média nominal de serviço (em cada servidor) em jobs por u.t.
+
+## Métricas de Desempenho
+
+- Response Time (**T**) : Tempo de resposta (Tempo no sistema)
+- Waiting Time (**Tq**) : Tempo perdido em filas (Q: Queue)
+- Número de jobs no sistema (**N(t)**) no instante $t$
+- Número de jobs na Fila (**Nq(t)**) no instante $t$
+
+O tempo de serviço S, assim como outras V.A.s e métricas, **depende do servidor**. Será maior ou menor conforme a taxa de serviço $\mu$ do servidor onde está. Para referir-se às métricas do i-ésimo servidor em uma rede de filas, anota-se $T_i$ , $Tq_i$ , $N(t)_i$ , etc.
+
+Condição de Estabilidade: Sempre assumiremos que $\mu < \lambda$
