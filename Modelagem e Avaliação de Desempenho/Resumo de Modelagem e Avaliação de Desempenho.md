@@ -11,7 +11,7 @@
 
 **Probabilidade Frequencista**: a probabilidade $P(E)$ de um evento $E$ é dado pela razão entre o nº de resultados favoráveis e o nº total de resultados
 $$
-P(E) = \lim_{n\rightarrow \inf} \frac{\text{Nº de ocorrências E}}{n}
+P(E) = \lim_{n\rightarrow \infty} \frac{\text{Nº de ocorrências E}}{n}
 $$
 
 **Probabilidade Condicional**: Para eventos A e B, a probabilidade condicional de _A dado B_ é definida como
@@ -32,7 +32,11 @@ $$
 P(A) = \sum_{i=1}^{n} P(A \mid B_i) \, P(B_i)
 $$
 **Regra de Bayes**: Se A e B são eventos com probabilidade positiva, então
-$$P(A|B) = \frac{(P(A)⋅P(B|A))}{P(B)}$$
+$$
+P(A|B) = \frac{P(B\mid A)\cdot P(A)}{P(B)}
+\quad
+P(A|B) = \frac{P(A\cap B)}{P(B)}
+$$
 obs: $P(A∩B)=P(A)⋅(B|A)$
 $P(A|B)+P(A|B^c)=1$
 
@@ -65,7 +69,7 @@ $$
 ## Linearidade da Esperança
 A **linearidade da esperança** afirma que a **esperança (ou valor esperado)** de uma soma de variáveis aleatórias é igual à soma das esperanças individuais, **independentemente de haver dependência entre elas**:
 $$
-E[aX + bY] = aE[X] + bE[Y] \quad E[X,Y]= E[X]+E[Y]
+E[aX + bY] = aE[X] + bE[Y]
 $$
 ou, mais geralmente,
 $$
@@ -104,7 +108,7 @@ $$
 $$
 - CDF
 $$
-F(k)=\sum\limits^k_{i=0} \dbinom{n}{i}\centerdot p^{i\centerdot(1-p)^{n-i}}= \sum\limits^k_{y \le k}p_x^{(y)}
+F(k)=\sum\limits^k_{i=0} \dbinom{n}{i}p^i(1-p)^{n-i}= \sum\limits^k_{y \le k}p_x^{(y)}
 $$
 - $E[X] = n \centerdot p$
 - $Var(X)=n\centerdot p \centerdot (1-p)$
@@ -226,8 +230,8 @@ E reciprocamente, se ( $N(t)$ ) é um processo de Poisson, então os tempos entr
 - **Ideia:** usar a função de distribuição acumulada (CDF) \( F(x) \) da variável desejada.
     
 - **Passos:**
-    1. Gere \( $U \sim \text{Uniforme}(0,1)$ \);
-    2. Calcule \( $X = F^{-1}(U)$ \).
+    (1) Gere \( $U \sim \text{Uniforme}(0,1)$ \);
+    (2) Calcule \( $X = F^{-1}(U)$ \).
 - **Justificativa:** se \( $U$ \) é uniforme em $[0,1]$, então \( $X = F^{-1}(U)$ \) tem CDF \( $F(x)$ \).
 - **Vantagens:** simples, exato.
 - **Limitações:** exige que \( $F^{-1}$ \) tenha forma analítica fácil.
@@ -238,9 +242,9 @@ E reciprocamente, se ( $N(t)$ ) é um processo de Poisson, então os tempos entr
 - **Ideia:** gerar amostras de uma distribuição difícil usando outra mais simples.
     
 - **Passos:**
-    1. Escolha uma distribuição fácil \( $g(x)$ \) e uma constante \( $c$ \) tal que \( $f(x) \le c,g(x)$ \) para todo \( $x$ \);
-    2. Gere \( $X \sim g(x)$ \) e \( $U \sim U(0,1)$ \);
-    3. Aceite \( $X$ \) se \( $U \le \frac{f(X)}{c,g(X)}$ \), senão rejeite e repita.
+    (1) Escolha uma distribuição fácil \( $g(x)$ \) e uma constante \( $c$ \) tal que \( $f(x) \le c,g(x)$ \) para todo \( $x$ \);
+    (2) Gere \( $X \sim g(x)$ \) e \( $U \sim U(0,1)$ \);
+    (3) Aceite \( $X$ \) se \( $U \le \frac{f(X)}{c,g(X)}$ \), senão rejeite e repita.
 
 - **Vantagens:** útil quando \( $F^{-1}$ \) é complexa.
 - **Limitações:** pode ser ineficiente se \( $c$ \) for grande (muitas rejeições).
@@ -248,19 +252,15 @@ E reciprocamente, se ( $N(t)$ ) é um processo de Poisson, então os tempos entr
 ### Método do Vetor (ou Método de Composição)
 
 - **Ideia:** gerar amostras quando a distribuição é composta ou mistura de várias partes.
-    
 - **Passos:**
-    1. Escolha qual componente gerar (segundo probabilidades associadas);
-    2. Gere a amostra da distribuição correspondente.
-
+		(1) Escolha qual componente gerar (segundo probabilidades associadas);
+		(2) Gere a amostra da distribuição correspondente.
 - **Exemplo:**  
     Se \( X \) vem de uma mistura de duas exponenciais:  
-$$
-    f(x) = p f_1(x) + (1-p) f_2(x)
-    $$
-    então:
-    - Gere \( $U \sim U(0,1)$ \);
-    - Se \( $U < p$ \), gere \( $X \sim f_1$ \); caso contrário, \( $X \sim f_2$ \).
+				$f(x) = p f_1(x) + (1-p) f_2(x)$
+Então:
+		(1) Gere \( $U \sim U(0,1)$ \);
+		(2) Se \( $U < p$ \), gere \( $X \sim f_1$ \); caso contrário, \( $X \sim f_2$ \).
 
 - **Aplicação:** simulação de **sistemas com múltiplos regimes** ou **processos compostos**.
 
@@ -273,8 +273,6 @@ $$
 # 5. Modelo Híbrido de Amostragem
 
 O **método híbrido de amostragem** combina **dois ou mais métodos de geração de amostras aleatórias** (como transformada inversa, aceitação–rejeição e composição) para aproveitar as vantagens de cada um e contornar suas limitações.
-
----
 ## Ideia principal
 
 Nem todas as distribuições têm uma forma simples para \( $F^{-1}(x)$ \) (inversa da CDF) ou uma função de densidade \( $f(x)$ \) que facilite o uso de um único método.  
@@ -296,34 +294,10 @@ O método híbrido busca **dividir o domínio ou estrutura da distribuição** e
 Para gerar amostras **Normais**, o método híbrido pode:
 - Usar **Transformada Inversa** para a parte central da distribuição (onde \( $F^{-1}$ \) é bem comportada);
 - Usar **Aceitação–Rejeição** para as caudas (onde \( $F^{-1}$ \) diverge).
+
 # 6. Filas
 ![[Pasted image 20251005012909.png]]
 **Servidor**: Qualquer recurso onde filas de tarefas possam se formar
-## Notação de Kendall (A/S/k/K/N/D)
-|Símbolo|Significado|
-|---|---|
-|**A**|Distribuição do tempo entre chegadas|
-|**S**|Distribuição do tempo de serviço|
-|**k**|Número de servidores|
-|**K**|Capacidade máxima do sistema (fila + serviço)|
-|**N**|Tamanho da população de clientes (finita ou infinita)|
-|**D**|Disciplina de atendimento (ordem de serviço)|
-## Distribuições
-|Símbolo|Tipo de distribuição|Descrição|
-|---|---|---|
-|**M**|Exponencial (Markoviana)|Chegadas ou serviços seguem processo de Poisson|
-|**D**|Determinística|Tempo fixo entre chegadas ou serviços|
-|**G**|Geral|Distribuição arbitrária (qualquer forma)|
-#### Exemplos:
-|Modelo|Descrição|
-|---|---|
-|**M/M/1**|Um servidor, chegadas e serviços exponenciais|
-|**M/M/k**|k servidores em paralelo, chegadas e serviços exponenciais|
-|**M/M/∞**|Servidores infinitos (sem espera)|
-|**M/M/k/k**|Sistema sem fila: se todos os servidores estão ocupados, novos clientes são bloqueados|
-|**M/G/1**|Serviço com distribuição geral|
-|**G/G/1**|Modelo mais geral (ambos processos arbitrários)|
-
 ## Parâmetros do Sistemas
 - Topologia da Rede
 - Política (ordem de atendimento) da fila
@@ -348,13 +322,14 @@ O tempo de serviço S, assim como outras V.A.s e métricas, **depende do servido
 Condição de Estabilidade: Sempre assumiremos que $\mu < \lambda$
 
 - **Tempo de Espera**
-		$E[T]=E[Tq]+E[S] \quad S\rightarrow$ Tempo de Processo
-- **Número de Tarefas no Sistema (N):** O número de tarefas na fila mais as que estão sendo atendidas.
-- **Número de Tarefas na Fila (N<sub>Q</sub>):** Apenas o número de tarefas que estão esperando na fila.
-- **Utilização ($\rho_i$):** A fração do tempo em que um dispositivo (servidor) `i` está ocupado. Em um sistema de servidor único, é calculada como
-- **Vazão (Throughput: $X_i$):** A taxa de conclusão de tarefas em um dispositivo `i` (tarefas/segundo). Para um sistema estável, a taxa de saída é igual à taxa de entrada. $X_{i}= \mu_{i}\cdot \rho_i$
+		$E[T]=E[Tq]+E[S]$ 
+	Para $S\rightarrow$ Tempo de Processo
+- **Número de Jobs no Sistema (N):** O número de jobs na fila mais as que estão sendo atendidas.
+- **Número de Jobs na Fila (N<sub>Q</sub>):** Apenas o número de jobs que estão esperando na fila.
+- **Utilização ($\rho_i$):** A fração do tempo em que um dispositivo (servidor) `i` está ocupado. Em um sistema de servidor único, é calculada como $\rho_i = X_{i}/ \mu_i$
+- **Vazão (Throughput: $X_i$):** A taxa de conclusão de jobs em um dispositivo `i` (jobs/segundo). Para um sistema estável, a taxa de saída é igual à taxa de entrada. $X_{i}= \mu_{i}\cdot \rho_i$
 
-**Lei da Utilização** relaciona essas duas últimas métricas
+**Lei da Utilização**: relaciona essas duas últimas métricas
 $$
 \rho = \frac{X_i}{\mu_i}
 $$
@@ -366,29 +341,29 @@ As redes de filas são geralmente classificadas em duas categorias principais:
 	Vazão real é igual a taxa de chegada $\lambda$ (supondo $\lambda< \mu$), ou seja, $X_i$ não depende da taxa de serviço $\mu$
     
 2. **Redes Fechadas (Closed Networks):** Não possuem chegadas ou partidas externas. 
-	**Um número fixo de tarefas (N)**, conhecido como **nível de multiprogramação (MPL)**, circula constantemente pelo sistema. Elas se subdividem em:
-    - **Sistemas em Lote (Batch Systems):** Assim que uma tarefa termina, uma nova é iniciada imediatamente, mantendo sempre N tarefas ativas no sistema.
+	**Um número fixo de jobs (N)**, conhecido como **nível de multiprogramação (MPL)**, circula constantemente pelo sistema. Elas se subdividem em:
+    - **Sistemas em Lote (Batch Systems):** Assim que uma tarefa termina, uma nova é iniciada imediatamente, mantendo sempre N jobs ativas no sistema.
     - **Sistemas Interativos:** Modelam usuários em terminais. Um usuário envia uma requisição, espera pela resposta (tempo de resposta, R) e então passa um tempo "pensando" (think time, Z) antes de enviar a próxima requisição.
 ## Lei de Little
-Ela estabelece uma relação fundamental e simples entre o número médio de tarefas em um sistema, a taxa de chegada e o tempo médio que uma tarefa passa no sistema.
+Ela estabelece uma relação fundamental e simples entre o número médio de jobs em um sistema, a taxa de chegada e o tempo médio que uma tarefa passa no sistema.
 $$
 E[X]=X\cdot E[T]\quad E[T] = \frac{1}{x}\cdot E[N]
 $$
 Para $X=$ Vazão (Taxa média de jobs finalizados)
-		$\frac{1}{x}=$ Tempo entre jobs
+		$\frac{1}{X}=$ Tempo entre jobs
 ### Para sistemas abertos
 $$E[N]=\lambda \cdot E[T]$$
 Onde:
-- **E[N]**: É o número médio de tarefas no sistema (na fila + em serviço).
-- **λ**: É a taxa média de chegada de tarefas ao sistema.
-- **E[T]**: É o tempo médio que uma tarefa passa no sistema (tempo de resposta ou _sojourn time_).
+- **E[N]**: É o número médio de jobs no sistema (na fila + em serviço).
+- **λ**: É a taxa média de chegada de jobs ao sistema.
+- **E[T]**: É o tempo médio que um job passa no sistema (tempo de resposta ou _sojourn time_).
 ### Para sistemas fechados
 $$
 N = X \cdot E[T]
 $$
 Onde:
-- **N**: É o número de tarefas no sistema, também conhecido como nível de multiprogramação (MPL).
-- **X**: É a vazão (_throughput_) do sistema, ou seja, a taxa de conclusão de tarefas.
+- **N**: É o número de jobs no sistema, também conhecido como nível de multiprogramação (MPL).
+- **X**: É a vazão (_throughput_) do sistema, ou seja, a taxa de conclusão de jobs.
 - **E[T]**: É o tempo médio que uma tarefa leva para completar um ciclo no sistema. Para sistemas interativos, este tempo inclui o "tempo de pensamento" do usuário ($E[T]=E[R]+E[Z]$ )
 ### Apenas para a Fila
 A lei também se aplica se considerarmos apenas a parte da fila do sistema:
@@ -396,12 +371,27 @@ $$
 E[N_Q​]=\lambda \cdot E[T_Q​]
 $$
 Onde:
-- $N_Q$​ é o número de tarefas na fila 
+- $N_Q$​ é o número de jobs na fila 
 - $T_Q$​ é o tempo de espera na fila.
-### Apenas para um Tipo de Tarefa
-A lei pode ser aplicada a um subconjunto específico de tarefas, como apenas as tarefas "vermelhas"
+### Para recortes do sistema
+A Lei de Little pode ser usada para analisar apenas a parte da fila de um sistema, ignorando o tempo em que uma tarefa está sendo efetivamente servida.
 
-### Lei da Utilização: 
+A fórmula se torna: **$E[N_Q​]=λ⋅E[T_Q​]$**
+
+Onde:
+- **$E[N_Q​]$**: O número médio de tarefas esperando na fila.
+- **$\lambda$**: A taxa média de chegada de tarefas ao sistema.
+- **$E[T_Q​]$**: O tempo médio que uma tarefa passa esperando na fila.
+## Lei dos Fluxos Forçados
+A Lei dos Fluxos Forçados é uma lei operacional que estabelece uma relação direta entre a vazão (_throughput_) de um sistema inteiro e a vazão de um dispositivo individual dentro desse sistema.
+$$
+X_{i}= E[V_i] \cdot X
+$$
+Onde:
+- **$X_i$​**: É a vazão no dispositivo `i` (a taxa de conclusões de tarefas no dispositivo `i`).
+- **$E[V_i​]$**: É o número médio de visitas que uma tarefa faz ao dispositivo `i` antes de sair do sistema. 
+- **X**: É a vazão total do sistema (a taxa de conclusão de tarefas para o sistema como um todo)
+## Lei da Utilização: 
 A Lei de Little pode ser usada para provar a **Lei da Utilização**, que afirma que a utilização ($ρi_​$) de um servidor `i` é o produto de sua vazão ($X_i$​) e o tempo médio de serviço ($E[S_i​]$):
 $$
 \rho_{i}= X_{i}\cdot E[S_i]
@@ -416,6 +406,13 @@ $$
 Onde:
 - **$E[V_i​]$**: O número médio de visitas que uma tarefa faz ao dispositivo `i`.
 - **$E[S_i]$**: O tempo médio de serviço no dispositivo `i` por visita.
+#### Para um sistema real
+$$
+E[D_i]=\frac{B_i}{C}
+$$
+Onde,
+- $B_i$ : Tempo total que o servidor ficou ocupado
+- $C$ : Total de jobs finalizados pelo sistema
 ### A Lei do Gargalo
 
 A lei estabelece uma relação direta entre a utilização de um dispositivo, a vazão do sistema e a demanda de serviço:
@@ -424,7 +421,7 @@ $$
 $$
 Onde:
 - **ρi​**: É a utilização do dispositivo `i` (a fração de tempo que ele está ocupado).
-- **X**: É a vazão (_throughput_) total do sistema (tarefas concluídas por segundo).
+- **X**: É a vazão (_throughput_) total do sistema (jobs concluídos por segundo).
 - **$E[D_i​]$**: É a demanda média de serviço total no dispositivo `i`.
 ### Identificando o gargalo
 O dispositivo com a maior demanda de serviço total,
@@ -432,3 +429,76 @@ $$
 D_{max}​=\text{max}_i​{E[D_i​]} 
 $$
 é o **dispositivo gargalo**. Este dispositivo é o principal fator que limita o desempenho geral do sistema, pois é o primeiro a atingir 100% de utilização à medida que a carga aumenta.
+# 7. Análises de Modificações de Sistemas Fechados
+## Métricas principais
+
+Em sistemas fechados, analisam-se:
+- **Throughput ( X )** – taxa de processamento de requisições no sistema;
+- **Tempo médio de resposta ( E[R] )** – tempo total no sistema (espera + serviço);
+- **Número médio de clientes ( N )** – total constante;
+- **Tempo de reflexão ( E[Z] )** – tempo médio que o cliente passa (ocsioso) fora do sistema, antes de voltar.
+#### Conceitos-Chave
+
+A análise se baseia em **limites assintóticos** para a vazão (_throughput_, X) e o tempo de resposta ( E[R] ) em sistemas fechados. Esses limites são definidos em termos da demanda total de serviço em cada dispositivo ( $D_i$ ).
+- **Dispositivo Gargalo ( $D_{max}$ )** É o dispositivo com a maior demanda total de serviço por tarefa. Este é o recurso que fundamentalmente limita o desempenho do sistema.
+    $$D_{max}=\text{max}_i{E[D_i]}$$
+- **Soma das Demandas ( $D$ ):** A soma das demandas média de serviço em todos os dispositivos (ou seja, demanda total no sistema)
+    $$
+    D=\sum\limits_{i}E[D_i]
+$$
+Os limites para a vazão (X) e o tempo de resposta ( E[R] ) em um sistema com N jobs são dados por:
+$$
+X\le \text{min }\Bigg( \frac{N}{D+E[Z]},\frac{1}{D_{max}} \Bigg) \quad (1)
+$$
+
+$$E[T] = E[R]+E[Z] \ge D+E[Z] \quad (2)$$
+
+Onde 
+- **E[T]**: É o **tempo médio de ciclo do sistema**.
+- **E[R]**: É o **tempo médio de resposta**. É o tempo que o sistema leva para processar uma tarefa
+- **E[Z]**: É o **tempo médio de reflexão**, que é zero para sistemas em lote
+- N: Número total de cliente
+- D: É a a soma das demandas de serviço médias em todos os dispositivos para uma única tarefa
+- $D_{max}$: É o dispositivo com a maior demanda
+
+(2) significa que o tempo médio de resposta que os usuários estão experimentando é **maior do que o tempo mínimo de serviço**
+Pela lei de little:
+$$
+N = X \cdot E[T] \longrightarrow N = X \cdot E[R]+E[Z]
+
+$$
+Por $E[R] \ge D$:
+$$
+X \le \frac{N}{E[R]+E[Z]} \longrightarrow X\le \frac{N}{D+E[Z]}
+$$
+Pela de lei do gargalo (a utilização $\rho_i$ deve ser menor que 100%)
+$$
+X \cdot E[D_i]\le 1\longrightarrow X\le\frac{1}{E[D_i]}
+$$
+Como isso chegamos em (1), o **limite superior assintótico** para a vazão ( X )
+
+- **Ponto de Saturação ( $N^*$ )** É o nível de multiprogramação (número de jobs) além do qual começa a haver enfileiramento significativo no sistema. 
+$$
+\begin{align}
+\frac{N}{D+E[Z]}=\frac{1}{D_{max}}
+\\ \\
+N^{*}=\frac{D+E[Z]}{D_{max}} 
+\end{align}
+$$
+#### Principais Conclusões da Análise
+
+A análise desses limites revela como o sistema se comporta sob diferentes níveis de carga:
+
+1. **Quando a Carga é Alta ( $N > N^*$ ):** O desempenho (vazão e tempo de resposta) é dominado pelo dispositivo gargalo ($D_{max}$) $\frac{1}{D_{max}}$
+	Para obter mais vazão ou menor tempo de resposta, é necessário diminuir a demanda no dispositivo gargalo. Melhorar qualquer outro dispositivo terá um efeito insignificante no desempenho geral.
+    
+2. **Quando a Carga é Baixa ( $N < N^*$ ):** O desempenho é limitado pela soma total das demandas ( D ). $\frac{N}{D+E{Z}}$
+	Melhorar qualquer dispositivo (não apenas o gargalo) pode levar a uma pequena melhoria no desempenho.
+    
+#### Comparação entre Sistemas Fechados e Abertos
+
+A análise de modificações se aplica de forma diferente a sistemas abertos e fechados:
+
+- **Sistemas Fechados:** Como visto, o desempenho em alta carga é rigidamente limitado pelo gargalo.
+    
+- **Sistemas Abertos:** A vazão é determinada pela taxa de chegada externa ( $\lambda$ ). Embora a vazão ainda seja limitada pela capacidade do gargalo ( $X\le 1 / D_{max}$ ), essa não é uma restrição tão forte quanto nos sistemas fechados. Em um sistema aberto, melhorar um dispositivo que não é o gargalo **ainda assim melhora o tempo de resposta médio**, ao contrário do que acontece em um sistema fechado sob alta carga.
