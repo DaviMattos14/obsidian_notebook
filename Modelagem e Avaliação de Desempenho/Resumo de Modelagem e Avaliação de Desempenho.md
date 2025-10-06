@@ -314,6 +314,7 @@ Para gerar amostras **Normais**, o método híbrido pode:
 ## Métricas de Desempenho
 
 - Response Time (**T**) : Tempo de resposta (Tempo no sistema)
+		$T = Tq + Ts$
 - Waiting Time (**Tq**) : Tempo perdido em filas (Q: Queue)
 - Número de jobs no sistema (**N(t)**) no instante $t$
 - Número de jobs na Fila (**Nq(t)**) no instante $t$
