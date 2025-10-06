@@ -428,6 +428,7 @@ Onde:
 - **$E[D_i​]$**: É a demanda média de serviço total no dispositivo `i`.
 ### Identificando o gargalo
 O dispositivo com a maior demanda de serviço total,
-
-D_{max}​=maxi​{E[Di​]}, 
+$$
+D_{max}​=\text{max}_i​{E[D_i​]} 
+$$
 é o **dispositivo gargalo**. Este dispositivo é o principal fator que limita o desempenho geral do sistema, pois é o primeiro a atingir 100% de utilização à medida que a carga aumenta.
