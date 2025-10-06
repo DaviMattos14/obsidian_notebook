@@ -408,3 +408,26 @@ $$
 $$
 ## Lei do Gargalo
 A Lei do Gargalo é uma lei operacional simples e poderosa usada para identificar o recurso que limita o desempenho de um sistema de filas. O "gargalo" do sistema é o dispositivo que possui a maior demanda total de serviço por tarefa.
+### Demanda de Serviço (Di​)
+Para entender a Lei do Gargalo, primeiro definimos a **demanda total de serviço (Di​)** em um dispositivo `i`. Esta é a soma do tempo de serviço total que uma única tarefa exige do dispositivo `i` em todas as suas visitas
+$$
+E[D_i]=E[V_i]\cdot E[S_i]
+$$
+Onde:
+- **$E[V_i​]$**: O número médio de visitas que uma tarefa faz ao dispositivo `i`.
+- **$E[S_i]$**: O tempo médio de serviço no dispositivo `i` por visita.
+### A Lei do Gargalo
+
+A lei estabelece uma relação direta entre a utilização de um dispositivo, a vazão do sistema e a demanda de serviço:
+$$
+\rho_{i}= X \cdot E[D_i]
+$$
+Onde:
+- **ρi​**: É a utilização do dispositivo `i` (a fração de tempo que ele está ocupado).
+- **X**: É a vazão (_throughput_) total do sistema (tarefas concluídas por segundo).
+- **$E[D_i​]$**: É a demanda média de serviço total no dispositivo `i`.
+### Identificando o gargalo
+O dispositivo com a maior demanda de serviço total,
+
+D_{max}​=maxi​{E[Di​]}, 
+é o **dispositivo gargalo**. Este dispositivo é o principal fator que limita o desempenho geral do sistema, pois é o primeiro a atingir 100% de utilização à medida que a carga aumenta.
