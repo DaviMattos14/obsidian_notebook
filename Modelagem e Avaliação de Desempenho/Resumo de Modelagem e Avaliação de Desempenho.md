@@ -299,8 +299,31 @@ Para gerar amostras **Normais**, o método híbrido pode:
 # 6. Filas
 ![[Pasted image 20251005012909.png]]
 **Servidor**: Qualquer recurso onde filas de tarefas possam se formar
+## Notação de Kendall (A/S/k/K/N/D)
+|Símbolo|Significado|
+|---|---|
+|**A**|Distribuição do tempo entre chegadas|
+|**S**|Distribuição do tempo de serviço|
+|**k**|Número de servidores|
+|**K**|Capacidade máxima do sistema (fila + serviço)|
+|**N**|Tamanho da população de clientes (finita ou infinita)|
+|**D**|Disciplina de atendimento (ordem de serviço)|
+## Distribuições
+|Símbolo|Tipo de distribuição|Descrição|
+|---|---|---|
+|**M**|Exponencial (Markoviana)|Chegadas ou serviços seguem processo de Poisson|
+|**D**|Determinística|Tempo fixo entre chegadas ou serviços|
+|**G**|Geral|Distribuição arbitrária (qualquer forma)|
+#### Exemplos:
+|Modelo|Descrição|
+|---|---|
+|**M/M/1**|Um servidor, chegadas e serviços exponenciais|
+|**M/M/k**|k servidores em paralelo, chegadas e serviços exponenciais|
+|**M/M/∞**|Servidores infinitos (sem espera)|
+|**M/M/k/k**|Sistema sem fila: se todos os servidores estão ocupados, novos clientes são bloqueados|
+|**M/G/1**|Serviço com distribuição geral|
+|**G/G/1**|Modelo mais geral (ambos processos arbitrários)|
 
-## Classificação das Redes de Filas
 ## Parâmetros do Sistemas
 - Topologia da Rede
 - Política (ordem de atendimento) da fila
@@ -323,3 +346,65 @@ Para gerar amostras **Normais**, o método híbrido pode:
 O tempo de serviço S, assim como outras V.A.s e métricas, **depende do servidor**. Será maior ou menor conforme a taxa de serviço $\mu$ do servidor onde está. Para referir-se às métricas do i-ésimo servidor em uma rede de filas, anota-se $T_i$ , $Tq_i$ , $N(t)_i$ , etc.
 
 Condição de Estabilidade: Sempre assumiremos que $\mu < \lambda$
+
+- **Tempo de Espera**
+		$E[T]=E[Tq]+E[S] \quad S\rightarrow$ Tempo de Processo
+- **Número de Tarefas no Sistema (N):** O número de tarefas na fila mais as que estão sendo atendidas.
+- **Número de Tarefas na Fila (N<sub>Q</sub>):** Apenas o número de tarefas que estão esperando na fila.
+- **Utilização ($\rho_i$):** A fração do tempo em que um dispositivo (servidor) `i` está ocupado. Em um sistema de servidor único, é calculada como
+- **Vazão (Throughput: $X_i$):** A taxa de conclusão de tarefas em um dispositivo `i` (tarefas/segundo). Para um sistema estável, a taxa de saída é igual à taxa de entrada. $X_{i}= \mu_{i}\cdot \rho_i$
+
+**Lei da Utilização** relaciona essas duas últimas métricas
+$$
+\rho = \frac{X_i}{\mu_i}
+$$
+## Classificação das Redes de Filas
+As redes de filas são geralmente classificadas em duas categorias principais:
+
+1. **Redes Abertas (Open Networks):** Possuem chegadas e partidas externas. 
+	Vazão máxima é sempre limitada por $\mu$
+	Vazão real é igual a taxa de chegada $\lambda$ (supondo $\lambda< \mu$), ou seja, $X_i$ não depende da taxa de serviço $\mu$
+    
+2. **Redes Fechadas (Closed Networks):** Não possuem chegadas ou partidas externas. 
+	**Um número fixo de tarefas (N)**, conhecido como **nível de multiprogramação (MPL)**, circula constantemente pelo sistema. Elas se subdividem em:
+    - **Sistemas em Lote (Batch Systems):** Assim que uma tarefa termina, uma nova é iniciada imediatamente, mantendo sempre N tarefas ativas no sistema.
+    - **Sistemas Interativos:** Modelam usuários em terminais. Um usuário envia uma requisição, espera pela resposta (tempo de resposta, R) e então passa um tempo "pensando" (think time, Z) antes de enviar a próxima requisição.
+## Lei de Little
+Ela estabelece uma relação fundamental e simples entre o número médio de tarefas em um sistema, a taxa de chegada e o tempo médio que uma tarefa passa no sistema.
+$$
+E[X]=X\cdot E[T]\quad E[T] = \frac{1}{x}\cdot E[N]
+$$
+Para $X=$ Vazão (Taxa média de jobs finalizados)
+		$\frac{1}{x}=$ Tempo entre jobs
+### Para sistemas abertos
+$$E[N]=\lambda \cdot E[T]$$
+Onde:
+- **E[N]**: É o número médio de tarefas no sistema (na fila + em serviço).
+- **λ**: É a taxa média de chegada de tarefas ao sistema.
+- **E[T]**: É o tempo médio que uma tarefa passa no sistema (tempo de resposta ou _sojourn time_).
+### Para sistemas fechados
+$$
+N = X \cdot E[T]
+$$
+Onde:
+- **N**: É o número de tarefas no sistema, também conhecido como nível de multiprogramação (MPL).
+- **X**: É a vazão (_throughput_) do sistema, ou seja, a taxa de conclusão de tarefas.
+- **E[T]**: É o tempo médio que uma tarefa leva para completar um ciclo no sistema. Para sistemas interativos, este tempo inclui o "tempo de pensamento" do usuário ($E[T]=E[R]+E[Z]$ )
+### Apenas para a Fila
+A lei também se aplica se considerarmos apenas a parte da fila do sistema:
+$$
+E[N_Q​]=\lambda \cdot E[T_Q​]
+$$
+Onde:
+- $N_Q$​ é o número de tarefas na fila 
+- $T_Q$​ é o tempo de espera na fila.
+### Apenas para um Tipo de Tarefa
+A lei pode ser aplicada a um subconjunto específico de tarefas, como apenas as tarefas "vermelhas"
+
+### Lei da Utilização: 
+A Lei de Little pode ser usada para provar a **Lei da Utilização**, que afirma que a utilização ($ρi_​$) de um servidor `i` é o produto de sua vazão ($X_i$​) e o tempo médio de serviço ($E[S_i​]$):
+$$
+\rho_{i}= X_{i}\cdot E[S_i]
+$$
+## Lei do Gargalo
+A Lei do Gargalo é uma lei operacional simples e poderosa usada para identificar o recurso que limita o desempenho de um sistema de filas. O "gargalo" do sistema é o dispositivo que possui a maior demanda total de serviço por tarefa.
