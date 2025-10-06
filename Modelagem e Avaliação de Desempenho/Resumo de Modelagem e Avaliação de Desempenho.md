@@ -300,6 +300,7 @@ Para gerar amostras **Normais**, o método híbrido pode:
 ![[Pasted image 20251005012909.png]]
 **Servidor**: Qualquer recurso onde filas de tarefas possam se formar
 
+## Classificação das Redes de Filas
 ## Parâmetros do Sistemas
 - Topologia da Rede
 - Política (ordem de atendimento) da fila
