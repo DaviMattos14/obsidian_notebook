@@ -441,15 +441,18 @@ Em sistemas fechados, analisam-se:
 
 A análise se baseia em **limites assintóticos** para a vazão (_throughput_, X) e o tempo de resposta ( E[R] ) em sistemas fechados. Esses limites são definidos em termos da demanda total de serviço em cada dispositivo ( $D_i$ ).
 - **Dispositivo Gargalo ( $D_{max}$ )** É o dispositivo com a maior demanda total de serviço por tarefa. Este é o recurso que fundamentalmente limita o desempenho do sistema.
-    $$D_{max}=\text{max}_i{E[D_i]}$$
+$$
+    D_{max}=\text{max}_i{E[D_i]}
+$$
 - **Soma das Demandas ( $D$ ):** A soma das demandas média de serviço em todos os dispositivos (ou seja, demanda total no sistema)
-    $$
+$$
     D=\sum\limits_{i}E[D_i]
 $$
 Os limites para a vazão (X) e o tempo de resposta ( E[R] ) em um sistema com N jobs são dados por:
 $$
 X\le \text{min }\Bigg( \frac{N}{D+E[Z]},\frac{1}{D_{max}} \Bigg) \quad (1)
 $$
+.
 
 $$E[T] = E[R]+E[Z] \ge D+E[Z] \quad (2)$$
 
