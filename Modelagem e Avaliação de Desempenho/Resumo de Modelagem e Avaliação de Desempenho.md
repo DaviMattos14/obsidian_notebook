@@ -352,7 +352,7 @@ $$
 Para $X=$ Vazão (Taxa média de jobs finalizados)
 		$\frac{1}{X}=$ Tempo entre jobs
 ### Para sistemas abertos
-$$E[N]=\lambda \cdot E[T]$$
+$$E[N]= \lambda \cdot E[T]$$
 Onde:
 - **E[N]**: É o número médio de jobs no sistema (na fila + em serviço).
 - **λ**: É a taxa média de chegada de jobs ao sistema.
