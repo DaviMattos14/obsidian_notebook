@@ -314,6 +314,21 @@ são utilizadas para que possamos saber qual o grau de variação dos nossos dad
 	
 	**Intervalo Interquartílico (IQR):** É a diferença entre o terceiro e o primeiro quartil ($IQR=Q3−Q1$), representando a dispersão dos 50% centrais dos dados.
 
+	Como calcular os quartis:
+$$
+\begin{matrix} 
+i=(N-1)\cdot q+1
+\\
+P_{p}=x_{[i]}+(i-[i])\cdot(x_{[i]+1}-x_{[i]})
+\end{matrix}
+$$
+onde:
+- 
+- 
+	Como calcular os limites:
+	-  $X_i > LS \text{ (Limite Superior)}$, para $LS=Q_3 + 1.5\times(Q_3-Q_1)$
+	- $X_i < LI \text{ (Limite Inferior)}$, para $LI=Q_1 - 1.5\times(Q_3-Q_1)$
+
 - **Variância** $\sigma$= média dos desvios² da média
     $$
     \frac{1}{2}\sum\limits(x_i-\overline{x}_i)^2
