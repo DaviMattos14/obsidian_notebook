@@ -1,84 +1,257 @@
+# 1. Aprendizado de Máquina
+Aprender é o processo pelo qual um sistema melhora seu desempenho por meio da experiência. O Aprendizado de Máquina (Machine Learning) surge como uma solução para problemas onde é difícil antecipar todas as situações possíveis ou programar uma solução passo a passo. As abordagens para o aprendizado incluem:
 
-# 🧠 **Resumo para Prova – ICP363: Introdução ao Aprendizado de Máquina**
+- **Aprendizado como busca**: Consiste em enumerar um espaço de conceitos e eliminar aqueles que não condizem com os dados observados.
+    
+- **Aprendizado indutivo**: Foca em extrair informações gerais a partir da observação de um conjunto de casos particulares. Um exemplo histórico é como as observações de Tycho Brahe permitiram a Johannes Kepler formular suas leis da mecânica celeste.
+    
+### O Papel dos Dados
+
+Os dados são a base para o treinamento de programas de aprendizado de máquina. O desenvolvimento de um sistema de ML segue etapas como a definição do problema, coleta e preparação dos dados, treinamento e avaliação do modelo.
+
+Contudo, a coleta de dados apresenta desafios:
+
+- **Desbalanceamento**: Fontes como a Wikipedia possuem uma distribuição de tópicos desigual, com maior concentração em áreas como Esportes, Música e Política.
+    
+- **Falta de Diversidade**: Os dados frequentemente sub-representam diversas culturas, geografias e grupos étnicos , privilegiando pontos de vista predominantes. O acesso à internet, por exemplo, é maior entre jovens e em países desenvolvidos.
+    
+- **Dados no Brasil**: Embora o acesso à internet atinja 80% dos domicílios, há uma disparidade social: 100% da classe A está conectada, contra 60% das classes D e E.
+### Relação com Outras Áreas
+
+O documento posiciona o Aprendizado de Máquina dentro de um contexto mais amplo:
+
+- **Inteligência Artificial (IA)**: É a área mais ampla, focada na construção de sistemas inteligentes que se comportam como humanos.
+    
+- **Aprendizado de Máquina (ML)**: É uma subárea da IA que desenvolve algoritmos capazes de aprender.
+    
+- **Aprendizado Profundo (Deep Learning)**: Uma subárea do ML que utiliza modelos com múltiplas camadas de processamento para aprender representações de dados em vários níveis de abstração.
+    
+- **Ciência de Dados e Mineração de Dados**: A Ciência de Dados estuda a extração de conhecimento a partir de dados, utilizando técnicas de ML , enquanto a Mineração de Dados foca na aplicação de algoritmos para extrair padrões de conjuntos de dados.
+# 2. Perceptron
+
+Ele é o **modelo mais simples de rede neural** e foi o ponto de partida para o desenvolvimento do **aprendizado supervisionado**.
+
+- Objetivo: **Classificar** dados em duas classes (ex: 0 ou 1, -1 ou +1).
+    
+- Tipo: **Aprendizado supervisionado (classificação binária)**.
+    
+- Baseia-se em **combinar entradas ponderadas por pesos** e aplicar uma **função de ativação**.
+
+O Perceptron representa **um neurônio artificial** com
+
+| Componente                     | Descrição                                            |
+| ------------------------------ | ---------------------------------------------------- |
+| **Entradas (x₁, x₂, ..., xₙ)** | Atributos ou variáveis de entrada.                   |
+| **Pesos (w₁, w₂, ..., wₙ)**    | Parâmetros ajustáveis (importância de cada entrada). |
+| **Viés (bias, b)**             | Constante que desloca o limiar da decisão.           |
+| **Soma Ponderada (z)**         | $z = \sum_{i=1}^{n} (w_i \cdot x_i) + b$             |
+| **Função de Ativação (f)**     | Converte ( z ) em saída binária (0 ou 1).            |
+Saída:  
+$$
+	y =  
+    \begin{cases}  
+    1, & \text{se } (Σ_{i=1} w_i x_i + b) > 0 \\
+    0, & \text{caso contrário}  
+    \end{cases}  
+$$
+
+### 🧩 Pseudocódigo:
+
+```
+Entrada: dados de treino {(x₁, y₁), ..., (xₙ, yₙ)}
+inicializar pesos w_i = 0 e bias b = 0
+Definir taxa de aprendizado α (ex: 0.1)
+
+para época em 1..N:
+    para cada amostra (x, y_esperado):
+        y_pred = ativacao(Σ(w_i * x_i) + b)
+        erro = y_esperado - y_pred
+        para cada peso w_i:
+            w_i = w_i + α * erro * x_i
+        b = b + α * erro
+```
+
+**Função ativação:** retorna 1 se entrada > 0, senão 0.
+- **α** → taxa de aprendizado (ex: 0.1)
+- Atualiza pesos apenas quando há erro.
+O Perceptron busca **coeficientes (pesos)** que satisfaçam:
+
+$$
+y_i (w \cdot x_i + b) > 0
+$$
+para todas as amostras corretamente classificadas.
+
+Se o conjunto for **linearmente separável**, o Perceptron **converge** (ou seja, encontra pesos corretos).
+
+Se **não for separável**, ele **não converge** (fica oscilando).
+
+## Representação Geométrica
+
+A fronteira de decisão é dada por:
+
+$$
+w_1x_1 + w_2x_2 + ... + w_nx_n + b = 0
+$$
+- Pontos acima → classe 1
+- Pontos abaixo → classe 0
 
 ---
 
-## 🏁 **1. Fundamentos**
+## Limitações
 
-### 📌 O que é Aprendizado de Máquina (ML)?
-
-- Subárea da **Inteligência Artificial (IA)**.
-    
-- **Objetivo**: fazer sistemas melhorarem sua performance **com a experiência (dados)**.
-    
-- ML aprende **padrões** e **faz previsões** sem precisar de regras explícitas.
-    
-
-### ⚙️ Relação entre áreas:
-
-|Área|Descrição|
-|---|---|
-|**IA**|Sistemas inteligentes que simulam comportamento humano.|
-|**ML**|Algoritmos que aprendem com dados.|
-|**DL (Deep Learning)**|Modelos com várias camadas (redes neurais profundas).|
-|**Data Science**|Extração de conhecimento de dados (usa ML, estatística e mineração).|
-
-### 🕰️ Breve histórico:
-
-- **Bayes (1763)** – probabilidade condicional.
-    
-- **Markov (1913)** – processos estocásticos.
-    
-- **Perceptron (1957)** – primeira rede neural.
-    
-- **Backpropagation (1986)** – aprendizado em redes multicamadas.
-    
+| Limitação                                                  | Explicação                                        |
+| ---------------------------------------------------------- | ------------------------------------------------- |
+| **Somente separável linearmente**                          | Não funciona para padrões não lineares (ex: XOR). |
+| **Convergência garantida apenas se linearmente separável** | Caso contrário, entra em loop.                    |
+| **Função de ativação simples**                             | Apenas degrau; não lida com probabilidades.       |
 
 ---
 
-## 📊 **2. Tipos de Aprendizado**
+## Versão Vetorial (Forma Compacta)
+
+$$
+\begin{matrix}
+\mathbf{w} \leftarrow \mathbf{w} + α (y - \hat{y}) \mathbf{x} \\  b \leftarrow b + α (y - \hat{y})
+\end{matrix}
+$$
+
+- $\mathbf{w}$: vetor de pesos
+- $\mathbf{x}$: vetor de entrada
+- $y$: rótulo real
+- $\hat{y}$​: previsão
+## 💡 **Dica para Prova**
+
+Lembre-se:
+- O perceptron **não “entende” padrões curvos** — só retas/planos.
+- **Erro = esperado - previsto**
+- **Atualiza pesos somente se erra**
+- **Bias desloca a fronteira de decisão** (não precisa passar pela origem).
+
+#  3. Tipos de Aprendizado
 
 ### 🔹 Supervisionado:
 
 - Dados **rotulados** (x → y conhecidos).
-    
 - O modelo **aprende mapeamento f(x) → y**.
-    
+
 - Exemplo:
-    
     - Regressão linear (previsão de valores contínuos)
-        
     - Classificação (atribuição de rótulos, ex: spam/não spam)
-        
 
-**Pseudocódigo básico:**
+#### Como funciona
 
-```
-Para cada amostra (x_i, y_i) no conjunto de treino:
-    modelo ← ajustar parâmetros para minimizar erro entre previsão e y_i
-```
+1. Fornecemos **dados de treino** com pares (entrada, saída):
+$$
+  D = \{(x_1, y_1), (x_2, y_2), ..., (x_n, y_n)\}  
+$$
+    
+2. O modelo aprende **a relação entre x e y** ajustando seus parâmetros.
+3. Depois é testado em **dados novos** (sem rótulo) para verificar se generalizou bem.
+ #### Tipos principais
+- **Regressão:** Usada para prever valores contínuos.
+- **Classificação:** Utiliza um algoritmo para atribuir dados a categorias específicas.
+
+⚠️ Cuidados
+- Dividir dataset em **treino e teste**.
+- Evitar **overfitting** (memorizar dados).
+- Avaliar com métricas adequadas (MSE, acurácia, precisão, recall...).
 
 ---
 
 ### 🔹 Não Supervisionado:
 
-- Dados **não rotulados**.
-    
-- O algoritmo descobre **padrões ocultos** (grupos, associações).
-    
-- Exemplo: _Clustering (agrupamento K-Means)_.
-    
+Neste tipo, **os dados não têm rótulos** — o modelo tenta **descobrir padrões, grupos ou estruturas ocultas** nos dados. Não há “resposta correta” para comparar.
 
+- Dados **não rotulados**.
+- O algoritmo descobre **padrões ocultos** (grupos, associações).
+
+ Objetivo
+- Encontrar **relações internas** entre os dados.
+- Reduzir dimensionalidade, agrupar exemplos similares ou identificar outliers.
+- Exemplo: _Clustering (agrupamento K-Means)_.
+
+⚠️ Limitações
+- Difícil avaliar se o agrupamento está “correto”.
+- Requer interpretação humana posterior.
 ---
 
 ### 🔹 Por Reforço:
 
 - O agente aprende por **recompensa/punição** ao interagir com o ambiente.
-    
 - Exemplo: jogos, robótica, controle autônomo.
     
-
 ---
+
+# 4. Modelos Paramétricos vs. Não Paramétricos
+
+- **Modelos Paramétricos:** Resumem os dados com um conjunto de parâmetros de tamanho fixo, independentemente do número de exemplos. Exemplos incluem Regressão Linear e Perceptron.
+    
+    - **Vantagens:** São mais fáceis de interpretar, mais rápidos e não exigem muitos dados.
+    - **Desvantagens:** São muito dependentes da função escolhida e mais adequados para problemas simples.
+        
+- **Modelos Não Paramétricos:** Não podem ser caracterizados por um conjunto limitado de parâmetros. Exemplos incluem árvores de decisão, redes neurais e SVM.
+    
+    - **Vantagens:** São mais flexíveis, não fazem suposições sobre a função subjacente e possuem alta performance.
+    - **Desvantagens:** Requerem mais dados, são mais lentos para treinar e têm maior risco de _overfitting_.
+---
+
+# 5. Tipos de Dados
+
+## Dados Estruturados 
+
+São dados organizados, com informações representadas por atributos (features) e seus valores, geralmente armazenados em bancos de dados ou planilhas. Os tipos de atributos podem ser:
+
+- **Categóricos/Nominais:** Valores que representam categorias (ex: cor do cabelo).
+- **Booleano:** Apenas dois valores (verdadeiro/falso).
+- **Ordinal:** Valores que representam uma escala (ex: nível de satisfação).
+- **Numéricos:** Valores inteiros ou reais. 
+
+## Dados Não Estruturados 
+São compostos por diferentes tipos de dados combinados, como textos e imagens.
+
+- **Preparação de Dados:** Textos podem ser convertidos em representações numéricas (vetores) para capturar relações semânticas, como no exemplo `(rei - homem) + mulher = rainha`.
+- **Dados de Imagem:** Uma imagem pode ser vista como uma matriz de pixels. Cada pixel é representado por um valor numérico, seja em escala de cinza (um inteiro de 0 a 255) ou RGB (três inteiros, um para cada cor).
+
+# 6. Métricas de Avaliação para Modelos
+
+Treinar um modelo (regressão, classificação etc.) não é o suficiente.  
+Precisamos **quantificar seu desempenho** — ou seja, **medir o erro ou acerto das previsões**.
+
+- **Objetivo:** saber se o modelo **generaliza bem** para dados novos.
+- **Problema comum:** _Overfitting_ (modelo “decorou” o treino) ou _Underfitting_ (modelo muito simples)
+
+## Matriz de confusão
+![[Pasted image 20251008193718.png]]
+- **Verdadeiro Positivo (VP):** O modelo previu "positivo" e o valor real era "positivo".
+- **Falso Positivo (FP):** O modelo previu "positivo", mas o valor real era "negativo".
+- **Falso Negativo (FN):** O modelo previu "negativo", mas o valor real era "positivo".
+- **Verdadeiro Negativo (VN):** O modelo previu "negativo" e o valor real era "negativo".
+
+## Acurácia
+Percentual de acertos totais do modelo. 
+Boa quando as classes estão **equilibradas**
+$$
+\text{Acurácia }=\frac{VP+VN}{VP+VN+FP+FN}
+$$
+​
+## Revocação (Recall)
+De todos os casos que eram realmente "positivos", quantos o modelo conseguiu identificar?
+Alta sensibilidade → poucos falsos negativos.
+$$
+\text{Recall}=\frac{VP}{VP+FN}​
+$$
+## Precisão
+Das vezes que o modelo previu "positivo", quantas ele acertou?
+Alta precisão → poucos falsos positivos.
+$$
+\text{Precision}=\frac{VP}{VP+FP}​
+$$
+## F1 - Score
+Média harmônica entre precisão e revocação, útil para balancear o impacto de falsos positivos e falsos negativos
+Boa quando há **classes desbalanceadas**.
+$$
+\text{F1}=2\times \frac{\text{Precisão}\times \text{Recall}}{\text{Precisão} + \text{Recall}}​
+$$
 
 ## 🧩 **3. Tipos de Dados e Pré-Processamento**
 
