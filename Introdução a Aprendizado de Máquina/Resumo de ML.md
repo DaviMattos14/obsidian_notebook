@@ -253,60 +253,77 @@ $$
 \text{F1}=2\times \frac{\text{Precisão}\times \text{Recall}}{\text{Precisão} + \text{Recall}}​
 $$
 
-## 🧩 **3. Tipos de Dados e Pré-Processamento**
+# 7. Tipos de Dados e Pré-Processamento
 
-### 🧮 Tipos de atributos:
+### Tipos de atributos:
 
-|Tipo|Exemplo|Observação|
-|---|---|---|
-|**Nominal**|Cor (vermelho, azul)|Sem ordem.|
-|**Binário**|Fumante (0/1)|Dois estados.|
-|**Ordinal**|Tamanho (P, M, G)|Ordem, sem distância fixa.|
-|**Numérico**|Idade, peso|Intervalo ou razão.|
+| Tipo         | Exemplo              | Observação                 |
+| ------------ | -------------------- | -------------------------- |
+| **Nominal**  | Cor (vermelho, azul) | Sem ordem.                 |
+| **Binário**  | Fumante (0/1)        | Dois estados.              |
+| **Ordinal**  | Tamanho (P, M, G)    | Ordem, sem distância fixa. |
+| **Numérico** | Idade, peso          | Intervalo ou razão.        |
 
 ---
-
-### ⚙️ Etapas de pré-processamento:
+### Etapas de pré-processamento:
 
 1. **Limpeza de dados**
-    
     - Preencher valores ausentes (média, mediana, modelo preditivo).
-        
     - Remover ruído (método de _binning_, regressão).
-        
     - Detectar outliers.
         
 2. **Integração de dados**
-    
     - Unir dados de múltiplas fontes, resolvendo duplicatas e conflitos de nomes.
         
 3. **Redução de dados**
-    
     - Reduzir dimensionalidade (PCA, amostragem, seleção de atributos).
         
 4. **Transformação de dados**
-    
     - Normalizar (ex: [0,1]).
-        
     - Discretizar (intervalos, faixas de idade etc.).
         
-
 ---
 
 ### 🧮 Estatística básica:
 
+#### Medidas de Posição: 
+medem a localização do meio ou centro de uma distribuição;
+
 - **Média** (tendência central)
-    
+$$
+    \frac{\sum\limits x_i}{n}
+$$
+sensível a valores extremos (outliers).
+
 - **Mediana** (valor central)
-    
+$$
+    \text{mediana }(x) =
+ \begin{cases}
+ \text{x}_{\frac{n+1}{2}} & \text{se n for ímpar} \\
+\frac{(\text{x}_{\frac{n}{2}} + \text{x}_{\frac{n+1}{2}})}{2} & \text{se n for par}
+ \end{cases}   
+$$
+para dados assimétricos, esta é a melhor medida.
+
 - **Moda** (valor mais frequente)
-    
-- **Variância** = média dos desvios² da média
-    
-- **Desvio padrão** = √variância
-    
+#### Medidas de dispersão: 
+são utilizadas para que possamos saber qual o grau de variação dos nossos dados
+
+- **Quartis**:
+	Dividem os dados ordenados em quatro partes iguais. O primeiro quartil (Q1) corresponde ao percentil 25, o segundo (Q2) é a mediana (percentil 50), e o terceiro (Q3) é o percentil 75
+	
+	**Intervalo Interquartílico (IQR):** É a diferença entre o terceiro e o primeiro quartil ($IQR=Q3−Q1$), representando a dispersão dos 50% centrais dos dados.
+
+- **Variância** $\sigma$= média dos desvios² da média
+    $$
+    \frac{1}{2}\sum\limits(x_i-\overline{x}_i)^2
+$$
+- **Desvio padrão** = $\sqrt{\sigma}$
+    Mede o quão distantes os valores estão da média
 - **Z-score** = (valor - média) / desvio padrão → mede quão longe está da média.
-    
+    $$
+    \frac{x-\overline{x}}{\sigma}
+$$
 
 ---
 
