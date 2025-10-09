@@ -253,6 +253,14 @@ $$
 \text{F1}=2\times \frac{\text{Precisão}\times \text{Recall}}{\text{Precisão} + \text{Recall}}​
 $$
 
+| Métrica      | Melhor em...                                    | Exemplo                              |
+| ------------ | ----------------------------------------------- | ------------------------------------ |
+| **Acurácia** | Bases **balanceadas**                           | Spam vs. não spam                    |
+| **Precisão** | Custo alto de **falsos positivos**              | Biometria bancária                   |
+| **Recall**   | Custo alto de **falsos negativos**              | Diagnóstico de câncer                |
+| **F1**       | Bases **desbalanceadas** e com erros simétricos | Análise de sentimentos em e-commerce |
+
+
 # 7. Tipos de Dados e Pré-Processamento
 
 ### Tipos de atributos:
@@ -514,9 +522,35 @@ RSS = \sum\limits(y_i-y_{previsto})^2=\sum\limits^n_{i=1}(y-(\hat{\beta_1}x_i+\h
 $$
 Derivando RSS em função de $\hat{\beta_1}$ e $\hat{\beta_0}$ e igualando a zero, chegamos nas seguintes fórmulas fechadas:
 $$
-
+\frac{\partial J(\hat{\beta_0},\hat{\beta_0})}{\partial \hat{\beta_1}} = \hat{\beta_1}\sum x_i + \hat{\beta_0}\cdot n = \sum y_i
+$$
+$$
+\frac{\partial J(\hat{\beta_0},\hat{\beta_1})}{\partial \hat{\beta_1}}= \hat{\beta_1}\sum x_i^2 +\hat{\beta_0}\sum x_i = \sum x_iy_i
 $$
 
+### Regressão Linear Multipla:
+Quando há mais de uma variável independente:
+
+$$
+y = β_0 + β_1x_1 + β_2x_2 + … + β_nx_n + ε
+$$
+
+### Forma matricial:
+
+$$
+\mathbf{y} = \mathbf{Xβ} + \mathbf{ε}
+$$
+Onde:
+- **X** é a matriz de entradas (com n amostras e p variáveis);
+- **β** é o vetor de coeficientes;
+- **y** é o vetor de saídas.
+### Estimação dos parâmetros:
+
+$$
+\hat{β} = (X^TX)^{-1}X^Ty
+$$
+
+Esse vetor **β̂** fornece os coeficientes que minimizam o erro de previsão.
 
 **Pseudocódigo (ajuste por mínimos quadrados):**
 
@@ -530,76 +564,60 @@ para cada novo x:
     prever y_pred = β0 + β1 * x
 ```
 
-### 📊 Avaliação:
 
-- **Erro Quadrático Médio (MSE)**  
-$$
-MSE = \frac{1}{n}\sum(y_i - \hat{y_i})^2  
-$$
-    
-- Quanto **menor o MSE**, melhor o ajuste.
+### Correlação 
 
----
-
-### 🔹 Regressão Linear Múltipla:
-$$
-y = β_0 + β_1x_1 + β_2x_2 + ... + β_nx_n  
-
-$$
-- Representação matricial:  
-$$
-    \mathbf{y} = Xβ + ε  
-$$    
-- Adiciona uma **coluna de 1’s** para o intercepto.
-    
-
----
-
-## 🔗 **5. Correlação**
+Nem todas as variáveis de entrada contribuem igualmente para a previsão da variável de saída. A **seleção de features** é o processo de escolher os atributos mais relevantes, o que pode diminuir o _overfitting_, melhorar o desempenho e reduzir o tempo de treinamento. Uma forma de fazer isso é através da análise de correlação**
 
 ### 📏 Correlação de Pearson:
 
 - Mede **relação linear** entre variáveis.  
 $$
-r = \frac{Cov(x, y)}{σ_x σ_y}      
+r = \frac{Cov(x, y)}{σ_x σ_y}   
 $$
+![[Pasted image 20251008230007.png]]
 - Varia entre **-1 e 1**.
     
-    - r = 1 → forte positiva
-        
+	- r = 1 → forte positiva
     - r = -1 → forte negativa
-        
     - r ≈ 0 → sem correlação linear
         
 - **Sensível a outliers.**
-    
+
+**Interpretação**:
+
+- **Correlação alta entre features** → multicolinearidade, o que pode distorcer os coeficientes β;
+- **Correlação alta entre uma feature e o alvo (y)** → boa candidata para o modelo.
 
 ---
 
 ### 📈 Correlação de Spearman:
 
 - Usa **ordem (ranks)** dos dados (não valores).
-    
 - Mede **relação monótona** (não necessariamente linear).
-    
 - **Mais robusta a outliers**.
-    
 
+|Valor de ρ|Interpretação|
+|---|---|
+|**+1**|Correlação monotônica **positiva perfeita** – à medida que X aumenta, Y sempre aumenta.|
+|**0**|**Nenhuma correlação monotônica** – não há tendência consistente.|
+|**–1**|Correlação monotônica **negativa perfeita** – à medida que X aumenta, Y sempre diminui.|
+
+Use Spearman quando:
+
+- Os **dados não seguem distribuição normal** (violam a suposição de normalidade);
+    
+- As **relações entre as variáveis são monotônicas**, mas **não lineares**;
+	    Uma relação é **monotônica** se, à medida que uma variável cresce, a outra **sempre cresce** ou **sempre decresce**, mas não necessariamente em linha reta.
+	Exemplo:
+	- ✅ Monotônica: à medida que a temperatura aumenta, o consumo de sorvete aumenta (não precisa ser linear).
+	- ❌ Não monotônica: à medida que o tempo aumenta, a produtividade sobe até certo ponto e depois cai (relação em forma de “U”).
+
+- Os dados são **ordinais** (valores representando posições, classificações ou ranqueamentos);
+    
+- Há **outliers**, que podem distorcer a correlação de Pearson.
 ---
-
-## 🔁 **6. Validação e Conjuntos de Dados**
-
-### 🧩 Divisão treino/teste:
-
-- **Treino:** ajustar o modelo.
-    
-- **Teste:** medir desempenho em dados novos.
-    
-- Evita _overfitting_ (modelo “memoriza” o treino e erra no teste).
-    
-
 ---
-
 ### 🔁 **Validação Cruzada (k-Fold Cross Validation):**
 
 1. Divide o dataset em _k_ partes iguais (folds).
@@ -682,38 +700,3 @@ para época em 1..N:
 
 - Atualiza pesos apenas quando há erro.
     
-
----
-
-## 📚 **9. Conceitos-Chave para Revisar**
-
-|Conceito|Definição curta|
-|---|---|
-|**MSE**|Mede erro médio das previsões|
-|**Z-Score**|Quantos desvios padrão o valor está da média|
-|**Bias (viés)**|Erro sistemático do modelo|
-|**Variância**|Sensibilidade às variações do treino|
-|**Trade-off Viés-Variância**|Ajustar complexidade para minimizar erro total|
-|**Normalização**|Escalar dados (0–1) para evitar distorções|
-|**Outlier**|Valor que foge do padrão da distribuição|
-
----
-
-## 🧾 Dica Final de Estudo
-
-Priorize entender **o raciocínio por trás dos algoritmos**:
-
-- Por que normalizar?
-    
-- O que significa “erro baixo”?
-    
-- Como o modelo aprende com dados?
-    
-
-E pratique implementando:
-
-- `LinearRegression()` e `KFold()` do **Scikit-Learn**
-    
-- `pearsonr()` e `spearmanr()` do **SciPy**
-    
-- Pequenos datasets como “Advertising.csv” para treinar e validar.
