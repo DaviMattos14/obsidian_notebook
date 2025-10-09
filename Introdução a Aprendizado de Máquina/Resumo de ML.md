@@ -522,7 +522,7 @@ RSS = \sum\limits(y_i-y_{previsto})^2=\sum\limits^n_{i=1}(y-(\hat{\beta_1}x_i+\h
 $$
 Derivando RSS em função de $\hat{\beta_1}$ e $\hat{\beta_0}$ e igualando a zero, chegamos nas seguintes fórmulas fechadas:
 $$
-\frac{\partial J(\hat{\beta_0},\hat{\beta_0})}{\partial \hat{\beta_1}} = \hat{\beta_1}\sum x_i + \hat{\beta_0}\cdot n = \sum y_i
+\frac{\partial J(\hat{\beta_0},\hat{\beta_1})}{\partial \hat{\beta_0}} = \hat{\beta_1}\sum x_i + \hat{\beta_0}\cdot n = \sum y_i
 $$
 $$
 \frac{\partial J(\hat{\beta_0},\hat{\beta_1})}{\partial \hat{\beta_1}}= \hat{\beta_1}\sum x_i^2 +\hat{\beta_0}\sum x_i = \sum x_iy_i
