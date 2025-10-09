@@ -323,8 +323,13 @@ P_{p}=x_{[i]}+(i-[i])\cdot(x_{[i]+1}-x_{[i]})
 \end{matrix}
 $$
 onde:
-- 
-- 
+- $i$ = índice
+- $N$ = Número de elementos
+- $q$ = percentil (0.25, 0.50, 0.75)
+- Pp = Valor do percentil (25, 50, 75)
+- $[i]$ = valor inteiro de $i$
+- $x_{[i]}$ = Elemento na posição $i$
+
 	Como calcular os limites:
 	-  $X_i > LS \text{ (Limite Superior)}$, para $LS=Q_3 + 1.5\times(Q_3-Q_1)$
 	- $X_i < LI \text{ (Limite Inferior)}$, para $LI=Q_1 - 1.5\times(Q_3-Q_1)$
@@ -339,10 +344,64 @@ $$
     $$
     \frac{x-\overline{x}}{\sigma}
 $$
+# 8. Limpeza de Dados
+## **Limpeza de Dados**
 
----
+Etapa crítica para eliminar **ruído, erros e inconsistências** nos dados.
+### 🔸 Problemas comuns:
 
-## 🧮 **4. Regressão Linear**
+- **Valores ausentes (missing values)**  
+- **Outliers (valores atípicos)**  
+- **Erros de digitação / duplicação**  
+
+| Método                               | Descrição                                            |
+| ------------------------------------ | ---------------------------------------------------- |
+| **Remoção**                          | Excluir linhas/colunas com muitos valores nulos.     |
+| **Imputação por média/mediana/moda** | Substituir valor ausente por uma medida estatística. |
+| **Modelos preditivos**               | Usar outro modelo para prever o valor ausente.       |
+# 9. Transformação de Dados
+## Escalonamento de Dados Numéricos
+### Normalização
+Escala os valores para um **intervalo padrão [0,1]**.
+$$
+x'=\frac{x-x_{min}}{x_{max}-x_{min}}
+$$
+### Padronização
+Converte dados para **média = 0 e desvio padrão = 1**.
+$$
+x'=\frac{x-\overline{x}}{\sigma}
+$$
+## Classificação de Dados Categóricos
+| Técnica              | Descrição                                                                                   | Exemplo                                         |
+| -------------------- | ------------------------------------------------------------------------------------------- | ----------------------------------------------- |
+| **Label Encoding**   | Cada categoria recebe um número inteiro.                                                    | “Azul”=0, “Verde”=1, “Vermelho”=2               |
+| **One-Hot Encoding** | Cria colunas binárias (0/1) para cada categoria.                                            | “Azul” → [1,0,0]; “Verde” → [0,1,0]             |
+| Variável dummy       | Semelhante ao One-Hot, mas representa C categorias com C-1 variáveis, evitando redundância. | 'verde'=[1,0]<br>'branco'=[0,1]<br>'azul'=[0,0] |
+# 10. Escolha de Modelos
+Para um determinado conjunto de dados, múltiplos algoritmos de aprendizado de máquina podem ser aplicados, e não existe um método universalmente superior a todos os outros. O desempenho de cada algoritmo depende da base de dados utilizada. Portanto, é crucial utilizar critérios de avaliação robustos para selecionar o modelo mais adequado para o problema.
+
+Para avaliar o desempenho de um modelo, especialmente em tarefas de regressão, a medida mais comum é o **Erro Quadrático Médio (MSE - Mean Squared Error)**. 
+
+Ele calcula a média dos quadrados das diferenças entre os valores reais ($y_i$) e os valores previstos pelo modelo $\hat{f}(x_i)$.
+$$
+MSE=\frac{1}{n}\sum\limits(y_i-\hat{f}(x_i))^2
+$$
+para Teste e Treinamento.
+
+onde $\hat{f}(x_i)$ é a previsão que $\hat{f}$ da para i-ésima observação
+- MSE será **pequeno** se as respostas previstas forem muito próximas das respostas verdadeiras, 
+- MSE será **grande** se para algumas das observações, as respostas previstas e verdadeiras diferirem substancialmente.
+
+## Overfitting
+
+Ocorre quando um modelo se ajusta de forma tão específica aos dados de treinamento que "memoriza" suas particularidades, incluindo ruídos. Isso resulta em um baixo erro de treinamento, mas um alto erro de teste, pois o modelo perde a capacidade de generalizar para novos dados
+
+O erro de teste esperado pode ser decomposto em três componentes:
+
+1. **Viés (Bias):** O erro introduzido ao usar um modelo simples para aproximar um problema complexo. Modelos mais flexíveis geralmente têm um viés menor.
+2. **Variância (Variance):** A quantidade que o modelo mudaria se fosse treinado com um conjunto de dados diferente. Modelos mais flexíveis tendem a ter uma variância maior.
+3. **Erro Irredutível:** Um erro inerente aos dados, que não pode ser eliminado por nenhum modelo.
+## 🧮 **. Regressão Linear**
 
 ### 📈 Modelo:
 
