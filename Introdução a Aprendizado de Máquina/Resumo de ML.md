@@ -392,15 +392,70 @@ onde $\hat{f}(x_i)$ é a previsão que $\hat{f}$ da para i-ésima observação
 - MSE será **pequeno** se as respostas previstas forem muito próximas das respostas verdadeiras, 
 - MSE será **grande** se para algumas das observações, as respostas previstas e verdadeiras diferirem substancialmente.
 
+O **melhor modelo** é aquele que minimiza o erro de teste esperado.
 ## Overfitting
 
 Ocorre quando um modelo se ajusta de forma tão específica aos dados de treinamento que "memoriza" suas particularidades, incluindo ruídos. Isso resulta em um baixo erro de treinamento, mas um alto erro de teste, pois o modelo perde a capacidade de generalizar para novos dados
+
+## Trade-off Viés-Variância 
 
 O erro de teste esperado pode ser decomposto em três componentes:
 
 1. **Viés (Bias):** O erro introduzido ao usar um modelo simples para aproximar um problema complexo. Modelos mais flexíveis geralmente têm um viés menor.
 2. **Variância (Variance):** A quantidade que o modelo mudaria se fosse treinado com um conjunto de dados diferente. Modelos mais flexíveis tendem a ter uma variância maior.
-3. **Erro Irredutível:** Um erro inerente aos dados, que não pode ser eliminado por nenhum modelo.
+3. **Erro Irredutível (ruído):** Um erro inerente aos dados, que não pode ser eliminado por nenhum modelo.
+descreve a relação inversa entre esses dois componentes: ao aumentar a flexibilidade de um modelo, o viés tende a diminuir, mas a variância tende a aumentar. O desafio é encontrar um equilíbrio que minimize o erro total de teste, encontrando um método com baixo viés e baixa variância
+
+# 11. K Vizinhos Mais Próximos - KNN
+
+**Ideia principal:** classificar uma nova amostra com base nos rótulos de suas K amostras mais próximas no conjunto de treinamento.
+    
+- **Características:**
+    - Algoritmo supervisionado e não paramétrico.
+    - Método “preguiçoso”: não há fase de treinamento; a previsão é feita por comparação direta.
+        
+- **Pré-processamento:**
+    - Normalização dos atributos (escala [0,1]).
+    - Tratamento de dados ausentes (remoção ou imputação).
+
+**Funcionamento:** Para uma nova instância, o algoritmo calcula a distância (geralmente euclidiana) para todas as instâncias do conjunto de treinamento, identifica os K mais próximos e atribui o rótulo da classe majoritária entre eles
+
+- **Métricas de distância:** geralmente usa-se a **distância euclidiana**.
+$$
+d(x,y)=\sqrt{\sum\limits_{i=1}^n(y_i-x_i)^2}
+$$
+- **Escolha do K:**
+    - K pequeno → modelo instável, Apenas objetos muito parecidos são considerados
+    - K Grande → Vizinhos podem ser muito diferentes, Predição tendenciosa para a classe majoritária
+    - Para classes pares, recomenda-se K ímpar.
+# 12. Conjunto de Treinamento e Teste
+
+Para evitar o _overfitting_ e obter uma avaliação de desempenho mais confiável, o conjunto de dados original deve ser dividido. A abordagem mais simples é a **divisão em treino e teste**, usando, por exemplo, 80% dos dados para treinamento e 20% para teste, de forma aleatória.
+
+Quando não há dados de teste suficientes, usamos **técnicas de reamostragem** para estimar o desempenho do modelo
+
+## Técnicas de Reamostragem:
+
+### K-Fold Cross-Validation
+
+É uma das técnicas mais comuns de validação de modelos.
+
+**Como funciona:**
+
+1. O conjunto de dados é dividido em **K partes (folds)** aproximadamente do mesmo tamanho.
+2. O modelo é treinado em **K−1 folds** e testado no **fold restante**.
+3. Repete-se o processo **K vezes**, trocando o fold de teste a cada rodada.
+4. O erro final é a **média dos K erros**.
+    
+**Vantagens:**
+- Usa todos os dados para treinamento e teste em momentos diferentes.
+- Reduz a variância da estimativa do erro.
+- K típico: **5 ou 10**.
+
+**Desvantagem:**
+- Pode ser **computacionalmente custoso** para modelos grandes.
+
+### Stratified K-Fold Cross-Validation
 ## 🧮 **. Regressão Linear**
 
 ### 📈 Modelo:
