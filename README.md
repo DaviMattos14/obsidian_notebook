@@ -2,6 +2,7 @@
 
 Bem-vindo ao repositório de materiais relacionados às disciplinas do curso de Bacharelado em Ciência da Computação da Universidade Federal do Rio de Janeiro (UFRJ). Aqui você encontrará resumos, PDFs, códigos e trabalhos organizados por período e disciplina.
 
+$$\hat{\beta}_1 = \frac{n(\sum x_i y_i) - (\sum x_i)(\sum y_i)}{n(\sum x_i^2) - (\sum x_i)^2}$$Substituindo os novos valores:$$\hat{\beta}_1 = \frac{14(1697.80) - (43)(572)}{14(157.42) - (43)^2} \\ \hat{\beta}_1 = \frac{23769.2 - 24596}{2203.88 - 1849} \\ \hat{\beta}_1 = \frac{-826.8}{354.88} \approx -2.3298$$
 ## Sumário
 
 - [1º Período](#1º-período)
