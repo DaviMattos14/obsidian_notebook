@@ -454,8 +454,40 @@ Quando não há dados de teste suficientes, usamos **técnicas de reamostragem**
 
 **Desvantagem:**
 - Pode ser **computacionalmente custoso** para modelos grandes.
-
 ### Stratified K-Fold Cross-Validation
+
+É uma **variação do K-Fold** usada especialmente em **problemas de classificação**.
+
+**Diferença principal:**
+
+- Garante que cada fold preserve a **proporção de classes** do conjunto original.  
+    Exemplo: se 30% das amostras são da classe “A” e 70% da classe “B”, cada fold manterá aproximadamente essa proporção.
+
+**Vantagem:**
+
+- Evita vieses causados por desequilíbrio entre as classes em cada divisão.
+- Fornece estimativas de erro mais realistas em conjuntos desbalanceados.
+
+### Bootstrap
+
+Gera múltiplos conjuntos de treinamento por amostragem com reposição do conjunto de dados original
+
+**Como funciona:**
+
+1. Gera-se um **novo conjunto de treinamento** de mesmo tamanho do original, **amostrando com reposição** (alguns exemplos aparecem várias vezes, outros podem não aparecer).
+2. O modelo é treinado nesse novo conjunto.
+3. As observações **não incluídas** (aproximadamente 36,8% dos dados) formam o **conjunto de teste** (“out-of-bag” samples).
+4. O processo é repetido várias vezes (ex.: 1000 vezes) e os erros são **médios**.
+    
+**Vantagens:**
+
+- Boa estimativa de variabilidade (intervalos de confiança).
+- Útil quando o conjunto de dados é pequeno.
+
+**Desvantagens:**
+
+- Pode superestimar o desempenho se o modelo for muito sensível a amostras específicas.
+
 ## 🧮 **. Regressão Linear**
 
 ### 📈 Modelo:
