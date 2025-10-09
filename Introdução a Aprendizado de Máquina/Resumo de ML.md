@@ -488,20 +488,35 @@ Gera múltiplos conjuntos de treinamento por amostragem com reposição do conju
 
 - Pode superestimar o desempenho se o modelo for muito sensível a amostras específicas.
 
-## 🧮 **. Regressão Linear**
+# 13 **. Regressão Linear**
 
-### 📈 Modelo:
+A regressão linear é um dos modelos mais fundamentais e amplamente utilizados no aprendizado de máquina supervisionado, especialmente em **problemas de predição contínua**.
+### Objetivo:
+
+Modelar a relação entre uma **variável dependente (y)** e uma ou mais **variáveis independentes (x₁, x₂, …, xₙ)**, ajustando uma função linear aos dados observados.
+### Regressão Linear Simples:
 
 $$
 y = β_0 + β_1x + ε  
 
 $$
-- ( $β_0$ ): intercepto (valor de y quando x = 0)
-    
-- ( $β_1$ ): inclinação (quanto y muda quando x varia 1 unidade)
-    
+- ( $β_0$ ): intercepto (valor de y quando x = 0) - coeficiente linear
+- ( $β_1$ ): inclinação (quanto y muda quando x varia 1 unidade) - coeficiente angular
 - ( $ε$ ): erro (diferença entre previsto e real)
-    
+
+A ideia é encontrar os valores de β₀ e β₁ que minimizam o **erro quadrático médio (MSE)** entre as previsões e os valores reais
+
+### Mínimos Quadrados
+
+Para encontrar os melhores valores para $β^​0​$ e $β^​1$​, o método mais comum é o dos **mínimos quadrados**. Ele busca minimizar a soma dos quadrados dos resíduos (erros), que é a diferença entre os valores reais ($y_i$​) e os valores previstos pela reta ($y_{i_{previsto}}$​​). Essa soma é conhecida como **Soma dos Quadrados dos Resíduos (RSS - Residual Sum of Squares)**.
+$$
+RSS = \sum\limits(y_i-y_{previsto})^2=\sum\limits^n_{i=1}(y-(\hat{\beta_1}x_i+\hat{\beta_0}))^2
+$$
+Derivando RSS em função de $\hat{\beta_1}$ e $\hat{\beta_0}$ e igualando a zero, chegamos nas seguintes fórmulas fechadas:
+$$
+
+$$
+
 
 **Pseudocódigo (ajuste por mínimos quadrados):**
 
