@@ -198,3 +198,12 @@ $$
 * **Tópicos**: Colisão Elástica, Padrões, Conservação de Energia.
 * **Fórmulas**: $w_{j+1} = \frac{2m_j v_j}{m_j+m_{j+1}}$, $h_n = \frac{v_n^2}{2g}$.
 * **Pontos de Atenção**: O segredo para resolver problemas em cadeia é resolver para o primeiro caso, depois para o segundo, e então **observar o padrão** para generalizar para o n-ésimo caso.
+
+# Momento Angular, Torque e Coordenadas em Rotação
+
+## Tensor de Inércia
+
+$$
+\mathbb{I} = \sum\limits_{k} m_{k}((r_{k}^{T}r_{k})I-r_{k}r_{k}^{T})
+$$$$\mathbb{I} = \begin{bmatrix} \sum m_i(y_i^2 + z_i^2) & -\sum m_i x_i y_i & -\sum m_i x_i z_i \\ -\sum m_i y_i x_i & \sum m_i(x_i^2 + z_i^2) & -\sum m_i y_i z_i \\ -\sum m_i z_i x_i & -\sum m_i z_i y_i & \sum m_i(x_i^2 + y_i^2) \end{bmatrix}
+$$
