@@ -52,7 +52,7 @@ class Primo implements Callable<Long>{
 
 //classe do método main
 public class FuturePool  {
-  private static final int N = 10;
+  private static final int N = 1000001;
   private static final int NTHREADS = 10;
 
   @SuppressWarnings("CallToPrintStackTrace")
@@ -62,7 +62,7 @@ public class FuturePool  {
     //cria uma lista para armazenar referencias de chamadas assincronas
     List<Future<Long>> list = new ArrayList<>();
 
-    for (int i = 0; i <= N; i++) {
+    for (int i = 1; i <= N; i++) {
       Callable<Long> primo = new Primo(i);
       /*submit() permite enviar tarefas Callable ou Runnable e obter um objeto Future para acompanhar o progresso e recuperar o resultado da tarefa
        */

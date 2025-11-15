@@ -100,17 +100,17 @@ class Primo implements Runnable {
 
 //Classe da aplicação (método main)
 class MyPool {
-    private static final int NTHREADS = 10;
+    private static final int NTHREADS = 1;
 
     public static void main (String[] args) {
       //--PASSO 2: cria o pool de threads
       FilaTarefas pool = new FilaTarefas(NTHREADS); 
       
       //--PASSO 3: dispara a execução dos objetos runnable usando o pool de threads
-      for (int i = 0; i < 25; i++) {
+      for (int i = 0; i < 11; i++) {
         final String m = "Hello da tarefa " + i;
         Runnable hello = new Hello(m);
-        pool.execute(hello);
+        //pool.execute(hello);
         Runnable primo = new Primo(i);
         pool.execute(primo);
       }
