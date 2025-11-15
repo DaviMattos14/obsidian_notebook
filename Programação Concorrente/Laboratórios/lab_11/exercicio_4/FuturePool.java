@@ -47,7 +47,6 @@ class Primo implements Callable<Long>{
     if (ehPrimo(numero)) aux++;
     return aux;
   }
-  //private Integer run() throws Exception{}
 }
 
 //classe do método main
