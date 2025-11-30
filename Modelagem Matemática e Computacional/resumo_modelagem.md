@@ -1,4 +1,162 @@
-A prova aborda três grandes pilares da Mecânica Clássica: **Dinâmica de Partículas (Newton)**, **Dinâmica de Corpos Rígidos (Rotação)** e **Mecânica Lagrangiana**.
+### 1. Dinâmica Newtoniana e Cinemática (O Básico)
+
+**Foco:** Capítulos 2 e 3 da apostila. Questões de blocos, planos inclinados e movimento circular.
+
+A Lógica de Resolução:
+
+Sempre que o problema envolver forças, acelerações e movimento sem rotação complexa ou vínculos difíceis, use Newton.
+
+**Passo a Passo Geral:**
+
+1. **Desenhe o Diagrama de Corpo Livre:** Isole cada corpo e desenhe todas as forças (Peso, Normal, Tensão, Atrito).
+    
+2. **Defina os Eixos:** Escolha um sistema de coordenadas conveniente (ex: alinhado com o plano inclinado).
+    
+3. **Decomponha as Forças:** Se uma força não está nos eixos, decomponha em $F_x$ e $F_y$ usando seno e cosseno.
+    
+4. **Aplique a 2ª Lei:** $\vec{F}_{resultante} = m\vec{a}$ para cada eixo de cada corpo.
+    
+5. **Vínculos:** Se os corpos estão ligados (ex: corda), as acelerações se relacionam (ex: $a_1 = a_2$).
+    
+
+**Exemplo Chave (Prova 1 - Questão 1):** Bloco na mesa puxando outro pendurado.
+
+- _Bloco na mesa:_ $T - F_{atrito} = ma$
+    
+- _Bloco pendurado:_ $Mg - T = Ma$
+    
+- _Resolução:_ Some as equações para eliminar $T$ e achar $a$.
+    
+
+---
+
+### 2. Conservação de Energia e Momento Linear (O Atalho)
+
+**Foco:** Capítulos 4 e 5. Questões de "antes e depois", colisões e alturas máximas.
+
+A Lógica de Resolução:
+
+Use quando o problema pede velocidades ou distâncias e não pede tempo ou aceleração, ou quando há choques.
+
+**Técnica 1: Colisões (Prova 2 - Q2; Prova 3 - Q2)**
+
+1. **Momento Linear ($\vec{p} = m\vec{v}$):** Sempre se conserva se não houver força externa horizontal.
+    
+    - $p_{antes} = p_{depois} \Rightarrow m_1v_{1i} + m_2v_{2i} = m_1v_{1f} + m_2v_{2f}$.
+        
+2. **Tipo de Colisão:**
+    
+    - _Inelástica (grudam):_ $v_{1f} = v_{2f}$. Energia **não** conserva.
+        
+    - _Elástica (batem e voltam):_ Energia Cinética se conserva ($K_i = K_f$).
+        
+    - _Dica de Ouro para Elástica:_ Use a relação de velocidade relativa: $v_{1i} - v_{2i} = -(v_{1f} - v_{2f})$.
+        
+
+**Técnica 2: Energia Mecânica ($E = T + V$)**
+
+1. **Identifique:** $T = \frac{1}{2}mv^2$ (Cinética) e $V = mgh + \frac{1}{2}kx^2$ (Potencial Gravitacional + Elástica).
+    
+2. **Conserva?** Se não tem atrito, $E_{inicial} = E_{final}$.
+    
+3. **Aplicação:** Se um bloco desce uma rampa e comprime uma mola (Prova 1 - Q4), toda a $V_{grav}$ inicial vira $V_{elástica}$ final (com $T=0$ nos extremos).
+    
+
+---
+
+### 3. Rotação e Momento Angular (O Avançado)
+
+**Foco:** Capítulo 6 e 8. Ioiôs, barras girando, torque.
+
+A Lógica de Resolução:
+
+Agora os corpos têm dimensão. A massa não é um ponto. Eles giram.
+
+**Passo a Passo:**
+
+1. **Identifique o Eixo:** Onde o corpo está girando? (No centro de massa ou num pivô fixo?).
+    
+2. **Momento de Inércia ($I$):** É a "massa" da rotação.
+    
+    - _Barra pelo centro:_ $I = \frac{1}{12}ML^2$.
+        
+    - _Cilindro/Disco:_ $I = \frac{1}{2}MR^2$.
+        
+    - _Partícula a distância $R$:_ $I = mR^2$.
+        
+    - _Teorema dos Eixos Paralelos:_ Se girar fora do centro de massa: $I_{novo} = I_{CM} + Md^2$.
+        
+3. **Torque ($\tau$):** É a "força" da rotação. $\tau = \text{Força} \times \text{Braço de Alavanca}$.
+    
+4. **Leis de Newton para Rotação:**
+    
+    - $\tau_{res} = I\alpha$ (analoga a $F=ma$).
+        
+    - $\vec{L} = I\vec{\omega}$ (Momento Angular).
+        
+5. **Conservação do Momento Angular ($L$):** Se o Torque externo for zero, $L_{antes} = L_{depois}$.
+    
+    - _Exemplo (Prova 2 - Q1):_ Uma bala bate numa barra. $L_{bala} = L_{sistema}$.
+        
+    - $m v r = I_{total} \omega$.
+        
+
+---
+
+### 4. Equações de Lagrange (A Ferramenta Suprema)
+
+**Foco:** Capítulo 7. Resolve problemas complexos de forma elegante, sem vetores de força.
+
+A Receita Infalível (Passo a Passo):
+
+Esta técnica resolve quase todas as questões difíceis (Ioiô, conta no arame, bloco na cunha).
+
+1. **Escolha as Coordenadas Generalizadas ($q$):** As variáveis mínimas para descrever o movimento (ex: $x$, $\theta$, $s$).
+    
+2. **Defina a Energia Cinética ($T$):**
+    
+    - $T = \frac{1}{2}mv^2 + \frac{1}{2}I\omega^2$ (Translação + Rotação).
+        
+    - _Atenção:_ Escreva $v$ e $\omega$ em função das coordenadas $q$ e suas derivadas $\dot{q}$. Use geometria se necessário (ex: $v^2 = \dot{x}^2 + \dot{y}^2$).
+        
+3. **Defina a Energia Potencial ($V$):**
+    
+    - Escolha o nível zero ($y=0$). Tudo acima é positivo, abaixo é negativo. $V = mgh$.
+        
+4. **Monte o Lagrangiano:** $\mathcal{L} = T - V$.
+    
+5. Aplique a Equação de Euler-Lagrange:
+    
+    $$\frac{d}{dt} \left( \frac{\partial \mathcal{L}}{\partial \dot{q}} \right) - \frac{\partial \mathcal{L}}{\partial q} = 0$$
+    
+    - Faça isso para cada coordenada $q$.
+        
+
+**Exemplo Prático (Prova 3 - Q3 - Ioiô):**
+
+- $T = \frac{1}{2}m\dot{y}^2 + \frac{1}{2}I\dot{\theta}^2$.
+    
+- Vínculo: $y = R\theta \Rightarrow \dot{y} = R\dot{\theta}$. Substitua para ter só uma variável.
+    
+- $V = -mgy$ (se $y$ cresce para baixo).
+    
+- $\mathcal{L} = T - V$. Aplique a derivada.
+    
+
+---
+
+### Resumo das Fórmulas Essenciais
+
+| **Conceito**          | **Fórmula**                                                                                             | **Onde Usar**                |
+| --------------------- | ------------------------------------------------------------------------------------------------------- | ---------------------------- |
+| **2ª Lei de Newton**  | $\vec{F} = m\vec{a}$                                                                                    | Translação simples.          |
+| **Energia Cinética**  | $K = \frac{1}{2}mv^2 + \frac{1}{2}I\omega^2$                                                            | Corpos em movimento/rotação. |
+| **Energia Potencial** | $U = mgh + \frac{1}{2}kx^2$                                                                             | Altura e Molas.              |
+| **Momento Linear**    | $\vec{p} = m\vec{v}$                                                                                    | Colisões.                    |
+| **Momento Angular**   | $L = I\omega$ ou $\vec{r} \times \vec{p}$                                                               | Rotação, Colisão com barra.  |
+| **Torque**            | $\tau = r F \sin\theta = I\alpha$                                                                       | Causar rotação.              |
+| **Lagrangiano**       | $\mathcal{L} = T - V$                                                                                   | Sistemas complexos/vínculos. |
+| **Eq. de Lagrange**   | $\frac{d}{dt}(\frac{\partial \mathcal{L}}{\partial \dot{q}}) = \frac{\partial \mathcal{L}}{\partial q}$ | Obter eq. do movimento.      |
 
 ---
 
