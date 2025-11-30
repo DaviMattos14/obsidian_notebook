@@ -1,5 +1,3 @@
-Com base na **Apostila de Modelagem Matemática e Computacional** fornecida e na **Prova 3 de 2025.1**, preparei um guia passo a passo para você entender os conceitos fundamentais e resolver não apenas essas questões, mas qualquer problema similar.
-
 A prova aborda três grandes pilares da Mecânica Clássica: **Dinâmica de Partículas (Newton)**, **Dinâmica de Corpos Rígidos (Rotação)** e **Mecânica Lagrangiana**.
 
 ---
