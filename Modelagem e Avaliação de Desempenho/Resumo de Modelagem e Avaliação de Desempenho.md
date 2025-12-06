@@ -347,7 +347,7 @@ As redes de filas são geralmente classificadas em duas categorias principais:
 ## Lei de Little
 Ela estabelece uma relação fundamental e simples entre o número médio de jobs em um sistema, a taxa de chegada e o tempo médio que uma tarefa passa no sistema.
 $$
-E[X]=X\cdot E[T]\quad E[T] = \frac{1}{x}\cdot E[N]
+E[N]=X\cdot E[T]\quad E[T] = \frac{1}{X}\cdot E[N]
 $$
 Para $X=$ Vazão (Taxa média de jobs finalizados)
 		$\frac{1}{X}=$ Tempo entre jobs
