@@ -505,3 +505,191 @@ A análise de modificações se aplica de forma diferente a sistemas abertos e f
 - **Sistemas Fechados:** Como visto, o desempenho em alta carga é rigidamente limitado pelo gargalo.
     
 - **Sistemas Abertos:** A vazão é determinada pela taxa de chegada externa ( $\lambda$ ). Embora a vazão ainda seja limitada pela capacidade do gargalo ( $X\le 1 / D_{max}$ ), essa não é uma restrição tão forte quanto nos sistemas fechados. Em um sistema aberto, melhorar um dispositivo que não é o gargalo **ainda assim melhora o tempo de resposta médio**, ao contrário do que acontece em um sistema fechado sob alta carga.
+
+### **PARTE 1: O Núcleo Teórico (Livro + Slides)**
+
+#### **Fase 1: O Mundo Discreto (Caps 8, 9 e Slides 19, 20, 26, 27)**
+
+Aqui o tempo avança em "clocks" ou passos. O sistema é síncrono.
+
+**1. A Base (DTMC - Cap 8 & Slides 19-20):**
+
+- **Definição:** O estado futuro depende _apenas_ do estado atual (Propriedade de Markov). Esqueça o histórico.
+    
+- **Matriz de Transição ($P$):** A ferramenta central. $P_{ij}$ é a probabilidade de pular de $i$ para $j$.
+    
+    - _Regra de Ouro:_ A soma de cada linha deve ser 1. O sistema tem que ir para algum lugar.
+        
+- **A Solução ($\pi$):** Queremos a distribuição estacionária ($\pi$), que é a probabilidade de longo prazo de estar em cada estado.
+    
+- **Como calcular:**
+    
+    1. Resolva o sistema linear $\overrightarrow{\pi} = \overrightarrow{\pi} P$ (o vetor não muda após a multiplicação).
+        
+    2. Use a condição de normalização $\sum \pi_i = 1$ (Slide 20 reforça isso: sem isso, o sistema é indeterminado).
+        
+
+2. A Complexidade do Infinito (Cap 9 & Slides 26-27):
+
+Quando o número de estados é infinito (ex: uma fila que pode crescer para sempre), a matriz não resolve mais.
+
+- **Classificação de Estados (Slide 26):**
+    
+    - _Transiente:_ Você sai e nunca mais volta (Fila explodindo).
+        
+    - _Recorrente Nulo:_ Você volta, mas demora uma eternidade (média infinita).
+        
+    - _Recorrente Positivo:_ Você volta em tempo finito. **Só aqui existe estabilidade.**
+        
+- **Teorema Ergódico (Cap 9):** Para termos médias confiáveis (Time Average = Ensemble Average), a cadeia precisa ser Irredutível (tudo conecta em tudo), Aperiódica (sem ciclos fixos) e Recorrente Positiva.
+    
+- **Reversibilidade (O "Cheat Code" - Slide 27):**
+    
+    - Em vez de equacionar tudo que entra e sai de um estado (Balanço Global), verifique se o fluxo entre dois estados vizinhos é igual:
+        
+        $$\pi_i P_{ij} = \pi_j P_{ji}$$
+        
+    - Processos de Nascimento e Morte (BDP) são sempre reversíveis. Isso transforma um sistema linear complexo em uma multiplicação simples em cadeia.
+        
+
+---
+
+#### **Fase 2: O Mundo Contínuo (Cap 12 e Aula 32)**
+
+O mundo real não espera o relógio bater. Eventos acontecem a qualquer momento.
+
+**1. Transição para CTMC (Cap 12):**
+
+- Deixamos de usar probabilidades de transição ($P_{ij}$) e passamos a usar **Taxas de Transição** ($q_{ij}$ ou $\lambda, \mu$).
+    
+- **Tempo nos Estados:** O tempo que você fica parado em um estado segue, obrigatoriamente, uma **Distribuição Exponencial**. Por quê? Porque é a única distribuição contínua "sem memória" (memoryless).
+    
+- **Equações de Balanço Global (Fluxo):**
+    
+    - Não se multiplica mais matrizes. Iguala-se fluxo.
+        
+    - Rate In = Rate Out (Taxa de Entrada = Taxa de Saída).
+        
+    - $\sum (\text{Prob de estar no vizinho} \times \text{Taxa vindo dele}) = \pi_{estado} \times \text{Taxa total de saída}$.
+        
+
+**2. M/M/1 e PASTA (Cap 13 e Slide 32):**
+
+- **M/M/1:** A aplicação prática da CTMC. Chegadas Poisson ($\lambda$), Serviço Exponencial ($\mu$).
+    
+- **Solução (Decorar é pouco, entenda):**
+    
+    - Utilização: $\rho = \lambda/\mu$.
+        
+    - Probabilidade de ter $n$ usuários: $\pi_n = \rho^n(1-\rho)$. (Isso é uma P.G., como visto no Slide 26).
+        
+    - Número médio: $E[N] = \rho / (1-\rho)$.
+        
+- **PASTA (Poisson Arrivals See Time Averages):**
+    
+    - _Conceito (Slide 32):_ Se as chegadas são aleatórias (Poisson), o usuário que chega vê a média do sistema.
+        
+    - _Perigo:_ Se as chegadas não forem Poisson, o que o usuário vê é diferente da média do monitoramento.
+        
+
+---
+
+### **PARTE 2: O Guia Mestre para Resolver Exercícios (Algoritmo)**
+
+Pare de tentar adivinhar a fórmula. Siga este algoritmo rigorosamente para qualquer questão da prova ou da vida real envolvendo filas e Markov.
+
+#### **PASSO 1: Identificação do Domínio (O Filtro Binário)**
+
+Leia o enunciado. O tempo é fatiado em slots/passos ou é contínuo?
+
+- **Se disser "em cada slot de tempo", "a cada ciclo", "probabilidade de transição":** É **DTMC** (Discreto).
+    
+    - _Ferramenta:_ Matriz $P$, equações $\pi = \pi P$.
+        
+- **Se disser "taxa de chegadas", "tempo médio de serviço", "distribuição exponencial":** É **CTMC** (Contínuo).
+    
+    - _Ferramenta:_ Taxas $\lambda, \mu$, equações Rate In = Rate Out.
+        
+
+#### **PASSO 2: Definição dos Estados (Onde a maioria falha)**
+
+O que define o sistema _completamente_?
+
+- É só o número de jobs? (Ex: 0, 1, 2...)
+    
+- Ou preciso saber quem está operando? (Ex: Estado "On", Estado "Off").
+    
+- _Dica do Conselheiro:_ Se o enunciado diz que a máquina pode quebrar, o estado não é só o número de jobs na fila. O estado deve ser uma tupla: `(num_jobs, status_maquina)`. Ex: `(2, Quebrada)` é diferente de `(2, Funcionando)`.
+    
+
+#### **PASSO 3: O Diagrama de Transição (Visualização Obrigatória)**
+
+Não tente fazer de cabeça. Desenhe as bolinhas.
+
+- **DTMC:** As setas levam probabilidades ($0.5$, $0.3$). A soma das setas saindo de uma bola DEVE ser 1.
+    
+- **CTMC:** As setas levam taxas ($\lambda$, $\mu$). A soma não precisa ser 1 (pode ser 500 requisições/seg).
+    
+
+#### **PASSO 4: Equacionamento (A Mecânica)**
+
+**Cenário A: Cadeia de Nascimento e Morte (Só vai pra frente ou pra trás)**
+
+- _Tática:_ Use o **Corte (Cut Method)** ou Equações de Balanço Local (Reversibilidade).
+    
+- Imagine uma linha tracejada entre o estado $k$ e $k+1$. O fluxo que cruza para a direita deve ser igual ao que cruza para a esquerda.
+    
+    - DTMC: $\pi_k \cdot P_{k, k+1} = \pi_{k+1} \cdot P_{k+1, k}$
+        
+    - CTMC: $\pi_k \cdot \lambda_k = \pi_{k+1} \cdot \mu_{k+1}$
+        
+- Isso permite escrever tudo em função de $\pi_0$.
+    
+
+**Cenário B: Cadeia Genérica (Transições malucas)**
+
+- _Tática:_ Rate In = Rate Out (CTMC) ou $\pi = \pi P$ (DTMC).
+    
+- Escreva uma equação para cada estado:
+    
+    - Estado 0: (Entradas vindo de 1 e 2...) = (Saídas para 1 e 2...)
+        
+    - Estado 1: ...
+        
+
+#### **PASSO 5: A Normalização (O Fechamento)**
+
+Você terá todas as probabilidades $\pi_i$ em função de $\pi_0$ (ou de uma variável livre).
+
+- Use a verdade absoluta: A soma de tudo é 100%.
+    
+    $$\sum_{i=0}^{\infty} \pi_i = 1$$
+    
+- Se for uma série infinita (como no M/M/1 ou Slide 26), use a soma da PG: $\sum_{i=0}^{\infty} x^i = \frac{1}{1-x}$ (para $|x| < 1$).
+    
+- Encontre o valor numérico de $\pi_0$. Agora você tem tudo.
+    
+
+#### **PASSO 6: Cálculo das Métricas (O Objetivo Final)**
+
+O exercício pediu o quê?
+
+- **"Número médio na fila":** Calcule $E[N] = \sum n \cdot \pi_n$.
+    
+- **"Tempo médio de resposta":** Use a Lei de Little ($E[T] = E[N] / \lambda$). _Atenção: Use o $\lambda$ efetivo se houver perda de pacotes._
+    
+- **"Porcentagem do tempo ocioso":** É simplesmente $\pi_0$.
+    
+
+---
+
+### **Verificação de Sanidade (Checklist Final)**
+
+1. Seu resultado de probabilidade é negativo ou maior que 1? **Está errado.**
+    
+2. Sua utilização ($\rho$) deu maior que 1 em sistema de fila infinita? **O sistema é instável, a resposta é "explode".**
+    
+3. Você confundiu Taxa (eventos/tempo) com Probabilidade (chance adimensional)? **Revise o Passo 1.**
+    
+
+Este é o mapa. Se você seguir isso, a complexidade matemática se torna apenas "fazer contas", pois a modelagem estratégica já foi resolvida nos passos 2 e 3.
