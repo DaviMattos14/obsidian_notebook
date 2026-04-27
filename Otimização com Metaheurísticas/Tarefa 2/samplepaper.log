@@ -1,0 +1,689 @@
+This is pdfTeX, Version 3.141592653-2.6-1.40.29 (MiKTeX 26.2) (preloaded format=pdflatex 2026.4.5)  20 APR 2026 20:39
+entering extended mode
+ restricted \write18 enabled.
+ file:line:error style messages enabled.
+ %&-line parsing enabled.
+**"c:/Users/Pichau/Documents/REPOSITÃ“RIOS/obsidian_notebook/OtimizaÃ§Ã£o com MetaheurÃ­sticas/Tarefa 2/samplepaper.tex"
+(c:/Users/Pichau/Documents/REPOSITÃ“RIOS/obsidian_notebook/OtimizaÃ§Ã£o com MetaheurÃ­sticas/Tarefa 2/samplepaper.tex
+LaTeX2e <2025-11-01>
+L3 programming layer <2026-01-19>
+(llncs.cls
+Document Class: llncs 2024/01/29 v2.24 
+ LaTeX document class for Lecture Notes in Computer Science
+(C:\Program Files\MiKTeX\tex/latex/base\article.cls
+Document Class: article 2025/01/22 v1.4n Standard LaTeX document class
+(C:\Program Files\MiKTeX\tex/latex/base\size10.clo
+File: size10.clo 2025/01/22 v1.4n Standard LaTeX file (size option)
+)
+\c@part=\count275
+\c@section=\count276
+\c@subsection=\count277
+\c@subsubsection=\count278
+\c@paragraph=\count279
+\c@subparagraph=\count280
+\c@figure=\count281
+\c@table=\count282
+\abovecaptionskip=\skip49
+\belowcaptionskip=\skip50
+\bibindent=\dimen148
+) (C:\Program Files\MiKTeX\tex/latex/tools\multicol.sty
+Package: multicol 2025/10/21 v2.0b multicolumn formatting (FMi)
+\c@tracingmulticols=\count283
+\mult@box=\box53
+\multicol@leftmargin=\dimen149
+\c@unbalance=\count284
+\c@collectmore=\count285
+\doublecol@number=\count286
+\multicoltolerance=\count287
+\multicolpretolerance=\count288
+\full@width=\dimen150
+\page@free=\dimen151
+\premulticols=\dimen152
+\postmulticols=\dimen153
+\multicolsep=\skip51
+\multicolbaselineskip=\skip52
+\partial@page=\box54
+\last@line=\box55
+\mc@boxedresult=\box56
+\maxbalancingoverflow=\dimen154
+\mult@rightbox=\box57
+\mult@grightbox=\box58
+\mult@firstbox=\box59
+\mult@gfirstbox=\box60
+\@tempa=\box61
+\@tempa=\box62
+\@tempa=\box63
+\@tempa=\box64
+\@tempa=\box65
+\@tempa=\box66
+\@tempa=\box67
+\@tempa=\box68
+\@tempa=\box69
+\@tempa=\box70
+\@tempa=\box71
+\@tempa=\box72
+\@tempa=\box73
+\@tempa=\box74
+\@tempa=\box75
+\@tempa=\box76
+\@tempa=\box77
+\@tempa=\box78
+\@tempa=\box79
+\@tempa=\box80
+\@tempa=\box81
+\@tempa=\box82
+\@tempa=\box83
+\@tempa=\box84
+\@tempa=\box85
+\@tempa=\box86
+\@tempa=\box87
+\@tempa=\box88
+\@tempa=\box89
+\@tempa=\box90
+\@tempa=\box91
+\@tempa=\box92
+\@tempa=\box93
+\@tempa=\box94
+\@tempa=\box95
+\@tempa=\box96
+\c@minrows=\count289
+\c@columnbadness=\count290
+\c@finalcolumnbadness=\count291
+\last@try=\dimen155
+\multicolovershoot=\dimen156
+\multicolundershoot=\dimen157
+\mult@nat@firstbox=\box97
+\colbreak@box=\box98
+\mc@col@check@num=\count292
+\g__mc_curr_col_int=\count293
+) (C:\Program Files\MiKTeX\tex/latex/aliascnt\aliascnt.sty
+Package: aliascnt 2026-03-08 v1.7 Alias counters (HO)
+)
+\c@chapter=\count294
+LaTeX Font Info:    Redeclaring math symbol \Gamma on input line 379.
+LaTeX Font Info:    Redeclaring math symbol \Delta on input line 380.
+LaTeX Font Info:    Redeclaring math symbol \Theta on input line 381.
+LaTeX Font Info:    Redeclaring math symbol \Lambda on input line 382.
+LaTeX Font Info:    Redeclaring math symbol \Xi on input line 383.
+LaTeX Font Info:    Redeclaring math symbol \Pi on input line 384.
+LaTeX Font Info:    Redeclaring math symbol \Sigma on input line 385.
+LaTeX Font Info:    Redeclaring math symbol \Upsilon on input line 386.
+LaTeX Font Info:    Redeclaring math symbol \Phi on input line 387.
+LaTeX Font Info:    Redeclaring math symbol \Psi on input line 388.
+LaTeX Font Info:    Redeclaring math symbol \Omega on input line 389.
+LaTeX Info: Redefining \vec on input line 394.
+\tocchpnum=\dimen158
+\tocsecnum=\dimen159
+\tocsectotal=\dimen160
+\tocsubsecnum=\dimen161
+\tocsubsectotal=\dimen162
+\tocsubsubsecnum=\dimen163
+\tocsubsubsectotal=\dimen164
+\tocparanum=\dimen165
+\tocparatotal=\dimen166
+\tocsubparanum=\dimen167
+\@tempcntc=\count295
+\fnindent=\dimen168
+\c@@inst=\count296
+\c@@auth=\count297
+\c@auco=\count298
+\instindent=\dimen169
+\authrun=\box99
+\authorrunning=\toks17
+\tocauthor=\toks18
+\titrun=\box100
+\titlerunning=\toks19
+\toctitle=\toks20
+\c@theorem=\count299
+\c@case=\count300
+\c@conjecture=\count301
+\c@corollary=\count302
+\c@definition=\count303
+\c@example=\count304
+\c@exercise=\count305
+\c@lemma=\count306
+\c@note=\count307
+\c@problem=\count308
+\c@property=\count309
+\c@proposition=\count310
+\c@question=\count311
+\c@solution=\count312
+\c@remark=\count313
+\headlineindent=\dimen170
+) (C:\Program Files\MiKTeX\tex/latex/base\fontenc.sty
+Package: fontenc 2025/07/18 v2.1d Standard LaTeX package
+) (C:\Program Files\MiKTeX\tex/latex/graphics\graphicx.sty
+Package: graphicx 2024/12/31 v1.2e Enhanced LaTeX Graphics (DPC,SPQR)
+ (C:\Program Files\MiKTeX\tex/latex/graphics\keyval.sty
+Package: keyval 2022/05/29 v1.15 key=value parser (DPC)
+\KV@toks@=\toks21
+) (C:\Program Files\MiKTeX\tex/latex/graphics\graphics.sty
+Package: graphics 2024/08/06 v1.4g Standard LaTeX Graphics (DPC,SPQR)
+ (C:\Program Files\MiKTeX\tex/latex/graphics\trig.sty
+Package: trig 2023/12/02 v1.11 sin cos tan (DPC)
+) (C:\Program Files\MiKTeX\tex/latex/graphics-cfg\graphics.cfg
+File: graphics.cfg 2016/06/04 v1.11 sample graphics configuration
+)
+Package graphics Info: Driver file: pdftex.def on input line 106.
+ (C:\Program Files\MiKTeX\tex/latex/graphics-def\pdftex.def
+File: pdftex.def 2025/09/29 v1.2d Graphics/color driver for pdftex
+))
+\Gin@req@height=\dimen171
+\Gin@req@width=\dimen172
+) (C:\Program Files\MiKTeX\tex/latex/multirow\multirow.sty
+Package: multirow 2024/11/12 v2.9 Span multiple rows of a table
+\multirow@colwidth=\skip53
+\multirow@cntb=\count314
+\multirow@dima=\skip54
+\bigstrutjot=\dimen173
+) (C:\Program Files\MiKTeX\tex/latex/amsmath\amsmath.sty
+Package: amsmath 2025/07/09 v2.17z AMS math features
+\@mathmargin=\skip55
+
+For additional information on amsmath, use the `?' option.
+(C:\Program Files\MiKTeX\tex/latex/amsmath\amstext.sty
+Package: amstext 2024/11/17 v2.01 AMS text
+ (C:\Program Files\MiKTeX\tex/latex/amsmath\amsgen.sty
+File: amsgen.sty 1999/11/30 v2.0 generic functions
+\@emptytoks=\toks22
+\ex@=\dimen174
+)) (C:\Program Files\MiKTeX\tex/latex/amsmath\amsbsy.sty
+Package: amsbsy 1999/11/29 v1.2d Bold Symbols
+\pmbraise@=\dimen175
+) (C:\Program Files\MiKTeX\tex/latex/amsmath\amsopn.sty
+Package: amsopn 2022/04/08 v2.04 operator names
+)
+\inf@bad=\count315
+LaTeX Info: Redefining \frac on input line 233.
+\uproot@=\count316
+\leftroot@=\count317
+LaTeX Info: Redefining \overline on input line 398.
+LaTeX Info: Redefining \colon on input line 409.
+\classnum@=\count318
+\DOTSCASE@=\count319
+LaTeX Info: Redefining \ldots on input line 495.
+LaTeX Info: Redefining \dots on input line 498.
+LaTeX Info: Redefining \cdots on input line 619.
+\Mathstrutbox@=\box101
+\strutbox@=\box102
+LaTeX Info: Redefining \big on input line 721.
+LaTeX Info: Redefining \Big on input line 722.
+LaTeX Info: Redefining \bigg on input line 723.
+LaTeX Info: Redefining \Bigg on input line 724.
+\big@size=\dimen176
+LaTeX Font Info:    Redeclaring font encoding OML on input line 742.
+LaTeX Font Info:    Redeclaring font encoding OMS on input line 743.
+
+
+Package amsmath Warning: Unable to redefine math accent \vec.
+
+\macc@depth=\count320
+LaTeX Info: Redefining \bmod on input line 904.
+LaTeX Info: Redefining \pmod on input line 909.
+LaTeX Info: Redefining \smash on input line 939.
+LaTeX Info: Redefining \relbar on input line 969.
+LaTeX Info: Redefining \Relbar on input line 970.
+\c@MaxMatrixCols=\count321
+\dotsspace@=\muskip17
+\c@parentequation=\count322
+\dspbrk@lvl=\count323
+\tag@help=\toks23
+\row@=\count324
+\column@=\count325
+\maxfields@=\count326
+\andhelp@=\toks24
+\eqnshift@=\dimen177
+\alignsep@=\dimen178
+\tagshift@=\dimen179
+\tagwidth@=\dimen180
+\totwidth@=\dimen181
+\lineht@=\dimen182
+\@envbody=\toks25
+\multlinegap=\skip56
+\multlinetaggap=\skip57
+\mathdisplay@stack=\toks26
+LaTeX Info: Redefining \[ on input line 2950.
+LaTeX Info: Redefining \] on input line 2951.
+) (C:\Program Files\MiKTeX\tex/latex/amsfonts\amssymb.sty
+Package: amssymb 2013/01/14 v3.01 AMS font symbols
+ (C:\Program Files\MiKTeX\tex/latex/amsfonts\amsfonts.sty
+Package: amsfonts 2013/01/14 v3.01 Basic AMSFonts support
+\symAMSa=\mathgroup4
+\symAMSb=\mathgroup5
+LaTeX Font Info:    Redeclaring math symbol \hbar on input line 98.
+LaTeX Font Info:    Overwriting math alphabet `\mathfrak' in version `bold'
+(Font)                  U/euf/m/n --> U/euf/b/n on input line 106.
+)) (C:\Program Files\MiKTeX\tex/latex/amscls\amsthm.sty
+Package: amsthm 2020/05/29 v2.20.6
+\thm@style=\toks27
+\thm@bodyfont=\toks28
+\thm@headfont=\toks29
+\thm@notefont=\toks30
+\thm@headpunct=\toks31
+\thm@preskip=\skip58
+\thm@postskip=\skip59
+\thm@headsep=\skip60
+\dth@everypar=\toks32
+LaTeX Info: Redefining \qed on input line 273.
+
+
+C:\Program Files\MiKTeX\tex/latex/amscls\amsthm.sty:440: LaTeX Error: Command \proof already defined.
+               Or name \end... illegal, see p.192 of the manual.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.440 }
+       
+Your command was ignored.
+Type  I <command> <return>  to replace it with another command,
+or  <return>  to continue without it.
+
+) (C:\Program Files\MiKTeX\tex/latex/jknappen\mathrsfs.sty
+Package: mathrsfs 1996/01/01 Math RSFS package v1.0 (jk)
+\symrsfs=\mathgroup6
+) (C:\Program Files\MiKTeX\tex/latex/appendix\appendix.sty
+Package: appendix 2020/02/08 v1.2c extra appendix facilities
+\c@@pps=\count327
+\c@@ppsavesec=\count328
+\c@@ppsaveapp=\count329
+) (C:\Program Files\MiKTeX\tex/latex/xcolor\xcolor.sty
+Package: xcolor 2024/09/29 v3.02 LaTeX color extensions (UK)
+ (C:\Program Files\MiKTeX\tex/latex/graphics-cfg\color.cfg
+File: color.cfg 2016/01/02 v1.6 sample color configuration
+)
+Package xcolor Info: Driver file: pdftex.def on input line 274.
+ (C:\Program Files\MiKTeX\tex/latex/graphics\mathcolor.ltx)
+Package xcolor Info: Model `cmy' substituted by `cmy0' on input line 1349.
+Package xcolor Info: Model `hsb' substituted by `rgb' on input line 1353.
+Package xcolor Info: Model `RGB' extended on input line 1365.
+Package xcolor Info: Model `HTML' substituted by `rgb' on input line 1367.
+Package xcolor Info: Model `Hsb' substituted by `hsb' on input line 1368.
+Package xcolor Info: Model `tHsb' substituted by `hsb' on input line 1369.
+Package xcolor Info: Model `HSB' substituted by `hsb' on input line 1370.
+Package xcolor Info: Model `Gray' substituted by `gray' on input line 1371.
+Package xcolor Info: Model `wave' substituted by `hsb' on input line 1372.
+) (C:\Program Files\MiKTeX\tex/latex/base\textcomp.sty
+Package: textcomp 2024/04/24 v2.1b Standard LaTeX package
+) (C:\Program Files\MiKTeX\tex/latex/ncctools\manyfoot.sty
+Package: manyfoot 2019/08/03 v1.11 Many Footnote Levels Package (NCC)
+ (C:\Program Files\MiKTeX\tex/latex/ncctools\nccfoots.sty
+Package: nccfoots 2005/02/03 v1.2 NCC Footnotes Package (NCC)
+)
+\MFL@columnwidth=\dimen183
+) (C:\Program Files\MiKTeX\tex/latex/booktabs\booktabs.sty
+Package: booktabs 2020/01/12 v1.61803398 Publication quality tables
+\heavyrulewidth=\dimen184
+\lightrulewidth=\dimen185
+\cmidrulewidth=\dimen186
+\belowrulesep=\dimen187
+\belowbottomsep=\dimen188
+\aboverulesep=\dimen189
+\abovetopsep=\dimen190
+\cmidrulesep=\dimen191
+\cmidrulekern=\dimen192
+\defaultaddspace=\dimen193
+\@cmidla=\count330
+\@cmidlb=\count331
+\@aboverulesep=\dimen194
+\@belowrulesep=\dimen195
+\@thisruleclass=\count332
+\@lastruleclass=\count333
+\@thisrulewidth=\dimen196
+) (C:\Program Files\MiKTeX\tex/latex/algorithms\algorithm.sty
+Package: algorithm 2009/08/24 v0.1 Document Style `algorithm' - floating environment
+ (C:\Program Files\MiKTeX\tex/latex/float\float.sty
+Package: float 2001/11/08 v1.3d Float enhancements (AL)
+\c@float@type=\count334
+\float@exts=\toks33
+\float@box=\box103
+\@float@everytoks=\toks34
+\@floatcapt=\box104
+) (C:\Program Files\MiKTeX\tex/latex/base\ifthen.sty
+Package: ifthen 2024/03/16 v1.1e Standard LaTeX ifthen package (DPC)
+)
+\@float@every@algorithm=\toks35
+\c@algorithm=\count335
+) (C:\Program Files\MiKTeX\tex/latex/algorithmicx\algorithmicx.sty
+Package: algorithmicx 2005/04/27 v1.2 Algorithmicx
+
+Document Style algorithmicx 1.2 - a greatly improved `algorithmic' style
+\c@ALG@line=\count336
+\c@ALG@rem=\count337
+\c@ALG@nested=\count338
+\ALG@tlm=\skip61
+\ALG@thistlm=\skip62
+\c@ALG@Lnr=\count339
+\c@ALG@blocknr=\count340
+\c@ALG@storecount=\count341
+\c@ALG@tmpcounter=\count342
+\ALG@tmplength=\skip63
+) (C:\Program Files\MiKTeX\tex/latex/algorithmicx\algpseudocode.sty
+Package: algpseudocode 
+
+Document Style - pseudocode environments for use with the `algorithmicx' style
+) (C:\Program Files\MiKTeX\tex/latex/listings\listings.sty
+\lst@mode=\count343
+\lst@gtempboxa=\box105
+\lst@token=\toks36
+\lst@length=\count344
+\lst@currlwidth=\dimen197
+\lst@column=\count345
+\lst@pos=\count346
+\lst@lostspace=\dimen198
+\lst@width=\dimen199
+\lst@newlines=\count347
+\lst@lineno=\count348
+\lst@maxwidth=\dimen256
+ (C:\Program Files\MiKTeX\tex/latex/listings\lstpatch.sty
+File: lstpatch.sty 2025/11/14 1.11b (Carsten Heinz)
+) (C:\Program Files\MiKTeX\tex/latex/listings\lstmisc.sty
+File: lstmisc.sty 2025/11/14 1.11b (Carsten Heinz)
+\c@lstnumber=\count349
+\lst@skipnumbers=\count350
+\lst@framebox=\box106
+) (C:\Program Files\MiKTeX\tex/latex/listings\listings.cfg
+File: listings.cfg 2025/11/14 1.11b listings configuration
+))
+Package: listings 2025/11/14 1.11b (Carsten Heinz)
+
+==> First Aid for listings.sty no longer applied!
+    Expected:
+        2024/09/23 1.10c (Carsten Heinz)
+    but found:
+        2025/11/14 1.11b (Carsten Heinz)
+    so I'm assuming it got fixed.
+(C:\Program Files\MiKTeX\tex/latex/l3backend\l3backend-pdftex.def
+File: l3backend-pdftex.def 2025-10-09 L3 backend support: PDF output (pdfTeX)
+\l__color_backend_stack_int=\count351
+) (samplepaper.aux)
+\openout1 = `samplepaper.aux'.
+
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 36.
+LaTeX Font Info:    ... okay on input line 36.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 36.
+LaTeX Font Info:    ... okay on input line 36.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 36.
+LaTeX Font Info:    ... okay on input line 36.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 36.
+LaTeX Font Info:    ... okay on input line 36.
+LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 36.
+LaTeX Font Info:    ... okay on input line 36.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 36.
+LaTeX Font Info:    ... okay on input line 36.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 36.
+LaTeX Font Info:    ... okay on input line 36.
+ (C:\Program Files\MiKTeX\tex/context/base/mkii\supp-pdf.mkii
+[Loading MPS to PDF converter (version 2006.09.02).]
+\scratchcounter=\count352
+\scratchdimen=\dimen257
+\scratchbox=\box107
+\nofMPsegments=\count353
+\nofMParguments=\count354
+\everyMPshowfont=\toks37
+\MPscratchCnt=\count355
+\MPscratchDim=\dimen258
+\MPnumerator=\count356
+\makeMPintoPDFobject=\count357
+\everyMPtoPDFconversion=\toks38
+) (C:\Program Files\MiKTeX\tex/latex/epstopdf-pkg\epstopdf-base.sty
+Package: epstopdf-base 2020-01-24 v2.11 Base part for package epstopdf
+Package epstopdf-base Info: Redefining graphics rule for `.eps' on input line 485.
+ (C:\Program Files\MiKTeX\tex/latex/00miktex\epstopdf-sys.cfg
+File: epstopdf-sys.cfg 2021/03/18 v2.0 Configuration of epstopdf for MiKTeX
+))
+\c@lstlisting=\count358
+LaTeX Font Info:    Trying to load font information for U+msa on input line 56.
+ (C:\Program Files\MiKTeX\tex/latex/amsfonts\umsa.fd
+File: umsa.fd 2013/01/14 v3.01 AMS symbols A
+)
+LaTeX Font Info:    Trying to load font information for U+msb on input line 56.
+ (C:\Program Files\MiKTeX\tex/latex/amsfonts\umsb.fd
+File: umsb.fd 2013/01/14 v3.01 AMS symbols B
+)
+LaTeX Font Info:    Trying to load font information for U+rsfs on input line 56.
+ (C:\Program Files\MiKTeX\tex/latex/jknappen\ursfs.fd
+File: ursfs.fd 1998/03/24 rsfs font definition file (jk)
+)
+Title too long for running head. Please supply
+a shorter form with \titlerunning prior to \maketitle
+[1
+
+{C:/Users/Pichau/AppData/Local/MiKTeX/fonts/map/pdftex/pdftex.map}]
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+ [2]
+Overfull \hbox (0.56934pt too wide) in paragraph at lines 134--135
+\T1/cmr/m/n/10 Para a im-ple-men-tação dos al-go-rit-mos de otimiza-ção, foram uti-lizadas as seguintes
+ []
+
+
+Overfull \hbox (2.40637pt too wide) in paragraph at lines 144--145
+\T1/cmr/m/n/10 pois pos-si-bilita: (i) cál-culo au-tomático de derivadas sim-bóli-cas via \T1/cmtt/m/n/10 sp.diff()\T1/cmr/m/n/10 ;
+ []
+
+[3]
+c:/Users/Pichau/Documents/REPOSITÃ“RIOS/obsidian_notebook/OtimizaÃ§Ã£o com MetaheurÃ­sticas/Tarefa 2/samplepaper.tex:171: Undefined control sequence.
+<recently read> \botrule 
+                         
+l.171 }
+       
+The control sequence at the end of the top line
+of your error message was never \def'ed. If you have
+misspelled it (e.g., `\hobx'), type `I' and the correct
+spelling (e.g., `I\hbox'). Otherwise just continue,
+and I'll forget about whatever was undefined.
+
+[4]
+<grafico_fx.png, id=39, 695.9601pt x 597.6729pt>
+File: grafico_fx.png Graphic file (type png)
+<use grafico_fx.png>
+Package pdftex.def Info: grafico_fx.png  used on input line 187.
+(pdftex.def)             Requested size: 156.20453pt x 134.14229pt.
+
+Underfull \hbox (badness 10000) in paragraph at lines 188--188
+[]\T1/cmr/bx/n/9 Fig.1. \T1/cmr/m/n/9 Su-per-fí-cie 3D da função
+ []
+
+<curva_fx.png, id=41, 395.3169pt x 314.3745pt>
+File: curva_fx.png Graphic file (type png)
+<use curva_fx.png>
+Package pdftex.def Info: curva_fx.png  used on input line 194.
+(pdftex.def)             Requested size: 156.20453pt x 124.22212pt.
+
+Underfull \hbox (badness 1810) in paragraph at lines 195--195
+[]\T1/cmr/bx/n/9 Fig.2. \T1/cmr/m/n/9 Cur-vas de nível da função
+ []
+
+<grafico_zakharov.png, id=42, 709.6914pt x 591.1686pt>
+File: grafico_zakharov.png Graphic file (type png)
+<use grafico_zakharov.png>
+Package pdftex.def Info: grafico_zakharov.png  used on input line 220.
+(pdftex.def)             Requested size: 156.20453pt x 130.1116pt.
+<curva_zakharov.png, id=43, 392.4261pt x 314.3745pt>
+File: curva_zakharov.png Graphic file (type png)
+<use curva_zakharov.png>
+Package pdftex.def Info: curva_zakharov.png  used on input line 227.
+(pdftex.def)             Requested size: 156.20453pt x 125.13354pt.
+
+Underfull \vbox (badness 2189) has occurred while \output is active []
+
+ [5 <./grafico_fx.png> <./curva_fx.png>]
+<grafico_booth.png, id=50, 701.7417pt x 591.8913pt>
+File: grafico_booth.png Graphic file (type png)
+<use grafico_booth.png>
+Package pdftex.def Info: grafico_booth.png  used on input line 247.
+(pdftex.def)             Requested size: 156.20453pt x 131.75185pt.
+<curva_booth.png, id=51, 395.3169pt x 314.3745pt>
+File: curva_booth.png Graphic file (type png)
+<use curva_booth.png>
+Package pdftex.def Info: curva_booth.png  used on input line 254.
+(pdftex.def)             Requested size: 156.20453pt x 124.22212pt.
+
+Underfull \hbox (badness 1810) in paragraph at lines 255--255
+[]\T1/cmr/bx/n/9 Fig.6. \T1/cmr/m/n/9 Cur-vas de nível da função
+ []
+
+[6 <./grafico_zakharov.png> <./curva_zakharov.png> <./grafico_booth.png> <./curva_booth.png>]
+c:/Users/Pichau/Documents/REPOSITÃ“RIOS/obsidian_notebook/OtimizaÃ§Ã£o com MetaheurÃ­sticas/Tarefa 2/samplepaper.tex:277: Undefined control sequence.
+<recently read> \botrule 
+                         
+l.277 \botrule
+              
+The control sequence at the end of the top line
+of your error message was never \def'ed. If you have
+misspelled it (e.g., `\hobx'), type `I' and the correct
+spelling (e.g., `I\hbox'). Otherwise just continue,
+and I'll forget about whatever was undefined.
+
+
+c:/Users/Pichau/Documents/REPOSITÃ“RIOS/obsidian_notebook/OtimizaÃ§Ã£o com MetaheurÃ­sticas/Tarefa 2/samplepaper.tex:281: LaTeX Error: Unicode character âˆ’ (U+2212)
+               not set up for use with LaTeX.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.281 ...ito prÃ³ximo do mÃ­nimo teÃ³rico em $(âˆ’
+                                                  1.5, 2.5)$ com valor funci...
+You may provide a definition with
+\DeclareUnicodeCharacter 
+
+<gd_fx.png, id=59, 695.9601pt x 597.6729pt>
+File: gd_fx.png Graphic file (type png)
+<use gd_fx.png>
+Package pdftex.def Info: gd_fx.png  used on input line 287.
+(pdftex.def)             Requested size: 156.20453pt x 134.14229pt.
+<gd_curva_fx.png, id=60, 395.3169pt x 314.3745pt>
+File: gd_curva_fx.png Graphic file (type png)
+<use gd_curva_fx.png>
+Package pdftex.def Info: gd_curva_fx.png  used on input line 294.
+(pdftex.def)             Requested size: 156.20453pt x 124.22212pt.
+[7 <./gd_fx.png> <./gd_curva_fx.png>]
+c:/Users/Pichau/Documents/REPOSITÃ“RIOS/obsidian_notebook/OtimizaÃ§Ã£o com MetaheurÃ­sticas/Tarefa 2/samplepaper.tex:313: Undefined control sequence.
+<recently read> \botrule 
+                         
+l.313 \botrule
+              
+The control sequence at the end of the top line
+of your error message was never \def'ed. If you have
+misspelled it (e.g., `\hobx'), type `I' and the correct
+spelling (e.g., `I\hbox'). Otherwise just continue,
+and I'll forget about whatever was undefined.
+
+<gd_zakharov.png, id=67, 709.6914pt x 591.1686pt>
+File: gd_zakharov.png Graphic file (type png)
+<use gd_zakharov.png>
+Package pdftex.def Info: gd_zakharov.png  used on input line 323.
+(pdftex.def)             Requested size: 156.20453pt x 130.1116pt.
+<gd_curva_zakharov.png, id=68, 392.4261pt x 314.3745pt>
+File: gd_curva_zakharov.png Graphic file (type png)
+<use gd_curva_zakharov.png>
+Package pdftex.def Info: gd_curva_zakharov.png  used on input line 330.
+(pdftex.def)             Requested size: 156.20453pt x 125.13354pt.
+c:/Users/Pichau/Documents/REPOSITÃ“RIOS/obsidian_notebook/OtimizaÃ§Ã£o com MetaheurÃ­sticas/Tarefa 2/samplepaper.tex:349: Undefined control sequence.
+<recently read> \botrule 
+                         
+l.349 \botrule
+              
+The control sequence at the end of the top line
+of your error message was never \def'ed. If you have
+misspelled it (e.g., `\hobx'), type `I' and the correct
+spelling (e.g., `I\hbox'). Otherwise just continue,
+and I'll forget about whatever was undefined.
+
+
+Underfull \vbox (badness 1371) has occurred while \output is active []
+
+ [8 <./gd_zakharov.png> <./gd_curva_zakharov.png>]
+<gd_booth.png, id=74, 701.7417pt x 605.6226pt>
+File: gd_booth.png Graphic file (type png)
+<use gd_booth.png>
+Package pdftex.def Info: gd_booth.png  used on input line 359.
+(pdftex.def)             Requested size: 156.20453pt x 134.80835pt.
+<gd_curva_booth.png, id=75, 395.3169pt x 314.3745pt>
+File: gd_curva_booth.png Graphic file (type png)
+<use gd_curva_booth.png>
+Package pdftex.def Info: gd_curva_booth.png  used on input line 366.
+(pdftex.def)             Requested size: 156.20453pt x 124.22212pt.
+
+Overfull \hbox (4.53827pt too wide) in paragraph at lines 377--378
+[]\T1/cmr/bx/n/10 Função Quadrática: \T1/cmr/m/n/10 Re-dução de $\OT1/cmr/m/n/10 3119$ \T1/cmr/m/n/10 para $\OT1/cmr/m/n/10 23$ \T1/cmr/m/n/10 it-er-ações (re-dução de 99,26%) 
+ []
+
+
+Overfull \hbox (1.60936pt too wide) in paragraph at lines 384--385
+\T1/cmr/bx/n/10 lin-ear analítica ap-re-senta lim-i-tações sig-ni-fica-ti-vas e fun-ciona ad-e-quada-
+ []
+
+[9 <./gd_booth.png> <./gd_curva_booth.png>]
+Overfull \hbox (16.083pt too wide) in paragraph at lines 389--390
+[]\T1/cmr/bx/n/10 Custo com-puta-cional sim-bólico: \T1/cmr/m/n/10 A res-olução sim-bólica da equação $[]\OML/cmm/m/it/10 f\OT1/cmr/m/n/10 (\OML/cmm/m/it/10 \OT1/cmr/m/n/10 ) =
+ []
+
+[10]
+c:/Users/Pichau/Documents/REPOSITÃ“RIOS/obsidian_notebook/OtimizaÃ§Ã£o com MetaheurÃ­sticas/Tarefa 2/samplepaper.tex:430: Missing $ inserted.
+<inserted text> 
+                $
+l.430 ...JSmZ96BtkIiOtsW29dkeT_6gWamj?usp=sharing}
+                                                  , last accessed 2026/04/20
+I've inserted a begin-math/end-math symbol since I think
+you left one out. Proceed, with fingers crossed.
+
+c:/Users/Pichau/Documents/REPOSITÃ“RIOS/obsidian_notebook/OtimizaÃ§Ã£o com MetaheurÃ­sticas/Tarefa 2/samplepaper.tex:431: Missing $ inserted.
+<inserted text> 
+                $
+l.431 
+      
+I've inserted a begin-math/end-math symbol since I think
+you left one out. Proceed, with fingers crossed.
+
+c:/Users/Pichau/Documents/REPOSITÃ“RIOS/obsidian_notebook/OtimizaÃ§Ã£o com MetaheurÃ­sticas/Tarefa 2/samplepaper.tex:431: Missing } inserted.
+<inserted text> 
+                }
+l.431 
+      
+I've inserted something that you may have forgotten.
+(See the <inserted text> above.)
+With luck, this will get me unwedged. But if you
+really didn't forget anything, try typing `2' now; then
+my insertion and my current dilemma will both disappear.
+
+
+Overfull \hbox (20.78307pt too wide) in paragraph at lines 430--431
+\T1/cmr/m/n/9 https://colab.research.google.com/drive/1j2frJSmZ96BtkIiOtsW29dkeT$[]\OML/cmm/m/it/9 gWamj\OT1/cmr/m/n/9 ?\OML/cmm/m/it/9 usp \OT1/cmr/m/n/9 =
+ []
+
+c:/Users/Pichau/Documents/REPOSITÃ“RIOS/obsidian_notebook/OtimizaÃ§Ã£o com MetaheurÃ­sticas/Tarefa 2/samplepaper.tex:431: Extra }, or forgotten \endgroup.
+\par ...m \@noitemerr {\@@par }\fi \else {\@@par }
+                                                  \fi 
+l.431 
+      
+I've deleted a group-closing symbol because it seems to be
+spurious, as in `$x}$'. But perhaps the } is legitimate and
+you forgot something else, as in `\hbox{$x}'. In such cases
+the way to recover is to insert both the forgotten and the
+deleted material, e.g., by typing `I$}'.
+
+[11] (samplepaper.aux)
+ ***********
+LaTeX2e <2025-11-01>
+L3 programming layer <2026-01-19>
+ ***********
+ ) 
+Here is how much of TeX's memory you used:
+ 6468 strings out of 467866
+ 94164 string characters out of 5428378
+ 514038 words of memory out of 5000000
+ 35251 multiletter control sequences out of 15000+600000
+ 643711 words of font info for 81 fonts, out of 8000000 for 9000
+ 1141 hyphenation exceptions out of 8191
+ 57i,10n,65p,1196b,342s stack positions out of 10000i,1000n,20000p,200000b,200000s
+ <C:\Users\Pichau\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\ecti0900.pk> <C:\Users\Pichau\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\tcrm1000.pk> <C:\Users\Pichau\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\ectt1000.pk> <C:\Users\Pichau\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\ecti1000.pk> <C:\Users\Pichau\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\ecbx1000.pk> <C:\Users\Pichau\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\ecbx1200.pk> <C:\Users\Pichau\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\tcrm0900.pk> <C:\Users\Pichau\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\ecbx0900.pk> <C:\Users\Pichau\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\ectt0900.pk> <C:\Users\Pichau\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\ecrm0900.pk> <C:\Users\Pichau\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\ecrm1000.pk> <C:\Users\Pichau\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\ecbx1440.pk><C:/Program Files/MiKTeX/fonts/type1/public/amsfonts/cm/cmex10.pfb><C:/Program Files/MiKTeX/fonts/type1/public/amsfonts/cmextra/cmex9.pfb><C:/Program Files/MiKTeX/fonts/type1/public/amsfonts/cm/cmmi10.pfb><C:/Program Files/MiKTeX/fonts/type1/public/amsfonts/cm/cmmi6.pfb><C:/Program Files/MiKTeX/fonts/type1/public/amsfonts/cm/cmmi7.pfb><C:/Program Files/MiKTeX/fonts/type1/public/amsfonts/cm/cmmi9.pfb><C:/Program Files/MiKTeX/fonts/type1/public/amsfonts/cm/cmr10.pfb><C:/Program Files/MiKTeX/fonts/type1/public/amsfonts/cm/cmr5.pfb><C:/Program Files/MiKTeX/fonts/type1/public/amsfonts/cm/cmr6.pfb><C:/Program Files/MiKTeX/fonts/type1/public/amsfonts/cm/cmr7.pfb><C:/Program Files/MiKTeX/fonts/type1/public/amsfonts/cm/cmr9.pfb><C:/Program Files/MiKTeX/fonts/type1/public/amsfonts/cm/cmsy10.pfb><C:/Program Files/MiKTeX/fonts/type1/public/amsfonts/cm/cmsy6.pfb><C:/Program Files/MiKTeX/fonts/type1/public/amsfonts/cm/cmsy7.pfb><C:/Program Files/MiKTeX/fonts/type1/public/amsfonts/cm/cmsy9.pfb>
+Output written on samplepaper.pdf (11 pages, 2423828 bytes).
+PDF statistics:
+ 581 PDF objects out of 1000 (max. 8388607)
+ 0 named destinations out of 1000 (max. 500000)
+ 61 words of extra memory for PDF output out of 10000 (max. 10000000)
+

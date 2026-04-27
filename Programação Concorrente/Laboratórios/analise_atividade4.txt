@@ -1,0 +1,44 @@
+Análise dos Resultados (Atividade 4)
+
+Especificações da máquina de execução
+- CPU: AMD EPYC 7B13
+- Arquitetura de endereçamento: 48 bits físicos / 48 bits virtuais
+- Frequência reportada: 2449.998 MHz
+- Cache L2 reportado por processador lógico: 512 KB
+- 24 processadores lógicos
+- 12 núcleos físicos 
+
+1) Comportamento do tempo de execução
+- Para n = 1.000.000, o tempo cai de 1 para 2 e 4 threads, mas piora com 8 threads.
+- Para n = 10.000.000, há melhora forte até 4 threads; em 8 threads o tempo volta a subir.
+- Para n = 100.000.000, o ganho é consistente até 4 threads; em 8 threads ainda melhora em relação a 1 thread, mas piora em relação a 4 threads.
+Em geral, o tempo não diminui indefinidamente com mais threads: após certo ponto, overhead de sincronização e escalonamento passa a dominar.
+
+2) Aceleração obtida
+- n = 1.000.000: speedup aproximado de 1,63 (2 threads), 1,70 (4 threads) e 0,71 (8 threads).
+- n = 10.000.000: speedup aproximado de 1,89 (2), 3,33 (4) e 1,81 (8).
+- n = 100.000.000: speedup aproximado de 1,98 (2), 3,91 (4) e 3,53 (8).
+O melhor ponto observado foi 4 threads, principalmente para n maiores.
+
+3) Eficiência
+- n = 1.000.000: eficiência de aproximadamente 0,82 (2), 0,43 (4), 0,09 (8).
+- n = 10.000.000: eficiência de aproximadamente 0,95 (2), 0,83 (4), 0,23 (8).
+- n = 100.000.000: eficiência de aproximadamente 0,99 (2), 0,98 (4), 0,44 (8).
+A eficiência cai quando o número de threads cresce além de 4 threads.
+
+4) Impacto do tamanho do problema (n)
+Quanto maior n, melhor o aproveitamento do paralelismo.
+Em n pequeno, o custo de criar threads e sincronizar pesa proporcionalmente mais.
+Em n grande, esse overhead é diluído, então speedup e eficiência melhoram, principalmente até 4 threads.
+
+5) Limitações observadas
+Há contenção no mutex para pegar o próximo número e para acumular resultados, o que limita escalabilidade.
+Com muitas threads, o custo de troca de contexto e concorrência por CPU pode reduzir o ganho.
+O teste de primalidade (com sqrt a cada número) é computacionalmente caro; parte do tempo é gasto nessa rotina.
+O comportamento de 8 threads sugere saturação de recursos.
+Como o ambiente é virtualizado, pode haver variação de desempenho.
+
+Conclusão: 
+O paralelismo foi efetivo, principalmente para n maiores.
+Neste experimento, 4 threads apresentou o melhor equilíbrio entre tempo, speedup e eficiência.
+Aumentar para 8 threads não trouxe ganho proporcional e, em alguns casos, piorou o desempenho.

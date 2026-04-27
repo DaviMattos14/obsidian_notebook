@@ -1,0 +1,10 @@
+(((P ˅ ((¬Q) ˄ R)) → S) ↔ ((¬U) ˅ P))
+
+
+((P → (Q ˅ (R ˄ (¬P)))) ↔ R)
+
+P = Verdadeiro, Q = Falso, R = Verdadeiro
+
+X: V 
+
+Y: ¬(P ˅ R) ↔ (Q ˄ R)
