@@ -1,0 +1,29 @@
+
+2D (3 algoritmos)
+GA implementado: médio=0.635246, mediana=0.0377446
+GA pymoo: médio=6.87271e-06, mediana=2.71525e-06
+GA pymoo configurado: médio=0.00437722, mediana=2.70014e-05
+
+2D (2 algoritmos)
+GA implementado: médio=0.635246, mediana=0.0377446
+GA pymoo: médio=6.87271e-06, mediana=2.71525e-06
+GA pymoo configurado: médio=0.00437722, mediana=2.70014e-05
+
+5D (3 algoritmos)
+GA implementado: médio=5.88677, mediana=0.712228
+GA pymoo: médio=0.533806, mediana=0.657363
+GA pymoo configurado: médio=1.86835, mediana=1.98421
+
+10D (3 algoritmos)
+GA implementado: médio=13.6985, mediana=5.23377
+GA pymoo: médio=5.57747, mediana=6.05638
+GA pymoo configurado: médio=7.19376, mediana=7.28029
+
+30D (3 algoritmos)
+GA implementado: médio=56.3063, mediana=26.7902
+GA pymoo: médio=32.2322, mediana=26.7791
+GA pymoo configurado: médio=27.5255, mediana=27.6556
+
+30D (2 algoritmos)
+GA implementado: médio=56.3063, mediana=26.7902
+GA pymoo: médio=32.2322, mediana=26.7791
