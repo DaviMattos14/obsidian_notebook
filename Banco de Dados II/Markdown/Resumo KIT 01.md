@@ -44,5 +44,3 @@ Cada banco NoSQL pertence a uma família com modelagens distintas:
 
 - **Map-Reduce:** Um modelo de programação do Google para processar grandes conjuntos de dados em _clusters_. Funciona mapeando dados de entrada em pares chave-valor (_Map_) e, em seguida, agrupando e combinando esses valores (_Reduce_).
 - **Persistência Poliglota (Polystores):** A ideia de que não existe um "banco de dados universal". Sistemas modernos usam múltiplos bancos (relacionais e NoSQL) ao mesmo tempo, integrando-os através de uma _Query Engine_ (motor de consultas) e _Wrappers_.
-
-Gostaria que eu gerasse Flashcards ou um Quiz interativo sobre esse conteúdo para ajudar na sua fixação do material?
