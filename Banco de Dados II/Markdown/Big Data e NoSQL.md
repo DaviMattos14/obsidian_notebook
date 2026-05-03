@@ -1,9 +1,3 @@
-# Guia de Estudos: Big Data, NoSQL e a Arquitetura de Grafos
-
-Este documento sintetiza os conceitos fundamentais sobre modelos e arquiteturas de armazenamento de grandes volumes de dados, explorando a transição dos sistemas relacionais para o ecossistema NoSQL e as inovações em bancos de dados orientados a grafos.
-
---------------------------------------------------------------------------------
-
 ## 1. Big Data e a Evolução dos Bancos de Dados
 
 O cenário tecnológico atual é marcado pelo "Data Deluge" (dilúvio de dados), onde a ciência evoluiu de modelos empíricos e teóricos para o "Quarto Paradigma", orientado a grandes volumes de dados (_in silico_). O **Big Data** é definido pelo seu alto volume, velocidade e variedade, exigindo formas inovadoras de processamento. Tradicionalmente classificado pelos "3 V's", o conceito expandiu-se para os **6 V's**:
@@ -133,6 +127,10 @@ Cypher é uma linguagem declarativa que utiliza uma sintaxe visual inspirada em 
 - `()` representa um nó.
 - `[]` representa um relacionamento.
 - `->` representa a direção.
+- `{}` contém as propriedades (chave-valor)
+```Neo4j
+					(p:Pessoa)-[:SEGUE]->(amigo:Pessoa)
+```
 
 **Cláusulas Principais:**
 
