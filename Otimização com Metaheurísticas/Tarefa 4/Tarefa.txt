@@ -1,0 +1,29 @@
+Experimentação 03
+Algoritmo de Evolução Diferencial
+
+Você deverá entregar um relatório técnico contendo o link de códigos utilizados e também os resultados e discussões para os passos a seguir.
+
+Passo 1)
+1. Testar a versão de código feita do DE  por você a estratégia DE/Rand/1/bin na função de testes 
+Rosenbroack (2D) por 10000 avaliações de função.
+2. Gerar uma experimentação com 30 execuções do algoritmo e fornecer um gráfico de
+curva de convergência média
+Passo 2)
+3. Replicar a experimentação do passo 1 para as seguintes estratégias evolutivas:
+a) DE/Rand/2/bin
+b) DE/Best/1/bin
+c) DE/Best/2/bin
+d) DE/current-to-best/1/bin
+
+- Ao final apresente um gráfico de curva de convergência média contendo todas as
+estratégias. Faça uma exposição textual sobre o resultado;
+- Apresente também um gráfico de caixas boxplot e comente o resultado de cada série
+de 30 soluções vindas das estratégias. Para esta função, qual foi a estratégia mais
+eficiente?
+
+Passo 3)
+4. Execute a mesma experimentação com o algoritmo de Evolução Diferencial padrão da
+pymoo (DE/rand/1).
+- Faça um gráfico de convergência média contendo: o da melhor versão de DE feita por você, 
+o gráfico do resultado padrão da pymoo, e o gráfico do seu AG. Faça também o boxplot desta avaliação. 
+Descreva o resultado obtido.
