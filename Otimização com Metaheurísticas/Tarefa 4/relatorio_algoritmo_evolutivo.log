@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.29 (MiKTeX 26.2) (preloaded format=pdflatex 2026.4.5)  5 MAY 2026 22:32
+This is pdfTeX, Version 3.141592653-2.6-1.40.29 (MiKTeX 26.2) (preloaded format=pdflatex 2026.4.5)  6 MAY 2026 19:48
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -540,114 +540,108 @@ Package hyperref Info: bookmark level for unknown algorithm defaults to 0 on inp
 LaTeX Warning: `h' float specifier changed to `ht'.
 
 [3]
-<curva_todos.png, id=81, 735.7086pt x 396.0396pt>
+<curva_todos.png, id=80, 735.7086pt x 396.0396pt>
 File: curva_todos.png Graphic file (type png)
 <use curva_todos.png>
 Package pdftex.def Info: curva_todos.png  used on input line 183.
 (pdftex.def)             Requested size: 329.7663pt x 177.52121pt.
-
-
-LaTeX Warning: `h' float specifier changed to `ht'.
-
-[4]
-<curva_individuais.png, id=95, 1074.6549pt x 1076.1003pt>
+ [4 <./curva_todos.png>]
+<curva_individuais.png, id=92, 1074.6549pt x 1076.1003pt>
 File: curva_individuais.png Graphic file (type png)
 <use curva_individuais.png>
-Package pdftex.def Info: curva_individuais.png  used on input line 225.
+Package pdftex.def Info: curva_individuais.png  used on input line 204.
 (pdftex.def)             Requested size: 329.7663pt x 330.20514pt.
 
+Underfull \vbox (badness 10000) has occurred while \output is active []
 
-LaTeX Warning: `h' float specifier changed to `ht'.
-
-[5 <./curva_todos.png>]
-Overfull \hbox (41.4047pt too wide) in paragraph at lines 238--239
+ [5]
+Overfull \hbox (41.4047pt too wide) in paragraph at lines 217--218
 []\T1/cmr/m/n/10 As es-traté-gias com duas difer-enças difer-en-ci-ais (\T1/cmr/bx/n/10 DE/Rand/2/bin\T1/cmr/m/n/10 , \T1/cmr/bx/n/10 DE/Best/2/bin\T1/cmr/m/n/10 )
  []
 
-
-Overfull \hbox (7.40472pt too wide) in paragraph at lines 251--252
+[6 <./curva_individuais.png>]
+Overfull \hbox (7.40472pt too wide) in paragraph at lines 230--231
 []\T1/cmr/bx/n/10 DE/Current-to-Best/1/bin\T1/cmr/m/n/10 : Dis-per-são con-sid-erável com me-di-ana em $\OT1/cmr/m/n/10 10[]$\T1/cmr/m/n/10 .
  []
 
-<boxplot_todos.png, id=104, 715.473pt x 426.393pt>
+<boxplot_todos.png, id=106, 715.473pt x 426.393pt>
 File: boxplot_todos.png Graphic file (type png)
 <use boxplot_todos.png>
-Package pdftex.def Info: boxplot_todos.png  used on input line 258.
+Package pdftex.def Info: boxplot_todos.png  used on input line 237.
 (pdftex.def)             Requested size: 329.7663pt x 196.52702pt.
 
-LaTeX Warning: `h' float specifier changed to `ht'.
-
-
-Overfull \hbox (43.61577pt too wide) in paragraph at lines 263--264
+Overfull \hbox (43.61577pt too wide) in paragraph at lines 242--243
 \T1/cmr/m/n/10 unân-ime de con-vergên-cia, tabela de re-sul-ta-dos e dis-tribuição fi-nal aponta \T1/cmr/bx/n/10 DE/Best/1/bin
  []
 
-
-Overfull \hbox (0.41658pt too wide) in paragraph at lines 270--271
+[7 <./boxplot_todos.png>]
+Overfull \hbox (0.41658pt too wide) in paragraph at lines 249--250
 []\T1/cmr/bx/n/10 DE/Best/1/bin \T1/cmr/m/n/10 e \T1/cmr/bx/n/10 DE/Current-to-Best/1/bin \T1/cmr/m/n/10 ap-re-sen-tam de-scida mais
  []
 
-[6]
-Overfull \hbox (29.00684pt too wide) in paragraph at lines 296--297
-\T1/cmr/m/n/10 ap-re-senta as cur-vas de con-vergên-cia mé-dia com-para-ndo nossa es-traté-gia DE/Best/1/bin
+
+Overfull \hbox (30.67636pt too wide) in paragraph at lines 263--272
+ [][] 
  []
 
-<conv_best_vs_pymoo.png, id=114, 859.0494pt x 424.4658pt>
+<conv_best_vs_pymoo.png, id=116, 859.2903pt x 426.393pt>
 File: conv_best_vs_pymoo.png Graphic file (type png)
 <use conv_best_vs_pymoo.png>
-Package pdftex.def Info: conv_best_vs_pymoo.png  used on input line 300.
-(pdftex.def)             Requested size: 329.7663pt x 162.94379pt.
-
-LaTeX Warning: `h' float specifier changed to `ht'.
-
-
-Overfull \hbox (9.87567pt too wide) in paragraph at lines 310--311
+Package pdftex.def Info: conv_best_vs_pymoo.png  used on input line 280.
+(pdftex.def)             Requested size: 329.7663pt x 163.63155pt.
+[8]
+Overfull \hbox (9.87567pt too wide) in paragraph at lines 289--290
 []\T1/cmr/bx/n/10 Convergência pro-funda\T1/cmr/m/n/10 : A par-tir das 2.000 avali-ações, nossa DE/Best/1/bin
  []
 
-<boxplot_best_pymoo.png, id=116, 714.9912pt x 424.9476pt>
+<boxplot_best_pymoo.png, id=127, 714.7503pt x 426.393pt>
 File: boxplot_best_pymoo.png Graphic file (type png)
 <use boxplot_best_pymoo.png>
-Package pdftex.def Info: boxplot_best_pymoo.png  used on input line 323.
-(pdftex.def)             Requested size: 329.7663pt x 195.997pt.
+Package pdftex.def Info: boxplot_best_pymoo.png  used on input line 300.
+(pdftex.def)             Requested size: 329.7663pt x 196.72871pt.
 
-LaTeX Warning: `h' float specifier changed to `ht'.
+Underfull \vbox (badness 5316) has occurred while \output is active []
 
-[7]
-Overfull \hbox (3.35059pt too wide) in paragraph at lines 357--358
+ [9 <./conv_best_vs_pymoo.png>] [10 <./boxplot_best_pymoo.png>]
+Overfull \hbox (3.35059pt too wide) in paragraph at lines 333--334
 \T1/cmr/m/n/10 di-ví-duo (Best) con-vergem muito mais efi-cien-te-mente que es-traté-gias aleatórias
  []
 
 
-Overfull \hbox (28.59442pt too wide) in paragraph at lines 361--362
+Overfull \hbox (28.59442pt too wide) in paragraph at lines 337--338
 \T1/cmr/m/n/10 in-ter-es-sante en-tre as duas, mas não su-pera a ex-plotação agres-siva de DE/Best/1/bin
  []
 
 
-Overfull \hbox (7.4471pt too wide) in paragraph at lines 363--364
+Overfull \hbox (7.4471pt too wide) in paragraph at lines 339--340
 []\T1/cmr/bx/n/10 Robustez\T1/cmr/m/n/10 : A dis-tribuição de re-sul-ta-dos (box-plots) mostra que DE/Best/1/bin
  []
 
-[8] [9] [10 <./curva_individuais.png>] [11 <./boxplot_todos.png> <./conv_best_vs_pymoo.png>] [12 <./boxplot_best_pymoo.png>] (relatorio_algoritmo_evolutivo.aux)
+
+Underfull \hbox (badness 6110) in paragraph at lines 353--355
+[]\T1/cmr/m/n/9 VLSE: Vir-tual Li-brary of Sim-u-la-tion Ex-per-i-ments. []$\T1/cmtt/m/n/9 https : / / www . sfu . ca /
+ []
+
+[11] (relatorio_algoritmo_evolutivo.aux)
  ***********
 LaTeX2e <2025-11-01>
 L3 programming layer <2026-01-19>
  ***********
 Package rerunfilecheck Info: File `relatorio_algoritmo_evolutivo.out' has not changed.
-(rerunfilecheck)             Checksum: 5B2F0841FFE5113C460B1CE887431A15;359.
+(rerunfilecheck)             Checksum: F670C260DFA3A1D28619EDFC7C016E55;291.
  ) 
 Here is how much of TeX's memory you used:
- 13295 strings out of 467866
- 198529 string characters out of 5428378
- 629421 words of memory out of 5000000
- 41903 multiletter control sequences out of 15000+600000
- 644006 words of font info for 83 fonts, out of 8000000 for 9000
+ 13297 strings out of 467866
+ 198523 string characters out of 5428378
+ 627469 words of memory out of 5000000
+ 41908 multiletter control sequences out of 15000+600000
+ 644692 words of font info for 84 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 75i,9n,79p,944b,590s stack positions out of 10000i,1000n,20000p,200000b,200000s
- <C:\Users\Pichau\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\ecbx1000.pk> <C:\Users\Pichau\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\ecbx1200.pk> <C:\Users\Pichau\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\tcrm0900.pk> <C:\Users\Pichau\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\ecbx0900.pk> <C:\Users\Pichau\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\ectt0900.pk> <C:\Users\Pichau\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\ecrm0900.pk> <C:\Users\Pichau\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\ecrm1000.pk> <C:\Users\Pichau\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\ecbx1440.pk><C:/Program Files/MiKTeX/fonts/type1/public/amsfonts/cm/cmbx10.pfb><C:/Program Files/MiKTeX/fonts/type1/public/amsfonts/cm/cmbx9.pfb><C:/Program Files/MiKTeX/fonts/type1/public/amsfonts/cm/cmex10.pfb><C:/Program Files/MiKTeX/fonts/type1/public/amsfonts/cm/cmmi10.pfb><C:/Program Files/MiKTeX/fonts/type1/public/amsfonts/cm/cmmi6.pfb><C:/Program Files/MiKTeX/fonts/type1/public/amsfonts/cm/cmmi7.pfb><C:/Program Files/MiKTeX/fonts/type1/public/amsfonts/cm/cmmi9.pfb><C:/Program Files/MiKTeX/fonts/type1/public/amsfonts/cm/cmr10.pfb><C:/Program Files/MiKTeX/fonts/type1/public/amsfonts/cm/cmr5.pfb><C:/Program Files/MiKTeX/fonts/type1/public/amsfonts/cm/cmr6.pfb><C:/Program Files/MiKTeX/fonts/type1/public/amsfonts/cm/cmr7.pfb><C:/Program Files/MiKTeX/fonts/type1/public/amsfonts/cm/cmr9.pfb><C:/Program Files/MiKTeX/fonts/type1/public/amsfonts/cm/cmsy10.pfb><C:/Program Files/MiKTeX/fonts/type1/public/amsfonts/cm/cmsy6.pfb><C:/Program Files/MiKTeX/fonts/type1/public/amsfonts/cm/cmsy7.pfb><C:/Program Files/MiKTeX/fonts/type1/public/amsfonts/cm/cmsy9.pfb>
-Output written on relatorio_algoritmo_evolutivo.pdf (12 pages, 587943 bytes).
+ 75i,10n,79p,771b,533s stack positions out of 10000i,1000n,20000p,200000b,200000s
+ <C:\Users\Pichau\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\ecti0900.pk> <C:\Users\Pichau\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\ecbx1000.pk> <C:\Users\Pichau\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\ecbx1200.pk> <C:\Users\Pichau\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\tcrm0900.pk> <C:\Users\Pichau\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\ecbx0900.pk> <C:\Users\Pichau\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\ectt0900.pk> <C:\Users\Pichau\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\ecrm0900.pk> <C:\Users\Pichau\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\ecrm1000.pk> <C:\Users\Pichau\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\ecbx1440.pk><C:/Program Files/MiKTeX/fonts/type1/public/amsfonts/cm/cmbx10.pfb><C:/Program Files/MiKTeX/fonts/type1/public/amsfonts/cm/cmbx9.pfb><C:/Program Files/MiKTeX/fonts/type1/public/amsfonts/cm/cmex10.pfb><C:/Program Files/MiKTeX/fonts/type1/public/amsfonts/cm/cmmi10.pfb><C:/Program Files/MiKTeX/fonts/type1/public/amsfonts/cm/cmmi6.pfb><C:/Program Files/MiKTeX/fonts/type1/public/amsfonts/cm/cmmi7.pfb><C:/Program Files/MiKTeX/fonts/type1/public/amsfonts/cm/cmmi9.pfb><C:/Program Files/MiKTeX/fonts/type1/public/amsfonts/cm/cmr10.pfb><C:/Program Files/MiKTeX/fonts/type1/public/amsfonts/cm/cmr5.pfb><C:/Program Files/MiKTeX/fonts/type1/public/amsfonts/cm/cmr6.pfb><C:/Program Files/MiKTeX/fonts/type1/public/amsfonts/cm/cmr7.pfb><C:/Program Files/MiKTeX/fonts/type1/public/amsfonts/cm/cmr9.pfb><C:/Program Files/MiKTeX/fonts/type1/public/amsfonts/cm/cmsy10.pfb><C:/Program Files/MiKTeX/fonts/type1/public/amsfonts/cm/cmsy6.pfb><C:/Program Files/MiKTeX/fonts/type1/public/amsfonts/cm/cmsy7.pfb><C:/Program Files/MiKTeX/fonts/type1/public/amsfonts/cm/cmsy9.pfb>
+Output written on relatorio_algoritmo_evolutivo.pdf (11 pages, 572588 bytes).
 PDF statistics:
- 618 PDF objects out of 1000 (max. 8388607)
- 87 named destinations out of 1000 (max. 500000)
+ 676 PDF objects out of 1000 (max. 8388607)
+ 83 named destinations out of 1000 (max. 500000)
  34 words of extra memory for PDF output out of 10000 (max. 10000000)
 

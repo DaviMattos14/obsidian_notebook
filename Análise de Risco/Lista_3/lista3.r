@@ -1,10 +1,5 @@
-if (!requireNamespace('triangle', quietly = TRUE)) {
-    install.packages('triangle', repos = 'https://cloud.r-project.org')
-}
+# Item 1
 
-library(triangle)
-
-# Dados do problema
 frota <- 20
 
 carro_dia <- c(16, 12, 15, 16, 19, 14, 15, 17, 15, 18,
@@ -17,27 +12,47 @@ litro_carro <- c(59, 51, 46, 67, 69, 52, 57, 57, 42, 67,
                 66, 46, 47, 63, 52, 64, 48, 47, 62, 49,
                 53, 49, 51, 44, 55, 59, 60, 45, 64, 55)
 
-# Parâmetros da simulação de risco
+install.packages('triangle')
+library(triangle)
+
 set.seed(1)
 n_simulacao <- 3000
 
-sort_ativos <- sort(carro_dia)
-sort_consumo <- sort(litro_carro)
+n_sim <- 3000
+n_carros <- 20
 
-sample_ativos <- sample(1:length(carro_dia), n_simulacao, replace = TRUE)
-sample_consumo <- sample(1:length(litro_carro), n_simulacao, replace = TRUE)
+sample_ativos <- sample(carro_dia, n_sim, replace = TRUE)
 
-amostra_ativos <- sort_ativos[sample_ativos]
-amostra_consumo <- sort_consumo[sample_consumo]
+matriz_ativos <- matrix(0, nrow = n_sim, ncol = n_carros)
 
-amostra_gasolina <- rtriangle(n_simulacao, 6.10, 7)
+for(i in 1:n_sim){
+  k <- sample_ativos[i]  # quantos carros ativos naquele dia
 
-# Modelo do gasto diário com combustível
-gasto <- amostra_ativos * amostra_consumo * amostra_gasolina
+  ativos_indices <- sample(1:n_carros, k, replace = FALSE)
+  matriz_ativos[i, ativos_indices] <- 1
+}
 
-# Medidas para interpretar a distribuição simulada
+matriz_consumo <- matrix(
+  sample(litro_carro, n_sim * n_carros, replace = TRUE),
+  nrow = n_sim,
+  ncol = n_carros
+)
+
+matriz_consumo <- matriz_consumo * matriz_ativos
+matriz_preco <- matrix(
+  rtriangle(n_simulacao, 6.10, 7),
+  nrow=n_sim,
+  ncol=n_carros
+)
+
+matriz_consumo <- matriz_consumo * matriz_ativos
+gasto <- rowSums(matriz_consumo * matriz_preco)
+
+summary(gasto)
+
+#Resultados
 resumo_gasto <- c(
-    media = mean(gasto), # valor esperado do gasto diario
+    #media = mean(gasto), # valor esperado do gasto diario
     desvio_padrao = sd(gasto), # variacao em torno da media
     mediana = median(gasto), # valor central da distribuicao
     minimo = min(gasto), # menor gasto simulado
@@ -45,6 +60,7 @@ resumo_gasto <- c(
     p05 = as.numeric(quantile(gasto, 0.05)), # limite inferior da faixa usual
     p25 = as.numeric(quantile(gasto, 0.25)), # primeiro quartil
     p75 = as.numeric(quantile(gasto, 0.75)), # terceiro quartil
+    p90 = as.numeric(quantile(gasto, 0.90)), # limite superior da faixa usual
     p95 = as.numeric(quantile(gasto, 0.95)), # limite superior da faixa usual
     cv = sd(gasto) / mean(gasto) # dispersao relativa da simulacao
 )
@@ -57,37 +73,69 @@ resumo_gasto_friendly <- data.frame(
 
 print(resumo_gasto_friendly)
 
-# Visualizações da distribuição simulada
+#Gráficos
 hist(gasto)
 plot(density(gasto))
 plot(ecdf(gasto))
 
+# Estatísticas principais
+custo_base <- quantile(gasto, 0.50)
+custo_p90  <- quantile(gasto, 0.90)
 
-# -----------------------------
-# Item 2 - custo anual com almoços
-# -----------------------------
-# Dados do enunciado: número de executivos (min, mode, max), gastos por pessoa e
-# número de almoços por ano (últimos 10 anos)
+# Contingência
+contingencia <- custo_p90 - custo_base
+percentual_contingencia <- (contingencia / custo_base) * 100
+
+# Exibir resultados
+cat(sprintf("P50 (mediana):      R$ %.2f\n", custo_base))
+cat(sprintf("P90 (cenário risco): R$ %.2f\n", custo_p90))
+cat(sprintf("Contingência:       R$ %.2f\n", contingencia))
+cat(sprintf("Contingência %%:     %.2f%%\n", percentual_contingencia))
+
+#-------------------------------------------------
+# Item 2
+#-------------------------------------------------
+
+set.seed(1)
+n_simulacao <- 3000
+
+# Parâmetros para a distribuição triangular (número de executivos)
 exec_min <- 16
-exec_mode <- 18
+exec_moda <- 18
 exec_max <- 22
 
-gasto_por_pessoa <- c(347,410,349,454,370,465,445,383,358,418,377,407,467,441,428,354,384,400,378,367,421,392,337,387,452,411,339,380,371,464,369,484,458,471,362)
+# Gastos por pessoa no último almoço
+gasto_por_pessoa <- c(347, 410, 349, 454, 370, 465, 445, 383, 358, 418, 377, 407, 467, 441, 428, 354, 384, 400, 378, 367, 421, 392, 337, 387, 452, 411, 339, 380, 371, 464, 369, 484, 458, 471, 362)
 
-almocos_ultimos10 <- c(38,45,42,37,38,31,42,37,42,40)
+# Número de almoços nos últimos 10 anos
+almocos_ultimos10 <- c(38, 45, 42, 37, 38, 31, 42, 37, 42, 40)
 
-# Parâmetros de simulação (mantendo o mesmo n_simulacao)
-set.seed(1)
+sample_presenca <- sample(round(rtriangle(n_simulacao, a = exec_min, b = exec_max, c = exec_moda)), n_sim, replace = TRUE)
 
-# Simular número de executivos por almoço com distribuição triangular (discreta via arredondamento)
-exec_sim <- round(rtriangle(n_simulacao, a = exec_min, b = exec_max, c = exec_mode))
+matriz_presenca <- matrix(0, nrow = n_sim, ncol = exec_max)
 
-# Simular gasto por pessoa e número de almoços por ano por amostragem empírica (bootstrap)
-gasto_pessoa_sim <- sample(gasto_por_pessoa, n_simulacao, replace = TRUE)
-almocos_ano_sim <- sample(almocos_ultimos10, n_simulacao, replace = TRUE)
+for(i in 1:n_sim){
+  k <- sample_presenca[i]  # quantos executivos estavam presentes naquele dia
 
-# Custo anual = número de executivos * gasto por pessoa * número de almoços no ano
-custo_anual <- exec_sim * gasto_pessoa_sim * almocos_ano_sim
+  ativos_indices <- sample(1:exec_max, k, replace = FALSE)
+  matriz_presenca[i, ativos_indices] <- 1
+}
+
+
+matriz_valor_por_pessoa <- matrix(
+  sample(gasto_por_pessoa, n_simulacao, replace = TRUE),
+  nrow = n_sim,
+  ncol = exec_max
+)
+
+matriz_almocos_por_ano <- matrix(
+  sample(almocos_ultimos10, n_simulacao, replace = TRUE),
+  nrow = n_sim,
+  ncol = 1
+)
+
+custo_por_pessoa <- matriz_valor_por_pessoa * matriz_presenca
+custo_anual <- matriz_almocos_por_ano * rowSums(custo_por_pessoa)
 
 # Resumo estatístico do custo anual
 resumo_custo <- c(
@@ -99,6 +147,8 @@ resumo_custo <- c(
     p05 = as.numeric(quantile(custo_anual, 0.05)),
     p25 = as.numeric(quantile(custo_anual, 0.25)),
     p75 = as.numeric(quantile(custo_anual, 0.75)),
+    p80 = as.numeric(quantile(custo_anual, 0.80)),
+    p90 = as.numeric(quantile(custo_anual, 0.90)),
     p95 = as.numeric(quantile(custo_anual, 0.95)),
     cv = sd(custo_anual) / mean(custo_anual)
 )
@@ -112,10 +162,23 @@ resumo_custo_friendly <- data.frame(
 cat('\n--- Item 2: Resumo do custo anual (simulação) ---\n')
 print(resumo_custo_friendly)
 
+summary(custo_anual)
+
+# Estatísticas principais
+custo_base <- quantile(custo_anual, 0.50)
+custo_p90  <- quantile(custo_anual, 0.90)
+
+# Contingência
+contingencia <- custo_p90 - custo_base
+percentual_contingencia <- (contingencia / custo_base) * 100
+
+# Exibir resultados
+cat(sprintf("P50 (mediana):      R$ %.2f\n", custo_base))
+cat(sprintf("P90 (cenário risco): R$ %.2f\n", custo_p90))
+cat(sprintf("Contingência:       R$ %.2f\n", contingencia))
+cat(sprintf("Contingência %%:     %.2f%%\n", percentual_contingencia))
+
 # Visualizações rápidas
 hist(custo_anual, main = 'Histograma do custo anual (Item 2)', xlab = 'Custo anual (R$)')
 plot(density(custo_anual), main = 'Densidade do custo anual (Item 2)')
 plot(ecdf(custo_anual), main = 'ECDF do custo anual (Item 2)')
-
-
-
