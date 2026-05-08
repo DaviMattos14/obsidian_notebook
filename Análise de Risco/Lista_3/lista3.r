@@ -12,7 +12,10 @@ litro_carro <- c(59, 51, 46, 67, 69, 52, 57, 57, 42, 67,
                 66, 46, 47, 63, 52, 64, 48, 47, 62, 49,
                 53, 49, 51, 44, 55, 59, 60, 45, 64, 55)
 
-install.packages('triangle')
+if (!require('triangle', quietly = TRUE)) {
+  options(repos = c(CRAN = "https://cloud.r-project.org"))
+  install.packages('triangle', quiet = TRUE)
+}
 library(triangle)
 
 set.seed(1)
@@ -110,32 +113,38 @@ gasto_por_pessoa <- c(347, 410, 349, 454, 370, 465, 445, 383, 358, 418, 377, 407
 # Número de almoços nos últimos 10 anos
 almocos_ultimos10 <- c(38, 45, 42, 37, 38, 31, 42, 37, 42, 40)
 
-sample_presenca <- sample(round(rtriangle(n_simulacao, a = exec_min, b = exec_max, c = exec_moda)), n_sim, replace = TRUE)
+# Vetor para armazenar o custo anual de cada simulação
+custo_anual <- numeric(n_simulacao)
 
-matriz_presenca <- matrix(0, nrow = n_sim, ncol = exec_max)
-
-for(i in 1:n_sim){
-  k <- sample_presenca[i]  # quantos executivos estavam presentes naquele dia
-
-  ativos_indices <- sample(1:exec_max, k, replace = FALSE)
-  matriz_presenca[i, ativos_indices] <- 1
+# Loop sobre cada simulação (cada ano)
+for(sim in 1:n_simulacao){
+  # Determinar número de almoços naquele ano
+  num_almocos <- sample(almocos_ultimos10, 1)
+  
+  # Somar custo de todos os almoços naquele ano
+  custo_almocos_ano <- 0
+  
+  # Loop sobre cada almoço naquele ano
+  for(alm in 1:num_almocos){
+    # Gerar número de executivos presentes neste almoço
+    num_executivos <- round(rtriangle(1, a = exec_min, b = exec_max, c = exec_moda))
+    
+    # Selecionar quem está presente (índices)
+    presentes <- sample(1:exec_max, num_executivos, replace = FALSE)
+    
+    # Gerar gasto de cada executivo presente
+    gastos_individuais <- sample(gasto_por_pessoa, num_executivos, replace = TRUE)
+    
+    # Custo deste almoço
+    custo_almoço <- sum(gastos_individuais)
+    
+    # Acumular ao total do ano
+    custo_almocos_ano <- custo_almocos_ano + custo_almoço
+  }
+  
+  # Guardar custo anual da simulação
+  custo_anual[sim] <- custo_almocos_ano
 }
-
-
-matriz_valor_por_pessoa <- matrix(
-  sample(gasto_por_pessoa, n_simulacao, replace = TRUE),
-  nrow = n_sim,
-  ncol = exec_max
-)
-
-matriz_almocos_por_ano <- matrix(
-  sample(almocos_ultimos10, n_simulacao, replace = TRUE),
-  nrow = n_sim,
-  ncol = 1
-)
-
-custo_por_pessoa <- matriz_valor_por_pessoa * matriz_presenca
-custo_anual <- matriz_almocos_por_ano * rowSums(custo_por_pessoa)
 
 # Resumo estatístico do custo anual
 resumo_custo <- c(

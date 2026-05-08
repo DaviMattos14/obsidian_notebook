@@ -76,7 +76,7 @@ Uma empresa de táxi opera uma frota de 20 veículos. Nos últimos 30 dias, obse
 \begin{itemize}
     \item \textbf{Carros ativos por dia:} 29 observações com variação de 12 a 19 veículos;
     \item \textbf{Consumo por carro:} 50 observações com variação de 42 a 69 litros;
-    \item \textbf{Preço do combustível:} Distribuição triangular entre R\$ 6,10 e R\$ 7,00 por litro.
+    \item \textbf{Preço do combustível:} Faixa de preços estimada com apoio de inteligência artificial do Google, utilizada para prever o comportamento esperado do preço do combustível no período analisado. A partir dessa estimativa, adotou-se uma distribuição triangular variando entre R\$ 6,10 e R\$ 7,00 por litro.
 \end{itemize}
 
 \subsection{Modelo de Simulação}
@@ -101,17 +101,17 @@ O gasto diário foi modelado através dos seguintes passos:
 \toprule
 \textbf{Medida} & \textbf{Valor (R\$)} \\
 \midrule
-Mínimo & 570,57 \\
-P5 (Percentil 5\%) & 891,35 \\
-P25 (Primeiro Quartil) & 1.209,63 \\
-Mediana (P50) & 1.521,81 \\
-P75 (Terceiro Quartil) & 1.829,36 \\
-P90 (Percentil 90\%) & 2.159,20 \\
-P95 (Percentil 95\%) & 2.371,39 \\
-Máximo & 2.939,14 \\
+Mínimo & 3.993,10 \\
+P5 (Percentil 5\%) & 4.547,59 \\
+P25 (Primeiro Quartil) & 5.089,61 \\
+Mediana (P50) & 5.621,06 \\
+P75 (Terceiro Quartil) & 6.181,39 \\
+P90 (Percentil 90\%) & 6.656,25 \\
+P95 (Percentil 95\%) & 6.861,45 \\
+Máximo & 7.458,24 \\
 \midrule
-Desvio Padrão & 487,23 \\
-Coeficiente de Variação & 0,32 \\
+Desvio Padrão & 716,51 \\
+Coeficiente de Variação & 0,13 \\
 \bottomrule
 \end{tabular}
 \end{table}
@@ -121,10 +121,10 @@ Coeficiente de Variação & 0,32 \\
 A contingência representa a margem de segurança necessária para cobrir variações adversas:
 
 \begin{align*}
-\text{Custo Base (P50)} &= \text{R\$ } 1.521,81 \\
-\text{Custo Cenário Risco (P90)} &= \text{R\$ } 2.159,20 \\
-\text{Contingência} &= \text{R\$ } 637,39 \\
-\text{Contingência \%} &= 41,88\%
+\text{Custo Base (P50)} &= \text{R\$ } 5.621,06 \\
+\text{Custo Cenário Risco (P90)} &= \text{R\$ } 6.656,25 \\
+\text{Contingência} &= \text{R\$ } 1.035,19 \\
+\text{Contingência \%} &= 18,42\%
 \end{align*}
 
 \textbf{Interpretação:} Para estar preparada em 90\% dos cenários possíveis, a empresa deve alocar uma contingência de 41,88\% acima do gasto mediano esperado.
@@ -180,40 +180,45 @@ Uma empresa oferece almoços às sextas-feiras para seus principais executivos. 
 
 \subsection{Modelo de Simulação}
 
-O custo anual foi modelado através dos seguintes passos:
+O custo anual foi modelado através de simulação de cada almoço individualmente, seguindo estes passos:
 
 \begin{enumerate}
-    \item Amostrar número de executivos na simulação $i$: $E_i \sim$ Triangular$(16, 22, 18)$;
-    \item Selecionar aleatoriamente $E_i$ executivos;
-    \item Amostrar gasto por pessoa: $V_{ij} \sim$ Amostrada de $\{\text{dados históricos}\}$;
     \item Amostrar número de almoços no ano: $A_i \sim$ Amostrada de $\{\text{dados históricos}\}$;
-    \item Calcular custo total do almoço: $L_i = \sum_{j=1}^{E_i} V_{ij}$;
-    \item Calcular custo anual: $C_i = A_i \times L_i$.
+    \item Para cada almoço $a$ no ano $i$:
+    \begin{enumerate}
+        \item Amostrar número de executivos presentes: $E_{ia} \sim$ Triangular$(16, 22, 18)$;
+        \item Selecionar aleatoriamente $E_{ia}$ executivos;
+        \item Amostrar gasto de cada executivo: $V_{iaj} \sim$ Amostrada de $\{\text{dados históricos}\}$;
+        \item Calcular custo deste almoço: $L_{ia} = \sum_{j=1}^{E_{ia}} V_{iaj}$.
+    \end{enumerate}
+    \item Calcular custo anual: $C_i = \sum_{a=1}^{A_i} L_{ia}$.
 \end{enumerate}
+
+\textbf{Nota importante:} Este modelo captura corretamente a variabilidade de cada almoço individualmente, ao invés de multiplicar um custo único por um número de almoços.
 
 \subsection{Resultados Item 2}
 
 \begin{table}[H]
 \centering
-\caption{Estatísticas do Custo Anual com Almoços (R\$)}
+\caption{Estatísticas do Custo Anual com Almoços -- Modelo Corrigido (R\$)}
 \label{tab:custo_almocos}
 \begin{tabular}{lr}
 \toprule
 \textbf{Medida} & \textbf{Valor (R\$)} \\
 \midrule
-Mínimo & 119.628,00 \\
-P5 (Percentil 5\%) & 246.893,05 \\
-P25 (Primeiro Quartil) & 296.547,56 \\
-Mediana (P50) & 336.633,00 \\
-P75 (Terceiro Quartil) & 376.699,81 \\
-P80 (Percentil 80\%) & 391.301,61 \\
-P90 (Percentil 90\%) & 426.598,99 \\
-P95 (Percentil 95\%) & 451.584,67 \\
-Máximo & 589.080,00 \\
+Mínimo & 223.396,00 \\
+P5 (Percentil 5\%) & 233.075,15 \\
+P25 (Primeiro Quartil) & 279.453,25 \\
+Mediana (P50) & 295.387,50 \\
+P75 (Terceiro Quartil) & 315.657,50 \\
+P80 (Percentil 80\%) & 317.086,00 \\
+P90 (Percentil 90\%) & 324.127,30 \\
+P95 (Percentil 95\%) & 337.633,65 \\
+Máximo & 349.819,00 \\
 \midrule
-Média & 336.908,17 \\
-Desvio Padrão & 61.959,27 \\
-Coeficiente de Variação & 0,18 \\
+Média & 294.276,97 \\
+Desvio Padrão & 28.259,03 \\
+Coeficiente de Variação & 0,10 \\
 \bottomrule
 \end{tabular}
 \end{table}
@@ -223,23 +228,24 @@ Coeficiente de Variação & 0,18 \\
 A contingência para o cenário de risco no custo anual é:
 
 \begin{align*}
-\text{Custo Base (P50)} &= \text{R\$ } 336.633,00 \\
-\text{Custo Cenário Risco (P90)} &= \text{R\$ } 426.598,99 \\
-\text{Contingência} &= \text{R\$ } 89.965,99 \\
-\text{Contingência \%} &= 26,73\%
+\text{Custo Base (P50)} &= \text{R\$ } 295.387,50 \\
+\text{Custo Cenário Risco (P90)} &= \text{R\$ } 324.127,30 \\
+\text{Contingência} &= \text{R\$ } 28.739,80 \\
+\text{Contingência \%} &= 9,73\%
 \end{align*}
 
-\textbf{Interpretação:} Para estar preparada em 90\% dos cenários possíveis, a empresa deve alocar uma contingência de 26,73\% acima do gasto mediano esperado com almoços.
+\textbf{Interpretação:} Para estar preparada em 90\% dos cenários possíveis, a empresa deve alocar uma contingência de 12,60\% acima do gasto mediano esperado com almoços. Este valor menor que a estimativa anterior reflete uma simulação mais realista onde cada almoço tem variabilidade independente.
 
 \subsubsection{Análise Comparativa}
 
 Comparando com o Item 1:
 
 \begin{itemize}
-    \item O custo de almoços apresenta menor variabilidade relativa (CV = 0,18 vs 0,32);
-    \item A contingência necessária é menor (26,73\% vs 41,88\%), indicando processo mais previsível;
-    \item A distribuição é mais concentrada, com menor cauda direita;
-    \item Maior estabilidade nos padrões de gasto anual de almoços.
+    \item O custo de almoços apresenta menor variabilidade relativa (CV = 0,10 vs 0,13);
+    \item A contingência necessária é consideravelmente menor (9,73\% vs 18,42\%), indicando processo significativamente mais previsível;
+    \item A distribuição é mais concentrada com cauda direita mais curta;
+    \item Maior estabilidade nos padrões de gasto anual de almoços, resultado da agregação de múltiplos eventos independentes;
+    \item O modelo agora captura adequadamente a variabilidade individual de cada almoço, não apenas o efeito multiplicativo.
 \end{itemize}
 
 \subsubsection{Visualizações}
@@ -284,18 +290,19 @@ Os gráficos gerados (histograma, densidade e ECDF) mostram:
 \begin{enumerate}
     \item \textbf{Gasto com Combustível (Item 1):}
     \begin{itemize}
-        \item Gasto diário esperado (mediana): R\$ 1.521,81;
-        \item Contingência necessária (P90): 41,88\% acima da mediana;
+        \item Gasto diário esperado (mediana): R\$ 5.621,06;
+        \item Contingência necessária (P90): 18,42\% acima da mediana;
         \item Alta variabilidade devido à aleatoriedade em carros ativos e consumo;
-        \item Recomendação: Manter reserva de aproximadamente R\$ 637,39/dia.
+        \item Recomendação: Manter reserva de aproximadamente R\$ 1.035,19/dia.
     \end{itemize}
 
-    \item \textbf{Custo com Almoços (Item 2):}
+    \item \textbf{Custo com Almoços (Item 2) -- Modelo Corrigido:}
     \begin{itemize}
-        \item Custo anual esperado (mediana): R\$ 336.633,00;
-        \item Contingência necessária (P90): 26,73\% acima da mediana;
-        \item Menor variabilidade ao nível anual;
-        \item Recomendação: Alocar orçamento anual com reserva de R\$ 89.966,00.
+        \item Custo anual esperado (mediana): R\$ 295.387,50;
+        \item Contingência necessária (P90): 9,73\% acima da mediana;
+        \item Menor variabilidade ao nível anual (CV = 0,10);
+        \item Recomendação: Alocar orçamento anual com reserva de R\$ 28.739,80;
+        \item Melhoramento: Simulação agora captura adequadamente a variabilidade individual de cada almoço, não apenas efeitos multiplicativos.
     \end{itemize}
 \end{enumerate}
 

@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.29 (MiKTeX 26.2) (preloaded format=pdflatex 2026.4.5)  6 MAY 2026 23:53
+This is pdfTeX, Version 3.141592653-2.6-1.40.29 (MiKTeX 26.2) (preloaded format=pdflatex 2026.4.5)  7 MAY 2026 20:45
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -454,40 +454,40 @@ File: ts1lmr.fd 2015/05/01 v1.6.1 Font defs for Latin Modern
 ) [1
 
 {C:/Users/Pichau/AppData/Local/MiKTeX/fonts/map/pdftex/pdftex.map}{C:/Program Files/MiKTeX/fonts/enc/dvips/lm/lm-ec.enc}{C:/Program Files/MiKTeX/fonts/enc/dvips/lm/lm-mathit.enc}{C:/Program Files/MiKTeX/fonts/enc/dvips/lm/lm-rm.enc}{C:/Program Files/MiKTeX/fonts/enc/dvips/lm/lm-ts1.enc}] [2] [3{C:/Program Files/MiKTeX/fonts/enc/dvips/lm/lm-mathsy.enc}{C:/Program Files/MiKTeX/fonts/enc/dvips/lm/lm-mathex.enc}]
-<grafico_item1_histograma.png, id=134, 602.25pt x 401.5pt>
+<grafico_item1_histograma.png, id=134, 803.0pt x 602.25pt>
 File: grafico_item1_histograma.png Graphic file (type png)
 <use grafico_item1_histograma.png>
 Package pdftex.def Info: grafico_item1_histograma.png  used on input line 146.
-(pdftex.def)             Requested size: 409.71692pt x 273.15729pt.
-<grafico_item1_densidade.png, id=135, 602.25pt x 401.5pt>
+(pdftex.def)             Requested size: 409.71692pt x 307.29047pt.
+<grafico_item1_densidade.png, id=135, 803.0pt x 602.25pt>
 File: grafico_item1_densidade.png Graphic file (type png)
 <use grafico_item1_densidade.png>
 Package pdftex.def Info: grafico_item1_densidade.png  used on input line 153.
-(pdftex.def)             Requested size: 409.71692pt x 273.15729pt.
+(pdftex.def)             Requested size: 409.71692pt x 307.29047pt.
  [4 <./grafico_item1_histograma.png>]
-<grafico_item1_ecdf.png, id=142, 602.25pt x 401.5pt>
+<grafico_item1_ecdf.png, id=142, 803.0pt x 602.25pt>
 File: grafico_item1_ecdf.png Graphic file (type png)
 <use grafico_item1_ecdf.png>
 Package pdftex.def Info: grafico_item1_ecdf.png  used on input line 160.
-(pdftex.def)             Requested size: 409.71692pt x 273.15729pt.
- [5 <./grafico_item1_densidade.png> <./grafico_item1_ecdf.png>] [6]
-<grafico_item2_histograma.png, id=162, 602.25pt x 401.5pt>
+(pdftex.def)             Requested size: 409.71692pt x 307.29047pt.
+ [5 <./grafico_item1_densidade.png>] [6 <./grafico_item1_ecdf.png>] [7] [8]
+<grafico_item2_histograma.png, id=172, 803.0pt x 602.25pt>
 File: grafico_item2_histograma.png Graphic file (type png)
 <use grafico_item2_histograma.png>
-Package pdftex.def Info: grafico_item2_histograma.png  used on input line 259.
-(pdftex.def)             Requested size: 409.71692pt x 273.15729pt.
- [7]
-<grafico_item2_densidade.png, id=168, 602.25pt x 401.5pt>
+Package pdftex.def Info: grafico_item2_histograma.png  used on input line 265.
+(pdftex.def)             Requested size: 409.71692pt x 307.29047pt.
+<grafico_item2_densidade.png, id=173, 803.0pt x 602.25pt>
 File: grafico_item2_densidade.png Graphic file (type png)
 <use grafico_item2_densidade.png>
-Package pdftex.def Info: grafico_item2_densidade.png  used on input line 266.
-(pdftex.def)             Requested size: 409.71692pt x 273.15729pt.
-<grafico_item2_ecdf.png, id=169, 602.25pt x 401.5pt>
+Package pdftex.def Info: grafico_item2_densidade.png  used on input line 272.
+(pdftex.def)             Requested size: 409.71692pt x 307.29047pt.
+ [9 <./grafico_item2_histograma.png>]
+<grafico_item2_ecdf.png, id=180, 803.0pt x 602.25pt>
 File: grafico_item2_ecdf.png Graphic file (type png)
 <use grafico_item2_ecdf.png>
-Package pdftex.def Info: grafico_item2_ecdf.png  used on input line 273.
-(pdftex.def)             Requested size: 409.71692pt x 273.15729pt.
- [8 <./grafico_item2_histograma.png> <./grafico_item2_densidade.png>] [9 <./grafico_item2_ecdf.png>] [10] [11] (Relatorio_Lista3_Grupo6.aux)
+Package pdftex.def Info: grafico_item2_ecdf.png  used on input line 279.
+(pdftex.def)             Requested size: 409.71692pt x 307.29047pt.
+ [10 <./grafico_item2_densidade.png>] [11 <./grafico_item2_ecdf.png>] [12] [13] (Relatorio_Lista3_Grupo6.aux)
  ***********
 LaTeX2e <2025-11-01>
 L3 programming layer <2026-01-19>
@@ -496,17 +496,17 @@ Package rerunfilecheck Info: File `Relatorio_Lista3_Grupo6.out' has not changed.
 (rerunfilecheck)             Checksum: 578BD4044AAE697968E2912E6A61D9FE;4246.
  ) 
 Here is how much of TeX's memory you used:
- 11703 strings out of 467866
- 184010 string characters out of 5428378
- 618020 words of memory out of 5000000
+ 11706 strings out of 467866
+ 184031 string characters out of 5428378
+ 617042 words of memory out of 5000000
  40364 multiletter control sequences out of 15000+600000
  683984 words of font info for 73 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 75i,12n,79p,688b,545s stack positions out of 10000i,1000n,20000p,200000b,200000s
+ 75i,12n,79p,688b,543s stack positions out of 10000i,1000n,20000p,200000b,200000s
 <C:/Program Files/MiKTeX/fonts/type1/public/lm/lmbx10.pfb><C:/Program Files/MiKTeX/fonts/type1/public/lm/lmbx12.pfb><C:/Program Files/MiKTeX/fonts/type1/public/lm/lmex10.pfb><C:/Program Files/MiKTeX/fonts/type1/public/lm/lmmi12.pfb><C:/Program Files/MiKTeX/fonts/type1/public/lm/lmmi6.pfb><C:/Program Files/MiKTeX/fonts/type1/public/lm/lmmi8.pfb><C:/Program Files/MiKTeX/fonts/type1/public/lm/lmr10.pfb><C:/Program Files/MiKTeX/fonts/type1/public/lm/lmr12.pfb><C:/Program Files/MiKTeX/fonts/type1/public/lm/lmr8.pfb><C:/Program Files/MiKTeX/fonts/type1/public/lm/lmsy10.pfb>
-Output written on Relatorio_Lista3_Grupo6.pdf (11 pages, 223236 bytes).
+Output written on Relatorio_Lista3_Grupo6.pdf (13 pages, 230717 bytes).
 PDF statistics:
- 262 PDF objects out of 1000 (max. 8388607)
- 59 named destinations out of 1000 (max. 500000)
+ 273 PDF objects out of 1000 (max. 8388607)
+ 62 named destinations out of 1000 (max. 500000)
  231 words of extra memory for PDF output out of 10000 (max. 10000000)
 
