@@ -1,0 +1,677 @@
+\documentclass[12pt,a4paper]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[brazilian]{babel}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{graphicx}
+\usepackage{geometry}
+\usepackage{fancyhdr}
+\usepackage{setspace}
+\usepackage{xcolor}
+\usepackage{listings}
+
+% Configuração de página
+\geometry{left=2.5cm, right=2.5cm, top=2.5cm, bottom=2.5cm}
+\onehalfspacing
+
+% Cabeçalho e rodapé
+\pagestyle{fancy}
+\fancyhf{}
+\rhead{Guia de Estudos -- Modelagem Matemática}
+\lhead{2026-1}
+\cfoot{\thepage}
+
+% Título e autor
+\title{\textbf{Guia de Estudos Abrangente} \\ \Large Modelagem Matemática: Lances Livres no Basquete e Solução de Problemas de Valor Inicial}
+\author{Resumo Sintetizado}
+\date{2026}
+
+\begin{document}
+
+\maketitle
+\thispagestyle{empty}
+
+\newpage
+
+% ============================================================================
+% SUMÁRIO EXECUTIVO
+% ============================================================================
+
+\section*{Sumário Executivo}
+
+Este guia sintetiza dois pilares fundamentais da modelagem matemática aplicada:
+
+\begin{enumerate}
+    \item \textbf{Modelagem de Lances Livres no Basquete}: Aplicação prática de cinemática e parábolas para caracterizar trajetórias balísticas em contexto esportivo, integrando simplificações físicas, parâmetros geométricos e análise de projéteis.
+    
+    \item \textbf{Solução Numérica de EDOs}: Método computacional para resolver Problemas de Valor Inicial, exemplificado pelo pêndulo simples, utilizando algoritmos de integração e análise no espaço de fase.
+\end{enumerate}
+
+Os principais conceitos abordados incluem: \textit{trajetórias parabólicas}, \textit{sistemas dinâmicos}, \textit{integração numérica}, \textit{condições iniciais} e \textit{análise de espaço de fase}. Juntos, esses tópicos ilustram como a matemática modela fenômenos reais através de equações diferenciais e métodos numéricos.
+
+\tableofcontents
+
+\newpage
+
+% ============================================================================
+% SEÇÃO 1: MODELAGEM DE LANCES LIVRES
+% ============================================================================
+
+\section{Modelagem Matemática de Lances Livres no Basquete}
+
+\subsection{Contextualização e Objetivos}
+
+A modelagem de lances livres em basquete representa um problema clássico de mecânica clássica: caracterizar arremessos ``perfeitos'' através de ferramentas matemáticas. O objetivo é determinar as condições (velocidade inicial e ângulo de lançamento) que permitem que a bola entre no aro.
+
+Este modelo integra:
+\begin{itemize}
+    \item Parâmetros geométricos do sistema (aro, bola, distância)
+    \item Parâmetros mecânicos do arremesso (velocidade, ângulo)
+    \item Equações cinemáticas de movimento de projétil
+    \item Análise de trajetórias parabólicas
+\end{itemize}
+
+\subsection{Simplificações do Modelo}
+
+Para viabilizar a análise matemática, aplicam-se as seguintes simplificações:
+
+\begin{enumerate}
+    \item \textbf{Movimento planar}: considera-se apenas o plano vertical contendo o centro da bola e do aro.
+    
+    \item \textbf{Alinhamento perfeito}: todos os lances estão totalmente alinhados com o centro do aro.
+    
+    \item \textbf{Resistência do ar negligenciada}: apenas a força da gravidade atua sobre a bola.
+    
+    \item \textbf{Rotação desprezada}: a bola é tratada como ponto material.
+    
+    \item \textbf{Campo gravitacional uniforme}: $g = 9,81 \, \text{m/s}^2$.
+\end{enumerate}
+
+Estas simplificações permitem aplicar a teoria clássica de lançamento de projéteis, reduzindo o problema a trajetórias parabólicas.
+
+\subsection{Parâmetros Geométricos}
+
+Define-se a configuração geométrica do sistema:
+
+\begin{table}[h]
+\centering
+\begin{tabular}{|l|c|l|}
+\hline
+\textbf{Parâmetro} & \textbf{Símbolo} & \textbf{Descrição} \\
+\hline
+Distância horizontal & $L$ & Projeção do ponto de lançamento ao aro \\
+Altura do aro & $H_a$ & Posição vertical do aro \\
+Diâmetro do aro & $D_a$ & Abertura do aro (típ. 0,4572 m) \\
+Diâmetro da bola & $D_b$ & Diâmetro da bola (típ. 0,24 m) \\
+Altura de lançamento & $H_l$ & Posição vertical de saída da bola \\
+\hline
+\end{tabular}
+\end{table}
+
+Define-se ainda: $\Delta R = \frac{D_a - D_b}{2}$ (margem de tolerância) e $H = H_a - H_l$ (altura relativa).
+
+\subsection{Parâmetros Mecânicos do Arremesso}
+
+Os parâmetros que controlam a trajetória são:
+
+\begin{itemize}
+    \item $v_0$: velocidade inicial da bola (m/s)
+    \item $\vartheta$: ângulo de lançamento com respeito à horizontal (radianos)
+\end{itemize}
+
+\subsection{Equações Cinemáticas de um Projétil}
+
+Considerando que a bola parte da origem do sistema de coordenadas, as equações paramétricas que descrevem a trajetória são:
+
+\begin{equation}
+x(t) = v_0 t \cos(\vartheta)
+\end{equation}
+
+\begin{equation}
+y(t) = v_0 t \sin(\vartheta) - \frac{1}{2} g t^2
+\end{equation}
+
+onde:
+\begin{itemize}
+    \item $x(t)$: coordenada horizontal em função do tempo
+    \item $y(t)$: coordenada vertical em função do tempo
+    \item $g$: aceleração gravitacional
+    \item $t$: tempo decorrido desde o lançamento
+\end{itemize}
+
+\subsection{Relação Entre Velocidade e Ângulo}
+
+Para que a bola atinja o ponto $(x_f, H)$ (entrada no aro), é necessário que:
+
+\begin{equation}
+x(t_f) = x_f \quad \text{e} \quad y(t_f) = H
+\end{equation}
+
+onde $t_f$ é o tempo de voo até o aro.
+
+Da primeira condição: $t_f = \frac{x_f}{v_0 \cos(\vartheta)}$
+
+Substituindo na segunda:
+
+\begin{equation}
+v_0 \sin(\vartheta) \cdot \frac{x_f}{v_0 \cos(\vartheta)} - \frac{1}{2}g\left(\frac{x_f}{v_0 \cos(\vartheta)}\right)^2 = H
+\end{equation}
+
+Simplificando e isolando $v_0$:
+
+\begin{equation}
+v_0 = \frac{x_f}{\cos(\vartheta)}\sqrt{\frac{g}{2(x_f \tan(\vartheta) - H)}}
+\end{equation}
+
+Esta relação é fundamental: para cada ângulo $\vartheta$, existe uma velocidade única $v_0(\vartheta)$ que garante a entrada da bola no aro.
+
+\subsection{Três Casos de Entrada}
+
+Existem três pontos de interesse onde a bola pode entrar no aro:
+
+\begin{enumerate}
+    \item \textbf{Borda frontal}: $x_f = L - \Delta R$ (bola toca a borda frontal)
+    \item \textbf{Centro}: $x_c = L$ (bola passa pelo centro do aro)
+    \item \textbf{Borda posterior}: $x_p = L + \Delta R$ (bola toca a borda posterior)
+\end{enumerate}
+
+Para cada caso, substitui-se o valor de $x$ correspondente na equação de $v_0(\vartheta)$.
+
+\newpage
+
+% ============================================================================
+% SEÇÃO 2: TEORIA DE LANÇAMENTO DE PROJÉTEIS
+% ============================================================================
+
+\section{Lançamento de Projéteis: Fundamentação Teórica}
+
+\subsection{Movimento Bidimensional sob Gravidade}
+
+O movimento de um projétil sob influência exclusiva da gravidade é um dos problemas clássicos da mecânica newtoniana. As equações que o descrevem derivam da segunda lei de Newton:
+
+\begin{equation}
+\mathbf{F} = m\mathbf{a}
+\end{equation}
+
+No caso do projétil, apenas a gravidade atua: $\mathbf{F} = -mg\hat{j}$ (força na direção vertical negativa).
+
+As componentes da aceleração são:
+\begin{itemize}
+    \item Horizontal: $a_x = 0$ (sem resistência do ar)
+    \item Vertical: $a_y = -g$
+\end{itemize}
+
+Integrando as acelerações em relação ao tempo:
+
+\begin{equation}
+v_x(t) = v_0 \cos(\vartheta) \quad \text{(constante)}
+\end{equation}
+
+\begin{equation}
+v_y(t) = v_0 \sin(\vartheta) - gt
+\end{equation}
+
+Integrando novamente:
+
+\begin{equation}
+x(t) = v_0 t \cos(\vartheta) + x_0
+\end{equation}
+
+\begin{equation}
+y(t) = v_0 t \sin(\vartheta) - \frac{1}{2}gt^2 + y_0
+\end{equation}
+
+Admitindo $x_0 = y_0 = 0$ (origem no ponto de lançamento), obtém-se as equações anteriores.
+
+\subsection{Trajetória Parabólica}
+
+Eliminando o tempo $t$ das equações paramétricas, obtém-se a equação da trajetória em forma cartesiana:
+
+\begin{equation}
+y = x \tan(\vartheta) - \frac{g x^2}{2v_0^2 \cos^2(\vartheta)}
+\end{equation}
+
+Esta é a equação de uma parábola, confirmando que a trajetória é parabólica.
+
+A parábola apresenta:
+\begin{itemize}
+    \item Vértice no ponto de altura máxima
+    \item Eixo de simetria vertical (ideal)
+    \item Concavidade para baixo
+\end{itemize}
+
+\subsection{Características do Movimento}
+
+\subsubsection{Tempo de Voo Total}
+
+O tempo total de voo (retorno ao nível inicial) é obtido igualando $y(t) = 0$:
+
+\begin{equation}
+t_{\text{total}} = \frac{2v_0 \sin(\vartheta)}{g}
+\end{equation}
+
+\subsubsection{Alcance Horizontal}
+
+O alcance máximo (sem obstáculos) é:
+
+\begin{equation}
+R_{\text{max}} = \frac{v_0^2 \sin(2\vartheta)}{g}
+\end{equation}
+
+O alcance é máximo quando $\vartheta = 45°$.
+
+\subsubsection{Altura Máxima}
+
+A altura máxima é atingida quando $v_y(t) = 0$:
+
+\begin{equation}
+h_{\text{max}} = \frac{v_0^2 \sin^2(\vartheta)}{2g}
+\end{equation}
+
+\subsection{Aplicação ao Contexto de Basquete}
+
+No contexto do lance livre:
+
+\begin{itemize}
+    \item O alcance não é maximizado; busca-se precisão ao atingir o aro.
+    \item Múltiplas combinações de $(v_0, \vartheta)$ levam ao mesmo alvo.
+    \item A geometria do aro impõe restrições espaciais (bola deve entrar num cone estreito).
+    \item A relação $v_0(\vartheta)$ restringe o espaço de possibilidades.
+\end{itemize}
+
+\newpage
+
+% ============================================================================
+% SEÇÃO 3: SOLUÇÃO NUMÉRICA DE EDOs
+% ============================================================================
+
+\section{Solução Numérica de Problemas de Valor Inicial para EDOs}
+
+\subsection{Problemas de Valor Inicial (PVIs)}
+
+Um Problema de Valor Inicial para uma Equação Diferencial Ordinária tem a forma:
+
+\begin{equation}
+\left\{\begin{aligned}
+y' &= f(t, y), \quad t_0 \leq t \leq t_f \\
+y(t_0) &= y_0
+\end{aligned}\right.
+\end{equation}
+
+onde:
+\begin{itemize}
+    \item $y(t)$: função incógnita definida no intervalo $[t_0, t_f]$
+    \item $y'(t)$: derivada de $y$ com respeito a $t$
+    \item $f(t, y)$: função conhecida
+    \item $y_0$: condição inicial
+\end{itemize}
+
+\textbf{Observação importante}: Uma EDO possui infinitas soluções. A condição inicial permite selecionar uma solução particular, tornando o problema bem-posicionado (com solução única, sob condições apropriadas).
+
+\subsection{Redução de EDOs de Ordem Superior}
+
+Uma EDO de ordem $n$ pode ser reduzida a um sistema de $n$ EDOs de primeira ordem. Considere uma EDO de segunda ordem:
+
+\begin{equation}
+y'' = g(t, y, y')
+\end{equation}
+
+Define-se: $y_1 = y$ e $y_2 = y'$. Então:
+
+\begin{equation}
+\left\{\begin{aligned}
+y_1' &= y_2 \\
+y_2' &= g(t, y_1, y_2)
+\end{aligned}\right.
+\end{equation}
+
+Este é um sistema de duas EDOs de primeira ordem com condições iniciais $y_1(t_0) = y_0$ e $y_2(t_0) = y_0'$.
+
+\subsection{Exemplo: O Pêndulo Simples}
+
+O pêndulo simples ilustra a modelagem e solução numérica de um PVI real.
+
+\subsubsection{Modelagem Física}
+
+Para um pêndulo de comprimento $l$ sob influência apenas da gravidade:
+
+\begin{equation}
+\frac{d^2\theta}{dt^2} + \frac{g}{l}\sin(\theta) = 0
+\end{equation}
+
+onde $\theta(t)$ é o ângulo com a vertical.
+
+Condições iniciais:
+\begin{itemize}
+    \item $\theta(0) = \theta_0$ (ângulo inicial)
+    \item $\frac{d\theta}{dt}(0) = \omega_0$ (velocidade angular inicial)
+\end{itemize}
+
+\subsubsection{Redução a Sistema de Primeira Ordem}
+
+Define-se:
+\begin{itemize}
+    \item $y_1(t) = \theta(t)$ (ângulo)
+    \item $y_2(t) = \frac{d\theta}{dt}(t)$ (velocidade angular)
+\end{itemize}
+
+O PVI se torna:
+
+\begin{equation}
+\left\{\begin{aligned}
+y_1' &= y_2 \\
+y_2' &= -\frac{g}{l}\sin(y_1) \\
+y_1(0) &= \theta_0, \quad y_2(0) = \omega_0
+\end{aligned}\right.
+\end{equation}
+
+\subsubsection{Propriedades Físicas}
+
+O pêndulo simples é um sistema conservativo: a energia total é preservada.
+
+Energia total: $E = \frac{1}{2}ml^2\omega^2 + mgl(1 - \cos\theta)$ (constante)
+
+Espaço de fase: trajetórias são curvas fechadas (movimento periódico) ou abertas (movimento rotacional), conforme a energia inicial.
+
+\subsection{Métodos Numéricos de Integração}
+
+Para resolver um PVI numericamente, aproxima-se a solução em pontos discretos $t_0, t_1, \ldots, t_N$.
+
+\subsubsection{Método de Runge-Kutta de Quarta Ordem}
+
+Um dos métodos mais utilizados é o Runge-Kutta de quarta ordem (RK4):
+
+\begin{equation}
+y_{n+1} = y_n + \frac{h}{6}(k_1 + 2k_2 + 2k_3 + k_4)
+\end{equation}
+
+onde:
+\begin{itemize}
+    \item $h = \Delta t$ (passo temporal)
+    \item $k_1 = f(t_n, y_n)$
+    \item $k_2 = f(t_n + h/2, y_n + hk_1/2)$
+    \item $k_3 = f(t_n + h/2, y_n + hk_2/2)$
+    \item $k_4 = f(t_n + h, y_n + hk_3)$
+\end{itemize}
+
+O método RK4 é de quarta ordem em $h$, significando erro local proporcional a $h^5$.
+
+\subsection{Análise no Espaço de Fase}
+
+O espaço de fase é um plano $(y_1, y_2)$ onde cada ponto representa um estado do sistema.
+
+\subsubsection{Trajetórias Periódicas}
+
+Para o pêndulo com pequenas energias, a trajetória no espaço de fase é uma curva fechada (órbita periódica), refletindo movimento oscilatório.
+
+\subsubsection{Separatriz}
+
+Existe uma órbita especial (separatriz) que separa os regimes de movimento: abaixo dela, oscilação; acima dela, rotação.
+
+\subsubsection{Interpretação Física}
+
+Uma trajetória no espaço de fase representa a evolução temporal do sistema sem dependência explícita de $t$.
+
+\newpage
+
+% ============================================================================
+% QUESTIONÁRIO 1: LANCES LIVRES
+% ============================================================================
+
+\section{Questionário 1: Modelagem de Lances Livres no Basquete}
+
+\begin{enumerate}
+    \item \textbf{Por que desprezamos a resistência do ar na modelagem de lances livres?} \par
+    Resposta esperada: Ao desprezar a resistência do ar, simplificamos significativamente o modelo matemático, permitindo aplicar equações de movimento de projétil bem conhecidas. A resistência do ar introduziria equações diferenciais não-lineares complexas, tornando a solução analítica impraticável.
+    
+    \item \textbf{Qual é a relação fundamental entre a velocidade inicial $v_0$ e o ângulo $\vartheta$ para atingir um ponto específico no aro?} \par
+    Resposta esperada: A relação é $v_0 = \frac{x_f}{\cos(\vartheta)}\sqrt{\frac{g}{2(x_f \tan(\vartheta) - H)}}$, derivada das equações paramétricas de movimento. Esta expressa $v_0$ como função de $\vartheta$, mostrando que múltiplas combinações podem atingir o mesmo alvo.
+    
+    \item \textbf{Explique a diferença entre os três casos de entrada no aro (frontal, central, posterior).} \par
+    Resposta esperada: Os três casos diferem na posição horizontal onde a bola atravessa o nível do aro: frontal ($x_f = L - \Delta R$), central ($x_c = L$) e posterior ($x_p = L + \Delta R$). Cada um requer uma combinação diferente de $(v_0, \vartheta)$, refletindo geometrias distintas de entrada.
+    
+    \item \textbf{Por que a trajetória de um projétil é parabólica?} \par
+    Resposta esperada: Porque a aceleração horizontal é nula (sem resistência do ar) e a vertical é constante ($-g$). Ao eliminar o tempo das equações paramétricas, obtém-se uma equação de segundo grau em $x$, que descreve uma parábola.
+    
+    \item \textbf{Como a altura de lançamento $H_l$ afeta o movimento do projétil?} \par
+    Resposta esperada: A altura $H_l$ define a altura relativa $H = H_a - H_l$. Uma altura maior reduz $H$, alterando a relação funcional entre $v_0$ e $\vartheta$, geralmente permitindo ângulos diferentes para atingir o aro.
+    
+    \item \textbf{Qual é o significado da margem de tolerância $\Delta R = (D_a - D_b)/2$?} \par
+    Resposta esperada: $\Delta R$ representa a distância máxima que o centro da bola pode se desviar do centro do aro enquanto ainda entra no aro. Define os limites geométricos de aceitabilidade da trajetória.
+    
+    \item \textbf{Se o ângulo de lançamento fosse muito pequeno (próximo de 0°), qual seria o efeito sobre a velocidade necessária?} \par
+    Resposta esperada: A velocidade $v_0$ tenderia a infinito, pois o argumento da raiz quadrada se aproximaria de zero no denominador. Fisicamente, lançamentos muito rasantes requerem velocidades impraticavelmente altas para atingir o aro.
+    
+    \item \textbf{Explique como as simplificações do modelo (sem rotação, sem resistência do ar, planar) afetam a precisão das previsões.} \par
+    Resposta esperada: As simplificações tornam o modelo tratável analiticamente, mas sacrificam realismo. A rotação da bola (backspin), resistência do ar e movimento em 3D (não apenas planar) afetam trajetórias reais, criando desvios entre modelo e realidade.
+    
+    \item \textbf{Como a gravidade $g$ influencia a relação $v_0(\vartheta)$?} \par
+    Resposta esperada: Aumentar $g$ reduz $v_0$ necessária (aparece em $1/\sqrt{2g}$). Em locais com gravidade menor, velocidades maiores seriam requeridas para atingir o mesmo alvo, alterando a dinâmica do arremesso.
+    
+    \item \textbf{Por que existem múltiplas combinações $(v_0, \vartheta)$ que atingem o mesmo ponto do aro?} \par
+    Resposta esperada: Porque a relação $v_0(\vartheta)$ não é bijetora. Para um mesmo ponto, há tipicamente dois ângulos viáveis (trajetória alta e trajetória baixa), cada um com sua velocidade correspondente, permitindo diferentes estilos de arremesso.
+
+\end{enumerate}
+
+\newpage
+
+% ============================================================================
+% QUESTIONÁRIO 2: EDOs E MÉTODOS NUMÉRICOS
+% ============================================================================
+
+\section{Questionário 2: Solução Numérica de Problemas de Valor Inicial}
+
+\begin{enumerate}
+    \item \textbf{Qual é a diferença fundamental entre uma Equação Diferencial Ordinária (EDO) e um Problema de Valor Inicial (PVI)?} \par
+    Resposta esperada: Uma EDO é uma equação com funções desconhecidas e suas derivadas. Um PVI é uma EDO acompanhada de condições iniciais (ou de contorno) que especificam a solução particular. O PVI garante unicidade da solução, enquanto a EDO sozinha possui infinitas soluções.
+    
+    \item \textbf{Por que reduzimos EDOs de ordem superior a sistemas de EDOs de primeira ordem?} \par
+    Resposta esperada: Porque a maioria dos métodos numéricos de integração (Runge-Kutta, Adams-Bashforth, etc.) é desenvolvida para EDOs de primeira ordem. Reduções permitem aplicar estes métodos a problemas de ordem arbitrária.
+    
+    \item \textbf{Descreva resumidamente como o método de Runge-Kutta de quarta ordem (RK4) funciona.} \par
+    Resposta esperada: RK4 aproxima a solução avançando no tempo em passos $h$. A cada passo, calcula quatro inclinações intermediárias $(k_1, k_2, k_3, k_4)$ e as combina com pesos específicos. O método alcança precisão de quarta ordem, com erro local proporcional a $h^5$.
+    
+    \item \textbf{Qual é o papel da condição inicial $y_0$ na resolução de um PVI?} \par
+    Resposta esperada: A condição inicial especifica o estado do sistema em $t_0$, selecionando uma trajetória única no espaço de fase. Sem ela, infinitas soluções da EDO seriam possíveis. Diferentes condições iniciais geram diferentes soluções.
+    
+    \item \textbf{Explique o significado de espaço de fase no contexto do pêndulo simples.} \par
+    Resposta esperada: O espaço de fase do pêndulo é o plano $(\theta, \omega)$ onde $\theta$ é ângulo e $\omega$ é velocidade angular. Cada ponto representa um estado instantâneo. Trajetórias no espaço de fase mostram a evolução temporal: órbitas fechadas para oscilação, abertas para rotação.
+    
+    \item \textbf{Como a energia do pêndulo se relaciona com as trajetórias no espaço de fase?} \par
+    Resposta esperada: O pêndulo é sistema conservativo; energia total $E = \frac{1}{2}ml^2\omega^2 + mgl(1-\cos\theta)$ é constante. Diferentes níveis de energia correspondem a diferentes órbitas: pequenas energias geram órbitas fechadas; acima da separatriz, órbitas abertas (rotação).
+    
+    \item \textbf{O que é a separatriz no espaço de fase do pêndulo?} \par
+    Resposta esperada: A separatriz é a órbita especial que separa dois regimes de movimento: oscilações periódicas (abaixo) e rotação contínua (acima). Corresponde ao pêndulo atingindo exatamente a posição vertical com velocidade nula e tendo energia crítica.
+    
+    \item \textbf{Por que o método RK4 é considerado mais preciso que métodos de primeira ordem simples (como Euler)?} \par
+    Resposta esperada: RK4 é de quarta ordem, significando erro local proporcional a $h^5$, enquanto Euler é de primeira ordem com erro proporcional a $h^2$. Para o mesmo passo $h$, RK4 mantém precisão com passos maiores ou alcança precisão superior com passos iguais.
+    
+    \item \textbf{Qual é o significado de um sistema conservativo no contexto de EDOs?} \par
+    Resposta esperada: Um sistema conservativo preserva uma quantidade chamada constante de movimento ou invariante (ex: energia total). Isso implica trajetórias fechadas ou estruturado-periódicas no espaço de fase, refletindo ausência de dissipação.
+    
+    \item \textbf{Como métodos numéricos introduzem erros na solução de um PVI?} \par
+    Resposta esperada: Métodos numéricos aproximam a solução em pontos discretos. Erros surgem de: (1) truncamento (solução exata aproximada por série finita), (2) arredondamento (precisão finita computacional), (3) acumulação de erros ao longo das iterações. Ordem do método controla erro local; acúmulo global depende de estabilidade.
+
+\end{enumerate}
+
+\newpage
+
+% ============================================================================
+% GABARITO
+% ============================================================================
+
+\section{Gabarito e Discussões Complementares}
+
+\subsection{Gabarito -- Questionário 1: Lances Livres}
+
+\subsubsection{Questão 1}
+\textit{Por que desprezamos a resistência do ar?}
+
+A resistência do ar obedece a leis não-lineares (tipicamente arrasto quadrático). Incluí-la levaria a equações diferenciais que requerem resolução numérica, complexificando significativamente o modelo. Para lances livres, onde distâncias e tempos envolvidos são moderados, o efeito da resistência é relativamente pequeno ($\sim 5\%$ de desvio), justificando a simplificação.
+
+\subsubsection{Questão 2}
+\textit{Qual é a relação fundamental entre $v_0$ e $\vartheta$?}
+
+Derivação completa: Das equações $x = v_0 t \cos(\vartheta)$ e $y = v_0 t \sin(\vartheta) - \frac{1}{2}gt^2$, eliminando $t$:
+$$t = \frac{x}{v_0\cos(\vartheta)} \Rightarrow y = x\tan(\vartheta) - \frac{gx^2}{2v_0^2\cos^2(\vartheta)}$$
+Aplicando $(x,y) = (x_f, H)$ e resolvendo para $v_0$:
+$$v_0 = \frac{x_f}{\cos(\vartheta)}\sqrt{\frac{g}{2(x_f\tan(\vartheta) - H)}}$$
+
+\subsubsection{Questão 3}
+Os três casos representam diferentes geometrias de entrada. A escolha entre eles afeta a visibilidade do aro e a tolerância a pequenos desvios. Matematicamente, cada caso gera uma curva $v_0(\vartheta)$ distinta.
+
+\subsubsection{Questão 4}
+A parábola emerge naturalmente porque: aceleração horizontal = 0 (sem forças horizontais) e aceleração vertical = constante. Integrações sucessivas fornecem equações lineares em $t$. Eliminando $t$ produz equação quadrática em $x$, característica de parábola.
+
+\subsubsection{Questão 5}
+$H_l$ afeta a altura relativa $H = H_a - H_l$. Jogadores mais altos têm $H_l$ maior, reduzindo $H$. A fórmula de $v_0(\vartheta)$ mostra que $H$ aparece no denominador do argumento da raiz; valores menores de $H$ requerem diferentes relações entre $v_0$ e $\vartheta$.
+
+\subsubsection{Questão 6}
+$\Delta R$ é a tolerância geométrica. Se $\Delta R$ é pequeno, a entrada deve ser precisa; se grande, mais tolerante. Define a ``zona aceitável'' para o centro da bola ao entrar no nível do aro.
+
+\subsubsection{Questão 7}
+Ângulos muito pequenos ($\vartheta \to 0$) resultam no argumento da raiz tendendo a zero, fazendo $v_0 \to \infty$. Isto ocorre porque trajetórias rasantes requerem velocidades astronômicas para atingir altura apreciável.
+
+\subsubsection{Questão 8}
+As simplificações reduzem o modelo a tratabilidade analítica, mas sacrificam realismo. Backspin (rotação) cria força Magnus; resistência do ar causa arrasto e reduz alcance; efeitos 3D (desvio lateral) não são capturados. Previsões do modelo diferem de tiros reais em $5\%$ a $15\%$.
+
+\subsubsection{Questão 9}
+$g$ aparece no denominador da fórmula: aumentar $g$ reduz $v_0$ necessária. Em um planeta com $g$ menor (ex: Lua), velocidades muito maiores seriam requeridas. Isso reflete que menor gravidade exige maior "impulso" para atingir a mesma altura.
+
+\subsubsection{Questão 10}
+Para um dado ponto-alvo, a equação $v_0(\vartheta)$ tipicamente admite dois ângulos soluções (um raso, um elevado). A função não é biunívoca: diferentes $\vartheta$ podem gerar o mesmo $(v_0, \vartheta)$ capaz de atingir o alvo. Isso reflete a multiplicidade de estilos de arremesso eficientes.
+
+\subsection{Gabarito -- Questionário 2: EDOs}
+
+\subsubsection{Questão 1}
+Uma EDO é uma equação relacional entre uma função desconhecida $y(t)$ e suas derivadas. Um PVI é uma EDO acompanhada de \textbf{condições iniciais} que especificam o estado em um ponto inicial. A EDO sozinha possui infinitas soluções (família de curvas); o PVI especifica \textbf{uma única solução} (pelo Teorema de Existência e Unicidade de Picard-Lindelöf, sob condições apropriadas).
+
+\subsubsection{Questão 2}
+Métodos numéricos padrão (Runge-Kutta, Adams, etc.) são desenvolvidos para sistemas de EDOs de primeira ordem. Uma EDO de ordem $n$ pode ser reduzida a $n$ equações de primeira ordem definindo $y_1 = y, y_2 = y', \ldots, y_n = y^{(n-1)}$. Isto permite aplicar algoritmos existentes a qualquer ordem.
+
+\subsubsection{Questão 3}
+Runge-Kutta RK4 avança a solução em passos temporais $h$. Em cada passo, calcula quatro inclinações: $k_1$ (início), $k_2, k_3$ (pontos intermediários), $k_4$ (fim). Combina-as como $y_{n+1} = y_n + \frac{h}{6}(k_1 + 2k_2 + 2k_3 + k_4)$. Precisão é quarta ordem: erro local $\sim h^5$, global $\sim h^4$.
+
+\subsubsection{Questão 4}
+A condição inicial $y(t_0) = y_0$ "âncora" a solução em um ponto específico do tempo. A EDO sozinha descreve uma família de soluções (constantes de integração indeterminadas). A condição inicial fixa estas constantes, selecionando \textbf{uma trajetória única} no espaço de soluções.
+
+\subsubsection{Questão 5}
+Espaço de fase é o plano $(\theta, \omega)$ onde cada ponto $(θ_0, \omega_0)$ representa um estado completo do pêndulo em um instante. Trajetória no espaço de fase mostra evolução sem dependência explícita de $t$. Órbita fechada = movimento periódico; órbita aberta = rotação contínua.
+
+\subsubsection{Questão 6}
+O pêndulo conserva energia: $E = \frac{1}{2}ml^2\omega^2 + mgl(1-\cos\theta) = \text{const}$. Diferentes valores de $E$ correspondem a diferentes órbitas no espaço de fase. Baixas energias: órbitas fechadas (oscilações). Alta energia: órbitas abertas (rotação). A separatriz marca a transição crítica.
+
+\subsubsection{Questão 7}
+A separatriz é a órbita especial que separa oscilação (abaixo) de rotação (acima). Corresponde ao pêndulo atingindo o ponto superior ($\theta = \pi$) com velocidade nula: posição de equilíbrio instável. Orbitas exatamente nela assintoticamente aproximam esta posição (tempo infinito).
+
+\subsubsection{Questão 8}
+RK4 é quarta ordem ($\sim h^4$ erro global), enquanto Euler é primeira ordem ($\sim h$ erro global). Para mesmo $h$, RK4 é $10^2$--$10^4$ vezes mais preciso. Alternativamente, RK4 usa passos 10--100 vezes maiores mantendo precisão equivalente, reduzindo custo computacional.
+
+\subsubsection{Questão 9}
+Um sistema conservativo preserva uma grandeza (energia, momento, etc.). Sem dissipação, não há atração a pontos fixos; trajetórias são estruturadas (períodos, órbitas fechadas). Contrastam com sistemas dissipativos onde trajetórias colapsam a atratores.
+
+\subsubsection{Questão 10}
+Erros surgem de: \textbf{(1) Truncamento}: série de Taylor truncada (erro local $\propto h^p$ para ordem $p$). \textbf{(2) Arredondamento}: precisão finita do computador (bits). \textbf{(3) Acumulação}: erros locais acumulam-se ao longo de muitos passos. Ordem do método controla truncamento; estabilidade controla acumulação. Precisão computacional não pode ser excedida.
+
+\newpage
+
+% ============================================================================
+% GLOSSÁRIO
+% ============================================================================
+
+\section{Glossário de Termos}
+
+\begin{description}
+    \item[Aceleração Gravitacional ($g$)] Magnitude da aceleração produzida pela gravidade na superfície terrestre, aproximadamente 9,81 m/s². Atua vertically para baixo.
+    
+    \item[Ângulo de Lançamento ($\vartheta$)] Ângulo entre o vetor velocidade inicial e a direção horizontal. Tipicamente medido em radianos. Controla a "altura" da trajetória.
+    
+    \item[Arredondamento (Erro de)] Erro devido à representação finita de números em computadores (precisão de bits). Diferente de truncamento; não pode ser reduzido sem aumentar precisão do hardware.
+    
+    \item[Atrator] Ponto ou órbita no espaço de fase para o qual trajetórias vizinhas convergem. Em sistemas dissipativos, movimentos são atraídos para atratores. Pêndulo com atrito converge a ponto fixo de repouso.
+    
+    \item[Condição Inicial] Especificação do estado de um sistema em um instante inicial $t_0$. Para PVI de primeira ordem: $y(t_0) = y_0$. Para ordem $n$: também especifica derivadas até ordem $(n-1)$.
+    
+    \item[Constante de Movimento] Quantidade que permanece constante ao longo da evolução temporal de um sistema. Para pêndulo: energia total. Em geral, reflete simetrias do sistema (Teorema de Noether).
+    
+    \item[Diâmetro do Aro ($D_a$)] Largura da abertura do aro de basquete. Tipicamente 0,4572 m (18 polegadas). Define limites geométricos de entrada da bola.
+    
+    \item[Diâmetro da Bola ($D_b$)] Diâmetro da bola de basquete. Tipicamente 0,24 m. Determina margem de tolerância $\Delta R = (D_a - D_b)/2$ para precisão de arremesso.
+    
+    \item[Equação Diferencial Ordinária (EDO)] Equação envolvendo uma função desconhecida de uma variável independente e suas derivadas ordinárias. Exemplo: $y' = 2t$.
+    
+    \item[Espaço de Fase] Espaço multidimensional onde cada eixo representa uma variável dinâmica (posição, velocidade, etc.). Cada ponto no espaço de fase representa um estado completo do sistema. Trajetória mostra evolução.
+    
+    \item[Estabilidade Numérica] Propriedade de um algoritmo numérico de manter erros limitados ao longo de muitas iterações. Algoritmos instáveis amplificam erros. RK4 é tipicamente estável para passos razoáveis.
+    
+    \item[Função Força ($f(t,y)$)] Função conhecida que define a EDO: $y' = f(t,y)$. Descreve como a taxa de mudança de $y$ depende de $t$ e $y$. Constitui a "lei física" do sistema.
+    
+    \item[Gravidade] Força atrativa exercida pela Terra (ou outro corpo celeste). Próximo da superfície, aproximada como constante $g \approx 9.81$ m/s² para cálculos práticos.
+    
+    \item[Altura do Aro ($H_a$)] Altura vertical da posição do aro de basquete. Padrão regulamentário: 3,05 m. Diferença $H = H_a - H_l$ é altura relativa do aro.
+    
+    \item[Altura de Lançamento ($H_l$)] Altura vertical onde a bola é liberada no arremesso. Varia conforme altura do jogador. Típico: 2,0 a 2,7 m.
+    
+    \item[Integração Numérica] Processo computacional de resolver uma EDO numericamente em vez de analiticamente. Aproxima solução em pontos discretos. Métodos incluem Euler, RK4, Adams-Bashforth.
+    
+    \item[Margem de Tolerância ($\Delta R$)] Distância máxima que o centro da bola pode se desviar do centro do aro enquanto ainda entra: $\Delta R = (D_a - D_b)/2$. Define precisão aceitável geométricamente.
+    
+    \item[Método de Runge-Kutta (RK)] Família de algoritmos para resolver EDOs numericamente. RK4 (quarta ordem) é amplamente usado: usa 4 avaliações de $f$ por passo, precisão $\sim h^4$.
+    
+    \item[Movimento de Projétil] Movimento sob influência apenas de força constante (gravidade), sem resistência do ar. Trajetória é parabólica. Modelo clássico para balistico, lançamento de bolas, etc.
+    
+    \item[Órbita Periódica] Trajetória no espaço de fase que retorna a seu ponto inicial após tempo finito. Representa movimento oscilatório ou cíclico. Pêndulo tem órbitas periódicas para baixas energias.
+    
+    \item[Ordem de Método] Potência de $h$ (passo) na expressão do erro: erro $\propto h^p$ (ordem $p$). Método de ordem superior converge mais rapidamente com redução de passo. RK4 tem ordem 4.
+    
+    \item[Parâmetro de Controle] Quantidade que pode ser ajustada para modificar comportamento de um sistema. Para arremesso: $v_0$ e $\vartheta$. Para pêndulo: comprimento $l$, ângulo inicial $\theta_0$.
+    
+    \item[Parábola] Curva geométrica de segunda ordem. Trajetória de projétil sob gravidade constante é parabólica. Equação cartesiana: $y = ax^2 + bx + c$.
+    
+    \item[Pêndulo Simples] Massa pontual suspensa por corda rígida, livre para oscilar em plano vertical. Modelo paradigmático para oscilações periódicas e sistemas dinâmicos. Descrito por EDO de segunda ordem.
+    
+    \item[Problema de Valor Inicial (PVI)] Sistema: EDO + condições iniciais. Exemplo: $\{y' = f(t,y), y(t_0) = y_0\}$. Solução é única sob condições de Picard-Lindelöf.
+    
+    \item[Resistência do Ar (Arrasto)] Força opositora ao movimento através do ar. Modelo linear ($F \propto v$) ou quadrático ($F \propto v^2$). Não-linear, tornaria EDO intratável analiticamente.
+    
+    \item[Separatriz] Órbita que separa dois regimes qualitativamente diferentes de movimento no espaço de fase. Para pêndulo: órbita separando oscilação de rotação. Frequentemente instável.
+    
+    \item[Sistema Conservativo] Sistema sem dissipação onde uma grandeza (energia, momento) é preservada. Trajetórias não convergem a atratores; permanecem estruturadas (periódicas ou caóticas determinísticas).
+    
+    \item[Sistema Dinâmico] Sistema cuja evolução temporal é governada por equações diferenciais. Estado é especificado por ponto no espaço de fase. Evolução é determinística dado estado inicial.
+    
+    \item[Truncamento (Erro de)] Erro introduzido ao truncar uma série infinita (ex: série de Taylor) em número finito de termos. Diferente de arredondamento; reduz-se com passo menor ou ordem maior.
+    
+    \item[Velocidade Angular ($\omega$)] Taxa de mudança do ângulo com respeito ao tempo: $\omega = d\theta/dt$. Para pêndulo: $\omega(t) = d\theta/dt$. Aparece como segunda variável no sistema de EDOs.
+    
+    \item[Velocidade Inicial ($v_0$)] Magnitude do vetor velocidade no instante de lançamento. Para arremesso: tipicamente 6--8 m/s. Afeta alcance e altura da trajetória.
+    
+\end{description}
+
+\newpage
+
+% ============================================================================
+% CONCLUSÕES
+% ============================================================================
+
+\section*{Considerações Finais}
+
+A modelagem matemática dos lances livres no basquete e a solução numérica de problemas de valor inicial ilustram como a matemática abstrata encontra aplicação prática em fenômenos reais. 
+
+Os dois tópicos, embora à primeira vista distintos, compartilham fundamentos comuns:
+\begin{itemize}
+    \item Ambos utilizam equações diferenciais para descrever sistemas físicos.
+    \item Ambos requerem determinação de soluções, seja analiticamente (projétil) ou numericamente (pêndulo).
+    \item Ambos permitem múltiplas representações: paramétricas, cartesianas, no espaço de fase.
+    \item Ambos demonstram como simplificações tornam problemas tratáveis sem perder essência física.
+\end{itemize}
+
+Domínio destes conceitos fornece ferramenta poderosa para modelar e analisar sistemas complexos em engenharia, física, biologia e além.
+
+\vfill
+\begin{center}
+\textit{Fim do Guia de Estudos}
+\end{center}
+
+\end{document}
