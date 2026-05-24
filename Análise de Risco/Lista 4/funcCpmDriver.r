@@ -1,0 +1,15 @@
+funcCpmDriver<-function(){
+  library(triangle)
+  library(igraph)
+  source('funcCpm.r')
+  #parametros
+  n=9
+  d=c(0,2,6,4,3,5,4,2,0)
+  Suc=list(c(2,3,4),c(5,7),8,6,8,8,9,9,0)
+  Pre=list(0,1,1,1,2,4,2,c(3,5,6),c(7,8))
+  elos<-c(1,2,1,3,1,4,2,5,2,7,3,8,4,6,5,8,6,8,7,9,8,9,9,10)
+  g<-make_graph(elos)
+  tkplot(g,vertex.color='white')
+  r<-funcCpm(n,d,Suc,Pre)
+  r
+}
