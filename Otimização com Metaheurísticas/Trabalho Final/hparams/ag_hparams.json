@@ -1,0 +1,92 @@
+{
+  "sphere": {
+    "best_value": 5.0598923279667206e-14,
+    "hparams": {
+      "taxa_mutacao": 0.010624825516885912,
+      "sigma_mutacao": 0.2824010964909748,
+      "alpha_blx": 0.4369562925075674
+    },
+    "trial_number": 31
+  },
+  "rosenbrock": {
+    "best_value": 0.2008538202323038,
+    "hparams": {
+      "taxa_mutacao": 0.025179680403065306,
+      "sigma_mutacao": 0.2035275192911193,
+      "alpha_blx": 0.30442004269230455
+    },
+    "trial_number": 31
+  },
+  "sum_squares": {
+    "best_value": 4.2863427666052694e-11,
+    "hparams": {
+      "taxa_mutacao": 0.010027029001488646,
+      "sigma_mutacao": 0.3894917805923882,
+      "alpha_blx": 0.4481389170333563
+    },
+    "trial_number": 35
+  },
+  "dixon_price": {
+    "best_value": 0.6666666666666665,
+    "hparams": {
+      "taxa_mutacao": 0.01170426827668165,
+      "sigma_mutacao": 0.2774199771840528,
+      "alpha_blx": 0.4640982507756509
+    },
+    "trial_number": 44
+  },
+  "zakharov": {
+    "best_value": 1.3040368371591093,
+    "hparams": {
+      "taxa_mutacao": 0.07047438752371352,
+      "sigma_mutacao": 0.10391088397801204,
+      "alpha_blx": 0.24088937093266455
+    },
+    "trial_number": 15
+  },
+  "rastrigin": {
+    "best_value": 6.964718292828593,
+    "hparams": {
+      "taxa_mutacao": 0.012087945956316543,
+      "sigma_mutacao": 0.15109142041113538,
+      "alpha_blx": 0.19724306163868802
+    },
+    "trial_number": 26
+  },
+  "ackley": {
+    "best_value": 9.602432986088871e-06,
+    "hparams": {
+      "taxa_mutacao": 0.01599917314270323,
+      "sigma_mutacao": 0.1550402505407659,
+      "alpha_blx": 0.4053751887356898
+    },
+    "trial_number": 47
+  },
+  "griewank": {
+    "best_value": 0.0,
+    "hparams": {
+      "taxa_mutacao": 0.010489081808369022,
+      "sigma_mutacao": 0.0966258947943291,
+      "alpha_blx": 0.46227950085211
+    },
+    "trial_number": 28
+  },
+  "schwefel": {
+    "best_value": -1.681386480491304e+51,
+    "hparams": {
+      "taxa_mutacao": 0.13764819953985796,
+      "sigma_mutacao": 0.1265669726319193,
+      "alpha_blx": 0.4995760438594086
+    },
+    "trial_number": 33
+  },
+  "levy": {
+    "best_value": 8.008336675218056e-13,
+    "hparams": {
+      "taxa_mutacao": 0.010624825516885912,
+      "sigma_mutacao": 0.4865783055109753,
+      "alpha_blx": 0.4239916263771246
+    },
+    "trial_number": 31
+  }
+}
