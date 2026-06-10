@@ -2,7 +2,7 @@
 optuna.py
 =========
 Otimização de hiperparâmetros para metaheurísticas usando Optuna.
-
+    
 Uso
 ---
     python optuna.py --algoritmo ag                     # otimizar AG em todas as 10 funções
