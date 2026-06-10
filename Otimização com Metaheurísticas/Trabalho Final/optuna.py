@@ -70,16 +70,16 @@ FUNCOES = {
 }
 
 # ── configuração experimental ─────────────────────────────────────────────
-DIMENSAO = 30
+DIMENSAO = [30, 50, 100]  # testar em 3 dimensões: 30, 50 e 100
 MAX_FES = 100000  # orçamento = 100.000
 POP_SIZE = 100
-N_TRIALS = 50  # número de tentativas por função
+N_TRIALS = 101  # número de tentativas por função
 
 
 # ── Objetivos de otimização ───────────────────────────────────────────────
 
-def objetivo_ag(trial: Any, func_nome: str) -> float:
-    """Objetivo para otimizar AG em uma função específica."""
+def objetivo_ag(trial: Any, func_nome: str, dim: int) -> float:
+    """Objetivo para otimizar AG em uma função específica e dimensão."""
     func, bounds = FUNCOES[func_nome]
 
     # sugerir hiperparâmetros
@@ -90,7 +90,7 @@ def objetivo_ag(trial: Any, func_nome: str) -> float:
     # executar AG
     resultado = ag(
         func=func,
-        dim=DIMENSAO,
+        dim=dim,
         bounds=bounds,
         max_fes=MAX_FES,
         pop_size=POP_SIZE,
@@ -109,8 +109,8 @@ def objetivo_ag(trial: Any, func_nome: str) -> float:
     return resultado["best_f"]
 
 
-def objetivo_de(trial: Any, func_nome: str) -> float:
-    """Objetivo para otimizar DE em uma função específica."""
+def objetivo_de(trial: Any, func_nome: str, dim: int) -> float:
+    """Objetivo para otimizar DE em uma função específica e dimensão."""
     func, bounds = FUNCOES[func_nome]
 
     # sugerir hiperparâmetros
@@ -120,7 +120,7 @@ def objetivo_de(trial: Any, func_nome: str) -> float:
     # executar DE
     resultado = de(
         func=func,
-        dim=DIMENSAO,
+        dim=dim,
         bounds=bounds,
         max_fes=MAX_FES,
         pop_size=POP_SIZE,
@@ -137,8 +137,8 @@ def objetivo_de(trial: Any, func_nome: str) -> float:
     return resultado["best_f"]
 
 
-def objetivo_pso(trial: Any, func_nome: str) -> float:
-    """Objetivo para otimizar PSO em uma função específica."""
+def objetivo_pso(trial: Any, func_nome: str, dim: int) -> float:
+    """Objetivo para otimizar PSO em uma função específica e dimensão."""
     func, bounds = FUNCOES[func_nome]
 
     # sugerir hiperparâmetros
@@ -149,7 +149,7 @@ def objetivo_pso(trial: Any, func_nome: str) -> float:
     # executar PSO
     resultado = pso(
         func=func,
-        dim=DIMENSAO,
+        dim=dim,
         bounds=bounds,
         max_fes=MAX_FES,
         pop_size=POP_SIZE,
@@ -212,51 +212,52 @@ def otimizar_algoritmo(
 
     print(f"\n{'='*70}")
     print(f"  Otimizando hiperparâmetros para {algoritmo_nome.upper()}")
-    print(f"  Dimensão: {DIMENSAO}")
+    print(f"  Dimensões: {DIMENSAO}")
     print(f"  Orçamento (max_fes): {MAX_FES}")
-    print(f"  Função tamanho: {POP_SIZE}")
-    print(f"  Trials por função: {N_TRIALS}")
+    print(f"  Tamanho da população: {POP_SIZE}")
+    print(f"  Trials por função/dimensão: {N_TRIALS}")
     print(f"{'='*70}\n")
 
     for func_nome in funcoes_lista:
-        print(f"▶ Otimizando em função: {func_nome}")
+        for dim in DIMENSAO:
+            print(f"▶ Otimizando em função: {func_nome} | dimensão: {dim}")
 
-        # criar sampler e pruner
-        sampler = TPESampler(seed=42)
-        pruner = MedianPruner()
+            # criar sampler e pruner
+            sampler = TPESampler(seed=42)
+            pruner = MedianPruner()
 
-        # criar estudo
-        estudo = optuna.create_study(
-            direction="minimize",
-            sampler=sampler,
-            pruner=pruner,
-        )
+            # criar estudo
+            estudo = optuna.create_study(
+                direction="minimize",
+                sampler=sampler,
+                pruner=pruner,
+            )
 
-        # otimizar
-        estudo.optimize(
-            lambda trial: objetivo_fn(trial, func_nome),
-            n_trials=N_TRIALS,
-            show_progress_bar=True,
-        )
+            # otimizar
+            estudo.optimize(
+                lambda trial: objetivo_fn(trial, func_nome, dim),
+                n_trials=N_TRIALS,
+                show_progress_bar=True,
+            )
 
-        # salvar estudo
-        estudo_path = out_dir / f"{algoritmo_nome}_estudo_{func_nome}.pkl"
-        with open(estudo_path, "wb") as f:
-            pickle.dump(estudo, f)
+            # salvar estudo
+            estudo_path = out_dir / f"{algoritmo_nome}_estudo_{func_nome}_d{dim}.pkl"
+            with open(estudo_path, "wb") as f:
+                pickle.dump(estudo, f)
 
-        # melhor trial
-        trial_otimo = estudo.best_trial
-        hparams_por_funcao[func_nome] = {
-            "best_value": float(trial_otimo.value),
-            "hparams": trial_otimo.params,
-            "trial_number": trial_otimo.number,
-        }
+            # melhor trial
+            trial_otimo = estudo.best_trial
+            hparams_por_funcao.setdefault(func_nome, {})[str(dim)] = {
+                "best_value": float(trial_otimo.value),
+                "hparams": trial_otimo.params,
+                "trial_number": trial_otimo.number,
+            }
 
-        print(
-            f"  ✓ Melhor f* = {trial_otimo.value:.6e} "
-            f"(trial #{trial_otimo.number})"
-        )
-        print(f"  ✓ Hiperparâmetros: {trial_otimo.params}\n")
+            print(
+                f"  ✓ Melhor f* = {trial_otimo.value:.6e} "
+                f"(trial #{trial_otimo.number})"
+            )
+            print(f"  ✓ Hiperparâmetros: {trial_otimo.params}\n")
 
     # salvar hiperparâmetros em JSON
     hparams_path = out_dir / f"{algoritmo_nome}_hparams.json"
@@ -267,10 +268,11 @@ def otimizar_algoritmo(
 
     # gerar resumo em CSV
     resumo_data = []
-    for func_nome, info in hparams_por_funcao.items():
-        row = {"funcao": func_nome, "best_f": info["best_value"]}
-        row.update(info["hparams"])
-        resumo_data.append(row)
+    for func_nome, dims_info in hparams_por_funcao.items():
+        for dim_str, info in dims_info.items():
+            row = {"funcao": func_nome, "dim": int(dim_str), "best_f": info["best_value"]}
+            row.update(info["hparams"])
+            resumo_data.append(row)
 
     df_resumo = pd.DataFrame(resumo_data)
     resumo_path = out_dir / f"{algoritmo_nome}_resumo.csv"
@@ -280,7 +282,10 @@ def otimizar_algoritmo(
 
     # resumo visual
     print("── Resumo de Resultados ──────────────────────────────────────")
-    print(df_resumo.to_string(index=False))
+    if not df_resumo.empty:
+        print(df_resumo.sort_values(["funcao", "dim"]).to_string(index=False))
+    else:
+        print("(nenhum resultado)")
     print()
 
     return hparams_por_funcao
