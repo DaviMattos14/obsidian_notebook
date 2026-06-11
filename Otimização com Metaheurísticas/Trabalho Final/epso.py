@@ -1,27 +1,29 @@
 """
-Evolutionary Particle Swarm Optimization (EPSO) — interface padrão para o planejamento experimental.
+Evolutionary Particle Swarm Optimization (EPSO)
 
-Híbrido PSO + Estratégia Evolutiva:
-  - PSO clássico com dinâmica de velocidade
-  - Parâmetros adaptativos (wi, em, wc) com mutação por geração
-  - Mutação via distribuição normal com decaimento exponencial
+Híbrido PSO + Estratégia Evolutiva (Miranda & Fonseca, 2002):
+  - Para cada partícula, um clone é criado e tem seus pesos estratégicos mutados
+  - Clone e original se movem; o melhor sobrevive (seleção greedy)
+  - Pesos adaptativos (wi, em, wc, perturbation) com mutação gaussiana
+  - Comunicação estocástica por dimensão: gBest só entra com prob. commProb
+  - gBest é perturbado de forma independente por cada partícula antes do movimento
 
 Parâmetros padrão:
-  pc (prob. cruzamento): 0.5
-  tau (taxa de mutação): 1.0 / sqrt(2*dim)
+  comm_prob (prob. comunicação por dimensão): 0.2
+  tau (taxa de mutação dos pesos):            0.2
 
-Limite de velocidade: 20% do intervalo [lo, hi]
+Limite de velocidade: range do espaço de busca (|hi - lo|)
 
 Interface pública
 -----------------
 epso(func, dim, bounds, max_fes, pop_size, seed) -> dict
 
-  func     : callable (f: np.ndarray (N,D) -> np.ndarray (N,))
-  dim      : int — número de dimensões
-  bounds   : (float, float) — (lower, upper) — mesmo bound para todas as dims
-  max_fes  : int — orçamento de avaliações (ex.: 10_000 * dim)
-  pop_size : int — tamanho da população
-  seed     : int — semente para reprodutibilidade
+  func      : callable (f: np.ndarray (N,D) -> np.ndarray (N,))
+  dim       : int — número de dimensões
+  bounds    : (float, float) — (lower, upper) — mesmo bound para todas as dims
+  max_fes   : int — orçamento de avaliações (ex.: 10_000 * dim)
+  pop_size  : int — tamanho da população
+  seed      : int — semente para reprodutibilidade
 
 Retorna dict com:
   best_f      : float — melhor fitness encontrado
@@ -34,21 +36,20 @@ Retorna dict com:
 import numpy as np
 
 
-def epso(func, dim, bounds, max_fes, pop_size=100, seed=None,
-         pc=0.5, tau_factor=1.0):
+def epso(func, dim, bounds, max_fes, pop_size=20, seed=None, comm_prob=0.2, tau=0.2):
     """
     Executa Evolutionary Particle Swarm Optimization e retorna um dicionário de resultados.
 
     Parâmetros
     ----------
-    func       : callable — função objetivo vetorizada (N, D) -> (N,)
-    dim        : int      — dimensionalidade
-    bounds     : (lo, hi) — domínio de busca
-    max_fes    : int      — orçamento de avaliações de função
-    pop_size   : int      — tamanho da população (padrão 100)
-    seed       : int|None — semente RNG
-    pc         : float    — probabilidade de cruzamento (padrão 0.5)
-    tau_factor : float    — fator de taxa de mutação (padrão 1.0)
+    func      : callable — função objetivo vetorizada (N, D) -> (N,)
+    dim       : int      — dimensionalidade
+    bounds    : (lo, hi) — domínio de busca (uniforme por dimensão)
+    max_fes   : int      — orçamento de avaliações de função
+    pop_size  : int      — tamanho da população (padrão 20)
+    seed      : int|None — semente RNG
+    comm_prob : float    — probabilidade de comunicação por dimensão (padrão 0.2)
+    tau       : float    — taxa de mutação dos pesos estratégicos (padrão 0.2)
 
     Retorna
     -------
@@ -57,109 +58,179 @@ def epso(func, dim, bounds, max_fes, pop_size=100, seed=None,
     lo, hi = bounds
     rng = np.random.default_rng(seed)
 
+    v_max = float(np.abs(hi - lo))  # limite de velocidade = range do espaço
+
     # ── inicialização ─────────────────────────────────────────────────────────
     pop = rng.uniform(lo, hi, (pop_size, dim))
-    fit = func(pop)  # avaliação vetorizada (pop_size FEs)
+    vel = rng.uniform(-v_max, v_max, (pop_size, dim))
+
+    fit = func(pop)  # (pop_size,) avaliações vetorizadas
     n_fes = pop_size
 
-    best_idx = int(np.argmin(fit))
-    best_f = float(fit[best_idx])
-    best_x = pop[best_idx].copy()
-
-    # pbest (melhor posição pessoal de cada partícula)
+    # pbest
     pbest = pop.copy()
     pbest_fit = fit.copy()
 
-    # gbest (melhor posição global)
+    # gbest
+    best_idx = int(np.argmin(fit))
+    gbest_fit = float(fit[best_idx])
     gbest = pop[best_idx].copy()
-    gbest_fit = best_f
 
-    # velocidades iniciais
-    v_max = 0.2 * (hi - lo)
-    v = rng.uniform(-v_max, v_max, (pop_size, dim))
+    # pesos estratégicos por partícula  [wi, em, wc, perturbation]
+    weights = rng.uniform(0.0, 1.0, (pop_size, 4))
+    # wi=col0, em=col1, wc=col2, perturbation=col3
 
-    # parâmetros adaptativos por partícula
-    wi = rng.uniform(0.4, 0.9, pop_size)  # inércia
-    em = np.full(pop_size, 1.5)  # aceleração pessoal
-    wc = np.full(pop_size, 1.5)  # aceleração cognitiva
-
-    # taxa de mutação
-    tau = tau_factor / np.sqrt(2.0 * dim)
-
-    # histórico de convergência (por geração)
-    history = [best_f]
+    history = [gbest_fit]
     fes_history = [n_fes]
 
     # ── loop principal ────────────────────────────────────────────────────────
     while n_fes < max_fes:
+
+        # ── verificar e atualizar gbest (lista já "ordenada" implicitamente) ──
+        best_now = int(np.argmin(pbest_fit))
+        if pbest_fit[best_now] < gbest_fit:
+            gbest_fit = float(pbest_fit[best_now])
+            gbest = pbest[best_now].copy()
+
+        # ── processar cada partícula ──────────────────────────────────────────
         for i in range(pop_size):
             if n_fes >= max_fes:
                 break
 
-            # ── mutação de parâmetros (estratégia evolutiva) ──────────────────
-            wi_filho = wi[i] * np.exp(-tau * n_fes)
-            em_filho = em[i] * np.exp(-tau * n_fes)
-            wc_filho = wc[i] * np.exp(-tau * n_fes)
+            # ── mutação gaussiana dos pesos (clone herda pesos mutados) ────────
+            noise = rng.standard_normal(4)
+            w_clone = weights[i] + noise * tau
+            w_clone = np.clip(w_clone, 0.0, 1.0)  # mesma lógica do C++
 
-            # clips nos parâmetros
-            wi_filho = np.clip(wi_filho, 0.4, 0.9)
-            em_filho = np.clip(em_filho, 0.5, 2.5)
-            wc_filho = np.clip(wc_filho, 0.5, 2.5)
+            wi_c   = w_clone[0]
+            em_c   = w_clone[1]
+            wc_c   = w_clone[2]
+            pert_c = w_clone[3]
 
-            # ── cruzamento probabilístico ──────────────────────────────────────
-            matriz_c = (rng.random(dim) < pc).astype(float)
+            # ── perturbação do gBest (por partícula, uma vez para todas as dims)
+            disturbator = rng.uniform(0.0, 1.0)  # único sorteio, como no C++
+            gbest_perturbed = gbest.copy()
 
-            # ── atualizar velocidade ───────────────────────────────────────────
-            r1 = rng.random(dim)
-            r2 = rng.random(dim)
+            # máscara de comunicação estocástica por dimensão (Bernoulli)
+            comm_mask = rng.uniform(0.0, 1.0, dim) < comm_prob  # (dim,) bool
 
-            v_filho = (
-                wi_filho * v[i]
-                + em_filho * r1 * (pbest[i] - pop[i])
-                + wc_filho * matriz_c * r2 * (gbest - pop[i])
+            # aplica perturbação somente nas dimensões com comunicação ativa
+            gbest_perturbed[comm_mask] = (
+                gbest[comm_mask] * (1.0 + pert_c * disturbator)
             )
 
-            # limitar velocidade
-            v_filho = np.clip(v_filho, -v_max, v_max)
+            # ── atualização de velocidade do clone ────────────────────────────
+            r1 = rng.uniform(0.0, 1.0, dim)
+            r2 = rng.uniform(0.0, 1.0, dim)
 
-            # ── atualizar posição ──────────────────────────────────────────────
-            candidato = np.clip(pop[i] + v_filho, lo, hi)
+            coop_term = np.where(
+                comm_mask,
+                wc_c * r2 * (gbest_perturbed - pop[i]),
+                0.0,
+            )
 
-            # ── avaliar candidato ──────────────────────────────────────────────
-            fit_candidato = float(func(candidato.reshape(1, -1))[0])
+            v_clone = (
+                wi_c * vel[i]
+                + em_c * r1 * (pbest[i] - pop[i])
+                + coop_term
+            )
+            v_clone = np.clip(v_clone, -v_max, v_max)
+
+            # ── atualização de posição do clone ───────────────────────────────
+            pos_clone = pop[i] + v_clone
+
+            # bounce nas fronteiras (mesmo comportamento do C++)
+            mask_lo = pos_clone < lo
+            mask_hi = pos_clone > hi
+            pos_clone = np.clip(pos_clone, lo, hi)
+            v_clone[mask_lo | mask_hi] *= -1.0
+            v_clone = np.clip(v_clone, -v_max, v_max)
+
+            fit_clone = float(func(pos_clone.reshape(1, -1))[0])
             n_fes += 1
 
-            # ── seleção greedy com adaptação de parâmetros ──────────────────────
-            if fit_candidato < fit[i]:
-                pop[i] = candidato
-                fit[i] = fit_candidato
-                v[i] = v_filho
+            if n_fes >= max_fes:
+                # ainda compara antes de sair
+                if fit_clone < fit[i]:
+                    pop[i] = pos_clone
+                    vel[i] = v_clone
+                    fit[i] = fit_clone
+                    weights[i] = w_clone
+                    if fit[i] < pbest_fit[i]:
+                        pbest_fit[i] = fit[i]
+                        pbest[i] = pop[i].copy()
+                        if fit[i] < gbest_fit:
+                            gbest_fit = fit[i]
+                            gbest = pop[i].copy()
+                break
 
-                # atualizar parâmetros adaptativos
-                wi[i] = wi_filho
-                em[i] = em_filho
-                wc[i] = wc_filho
+            # ── movimento do original (com seus pesos não mutados) ────────────
+            wi_o   = weights[i, 0]
+            em_o   = weights[i, 1]
+            wc_o   = weights[i, 2]
+            pert_o = weights[i, 3]
 
-                # atualizar pbest
-                if fit[i] < pbest_fit[i]:
-                    pbest_fit[i] = fit[i]
-                    pbest[i] = pop[i].copy()
+            gbest_perturbed_o = gbest.copy()
+            disturbator_o = rng.uniform(0.0, 1.0)
+            comm_mask_o = rng.uniform(0.0, 1.0, dim) < comm_prob
+            gbest_perturbed_o[comm_mask_o] = (
+                gbest[comm_mask_o] * (1.0 + pert_o * disturbator_o)
+            )
 
-                    # atualizar gbest
-                    if fit[i] < gbest_fit:
-                        gbest_fit = fit[i]
-                        gbest = pop[i].copy()
+            r1_o = rng.uniform(0.0, 1.0, dim)
+            r2_o = rng.uniform(0.0, 1.0, dim)
 
-        # ── registra ao final de cada geração completa ────────────────────
-        best_f = gbest_fit
-        best_x = gbest.copy()
-        history.append(best_f)
+            coop_term_o = np.where(
+                comm_mask_o,
+                wc_o * r2_o * (gbest_perturbed_o - pop[i]),
+                0.0,
+            )
+
+            v_orig = (
+                wi_o * vel[i]
+                + em_o * r1_o * (pbest[i] - pop[i])
+                + coop_term_o
+            )
+            v_orig = np.clip(v_orig, -v_max, v_max)
+
+            pos_orig = pop[i] + v_orig
+            mask_lo_o = pos_orig < lo
+            mask_hi_o = pos_orig > hi
+            pos_orig = np.clip(pos_orig, lo, hi)
+            v_orig[mask_lo_o | mask_hi_o] *= -1.0
+            v_orig = np.clip(v_orig, -v_max, v_max)
+
+            fit_orig = float(func(pos_orig.reshape(1, -1))[0])
+            n_fes += 1
+
+            # ── seleção greedy: melhor entre clone e original ─────────────────
+            if fit_orig <= fit_clone:
+                pop[i]     = pos_orig
+                vel[i]     = v_orig
+                fit[i]     = fit_orig
+                # pesos do original permanecem (weights[i] não muda)
+            else:
+                pop[i]     = pos_clone
+                vel[i]     = v_clone
+                fit[i]     = fit_clone
+                weights[i] = w_clone   # clone venceu — adota pesos mutados
+
+            # atualiza pbest e gbest se necessário
+            if fit[i] < pbest_fit[i]:
+                pbest_fit[i] = fit[i]
+                pbest[i] = pop[i].copy()
+                if fit[i] < gbest_fit:
+                    gbest_fit = fit[i]
+                    gbest = pop[i].copy()
+
+        # ── fim da geração: registra convergência ─────────────────────────────
+        history.append(gbest_fit)
         fes_history.append(n_fes)
 
     return {
-        "best_f": best_f,
-        "best_x": best_x,
-        "history": np.array(history),
+        "best_f":      gbest_fit,
+        "best_x":      gbest.copy(),
+        "history":     np.array(history),
         "fes_history": np.array(fes_history),
-        "n_fes": n_fes,
+        "n_fes":       n_fes,
     }

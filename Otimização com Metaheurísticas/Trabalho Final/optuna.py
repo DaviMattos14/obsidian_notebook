@@ -8,6 +8,7 @@ Uso
     python optuna.py --algoritmo ag                     # otimizar AG em todas as 10 funções
     python optuna.py --algoritmo de                     # otimizar DE
     python optuna.py --algoritmo pso                    # otimizar PSO
+    python optuna.py --algoritmo epso                   # otimizar EPSO
     python optuna.py --algoritmo ag --funcao sphere     # otimizar AG apenas em Sphere
 
 Estrutura de saída
@@ -16,6 +17,7 @@ hparams/
   ag_hparams.json      ← melhores hiperparâmetros por função
   de_hparams.json
   pso_hparams.json
+    epso_hparams.json
 
   ag_estudo_sphere.pkl ← estudo Optuna completo (visualizar com Optuna)
   ...
@@ -53,6 +55,7 @@ from benchmark import (
 # ── algoritmos ────────────────────────────────────────────────────────────
 from ag import ag
 from de import de
+from epso import epso
 from pso import pso
 
 
@@ -167,6 +170,33 @@ def objetivo_pso(trial: Any, func_nome: str, dim: int) -> float:
     return resultado["best_f"]
 
 
+def objetivo_epso(trial: Any, func_nome: str, dim: int) -> float:
+    """Objetivo para otimizar EPSO em uma função específica e dimensão."""
+    func, bounds = FUNCOES[func_nome]
+
+    # sugerir hiperparâmetros
+    comm_prob = trial.suggest_float("comm_prob", 0.1, 0.9)
+    tau = trial.suggest_float("tau", 0.05, 0.5)
+
+    # executar EPSO
+    resultado = epso(
+        func=func,
+        dim=dim,
+        bounds=bounds,
+        max_fes=MAX_FES,
+        pop_size=POP_SIZE,
+        seed=42,
+        comm_prob=comm_prob,
+        tau=tau,
+    )
+
+    trial.report(resultado["best_f"], 0)
+
+    if trial.should_prune():
+        raise optuna.TrialPruned()
+
+    return resultado["best_f"]
+
 # ── Pipeline de otimização ────────────────────────────────────────────────
 
 def otimizar_algoritmo(
@@ -195,6 +225,7 @@ def otimizar_algoritmo(
     objetivo_map = {
         "ag": objetivo_ag,
         "de": objetivo_de,
+        "epso": objetivo_epso,
         "pso": objetivo_pso,
     }
 
@@ -299,7 +330,7 @@ if __name__ == "__main__":
     )
     parser.add_argument(
         "--algoritmo",
-        choices=["ag", "de", "pso"],
+        choices=["ag", "de", "epso", "pso"],
         required=True,
         help="algoritmo a otimizar",
     )

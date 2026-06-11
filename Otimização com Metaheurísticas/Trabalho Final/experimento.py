@@ -14,9 +14,14 @@ Estrutura dos arquivos gerados
 results/
   ag_resultados.csv        ← métricas resumidas (1 linha por rodada)
   ag_historico.csv         ← curvas de convergência (1 linha por geração)
+
+Se existirem arquivos gerados pelo Optuna em hparams/<algoritmo>_hparams.json,
+eles são carregados automaticamente e aplicados em cada combinação de função e
+dimensão antes da execução do algoritmo.
 """
 
 import argparse
+import json
 import time
 from itertools import product
 from pathlib import Path
@@ -45,6 +50,28 @@ ALGORITMOS = {
     # adicione aqui os próximos: "deepso": _deepso, "cdeepso": _cdeepso, ...
 }
 
+HPARAMS_CACHE = {}
+
+
+def carregar_hparams_otimizados(algoritmo_nome: str):
+    """Carrega hiperparâmetros gerados pelo Optuna, se o arquivo existir."""
+    if algoritmo_nome in HPARAMS_CACHE:
+        return HPARAMS_CACHE[algoritmo_nome]
+
+    caminho = Path("hparams") / f"{algoritmo_nome}_hparams.json"
+    if caminho.exists():
+        with open(caminho, "r", encoding="utf-8") as arquivo:
+            HPARAMS_CACHE[algoritmo_nome] = json.load(arquivo)
+    else:
+        HPARAMS_CACHE[algoritmo_nome] = {}
+
+    return HPARAMS_CACHE[algoritmo_nome]
+
+
+def obter_hparams_para_combo(hparams_por_funcao, funcao_nome: str, dim: int):
+    """Retorna os hiperparâmetros salvos para a função/dimensão atual."""
+    return hparams_por_funcao.get(funcao_nome, {}).get(str(dim), {}).get("hparams", {})
+
 # ── configuração experimental ─────────────────────────────────────────────────
 FUNCOES = {
     # nome           callable       (lo, hi)
@@ -69,6 +96,7 @@ MAX_FES     = 100000 # Limite de chamadas de função (orçamento)
 def rodar_experimento(algoritmo_nome: str, dry_run: bool = False) -> None:
     alg_fn   = ALGORITMOS[algoritmo_nome]
     n_exec   = 1 if dry_run else N_EXECUCOES
+    hparams_por_funcao = carregar_hparams_otimizados(algoritmo_nome)
 
     out_dir  = Path("results")
     out_dir.mkdir(exist_ok=True)
@@ -86,6 +114,10 @@ def rodar_experimento(algoritmo_nome: str, dry_run: bool = False) -> None:
     print(f"  Execuções : {n_exec}{'  (dry-run)' if dry_run else ''}")
     print(f"  Total     : {total} rodadas")
     print(f"  Chamadas de Funções : 100.000")
+    if hparams_por_funcao:
+        print(f"  Hiperparâmetros Optuna: carregados de hparams/{algoritmo_nome}_hparams.json")
+    else:
+        print(f"  Hiperparâmetros Optuna: não encontrados, usando padrões do algoritmo")
     print(f"{'='*60}\n")
 
     linhas_res  = []   # métricas resumidas
@@ -94,6 +126,7 @@ def rodar_experimento(algoritmo_nome: str, dry_run: bool = False) -> None:
     pbar = tqdm(total=total, unit="rodada", ncols=72)
 
     for (fn_nome, (fn, bounds)), dim in combos:
+        hparams = obter_hparams_para_combo(hparams_por_funcao, fn_nome, dim)
         
         for exec_id in range(n_exec):
             t0   = time.perf_counter()
@@ -104,6 +137,7 @@ def rodar_experimento(algoritmo_nome: str, dry_run: bool = False) -> None:
                 bounds   = bounds,
                 max_fes  = MAX_FES,
                 pop_size = POP_SIZE,
+                **hparams,
             )
 
             elapsed = time.perf_counter() - t0
