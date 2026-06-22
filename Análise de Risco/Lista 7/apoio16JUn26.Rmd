@@ -1,0 +1,72 @@
+---
+title: "apoio16Jun"
+output: html_document
+date: "2026-06-15"
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+# 1. Parâmetros do modelo
+
+```{r, eval=T }
+set.seed(123)
+nSim=300
+```
+# 2.Ler arquivo com histórico de ações PETR4 de 2021
+```{r, eval=T }
+df<-read.csv("petr2021.csv",sep=';',dec=',',header = T)
+head(df)
+preco<-df$Close
+head(preco)
+P0=preco[1]
+P0
+```
+
+# 3.Calcular parametros do modelo CER
+```{r, eval=T }
+logpreco<-log(preco)
+head(logpreco)
+
+diflogpreco<-diff(logpreco)
+head(diflogpreco)
+
+mu=mean(diflogpreco)
+sigma2<-var(diflogpreco)
+sigma<-sqrt(sigma2)
+```
+# 4. Gerar série de retornos logarítmicos
+```{r, eval=T }
+n<-length(diflogpreco)
+matprec<-matrix(nrow=nSim,ncol = n)
+retornos_log <- rnorm(n, mean = mu, sd = sigma)
+par(mfrow=c(1,2))
+plot(diflogpreco, type='h')
+plot(retornos_log, type='h')
+```
+
+# 5. Obter série de preços simulada
+```{r, eval=T }
+for ( i in 1:nSim){
+  retornos_log <- rnorm(n, mean = mu, sd = sigma)
+  precos <- P0 * exp(cumsum(retornos_log))
+  matprec[i,]<-precos
+}
+```
+# 6 Visualizar uma sequencia
+```{r, eval=T }
+par(mfrow=c(2,2))
+for(i in 1:4){
+retornos_log <- rnorm(n, mean = mu, sd = sigma)
+precos <- P0 * exp(cumsum(retornos_log))
+plot(precos, type = "l", col = "blue", ylab = "Preço", xlab = "Tempo (dias)",
+     main = "Preços Log-Normais")
+}
+```
+# 7. Visualizar a distribuição empírica do ultimo dia
+```{r, eval=T }
+par(mfrow=c(1,1))
+ultdia<-matprec[,n]
+hist(ultdia,freq = T, main='Distribuição de preços do ultimo dia')
+```

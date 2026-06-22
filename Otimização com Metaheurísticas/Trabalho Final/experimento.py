@@ -88,7 +88,7 @@ FUNCOES = {
 }
 
 DIMENSOES   = [30, 50, 100]
-N_EXECUCOES = 30
+N_EXECUCOES = 51
 POP_SIZE    = 100
 MAX_FES     = 100000 # Limite de chamadas de função (orçamento)
 

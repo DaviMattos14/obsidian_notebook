@@ -1,0 +1,196 @@
+---
+title: "RIntro"
+author: "EAS"
+date: "2026-04-01"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+
+#1-help da função sample() do R
+```{r}
+?sample
+```
+
+#2-modelando o lançamento de uma moeda 10 vezes
+```{r,eval=T} 
+x<-sample(x=c(0,1),size=10,replace=T,prob=c(1/2,1/2))
+x
+```
+
+#3-contando o número de vezes com resultado igual a 1
+```{r,eval=T} 
+x<-sample(x=c(0,1),size=10,replace=T,prob=c(1/2,1/2))
+y<-sum(x)
+y
+```
+
+#4- repetindo o experimento 100 vezes e analisando resultados
+```{r,eval=T}
+N<-100
+y<-vector(mode='numeric', length = N)
+for (i in 1:N){
+  x<-sample(x=c(0,1),size=10,replace=T,prob=c(1/2,1/2))
+  y[i]<-sum(x)
+}
+
+#analisando resultados
+summary(y)
+hist(y)
+mean(y)
+var(y)
+sd(y)
+```
+
+#5-gerando amostras de numeros entre 1..100
+```{r,eval=T}
+v<-1:100
+v
+y<-sample(v, 300, replace = T)
+y
+hist(y)
+```
+
+#6-gerando amostras de uma distribuição uniforme (80..120)
+```{r,eval=T}
+
+z<-runif(n=100, min=80,max=120)
+z
+hist(z)
+```
+
+#7-observando o efeito amostragem 
+```{r,eval=T}
+
+z<-runif(n=1000, min=80,max=120)
+z
+hist(z)
+```
+
+#8-simulando lancamento de um dado
+```{r,eval=T}
+dado<-sample(1:6, 10,replace = T)
+dado
+hist(dado)
+```
+
+
+#9-gerando amostras de uma triangular
+```{r,eval=T}
+
+library (triangle)
+w<-rtriangle(n=100, 80, 120, 90)
+hist(w)
+
+w<-rtriangle(n=1000, 80, 120, 90)
+hist(w)
+```
+
+#10-gerando cenários usando estimativa de três pontos: (Minimo,Máximo, Mais provável)
+```{r,eval=T}
+#Estimativa de tres pontos para uma obra (R$mil)
+# Escv<-(75,92.5,82.5)
+# Fund<-(57.5,77.5,67.5)
+# Estr<-(430,472.5,445)
+# Telh<-(140,157.5,145)
+# Acab<-(72.5,107.5,92.5)
+
+
+library (triangle)
+Ns<-100
+Ni<-5
+rs<-vector(length=Ns)
+pt=matrix(data=c( 75,92.5,82.5, 
+                  57.5,77.5,67.5,
+                  430,472.5,445,
+                  140,157.5,145,
+                  72.5,107.5,92.5),
+            nrow=Ni,ncol=3,byrow=TRUE)
+cenarios<-matrix(ncol=Ni,nrow=Ns)
+
+for (i in 1:Ns){
+#gera um scenario
+  for (j in 1:Ni){
+    cenarios[i,j]<-rtriangle(1,pt[j,1],pt[j,2],pt[j,3])
+  }
+}
+head(cenarios)
+rs<-apply(cenarios,M=1,sum)
+hist(rs)
+plot(ecdf(rs))
+rs
+```
+
+
+#11-gerando cenarios 2: mais eficiente computacionalmente
+```{r,eval=T}
+construcao<-function(){
+library (triangle)
+#Constantes  
+Ns=1000
+  
+#Passo 1-Gerar as amostras das variaveis de risco
+Escv<-rtriangle(Ns,75,92.5,82.5)
+Fund<-rtriangle(Ns,57.5,77.5,67.5)
+Estr<-rtriangle(Ns,430,472.5,445)
+Telh<-rtriangle(Ns,140,157.5,145)
+Acab<-rtriangle(Ns,72.5,107.5,92.5)
+#Passo 2-Montar a matriz de cenarios
+Cenarios<-cbind(Escv,Fund,Estr,Telh,Acab)
+
+#Passo 3-Avaliar cenarios
+Custo<-apply(Cenarios,M=1,sum)
+
+#Passo 4-Mostrar resultados
+hist(Custo)
+plot(ecdf(Custo))
+
+#Passo 5-Retorna resultado
+Cenarios
+}
+```
+
+
+#12-modelando contigenciamento
+#12.1-função rbinom()
+```{r,eval=T}
+?rbinom
+```
+
+  
+#12.2- modelo computacional  
+
+```{r,eval=T}
+constCont<-function(Ns=1000){
+library (triangle)
+
+#Passo 1-Gerar as amostras das variáveis de risco
+Escv<-rtriangle(Ns,75,92.5,82.5)
+Fund<-rtriangle(Ns,57.5,77.5,67.5)
+Estr<-rtriangle(Ns,430,472.5,445)
+Telh<-rtriangle(Ns,140,157.5,145)
+Acab<-rtriangle(Ns,72.5,107.5,92.5)
+Evnt<-rbinom   (Ns,1,0.2)
+Cont<-rtriangle(Ns,80,115,100)
+
+#Passo 2-Montar a matriz de cenários
+Cenarios<-cbind(Escv,Fund,Estr,Telh,Acab,Evnt,Cont)
+head(Cenarios)
+
+#Passo 3-Avaliar cenarios
+Custo<-apply(Cenarios[,1:5],M=1,sum)+Evnt*Cont
+
+#Passo 4-Mostrar resultados
+hist(Custo)
+plot(ecdf(Custo))
+
+#Passo 5-Retorna resultado
+Custo
+}
+constCont()
+
+```
+

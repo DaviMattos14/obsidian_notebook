@@ -21,7 +21,7 @@ pso(func, dim, bounds, max_fes, pop_size, seed) -> dict
 Retorna dict com:
   best_f      : float — melhor fitness encontrado
   best_x      : np.ndarray (dim,) — vetor solução
-  history     : np.ndarray — melhor f* ao fim de cada geração
+  history     : np.ndarray — melhor f* ao fim de cada geração (ou ao esgotar max_fes)
   fes_history : np.ndarray — nº acumulado de avaliações correspondente a cada ponto do history
   n_fes       : int — avaliações totais realizadas
 """
@@ -81,6 +81,12 @@ def pso(func, dim, bounds, max_fes, pop_size=100, seed=None,
     while n_fes < max_fes:
         for i in range(pop_size):
             if n_fes >= max_fes:
+                # ── orçamento esgotado no meio de uma geração ─────────────
+                # registra o ponto exato antes de sair, evitando que o último
+                # entry do histórico represente uma geração incompleta sem
+                # o n_fes correspondente correto.
+                history.append(gbest_fit)
+                fes_history.append(n_fes)
                 break
 
             # atualizar velocidade
@@ -112,11 +118,13 @@ def pso(func, dim, bounds, max_fes, pop_size=100, seed=None,
                     gbest_fit = fit[i]
                     gbest = pop[i].copy()
 
-        # ── registra ao final de cada geração completa ────────────────────
-        best_f = gbest_fit
-        best_x = gbest.copy()
-        history.append(best_f)
-        fes_history.append(n_fes)
+        else:
+            # ── registra ao final de cada geração completa ────────────────
+            history.append(gbest_fit)
+            fes_history.append(n_fes)
+
+    best_f = gbest_fit
+    best_x = gbest.copy()
 
     return {
         "best_f": best_f,
