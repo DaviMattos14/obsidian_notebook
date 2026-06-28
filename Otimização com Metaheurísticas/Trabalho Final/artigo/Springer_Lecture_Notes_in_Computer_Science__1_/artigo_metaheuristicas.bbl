@@ -1,0 +1,39 @@
+\begin{thebibliography}{1}
+\providecommand{\url}[1]{\texttt{#1}}
+\providecommand{\urlprefix}{URL }
+\providecommand{\doi}[1]{https://doi.org/#1}
+
+\bibitem{akiba2019optuna}
+Akiba, T., Sano, S., Yanase, T., Ohta, T., Koyama, M.: Optuna: A
+  next-generation hyperparameter optimization framework. Proceedings of the
+  25th ACM SIGKDD International Conference on Knowledge Discovery and Data
+  Mining pp. 2623--2631 (2019)
+
+\bibitem{demsar2006statistical}
+Dem{\v{s}}ar, J.: Statistical comparisons of classifiers over multiple data
+  sets. Journal of Machine Learning Research  \textbf{7},  1--30 (2006)
+
+\bibitem{goldberg1989genetic}
+Goldberg, D.E.: Genetic Algorithms in Search, Optimization, and Machine
+  Learning. Addison-Wesley (1989)
+
+\bibitem{jamil2013literature}
+Jamil, M., Yang, X.S.: A literature survey of benchmark functions for global
+  optimization problems. International Journal of Mathematical Modelling and
+  Numerical Optimisation  \textbf{4}(2),  150--194 (2013)
+
+\bibitem{kennedy1995particle}
+Kennedy, J., Eberhart, R.: Particle swarm optimization. In: Proceedings of
+  ICNN'95 - International Conference on Neural Networks. pp. 1942--1948 (1995)
+
+\bibitem{miranda2002epso}
+Miranda, V., Fonseca, N.: Epso -- evolutionary particle swarm optimization, a
+  new algorithm with applications in power systems. In: Proceedings of the
+  IEEE/PES Transmission and Distribution Conference and Exhibition (2002)
+
+\bibitem{storn1997differential}
+Storn, R., Price, K.: Differential evolution -- a simple and efficient
+  heuristic for global optimization over continuous spaces. Journal of Global
+  Optimization  \textbf{11}(4),  341--359 (1997)
+
+\end{thebibliography}

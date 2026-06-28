@@ -1,0 +1,169 @@
+\documentclass[runningheads]{llncs}
+
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage[brazilian]{babel}
+\usepackage{graphicx}
+\usepackage{booktabs}
+\usepackage{amsmath}
+\usepackage{url}
+
+\graphicspath{{../../imagens/}}
+
+\begin{document}
+
+\title{Comparação Experimental de Metaheurísticas Populacionais em Funções de Benchmark Contínuas}
+\titlerunning{Comparação de Metaheurísticas}
+
+\author{Nome do Autor}
+\authorrunning{Nome do Autor}
+\institute{Instituição do Autor\\
+\email{email@exemplo.com}}
+
+\maketitle
+
+\begin{abstract}
+Este artigo apresenta uma comparação experimental entre quatro metaheurísticas populacionais aplicadas a problemas de otimização contínua: Algoritmo Genético (AG), Evolução Diferencial (DE), Particle Swarm Optimization (PSO) e Evolutionary Particle Swarm Optimization (EPSO). O estudo considera dez funções de benchmark, divididas entre unimodais e multimodais, avaliadas nas dimensões 30, 50 e 100. Para reduzir viés de parametrização, os hiperparâmetros de cada algoritmo foram ajustados previamente com Optuna, e a comparação final foi conduzida com 51 execuções independentes por cenário, população de 100 indivíduos/partículas e orçamento fixo de 100.000 avaliações da função objetivo. Os resultados indicam que nenhum algoritmo domina todos os cenários: PSO se destaca em funções unimodais de menor dimensão, EPSO apresenta melhor comportamento relativo em 100 dimensões, DE é competitivo em funções multimodais como Rastrigin e Griewank, e AG obtém bons resultados em Ackley, Lévy e Rastrigin. A análise estatística por ranks, baseada no teste de Friedman, não encontrou evidência suficiente para afirmar superioridade global de um algoritmo sobre os demais, reforçando a dependência entre desempenho, paisagem da função e dimensionalidade.
+\keywords{Metaheurísticas \and Otimização contínua \and Funções de benchmark \and Optuna \and Planejamento experimental}
+\end{abstract}
+
+\section{Introdução}
+
+Problemas de otimização contínua aparecem em diversas áreas da computação, engenharia e ciência aplicada, frequentemente com espaços de busca não convexos, multimodais e de alta dimensionalidade. Nesses contextos, métodos exatos ou baseados em gradiente podem ser inadequados, seja pela ausência de derivadas, seja pelo custo computacional de explorar a paisagem da função objetivo. Metaheurísticas populacionais oferecem uma alternativa robusta por combinarem exploração global e intensificação local sem exigir hipóteses fortes sobre a função.
+
+Este trabalho compara quatro algoritmos representativos: Algoritmo Genético (AG)~\cite{goldberg1989genetic}, Evolução Diferencial (DE)~\cite{storn1997differential}, Particle Swarm Optimization (PSO)~\cite{kennedy1995particle} e Evolutionary Particle Swarm Optimization (EPSO)~\cite{miranda2002epso}. A comparação foi estruturada como um planejamento experimental fatorial, considerando o algoritmo, a função de benchmark e a dimensionalidade como fatores controlados. O objetivo é avaliar não apenas qual método atinge os menores valores de função, mas também como o desempenho se altera com o aumento da dimensão e com a transição entre funções unimodais e multimodais.
+
+A principal contribuição do estudo é uma análise experimental integrada, com tuning de hiperparâmetros por cenário, execução repetida para capturar variabilidade estocástica e comparação estatística baseada em ranks. Essa abordagem evita conclusões dependentes de uma única execução e torna explícito que o desempenho de metaheurísticas depende fortemente da geometria da função objetivo.
+
+\section{Metodologia}
+
+\subsection{Escopo do Experimento}
+
+Foram avaliados quatro algoritmos implementados em Python: AG, DE, PSO e EPSO. Todos os métodos seguem uma interface comum, recebendo a função objetivo, dimensão, limites de busca, tamanho populacional e orçamento máximo de avaliações. O experimento final utilizou população de 100 indivíduos ou partículas, orçamento de 100.000 avaliações da função objetivo por execução e 51 execuções independentes para cada combinação de algoritmo, função e dimensão. As dimensões avaliadas foram 30, 50 e 100.
+
+O planejamento experimental possui três fatores principais: algoritmo, função de benchmark e dimensão. Como existem quatro algoritmos, dez funções e três dimensões, o estudo totaliza 120 cenários algoritmo-função-dimensão. Com 51 repetições por cenário, foram geradas 6.120 execuções finais. A métrica primária foi o menor valor de função encontrado, denotado por $f_{\min}$. Também foram registrados o número de avaliações e o tempo de execução.
+
+Os algoritmos comparados possuem características complementares. O AG utiliza seleção por torneio, cruzamento BLX-$\alpha$ e mutação creep. A DE foi executada com estratégia DE/rand/1/bin, mutação diferencial, cruzamento binomial e seleção gulosa. O PSO utiliza atualização clássica por inércia, componente cognitiva e componente social, com limitação de velocidade e projeção para o domínio. O EPSO combina PSO com mecanismos evolutivos, incluindo mutação de pesos estratégicos, clonagem e seleção entre partícula original e clone.
+
+\subsection{Funções de Benchmark}
+
+O conjunto de benchmark foi composto por cinco funções unimodais e cinco multimodais, seguindo o uso recorrente de funções analíticas em estudos de otimização global~\cite{jamil2013literature}. As unimodais foram Sphere, Rosenbrock, Sum Squares, Dixon-Price e Zakharov. As multimodais foram Rastrigin, Ackley, Griewank, Schwefel e Lévy. A Tabela~\ref{tab:benchmarks} resume a classificação e o domínio utilizado em cada caso.
+
+\begin{table}
+\centering
+\caption{Funções de benchmark utilizadas no experimento.}
+\label{tab:benchmarks}
+\begin{tabular}{lll}
+\toprule
+Função & Classe & Domínio \\
+\midrule
+Sphere & Unimodal & $[-100,100]^D$ \\
+Rosenbrock & Unimodal & $[-5,10]^D$ \\
+Sum Squares & Unimodal & $[-10,10]^D$ \\
+Dixon-Price & Unimodal & $[-10,10]^D$ \\
+Zakharov & Unimodal & $[-5,10]^D$ \\
+Rastrigin & Multimodal & $[-5.12,5.12]^D$ \\
+Ackley & Multimodal & $[-32.768,32.768]^D$ \\
+Griewank & Multimodal & $[-600,600]^D$ \\
+Schwefel & Multimodal & $[-500,500]^D$ \\
+Lévy & Multimodal & $[-10,10]^D$ \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+As funções unimodais avaliam a capacidade de convergência e exploração eficiente de vales suaves ou mal condicionados. Já as funções multimodais impõem múltiplos ótimos locais, exigindo maior capacidade exploratória. Essa divisão permite observar se um algoritmo se comporta melhor em paisagens simples, como Sphere, ou em paisagens irregulares, como Rastrigin e Schwefel.
+
+\section{Experimento}
+
+O pipeline experimental foi dividido em duas etapas. Na primeira, os hiperparâmetros foram ajustados com Optuna para cada algoritmo, função e dimensão. Na segunda, os algoritmos foram executados com os melhores hiperparâmetros encontrados, gerando os arquivos de resultados finais. Os resultados agregados foram armazenados em arquivos CSV contendo algoritmo, função, dimensão, identificador da execução, melhor valor encontrado, número de avaliações e tempo de execução.
+
+Como todos os algoritmos são estocásticos, a repetição independente é fundamental. A análise final não utiliza uma única melhor execução como critério exclusivo; em vez disso, considera médias, dispersões, rankings e gráficos de distribuição. Os boxplots permitem observar robustez e variabilidade, enquanto as curvas médias de convergência indicam a velocidade com que cada método reduz o valor da função objetivo ao longo do orçamento.
+
+\subsection{Tuning de Hiperparâmetro com o Optuna}
+
+O ajuste de hiperparâmetros foi realizado com Optuna~\cite{akiba2019optuna} usando o amostrador TPE e poda por mediana. Para cada combinação de função e dimensão foram executadas 101 tentativas de otimização. O objetivo de cada tentativa foi minimizar o melhor valor de função obtido por uma execução do algoritmo com semente fixa, orçamento de 100.000 avaliações e população de 100 indivíduos/partículas.
+
+A Tabela~\ref{tab:hparams} apresenta os espaços de busca usados no tuning. Após o processo, os melhores hiperparâmetros foram salvos em arquivos JSON e reutilizados automaticamente no experimento final.
+
+\begin{table}
+\centering
+\caption{Hiperparâmetros otimizados com Optuna.}
+\label{tab:hparams}
+\begin{tabular}{lll}
+\toprule
+Algoritmo & Hiperparâmetros & Intervalos \\
+\midrule
+AG & taxa de mutação, $\sigma$ da mutação, $\alpha$ BLX & $[0.01,0.2]$, $[0.05,0.5]$, $[0.1,0.5]$ \\
+DE & fator diferencial $F$, taxa de cruzamento $CR$ & $[0.4,1.5]$, $[0.1,1.0]$ \\
+PSO & inércia $w$, coeficientes $c_1$ e $c_2$ & $[0.3,1.0]$, $[0.5,2.5]$, $[0.5,2.5]$ \\
+EPSO & probabilidade de comunicação, taxa $\tau$ & $[0.1,0.9]$, $[0.05,0.5]$ \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+O tuning por cenário favorece uma comparação mais justa, pois evita que um algoritmo seja penalizado por uma parametrização padrão inadequada para determinada função ou dimensionalidade. Por outro lado, essa decisão também significa que o estudo compara os métodos em uma condição favorável, após calibração específica.
+
+\section{Resultados}
+
+A Tabela~\ref{tab:rankings} resume o desempenho por ranks médios calculados sobre as 30 combinações de função e dimensão. Em cada combinação, os algoritmos foram ordenados pelo valor médio de $f_{\min}$ ao longo das 51 execuções, atribuindo rank 1 ao melhor desempenho. Quanto menor o rank médio, melhor o desempenho global.
+
+\begin{table}
+\centering
+\caption{Ranks médios e número de vitórias por média em 30 cenários.}
+\label{tab:rankings}
+\begin{tabular}{lccc}
+\toprule
+Algoritmo & Rank médio & Vitórias & Tempo médio por execução (s) \\
+\midrule
+DE & 2.33 & 6 & 4.94 \\
+AG & 2.40 & 8 & 3.97 \\
+EPSO & 2.60 & 9 & 5.06 \\
+PSO & 2.67 & 7 & 2.67 \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+Os ranks globais ficaram próximos, indicando ausência de dominância clara. A DE obteve o melhor rank médio global, mas com pequena diferença em relação ao AG, EPSO e PSO. O EPSO teve o maior número de vitórias por cenário, especialmente em dimensão 100, enquanto o PSO apresentou o menor tempo médio por execução.
+
+A análise por dimensão mostra mudanças relevantes. Em 30 dimensões, AG, DE e PSO ficaram empatados em rank médio aproximado de 2.30, com PSO vencendo quatro das dez funções. Em 50 dimensões, PSO apresentou o melhor rank médio, seguido por AG e DE. Em 100 dimensões, EPSO se destacou com rank médio de 1.90 e seis vitórias, sugerindo maior robustez relativa em problemas de maior dimensão.
+
+Em funções unimodais, PSO apresentou resultados fortes em Sphere, Sum Squares e Rosenbrock nas menores dimensões. EPSO assumiu vantagem em Sphere, Sum Squares, Dixon-Price e Zakharov quando a dimensão aumentou para 100. Em funções multimodais, DE foi competitivo em Rastrigin e Griewank, enquanto AG teve bons resultados médios em Ackley, Rastrigin de maior dimensão e Lévy em 30 dimensões.
+
+\begin{figure}
+\centering
+\includegraphics[width=\textwidth]{convergencia_artigo.pdf}
+\caption{Curvas médias de convergência dos algoritmos ao longo do orçamento de avaliações.}
+\label{fig:convergencia}
+\end{figure}
+
+\begin{figure}
+\centering
+\includegraphics[width=\textwidth]{escalabilidade_esc.pdf}
+\caption{Efeito da dimensionalidade sobre o desempenho agregado dos algoritmos.}
+\label{fig:escalabilidade}
+\end{figure}
+
+As curvas de convergência indicam diferenças no comportamento temporal. O PSO tende a convergir rapidamente em funções suaves, mas pode perder competitividade em 100 dimensões. A DE apresenta progresso mais gradual e competitivo em funções multimodais. O EPSO tende a se beneficiar em cenários de maior dimensão pela adaptação dos pesos e comunicação estocástica. O AG mostra bom desempenho em algumas funções multimodais, mas seu comportamento em Schwefel deve ser interpretado com cautela.
+
+Nos resultados de Schwefel, o AG produziu valores negativos de grande magnitude. Como a função Schwefel clássica possui mínimo global igual a zero no domínio especificado, esse comportamento sugere que indivíduos podem ter extrapolado os limites de busca durante cruzamento ou mutação. Assim, os resultados de Schwefel para AG não devem ser interpretados como melhoria real sobre o ótimo, mas como evidência de que a implementação precisa impor projeção ao domínio após os operadores genéticos para garantir comparabilidade estrita.
+
+\section{Análise Estatística}
+
+A análise estatística foi realizada sobre os ranks médios dos algoritmos nas 30 combinações função-dimensão. O teste de Friedman foi utilizado por ser adequado à comparação de múltiplos algoritmos avaliados nos mesmos conjuntos de teste, sem assumir normalidade das distribuições de desempenho~\cite{demsar2006statistical}. A hipótese nula considera que os algoritmos possuem desempenho equivalente em termos de ranks.
+
+O teste resultou em estatística de Friedman igual a 1.36 para quatro algoritmos e 30 blocos experimentais. A aproximação de Iman-Davenport resultou em $F_F \approx 0.445$. Esses valores indicam que não há evidência estatística suficiente, ao nível usual de 5\%, para rejeitar a hipótese nula de equivalência global entre os algoritmos. O valor crítico aproximado da diferença crítica de Nemenyi para quatro algoritmos e 30 blocos é 0.856; nenhuma diferença entre ranks médios globais excedeu esse limiar.
+
+Esse resultado é coerente com a inspeção descritiva: os algoritmos alternam posições conforme a função e a dimensão. Portanto, a conclusão mais adequada não é declarar um vencedor absoluto, mas identificar padrões condicionais. PSO é uma escolha eficiente para funções unimodais e dimensões menores, EPSO se mostra promissor em 100 dimensões, DE apresenta robustez em funções multimodais clássicas, e AG pode ser competitivo quando seus operadores estão bem ajustados e os limites de busca são respeitados.
+
+\section{Conclusão}
+
+Este trabalho comparou AG, DE, PSO e EPSO em dez funções de benchmark contínuas, nas dimensões 30, 50 e 100, com tuning prévio por Optuna e 51 execuções independentes por cenário. O estudo mostrou que a escolha do algoritmo depende fortemente da paisagem da função objetivo e da dimensão do problema.
+
+Globalmente, os ranks médios foram próximos e o teste de Friedman não indicou diferença estatisticamente significativa entre os quatro métodos. Ainda assim, a análise por cenário revelou tendências relevantes: PSO foi rápido e competitivo em funções unimodais de menor dimensão; EPSO apresentou melhor desempenho relativo em problemas com 100 dimensões; DE foi robusta em multimodais como Rastrigin e Griewank; e AG obteve bons resultados em funções como Ackley e Lévy, embora os resultados de Schwefel indiquem a necessidade de reforçar o controle de fronteiras.
+
+Como trabalhos futuros, recomenda-se corrigir a projeção de indivíduos do AG para o domínio após cruzamento e mutação, repetir a análise de Schwefel após essa correção, aplicar testes pareados por função, como Wilcoxon com correção de Holm, e expandir o estudo para variantes adaptativas, como jDE, SHADE, CLPSO ou versões aprimoradas do EPSO.
+
+\bibliographystyle{splncs04}
+\bibliography{referencias}
+
+\end{document}

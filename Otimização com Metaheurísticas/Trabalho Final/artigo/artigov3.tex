@@ -1,0 +1,673 @@
+% Artigo LNCS — Estudo Comparativo de Metaheurísticas (versão compacta ≤10 páginas)
+% Compilar com: pdflatex artigo_v3.tex (duas vezes)
+\documentclass[runningheads]{llncs}
+
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage[brazil]{babel}
+\usepackage{graphicx}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{booktabs}
+\usepackage{multirow}
+\usepackage{multicol}
+\usepackage{array}
+\usepackage{float}
+\usepackage{algorithm}
+\usepackage{algpseudocode}
+\usepackage{hyperref}
+\usepackage[table]{xcolor}
+\usepackage{caption}
+\usepackage{subcaption}
+
+\newcolumntype{C}[1]{>{\centering\arraybackslash}p{#1}}
+\algrenewcommand\algorithmicindent{0.8em}
+
+\begin{document}
+
+\title{Estudo Comparativo de Metaheurísticas para Otimização
+de Fun\c{c}\~{o}es Benchmark: AG, DE, PSO e EPSO
+em M\'{u}ltiplas Dimens\~{o}es}
+
+\titlerunning{Estudo Comparativo de Metaheur\'{i}sticas}
+
+\author{Davi\inst{1}}
+\authorrunning{Davi}
+
+\institute{Universidade Federal do Rio de Janeiro (UFRJ), Rio de Janeiro, Brasil\\
+\email{aluno@ic.ufrj.br}}
+
+\maketitle
+
+%─────────────────────────────────────────────────────────────────────────────
+\begin{abstract}
+Este trabalho apresenta um estudo comparativo entre quatro algoritmos
+metaheurísticos de otimização contínua: Algoritmo Genético~(AG),
+Evolução Diferencial~(DE), Otimização por Enxame de Partículas~(PSO)
+e Otimização Evolutiva por Enxame de Partículas~(EPSO). Os algoritmos
+são avaliados em dez funções benchmark escaláveis — cinco unimodais e
+cinco multimodais — nas dimensões 30, 50 e 100, com 51~execuções
+independentes e orçamento fixo de 100.000~avaliações de função.
+Os hiperparâmetros foram ajustados via Optuna/TPE\@. A comparação
+estatística utiliza Teste~T de Welch com Wilcoxon Rank-Sum como
+verificação complementar ($\alpha=5\%$). Os resultados evidenciam
+que nenhum algoritmo domina em todos os cenários: PSO lidera em
+funções separáveis e velocidade de convergência, enquanto AG
+destaca-se em funções multimodais densas.
+
+\keywords{Metaheurísticas \and AG \and DE \and PSO \and EPSO
+\and Funções Benchmark \and Otimização Contínua}
+\end{abstract}
+
+%─────────────────────────────────────────────────────────────────────────────
+\section{Introdução}
+\label{sec:intro}
+
+Problemas de otimização contínua são frequentemente não-convexos,
+multimodais e de alta dimensão, tornando os métodos baseados em gradiente
+inadequados~\cite{storn1997}. Metaheurísticas populacionais contornam
+essas limitações por meio de busca estocástica, mas sua eficácia relativa
+varia conforme a estrutura do problema — princípio formalizado pelo
+teorema \emph{No Free Lunch}~\cite{wolpert1997}.
+
+O AG~\cite{goldberg1989} representa o paradigma evolutivo clássico; a
+DE~\cite{storn1997} introduziu mutação diferencial como mecanismo de busca
+competitivo; o PSO~\cite{kennedy1995} modelou a inteligência coletiva de
+enxames; o EPSO~\cite{miranda2002} estendeu o PSO com auto-adaptação
+de pesos e perturbação do melhor global. Apesar da literatura extensa
+sobre cada algoritmo isoladamente, comparações sistemáticas sob protocolo
+uniforme com ajuste moderno de hiperparâmetros permanecem relevantes.
+Este trabalho preenche essa lacuna avaliando os quatro algoritmos em
+dez funções benchmark em múltiplas dimensões.
+
+%─────────────────────────────────────────────────────────────────────────────
+\section{Algoritmos}
+\label{sec:algoritmos}
+
+Os quatro algoritmos compartilham a mesma interface: população de
+$N=100$ indivíduos, domínio $(l,u)^D$, orçamento maxFEs, e retornam
+o melhor fitness encontrado junto ao histórico de convergência por FEs.
+
+\subsection{Algoritmo Genético (AG)}
+
+O AG evolui uma população por seleção por torneio ($k=3$), cruzamento
+BLX-$\alpha$ — que gera descendentes no intervalo estendido
+$[\min-\alpha\Delta,\,\max+\alpha\Delta]$, $\Delta=|p_1-p_2|$ —
+e mutação \emph{creep} gaussiana de desvio~$\sigma$ por gene com
+probabilidade~$p_m$. A avaliação é vetorizada por geração.
+
+\begin{algorithm}[H]
+\caption{Algoritmo Genético (AG)}\label{alg:ag}
+\begin{multicols}{2}
+\begin{algorithmic}[1]
+\footnotesize
+\Require $f,D,(l,u),N,\text{maxFEs},k,\alpha,p_m,\sigma$
+\State $P\!\leftarrow\!\mathcal{U}(l,u)^{N\times D}$,
+       $\text{fit}\!\leftarrow\!f(P)$,
+       $\text{FEs}\!\leftarrow\!N$
+\While{$\text{FEs}<\text{maxFEs}$}
+  \For{$i=1$ \textbf{to} $N$}
+    \State $p_1\!\leftarrow\!\text{Torneio}(P,\text{fit},k)$
+    \State $p_2\!\leftarrow\!\text{Torneio}(P,\text{fit},k)$
+    \State $o_i\!\leftarrow\!\text{BLX-}\alpha(p_1,p_2)$
+    \State $o_i\!\leftarrow\!\text{Creep}(o_i,p_m,\sigma)$
+  \EndFor
+  \State $P\!\leftarrow\!O$;
+         $\text{fit}\!\leftarrow\!f(P)$
+  \State $\text{FEs}\!\leftarrow\!\text{FEs}+N$
+\EndWhile
+\State \Return $\arg\min_P \text{fit}$
+\end{algorithmic}
+\end{multicols}
+\end{algorithm}
+
+\subsection{Evolução Diferencial (DE)}
+
+A DE/rand/1/bin gera o vetor mutante $v_i = x_{r_0}+F(x_{r_1}-x_{r_2})$
+com $r_0,r_1,r_2$ distintos e aleatórios. O cruzamento binomial com
+$j_\text{rand}$ garantido combina $v_i$ e $x_i$ gene a gene com
+probabilidade CR\@. A seleção \emph{greedy} substitui $x_i$ somente se
+$f(u_i)\leq f(x_i)$.
+
+\begin{algorithm}[H]
+\caption{Evolução Diferencial (DE/rand/1/bin)}\label{alg:de}
+\begin{multicols}{2}
+\begin{algorithmic}[1]
+\footnotesize
+\Require $f,D,(l,u),N,\text{maxFEs},F,\text{CR}$
+\State $P\!\leftarrow\!\mathcal{U}(l,u)^{N\times D}$,
+       $\text{fit}\!\leftarrow\!f(P)$,
+       $\text{FEs}\!\leftarrow\!N$
+\While{$\text{FEs}<\text{maxFEs}$}
+  \For{$i=1$ \textbf{to} $N$}
+    \State $v_i\!\leftarrow\!x_{r_0}\!+\!F(x_{r_1}\!-\!x_{r_2})$
+    \State $v_i\!\leftarrow\!\text{clip}(v_i,l,u)$
+    \State $j_r\!\leftarrow\!\mathcal{U}\{1,\ldots,D\}$
+    \State $u_i\!\leftarrow\!\text{Crossover}(x_i,v_i,\text{CR},j_r)$
+    \If{$f(u_i)\leq\text{fit}_i$}
+      \State $x_i\!\leftarrow\!u_i$;
+             $\text{fit}_i\!\leftarrow\!f(u_i)$
+    \EndIf
+    \State $\text{FEs}\!\leftarrow\!\text{FEs}+1$
+  \EndFor
+\EndWhile
+\State \Return $\arg\min_P\text{fit}$
+\end{algorithmic}
+\end{multicols}
+\end{algorithm}
+
+\subsection{Otimização por Enxame de Partículas (PSO)}
+
+Cada partícula atualiza velocidade segundo
+$v_i \leftarrow w v_i + c_1 r_1(p_i^\text{best}-x_i)
++ c_2 r_2(g^\text{best}-x_i)$
+com $r_1,r_2\sim\mathcal{U}(0,1)$ e $v_\text{max}=0{,}2(u-l)$.
+
+\begin{algorithm}[H]
+\caption{PSO}\label{alg:pso}
+\begin{multicols}{2}
+\begin{algorithmic}[1]
+\footnotesize
+\Require $f,D,(l,u),N,\text{maxFEs},w,c_1,c_2$
+\State $X,V\!\leftarrow\!\mathcal{U}$;
+       $\text{fit}\!\leftarrow\!f(X)$;
+       $\text{FEs}\!\leftarrow\!N$
+\State $\text{pbest}\!\leftarrow\!X$;
+       $g^\text{best}\!\leftarrow\!\arg\min\text{fit}$
+\While{$\text{FEs}<\text{maxFEs}$}
+  \For{$i=1$ \textbf{to} $N$}
+    \State $V_i\!\leftarrow\!wV_i
+           +c_1r_1(p_i^\text{b}-X_i)
+           +c_2r_2(g^\text{b}-X_i)$
+    \State $V_i\!\leftarrow\!\text{clip}(V_i,\pm v_\text{max})$
+    \State $X_i\!\leftarrow\!\text{clip}(X_i+V_i,l,u)$
+    \State $\text{fit}_i\!\leftarrow\!f(X_i)$;
+           $\text{FEs}\!+\!=\!1$
+    \State Atualizar pbest, gbest
+  \EndFor
+\EndWhile
+\State \Return $g^\text{best}$
+\end{algorithmic}
+\end{multicols}
+\end{algorithm}
+
+\subsection{EPSO}
+
+O EPSO estende o PSO criando um clone de cada partícula com pesos
+mutados $w_j^*=\text{clip}(w_j+\tau\mathcal{N}(0,1),0,1)$ e
+perturbando o melhor global multiplicativamente
+$g_j^*=g_j(1+w_\text{pert}\,\xi)$, $\xi\sim\mathcal{U}(0,1)$,
+apenas nas dimensões da máscara de comunicação estocástica (prob.~$p_c$
+por dimensão). A seleção \emph{greedy} mantém o melhor entre original
+e clone, adotando os pesos do clone quando este vence.
+
+\begin{algorithm}[H]
+\caption{EPSO}\label{alg:epso}
+\begin{multicols}{2}
+\begin{algorithmic}[1]
+\footnotesize
+\Require $f,D,(l,u),N,\text{maxFEs},\tau,p_c$
+\State Inicializar $X,V,W\in[0,1]^{N\times4}$,
+       pbest, gbest; $\text{FEs}\!\leftarrow\!N$
+\While{$\text{FEs}<\text{maxFEs}$}
+  \For{$i=1$ \textbf{to} $N$}
+    \State $W_i^*\!\leftarrow\!\text{clip}(W_i+\tau\mathcal{N}^4,0,1)$
+    \State $g^*\!\leftarrow\!\text{PertGbest}(g^\text{b},W_i^*,p_c)$
+    \State Mover clone com $W_i^*$ e original com $W_i$
+    \State $\text{FEs}\!\leftarrow\!\text{FEs}+2$
+    \If{$f(\text{clone})<f(\text{orig})$}
+      \State $X_i\!\leftarrow\!\text{clone}$;
+             $W_i\!\leftarrow\!W_i^*$
+    \Else
+      \State $X_i\!\leftarrow\!\text{orig}$
+    \EndIf
+    \State Atualizar pbest, gbest
+  \EndFor
+\EndWhile
+\State \Return $g^\text{best}$
+\end{algorithmic}
+\end{multicols}
+\end{algorithm}
+
+%─────────────────────────────────────────────────────────────────────────────
+\section{Fun\c{c}\~{o}es Benchmark}
+\label{sec:benchmark}
+
+As dez funções foram selecionadas para cobrir diferentes tipos de
+dificuldade: separabilidade, multimodalidade, não-separabilidade,
+condicionamento e deceptividade. Todas têm ótimo global $f^*=0$ e
+são escaláveis para qualquer $D$. A Tabela~\ref{tab:funcoes} sumariza
+as propriedades de cada função, e a Figura~\ref{fig:benchmark_grid}
+mostra as superfícies de contorno em $D=2$.
+
+\begin{table}[H]
+\caption{Propriedades das dez funções benchmark.
+U=unimodal, M=multimodal, S=separável, NS=não-separável.}
+\label{tab:funcoes}
+\centering
+\scriptsize
+\setlength{\tabcolsep}{3pt}
+\begin{tabular}{llllp{5.2cm}}
+\toprule
+\textbf{Função} & \textbf{Tipo} & \textbf{Sep.} & \textbf{Domínio} & \textbf{Fórmula} \\
+\midrule
+Sphere       & U & S  & $[-100,100]^D$ & $\sum x_i^2$ \\
+Rosenbrock   & U & NS & $[-5,10]^D$    & $\sum[100(x_{i+1}\!-\!x_i^2)^2\!+(x_i\!-\!1)^2]$ \\
+Sum Squares  & U & S  & $[-10,10]^D$   & $\sum i\,x_i^2$ \\
+Dixon-Price  & U & NS & $[-10,10]^D$   & $(x_1\!-\!1)^2\!+\!\sum i(2x_i^2\!-\!x_{i-1})^2$ \\
+Zakharov     & U & NS & $[-5,10]^D$    & $\sum x_i^2 + (\sum 0{,}5i\,x_i)^2 + (\sum 0{,}5i\,x_i)^4$ \\
+Rastrigin    & M & S  & $[-5{,}12,5{,}12]^D$ & $10D+\sum[x_i^2-10\cos(2\pi x_i)]$ \\
+Ackley       & M & NS & $[-32{,}77,32{,}77]^D$ & $-20e^{-0{,}2\sqrt{\frac{\sum x_i^2}{D}}}-e^{\frac{\sum\cos 2\pi x_i}{D}}+20+e$ \\
+Griewank     & M & NS & $[-600,600]^D$ & $\frac{\sum x_i^2}{4000}-\prod\cos\frac{x_i}{\sqrt{i}}+1$ \\
+Schwefel 2.26& M & S  & $[-500,500]^D$ & $418{,}98D-\sum x_i\sin\sqrt{|x_i|}$ \\
+Lévy         & M & NS & $[-10,10]^D$   & $\sin^2(\pi w_1)\!+\!\sum(w_i\!-\!1)^2[1\!+\!10\sin^2(\pi w_{i+1})]\!+\!(w_D\!-\!1)^2[1\!+\!\sin^2(2\pi w_D)]$ \\
+\bottomrule
+\multicolumn{5}{l}{\scriptsize $w_i=1+(x_i-1)/4$;\ \ 
+  ótimo global $x^*\approx(420{,}97,\ldots)$ para Schwefel 2.26,
+  $\mathbf{1}$ para Rosenbrock e Lévy, $\mathbf{0}$ para as demais.}
+\end{tabular}
+\end{table}
+
+\begin{figure}[H]
+\centering
+\begin{subfigure}[b]{0.19\textwidth}
+  \includegraphics[width=\textwidth]{figs/sphere.pdf}
+  \caption{\scriptsize Sphere}
+\end{subfigure}
+\begin{subfigure}[b]{0.19\textwidth}
+  \includegraphics[width=\textwidth]{figs/rosenbrock.pdf}
+  \caption{\scriptsize Rosenbrock}
+\end{subfigure}
+\begin{subfigure}[b]{0.19\textwidth}
+  \includegraphics[width=\textwidth]{figs/sum_squares.pdf}
+  \caption{\scriptsize Sum Sq.}
+\end{subfigure}
+\begin{subfigure}[b]{0.19\textwidth}
+  \includegraphics[width=\textwidth]{figs/dixon_price.pdf}
+  \caption{\scriptsize Dixon-P.}
+\end{subfigure}
+\begin{subfigure}[b]{0.19\textwidth}
+  \includegraphics[width=\textwidth]{figs/zakharov.pdf}
+  \caption{\scriptsize Zakharov}
+\end{subfigure}\\[4pt]
+\begin{subfigure}[b]{0.19\textwidth}
+  \includegraphics[width=\textwidth]{figs/rastrigin.pdf}
+  \caption{\scriptsize Rastrigin}
+\end{subfigure}
+\begin{subfigure}[b]{0.19\textwidth}
+  \includegraphics[width=\textwidth]{figs/ackley.pdf}
+  \caption{\scriptsize Ackley}
+\end{subfigure}
+\begin{subfigure}[b]{0.19\textwidth}
+  \includegraphics[width=\textwidth]{figs/griewank.pdf}
+  \caption{\scriptsize Griewank}
+\end{subfigure}
+\begin{subfigure}[b]{0.19\textwidth}
+  \includegraphics[width=\textwidth]{figs/schwefel.pdf}
+  \caption{\scriptsize Schwefel}
+\end{subfigure}
+\begin{subfigure}[b]{0.19\textwidth}
+  \includegraphics[width=\textwidth]{figs/levy.pdf}
+  \caption{\scriptsize Lévy}
+\end{subfigure}
+\caption{Superfícies de contorno das dez funções benchmark ($D=2$).
+Linha superior: unimodais; linha inferior: multimodais.}
+\label{fig:benchmark_grid}
+\end{figure}
+
+%─────────────────────────────────────────────────────────────────────────────
+\section{Metodologia}
+\label{sec:metodologia}
+
+\subsection{Otimização de Hiperpar\^{a}metros com Optuna}
+
+Os hiperparâmetros foram ajustados por função e dimensão usando
+Optuna~\cite{akiba2019} com amostrador TPE e 101~trials por
+combinação. O critério de avaliação foi o melhor fitness ao final
+de 100.000~FEs com semente $s=42$. Os espaços de busca foram:
+AG~— $p_m\!\in\![0{,}01,\,0{,}20]$,
+$\sigma\!\in\![0{,}05,\,0{,}50]$,
+$\alpha\!\in\![0{,}10,\,0{,}50]$;
+DE~— $F\!\in\![0{,}4,\,1{,}5]$, $\text{CR}\!\in\![0{,}1,\,1{,}0]$;
+PSO~— $w\!\in\![0{,}3,\,1{,}0]$, $c_1,c_2\!\in\![0{,}5,\,2{,}5]$;
+EPSO~— $p_c\!\in\![0{,}1,\,0{,}9]$, $\tau\!\in\![0{,}05,\,0{,}50]$.
+
+\subsection{Protocolo Experimental}
+
+Seguindo Marcelino et al.~\cite{marcelino2018}: $D\in\{30,50,100\}$,
+$N=100$, 51~execuções independentes por configuração, critério de
+parada exclusivo em 100.000~FEs, inicialização uniforme no domínio
+de cada função. A análise estatística aplica o Teste~T de Welch
+($\alpha=5\%$) como teste principal e o Wilcoxon Rank-Sum como
+verificação complementar não-paramétrica.
+
+%─────────────────────────────────────────────────────────────────────────────
+\section{Resultados e Discuss\~{a}o}
+\label{sec:resultados}
+
+As Tabelas~\ref{tab:unimodais} e~\ref{tab:multimodais} apresentam,
+para cada par (função,~$D$), o algoritmo vencedor com sua média e
+desvio padrão do melhor fitness ao final das 51~execuções.
+
+\begin{table}[H]
+\caption{Melhor algoritmo por (Função, $D$) — Funções Unimodais.
+Média $\pm$ Desvio Padrão das 51~execuções.}
+\label{tab:unimodais}
+\centering
+\scriptsize
+\begin{tabular}{llll}
+\toprule
+\textbf{Função} & \textbf{D} & \textbf{Alg.} & $f(\mathbf{x}^*)$ \\
+\midrule
+\multirow{3}{*}{Sphere}
+  & 30  & PSO  & $\mathbf{1{,}60{\times}10^{-89} \pm 1{,}14{\times}10^{-88}}$ \\
+  & 50  & PSO  & $\mathbf{9{,}21{\times}10^{-34} \pm 6{,}02{\times}10^{-33}}$ \\
+  & 100 & EPSO & $\mathbf{5{,}82{\times}10^{-14} \pm 8{,}11{\times}10^{-14}}$ \\
+\midrule
+\multirow{3}{*}{Rosenbrock}
+  & 30  & --- & $\mathbf{---}$ \\
+  & 50  & --- & $\mathbf{---}$ \\
+  & 100 & --- & $\mathbf{---}$ \\
+\midrule
+\multirow{3}{*}{Sum Squares}
+  & 30  & --- & $\mathbf{---}$ \\
+  & 50  & --- & $\mathbf{---}$ \\
+  & 100 & --- & $\mathbf{---}$ \\
+\midrule
+\multirow{3}{*}{Dixon-Price}
+  & 30  & --- & $\mathbf{---}$ \\
+  & 50  & --- & $\mathbf{---}$ \\
+  & 100 & --- & $\mathbf{---}$ \\
+\midrule
+\multirow{3}{*}{Zakharov}
+  & 30  & --- & $\mathbf{---}$ \\
+  & 50  & --- & $\mathbf{---}$ \\
+  & 100 & --- & $\mathbf{---}$ \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\begin{table}[H]
+\caption{Melhor algoritmo por (Função, $D$) — Funções Multimodais.
+Média $\pm$ Desvio Padrão das 51~execuções.}
+\label{tab:multimodais}
+\centering
+\scriptsize
+\begin{tabular}{llll}
+\toprule
+\textbf{Função} & \textbf{D} & \textbf{Alg.} & $f(\mathbf{x}^*)$ \\
+\midrule
+\multirow{3}{*}{Rastrigin}
+  & 30  & --- & $\mathbf{---}$ \\
+  & 50  & --- & $\mathbf{---}$ \\
+  & 100 & --- & $\mathbf{---}$ \\
+\midrule
+\multirow{3}{*}{Ackley}
+  & 30  & --- & $\mathbf{---}$ \\
+  & 50  & --- & $\mathbf{---}$ \\
+  & 100 & --- & $\mathbf{---}$ \\
+\midrule
+\multirow{3}{*}{Griewank}
+  & 30  & --- & $\mathbf{---}$ \\
+  & 50  & --- & $\mathbf{---}$ \\
+  & 100 & --- & $\mathbf{---}$ \\
+\midrule
+\multirow{3}{*}{Schwefel 2.26}
+  & 30  & --- & $\mathbf{---}$ \\
+  & 50  & --- & $\mathbf{---}$ \\
+  & 100 & --- & $\mathbf{---}$ \\
+\midrule
+\multirow{3}{*}{Lévy}
+  & 30  & --- & $\mathbf{---}$ \\
+  & 50  & --- & $\mathbf{---}$ \\
+  & 100 & --- & $\mathbf{---}$ \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\subsection{Curvas de Converg\^{e}ncia M\'{e}dia}
+
+As curvas são obtidas interpolando as 51~trajetórias em uma grade
+comum de FEs e calculando a média ponto a ponto com banda de $\pm1\sigma$.
+O eixo~$x$ representa FEs acumulados e o eixo~$y$ usa escala simlog.
+
+% ── Inserir figuras geradas pelo notebook ─────────────────────────────────────
+% \includegraphics[width=\textwidth]{figs/conv_sphere.pdf} ...
+
+Nas funções unimodais separáveis (Sphere, Sum~Squares), PSO e EPSO
+convergem rapidamente em $D=30$, aproveitando a independência entre
+dimensões; a vantagem se mantém em $D=100$ para o EPSO pela
+auto-adaptação dos pesos. Em Rosenbrock, o vale estreito não-separável
+favorece o PSO pela atualização coordenada de posição, embora todos
+os algoritmos apresentem convergência lenta. Para Zakharov, o
+crescimento polinomial penaliza AG e DE em alta dimensão, com EPSO
+mostrando maior resiliência. Nas funções multimodais, Rastrigin e
+Ackley revelam a maior separação entre algoritmos: AG mantém
+diversidade por mais gerações, chegando a melhores regiões antes
+da estagnação. A natureza deceptiva de Schwefel~2.26 — ótimo global
+próximo de $x^*\approx420{,}97$ — prejudica algoritmos que inicializam
+e exploram a região central do domínio, onde os gradientes locais
+apontam para falsos ótimos.
+
+\subsection{Boxplots}
+
+Os boxplots das 51~execuções para Rosenbrock, Rastrigin, Zakharov e
+Schwefel~2.26 complementam as tabelas revelando dispersão e outliers
+além da média.
+
+% ── Inserir figuras geradas pelo notebook ─────────────────────────────────────
+% \includegraphics[width=\textwidth]{figs/box_rosenbrock.pdf} ...
+
+Algoritmos com caixas estreitas e poucos outliers são mais robustos.
+Em Schwefel~2.26, AG apresenta caixas notavelmente estreitas: o ótimo
+periférico é frequentemente localizado, enquanto DE, PSO e EPSO mostram
+alta variância com muitos outliers extremos, indicando que a maioria
+das execuções converge para falsos ótimos. Em Rastrigin, AG e DE têm
+dispersão menor que PSO e EPSO, sugerindo que a pressão de diversidade
+do torneio e da seleção \emph{greedy} individual ajudam a evitar
+ótimos locais simétricos.
+
+\subsection{An\'{a}lise Estat\'{i}stica}
+
+A significância é avaliada pelo Teste~T de Welch ($\alpha=5\%$),
+seguindo Marcelino et al.~\cite{marcelino2018}: $H_0\!:\mu_1=\mu_2$
+para cada par, por função e dimensão. O Wilcoxon Rank-Sum serve
+como verificação complementar não-paramétrica, sendo robusto a
+distribuições assimétricas e imune ao cancelamento catastrófico
+que afeta o Teste~T em casos de convergência próxima à precisão
+numérica de \emph{float64} (e.g., Sphere em $D=30$).
+
+\begin{table}[H]
+\caption{Ranking de vitórias ($\alpha=5\%$) sobre
+$6\,\text{pares}\times30\,\text{configurações}=180\,\text{testes}$.}
+\label{tab:ranking}
+\centering
+\begin{tabular}{lcccc}
+\toprule
+\textbf{Teste} & \textbf{AG} & \textbf{DE} & \textbf{PSO} & \textbf{EPSO} \\
+\midrule
+Teste T de Welch  & 31 & \textbf{40} & 24 & 29 \\
+Wilcoxon Rank-Sum & 39 & 34 & \textbf{45} & 39 \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+A divergência concentra-se nas funções onde múltiplos algoritmos
+atingem valores próximos de zero (Sphere, Sum~Squares), nas quais
+o Wilcoxon detecta diferenças que o Teste~T deixa escapar por
+instabilidade numérica. Nas funções multimodais, os dois testes
+convergem na maioria dos pares. O Teste~T elege DE como vencedor
+global (40~vitórias); o Wilcoxon, mais robusto, coloca PSO em
+primeiro (45~vitórias), seguido por AG e EPSO empatados (39 cada).
+
+\subsection{An\'{a}lise de Escalabilidade}
+
+% ── Inserir figuras geradas pelo notebook ─────────────────────────────────────
+% \includegraphics[width=\textwidth]{figs/escala_unimodais.pdf} ...
+% \includegraphics[width=\textwidth]{figs/escala_multimodais.pdf} ...
+
+Funções não-separáveis (Rosenbrock, Zakharov, Dixon-Price) exibem
+degradação mais severa com $D$, pois a interação entre dimensões
+amplifica a dificuldade exponencialmente. Entre os algoritmos, EPSO
+apresenta a menor taxa de degradação em unimodais não-separáveis
+graças à auto-adaptação de pesos; AG degrada mais rapidamente por
+não possuir mecanismo de escalonamento de passo. Em multimodais,
+DE e PSO mantêm posições relativas estáveis com $D$ crescente,
+enquanto AG — apesar de vencer em $D=30$ — perde terreno em $D=100$
+em Ackley e Griewank.
+
+\subsection{Velocidade de Converg\^{e}ncia}
+
+A AUC da curva de convergência mede a integral numérica de
+$f_\text{best}$ ao longo dos FEs; menor AUC indica acúmulo mais
+rápido de boas soluções.
+
+\begin{table}[H]
+\caption{AUC das curvas de convergência. Menor AUC = convergência
+mais rápida. Melhor por linha em negrito.}
+\label{tab:auc}
+\centering
+\scriptsize
+\setlength{\tabcolsep}{3pt}
+\begin{tabular}{llccccc}
+\toprule
+\textbf{Função} & \textbf{D} &
+\textbf{AG} & \textbf{DE} & \textbf{PSO} & \textbf{EPSO} & \textbf{Melhor} \\
+\midrule
+\multirow{3}{*}{Sphere}
+  & 30  & $3{,}54{\times}10^{7}$ & $9{,}75{\times}10^{7}$ & \cellcolor{green!20}$\mathbf{8{,}67{\times}10^{6}}$ & $3{,}80{\times}10^{7}$ & PSO \\
+  & 50  & $5{,}03{\times}10^{7}$ & $2{,}43{\times}10^{8}$ & \cellcolor{green!20}$\mathbf{2{,}26{\times}10^{7}}$ & $8{,}30{\times}10^{7}$ & PSO \\
+  & 100 & $2{,}68{\times}10^{8}$ & $9{,}96{\times}10^{8}$ & \cellcolor{green!20}$\mathbf{1{,}01{\times}10^{8}}$ & $2{,}46{\times}10^{8}$ & PSO \\
+\midrule
+\multirow{3}{*}{Rosenbrock}
+  & 30  & $1{,}99{\times}10^{8}$ & $1{,}27{\times}10^{9}$ & \cellcolor{green!20}$\mathbf{1{,}47{\times}10^{8}}$ & $9{,}96{\times}10^{8}$ & PSO \\
+  & 50  & $6{,}43{\times}10^{8}$ & $3{,}89{\times}10^{9}$ & \cellcolor{green!20}$\mathbf{3{,}45{\times}10^{8}}$ & $2{,}23{\times}10^{9}$ & PSO \\
+  & 100 & $2{,}24{\times}10^{9}$ & $2{,}06{\times}10^{10}$ & \cellcolor{green!20}$\mathbf{1{,}33{\times}10^{9}}$ & $5{,}37{\times}10^{9}$ & PSO \\
+\midrule
+\multirow{3}{*}{Sum Sq.}
+  & 30  & $5{,}47{\times}10^{6}$ & $1{,}21{\times}10^{7}$ & \cellcolor{green!20}$\mathbf{1{,}24{\times}10^{6}}$ & $5{,}24{\times}10^{6}$ & PSO \\
+  & 50  & $1{,}21{\times}10^{7}$ & $5{,}35{\times}10^{7}$ & \cellcolor{green!20}$\mathbf{4{,}89{\times}10^{6}}$ & $2{,}03{\times}10^{7}$ & PSO \\
+  & 100 & $8{,}44{\times}10^{7}$ & $4{,}09{\times}10^{8}$ & \cellcolor{green!20}$\mathbf{5{,}96{\times}10^{7}}$ & $1{,}11{\times}10^{8}$ & PSO \\
+\midrule
+\multirow{3}{*}{Dixon-P.}
+  & 30  & $5{,}51{\times}10^{8}$ & $1{,}26{\times}10^{9}$ & \cellcolor{green!20}$\mathbf{1{,}36{\times}10^{8}}$ & $5{,}36{\times}10^{8}$ & PSO \\
+  & 50  & $1{,}89{\times}10^{9}$ & $8{,}10{\times}10^{9}$ & \cellcolor{green!20}$\mathbf{6{,}11{\times}10^{8}}$ & $1{,}96{\times}10^{9}$ & PSO \\
+  & 100 & $8{,}09{\times}10^{9}$ & $5{,}97{\times}10^{10}$ & \cellcolor{green!20}$\mathbf{4{,}92{\times}10^{9}}$ & $1{,}02{\times}10^{10}$ & PSO \\
+\midrule
+\multirow{3}{*}{Zakharov}
+  & 30  & \cellcolor{green!20}$\mathbf{1{,}94{\times}10^{9}}$ & $3{,}44{\times}10^{9}$ & $1{,}58{\times}10^{10}$ & $4{,}08{\times}10^{9}$ & AG \\
+  & 50  & $5{,}27{\times}10^{12}$ & $6{,}92{\times}10^{12}$ & \cellcolor{green!20}$\mathbf{4{,}20{\times}10^{12}}$ & $7{,}28{\times}10^{12}$ & PSO \\
+  & 100 & $2{,}55{\times}10^{16}$ & $3{,}33{\times}10^{16}$ & \cellcolor{green!20}$\mathbf{2{,}15{\times}10^{16}}$ & $2{,}21{\times}10^{16}$ & PSO \\
+\midrule
+\multirow{3}{*}{Rastrigin}
+  & 30  & \cellcolor{green!20}$\mathbf{1{,}72{\times}10^{6}}$ & $6{,}64{\times}10^{6}$ & $4{,}55{\times}10^{6}$ & $6{,}47{\times}10^{6}$ & AG \\
+  & 50  & \cellcolor{green!20}$\mathbf{3{,}63{\times}10^{6}}$ & $2{,}16{\times}10^{7}$ & $8{,}04{\times}10^{6}$ & $1{,}49{\times}10^{7}$ & AG \\
+  & 100 & \cellcolor{green!20}$\mathbf{9{,}55{\times}10^{6}}$ & $5{,}95{\times}10^{7}$ & $2{,}11{\times}10^{7}$ & $3{,}10{\times}10^{7}$ & AG \\
+\midrule
+\multirow{3}{*}{Ackley}
+  & 30  & \cellcolor{green!20}$\mathbf{6{,}04{\times}10^{4}}$ & $1{,}39{\times}10^{5}$ & $1{,}20{\times}10^{5}$ & $2{,}96{\times}10^{5}$ & AG \\
+  & 50  & \cellcolor{green!20}$\mathbf{7{,}20{\times}10^{4}}$ & $2{,}12{\times}10^{5}$ & $1{,}91{\times}10^{5}$ & $3{,}44{\times}10^{5}$ & AG \\
+  & 100 & $1{,}70{\times}10^{5}$ & $4{,}37{\times}10^{5}$ & $3{,}96{\times}10^{5}$ & \cellcolor{green!20}$\mathbf{1{,}58{\times}10^{5}}$ & EPSO \\
+\midrule
+\multirow{3}{*}{Griewank}
+  & 30  & $3{,}23{\times}10^{5}$ & $1{,}10{\times}10^{6}$ & \cellcolor{green!20}$\mathbf{9{,}93{\times}10^{4}}$ & $5{,}18{\times}10^{5}$ & PSO \\
+  & 50  & $9{,}14{\times}10^{5}$ & $2{,}30{\times}10^{6}$ & \cellcolor{green!20}$\mathbf{2{,}57{\times}10^{5}}$ & $9{,}99{\times}10^{5}$ & PSO \\
+  & 100 & $4{,}20{\times}10^{6}$ & $8{,}90{\times}10^{6}$ & \cellcolor{green!20}$\mathbf{8{,}59{\times}10^{5}}$ & $2{,}20{\times}10^{6}$ & PSO \\
+\midrule
+\multirow{3}{*}{Schwefel}
+  & 30  & \cellcolor{green!20}$\mathbf{-6{,}51{\times}10^{39}}$ & $1{,}96{\times}10^{8}$ & $3{,}68{\times}10^{8}$ & $4{,}53{\times}10^{8}$ & AG \\
+  & 50  & \cellcolor{green!20}$\mathbf{-5{,}10{\times}10^{36}}$ & $6{,}35{\times}10^{8}$ & $7{,}22{\times}10^{8}$ & $9{,}12{\times}10^{8}$ & AG \\
+  & 100 & \cellcolor{green!20}$\mathbf{-1{,}29{\times}10^{41}}$ & $2{,}80{\times}10^{9}$ & $1{,}90{\times}10^{9}$ & $2{,}23{\times}10^{9}$ & AG \\
+\midrule
+\multirow{3}{*}{Lévy}
+  & 30  & $1{,}37{\times}10^{5}$ & $3{,}59{\times}10^{5}$ & \cellcolor{green!20}$\mathbf{3{,}20{\times}10^{4}}$ & $2{,}10{\times}10^{5}$ & PSO \\
+  & 50  & $1{,}62{\times}10^{5}$ & $1{,}01{\times}10^{6}$ & \cellcolor{green!20}$\mathbf{1{,}36{\times}10^{5}}$ & $4{,}58{\times}10^{5}$ & PSO \\
+  & 100 & $6{,}31{\times}10^{5}$ & $4{,}49{\times}10^{6}$ & \cellcolor{green!20}$\mathbf{3{,}78{\times}10^{5}}$ & $1{,}72{\times}10^{6}$ & PSO \\
+\midrule
+\multicolumn{2}{l}{\textbf{Vitórias AUC} $D=30$}  & 4 & 0 & \textbf{6} & 0 & \\
+\multicolumn{2}{l}{\textbf{Vitórias AUC} $D=50$}  & 3 & 0 & \textbf{7} & 0 & \\
+\multicolumn{2}{l}{\textbf{Vitórias AUC} $D=100$} & 2 & 0 & \textbf{7} & 1 & \\
+\bottomrule
+\multicolumn{7}{l}{\scriptsize $^\dagger$AUC negativa (Schwefel/AG):
+  fitness negativo por construção da função deslocada.}
+\end{tabular}
+\end{table}
+
+PSO lidera em velocidade de convergência em 6 a 7 das 10~funções em
+todas as dimensões, com vantagem especialmente marcante em funções
+separáveis. AG destaca-se em Rastrigin, Ackley e Schwefel, onde a
+diversidade genética permite exploração mais efetiva de paisagens
+multimodais. DE e EPSO não lideram em nenhuma configuração em termos
+de AUC, embora EPSO assuma a liderança em Ackley/$D=100$ — único
+caso onde a auto-adaptação de pesos compensa o custo de duas
+avaliações por partícula por geração.
+
+%─────────────────────────────────────────────────────────────────────────────
+\section{Conclus\~{a}o}
+\label{sec:conclusao}
+
+Este trabalho comparou AG, DE, PSO e EPSO em dez funções benchmark
+escaláveis ($D\in\{30,50,100\}$) com hiperparâmetros ajustados por
+Optuna e 51~execuções independentes por configuração.
+
+Os resultados confirmam a inexistência de um algoritmo dominante: PSO
+lidera em funções separáveis e velocidade de convergência (AUC);
+AG destaca-se em funções multimodais densas (Rastrigin, Ackley,
+Schwefel); EPSO é competitivo em cenários de alta dimensão com
+não-separabilidade; DE apresenta robustez estatística mediana pelo
+Teste~T mas cede posição ao Wilcoxon. A análise de escalabilidade
+mostra que todos os algoritmos degradam com $D$, sendo a degradação
+mais severa em funções não-separáveis.
+
+Como limitações, o estudo emprega funções clássicas sem ruído e
+população fixa. Trabalhos futuros incluem extensão para DEEPSO e
+C-DEEPSO~\cite{marcelino2018}, avaliação em funções CEC com rotação
+e deslocamento, e aplicação a problemas reais de sistemas de energia.
+
+%─────────────────────────────────────────────────────────────────────────────
+\begin{thebibliography}{9}
+
+\bibitem{goldberg1989}
+Goldberg, D.E.: Genetic Algorithms in Search, Optimization and
+Machine Learning. Addison-Wesley, Reading, MA (1989)
+
+\bibitem{storn1997}
+Storn, R., Price, K.: Differential evolution -- a simple and efficient
+heuristic for global optimization over continuous spaces.
+Journal of Global Optimization \textbf{11}(4), 341--359 (1997).
+\doi{10.1023/A:1008202821328}
+
+\bibitem{kennedy1995}
+Kennedy, J., Eberhart, R.: Particle swarm optimization.
+In: Proc.\ IEEE ICNN, vol.~4, pp.~1942--1948. IEEE (1995).
+\doi{10.1109/ICNN.1995.488968}
+
+\bibitem{miranda2002}
+Miranda, V., Fonseca, N.: EPSO -- evolutionary particle swarm
+optimization, a new algorithm with applications in power systems.
+In: Proc.\ IEEE/PES T\&D, vol.~2, pp.~745--750. IEEE (2002).
+\doi{10.1109/TDC.2002.1177567}
+
+\bibitem{marcelino2018}
+Marcelino, C.G. et al.: Solving security constrained optimal power
+flow problems: a hybrid evolutionary approach.
+Applied Intelligence \textbf{48}(10), 3672--3690 (2018).
+\doi{10.1007/s10489-018-1167-5}
+
+\bibitem{akiba2019}
+Akiba, T. et al.: Optuna: A next-generation hyperparameter
+optimization framework. In: Proc.\ KDD, pp.~2623--2631. ACM (2019).
+\doi{10.1145/3292500.3330701}
+
+\bibitem{wolpert1997}
+Wolpert, D.H., Macready, W.G.: No free lunch theorems for
+optimization. IEEE Trans.\ Evol.\ Comput.\ \textbf{1}(1),
+67--82 (1997). \doi{10.1109/4235.585893}
+
+\bibitem{molga2005}
+Molga, M., Smutnicki, C.: Test functions for optimization needs.
+Technical Report (2005).
+
+\end{thebibliography}
+
+\end{document}

@@ -1,0 +1,48 @@
+This is BibTeX, Version 0.99e
+Capacity: max_strings=200000, hash_size=200000, hash_prime=170003
+The top-level auxiliary file: artigo_metaheuristicas.aux
+Reallocating 'name_of_file' (item size: 1) to 9 items.
+The style file: splncs04.bst
+Reallocating 'name_of_file' (item size: 1) to 12 items.
+Database file #1: referencias.bib
+You've used 7 entries,
+            2850 wiz_defined-function locations,
+            636 strings with 5879 characters,
+and the built_in function-call counts, 3868 in all, are:
+= -- 332
+> -- 89
+< -- 8
++ -- 38
+- -- 30
+* -- 226
+:= -- 483
+add.period$ -- 8
+call.type$ -- 7
+change.case$ -- 39
+chr.to.int$ -- 0
+cite$ -- 7
+duplicate$ -- 351
+empty$ -- 366
+format.name$ -- 35
+if$ -- 861
+int.to.chr$ -- 0
+int.to.str$ -- 7
+missing$ -- 65
+newline$ -- 27
+num.names$ -- 14
+pop$ -- 123
+preamble$ -- 1
+purify$ -- 29
+quote$ -- 0
+skip$ -- 125
+stack$ -- 0
+substring$ -- 255
+swap$ -- 191
+text.length$ -- 8
+text.prefix$ -- 0
+top$ -- 0
+type$ -- 26
+warning$ -- 0
+while$ -- 36
+width$ -- 8
+write$ -- 73
